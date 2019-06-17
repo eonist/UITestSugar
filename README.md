@@ -15,5 +15,4 @@ searchedElement.firstMatch.tap()
 ```
 
 ### Todo:
-- Fix this
-- Research that
+- Add tests
