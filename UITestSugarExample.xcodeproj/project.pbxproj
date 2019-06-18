@@ -22,6 +22,7 @@
 		9D87BF5622B8D283009E99B3 /* XCUIElement+Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D87BF5022B8D283009E99B3 /* XCUIElement+Filtering.swift */; };
 		9D87BF5722B8D283009E99B3 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D87BF5122B8D283009E99B3 /* NavigationHelper.swift */; };
 		9D87BF5822B8D283009E99B3 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D87BF5222B8D283009E99B3 /* Sleep.swift */; };
+		9D87BF7322B8DAF1009E99B3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D87BF7222B8DAF1009E99B3 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		9D87BF5022B8D283009E99B3 /* XCUIElement+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Filtering.swift"; sourceTree = "<group>"; };
 		9D87BF5122B8D283009E99B3 /* NavigationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
 		9D87BF5222B8D283009E99B3 /* Sleep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
+		9D87BF7222B8DAF1009E99B3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D87BF7322B8DAF1009E99B3 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +114,7 @@
 				9D87BF2D22B8D201009E99B3 /* UITestSugarExampleUITests */,
 				9D87BF3F22B8D272009E99B3 /* UITestSugar */,
 				9D87BF1722B8D200009E99B3 /* Products */,
+				9D87BF7122B8DAF1009E99B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +178,14 @@
 				9D87BF5022B8D283009E99B3 /* XCUIElement+Filtering.swift */,
 			);
 			path = element;
+			sourceTree = "<group>";
+		};
+		9D87BF7122B8DAF1009E99B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D87BF7222B8DAF1009E99B3 /* XCTest.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -542,6 +554,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = UITestSugarExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -562,6 +575,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				INFOPLIST_FILE = UITestSugarExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
