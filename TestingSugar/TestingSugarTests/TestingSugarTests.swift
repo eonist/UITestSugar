@@ -1,7 +1,15 @@
-import XCTest
-@testable import UITestSugar_iOS
+//
+//  TestingSugarTests.swift
+//  TestingSugarTests
+//
+//  Created by André Jørgensen on 18/06/2019.
+//  Copyright © 2019 futurelab. All rights reserved.
+//
 
-class UITestSugar_iOSTests: XCTestCase {
+import XCTest
+@testable import TestingSugar
+
+class TestingSugarTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -12,7 +20,6 @@ class UITestSugar_iOSTests: XCTestCase {
     }
 
     func testExample() {
-        //UITestHelper.hittableElements(query: XCUIElementQuery))
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }

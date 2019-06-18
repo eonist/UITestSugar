@@ -21,6 +21,6 @@ extension XCUIElementQuery {
      * XCUIApplication().descendants(matching: .any).hittableElements.count // n
      */
     public var hittableElements: [XCUIElement] {
-        UITestHelper.hittableElements(query:self)
+        return UITestHelper.hittableElements(query:self)
     }
 }
