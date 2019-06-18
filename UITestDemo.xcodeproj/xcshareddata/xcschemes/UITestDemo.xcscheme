@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9D87BF3D22B8D272009E99B3"
-               BuildableName = "UITestSugar.framework"
-               BlueprintName = "UITestSugar"
-               ReferencedContainer = "container:UITestSugarExample.xcodeproj">
+               BlueprintIdentifier = "9D00705122B8EE310096D893"
+               BuildableName = "UITestDemo.framework"
+               BlueprintName = "UITestDemo"
+               ReferencedContainer = "container:UITestDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9D00705A22B8EE310096D893"
+               BuildableName = "UITestDemoTests.xctest"
+               BlueprintName = "UITestDemoTests"
+               ReferencedContainer = "container:UITestDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "9D00705122B8EE310096D893"
+            BuildableName = "UITestDemo.framework"
+            BlueprintName = "UITestDemo"
+            ReferencedContainer = "container:UITestDemo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -45,10 +64,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D87BF3D22B8D272009E99B3"
-            BuildableName = "UITestSugar.framework"
-            BlueprintName = "UITestSugar"
-            ReferencedContainer = "container:UITestSugarExample.xcodeproj">
+            BlueprintIdentifier = "9D00705122B8EE310096D893"
+            BuildableName = "UITestDemo.framework"
+            BlueprintName = "UITestDemo"
+            ReferencedContainer = "container:UITestDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,10 +82,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D87BF3D22B8D272009E99B3"
-            BuildableName = "UITestSugar.framework"
-            BlueprintName = "UITestSugar"
-            ReferencedContainer = "container:UITestSugarExample.xcodeproj">
+            BlueprintIdentifier = "9D00705122B8EE310096D893"
+            BuildableName = "UITestDemo.framework"
+            BlueprintName = "UITestDemo"
+            ReferencedContainer = "container:UITestDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
