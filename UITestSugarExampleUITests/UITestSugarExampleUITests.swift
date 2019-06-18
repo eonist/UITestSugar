@@ -6,11 +6,14 @@ class UITestSugarExampleUITests: XCTestCase {
    override func setUp() {
       
       let homeNavButton = NavigationHelper.tabButton(tabButtonName: "home")
-      XCUIApplication().descendants(matching: .any).hittableElements.count
+      Swift.print("homeNavButton:  \(homeNavButton)")
+      let numOfHittableElements = XCUIApplication().descendants(matching: .any).hittableElements.count
+      Swift.print("numOfHittableElements:  \(numOfHittableElements)")
       
       let app = XCUIApplication()
       let searchedElement = app.filterElements(containing: "Sugar", "500 g").element
-      searchedElement.exists // true , false
+      let elementExists = searchedElement.exists // true , false
+      Swift.print("elementExists:  \(elementExists)")
       searchedElement.firstMatch.tap()
       
       // Put setup code here. This method is called before the invocation of each test method in the class.
