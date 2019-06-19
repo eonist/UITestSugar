@@ -32,6 +32,8 @@
 		9D00741B22BA5C070096D893 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741022BA5C070096D893 /* Sleep.swift */; };
 		9D00741C22BA5C070096D893 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741022BA5C070096D893 /* Sleep.swift */; };
 		9D00741F22BA5DBF0096D893 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
+		9D00742022BA60C00096D893 /* XCTest.framework in Resources */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
+		9D00742122BA60C60096D893 /* XCTest.framework in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -448,6 +450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D00742022BA60C00096D893 /* XCTest.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D00742122BA60C60096D893 /* XCTest.framework in Sources */,
 				9D00741722BA5C070096D893 /* XCUIElement+Filtering.swift in Sources */,
 				9D00741522BA5C070096D893 /* XCUIElement+Text.swift in Sources */,
 				9D00741322BA5C070096D893 /* XCUIElement+Scroll.swift in Sources */,
@@ -810,7 +814,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = UITestSugarIOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -839,7 +847,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = UITestSugarIOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
