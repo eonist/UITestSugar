@@ -31,6 +31,7 @@
 		9D00741A22BA5C070096D893 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00740F22BA5C070096D893 /* NavigationHelper.swift */; };
 		9D00741B22BA5C070096D893 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741022BA5C070096D893 /* Sleep.swift */; };
 		9D00741C22BA5C070096D893 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741022BA5C070096D893 /* Sleep.swift */; };
+		9D00741F22BA5DBF0096D893 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		9D00740E22BA5C070096D893 /* XCUIElement+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Filtering.swift"; sourceTree = "<group>"; };
 		9D00740F22BA5C070096D893 /* NavigationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
 		9D00741022BA5C070096D893 /* Sleep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
+		9D00741E22BA5DBF0096D893 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D00741F22BA5DBF0096D893 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +167,7 @@
 				9D0073EC22BA5BF30096D893 /* UITestSugarIOS */,
 				9D0073F922BA5BF30096D893 /* UITestSugarIOSTests */,
 				9D0073B622BA5B6F0096D893 /* Products */,
+				9D00741D22BA5DBF0096D893 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -247,6 +251,14 @@
 				9D00740E22BA5C070096D893 /* XCUIElement+Filtering.swift */,
 			);
 			path = element;
+			sourceTree = "<group>";
+		};
+		9D00741D22BA5DBF0096D893 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D00741E22BA5DBF0096D893 /* XCTest.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
