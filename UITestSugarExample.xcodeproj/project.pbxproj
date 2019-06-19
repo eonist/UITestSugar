@@ -31,9 +31,8 @@
 		9D00741A22BA5C070096D893 /* NavigationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00740F22BA5C070096D893 /* NavigationHelper.swift */; };
 		9D00741B22BA5C070096D893 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741022BA5C070096D893 /* Sleep.swift */; };
 		9D00741C22BA5C070096D893 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741022BA5C070096D893 /* Sleep.swift */; };
-		9D00741F22BA5DBF0096D893 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
-		9D00742022BA60C00096D893 /* XCTest.framework in Resources */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
-		9D00742122BA60C60096D893 /* XCTest.framework in Sources */ = {isa = PBXBuildFile; fileRef = 9D00741E22BA5DBF0096D893 /* XCTest.framework */; };
+		9D00743222BA651B0096D893 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D00742E22BA651A0096D893 /* XCTest.framework */; };
+		9D00743322BA651B0096D893 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D00742E22BA651A0096D893 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +113,7 @@
 		9D00740E22BA5C070096D893 /* XCUIElement+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Filtering.swift"; sourceTree = "<group>"; };
 		9D00740F22BA5C070096D893 /* NavigationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHelper.swift; sourceTree = "<group>"; };
 		9D00741022BA5C070096D893 /* Sleep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
-		9D00741E22BA5DBF0096D893 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		9D00742E22BA651A0096D893 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCTest.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D00741F22BA5DBF0096D893 /* XCTest.framework in Frameworks */,
+				9D00743222BA651B0096D893 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D0073F422BA5BF30096D893 /* UITestSugarIOS.framework in Frameworks */,
+				9D00743322BA651B0096D893 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 		9D00741D22BA5DBF0096D893 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D00741E22BA5DBF0096D893 /* XCTest.framework */,
+				9D00742E22BA651A0096D893 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -450,7 +450,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D00742022BA60C00096D893 /* XCTest.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,7 +492,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D00742122BA60C60096D893 /* XCTest.framework in Sources */,
 				9D00741722BA5C070096D893 /* XCUIElement+Filtering.swift in Sources */,
 				9D00741522BA5C070096D893 /* XCUIElement+Text.swift in Sources */,
 				9D00741322BA5C070096D893 /* XCUIElement+Scroll.swift in Sources */,
@@ -690,6 +688,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -709,6 +711,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -728,6 +734,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -749,6 +759,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -769,6 +783,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -789,6 +807,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -818,6 +840,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = UITestSugarIOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -851,6 +874,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks,
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = UITestSugarIOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -875,6 +899,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarIOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -895,6 +923,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TXKCF76Y2G;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UITestSugarIOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
