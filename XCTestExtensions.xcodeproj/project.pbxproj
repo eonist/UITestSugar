@@ -348,6 +348,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.futurelab.XCTestExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -374,6 +375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.futurelab.XCTestExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
