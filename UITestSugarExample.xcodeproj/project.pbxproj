@@ -20,8 +20,6 @@
 		9D0073EB22BA5BF30096D893 /* UITestSugarIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITestSugarIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D0073ED22BA5BF30096D893 /* UITestSugarIOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITestSugarIOS.h; sourceTree = "<group>"; };
 		9D0073EE22BA5BF30096D893 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D0073FA22BA5BF30096D893 /* UITestSugarIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestSugarIOSTests.swift; sourceTree = "<group>"; };
-		9D0073FC22BA5BF30096D893 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D00746C22BB7B660096D893 /* XCUIElement+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Scroll.swift"; sourceTree = "<group>"; };
 		9D00746D22BB7B660096D893 /* XCUIElement+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Text.swift"; sourceTree = "<group>"; };
 		9D00746E22BB7B660096D893 /* XCUIElement+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Filtering.swift"; sourceTree = "<group>"; };
@@ -46,7 +44,6 @@
 			children = (
 				9D00740922BA5C070096D893 /* src */,
 				9D0073EC22BA5BF30096D893 /* UITestSugarIOS */,
-				9D0073F922BA5BF30096D893 /* UITestSugarIOSTests */,
 				9D0073B622BA5B6F0096D893 /* Products */,
 				9D00741D22BA5DBF0096D893 /* Frameworks */,
 			);
@@ -67,15 +64,6 @@
 				9D0073EE22BA5BF30096D893 /* Info.plist */,
 			);
 			path = UITestSugarIOS;
-			sourceTree = "<group>";
-		};
-		9D0073F922BA5BF30096D893 /* UITestSugarIOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				9D0073FA22BA5BF30096D893 /* UITestSugarIOSTests.swift */,
-				9D0073FC22BA5BF30096D893 /* Info.plist */,
-			);
-			path = UITestSugarIOSTests;
 			sourceTree = "<group>";
 		};
 		9D00740922BA5C070096D893 /* src */ = {
@@ -282,7 +270,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
