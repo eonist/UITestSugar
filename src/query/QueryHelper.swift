@@ -1,6 +1,6 @@
 import XCTest
 
-public class UITestHelper {
+public class QueryHelper {
     /**
      * ⚠️️ beta ⚠️️
      * ## Example:
@@ -13,7 +13,9 @@ public class UITestHelper {
         }.compactMap { $0 }
     }
 }
-
+/**
+ * Extension
+ */
 extension XCUIElementQuery {
     /**
      * ⚠️️ beta ⚠️️
@@ -21,6 +23,6 @@ extension XCUIElementQuery {
      * XCUIApplication().descendants(matching: .any).hittableElements.count // n
      */
     public var hittableElements: [XCUIElement] {
-        return UITestHelper.hittableElements(query:self)
+        return QueryHelper.hittableElements(query:self)
     }
 }

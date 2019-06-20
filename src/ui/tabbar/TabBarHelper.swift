@@ -2,7 +2,7 @@ import XCTest
 
 //public enum TabButtonType: String { case homeButton, exploreButton, searchButton, myCollectionButton }
 
-public class NavigationHelper {
+public class TabBarHelper {
     ///
     /// Returns tabbar buttons
     /// ## Examples: "homeButton", "exploreButton", "searchButton", "myCollectionButton"
