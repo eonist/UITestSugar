@@ -139,7 +139,6 @@
 				9D0074A722BB97A30096D893 /* Headers */,
 				9D0074A822BB97A30096D893 /* Sources */,
 				9D0074A922BB97A30096D893 /* Frameworks */,
-				9D0074AA22BB97A30096D893 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -180,16 +179,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		9D0074AA22BB97A30096D893 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D0074A822BB97A30096D893 /* Sources */ = {
@@ -333,6 +322,7 @@
 		9D0074B522BB97A30096D893 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -359,6 +349,7 @@
 		9D0074B622BB97A30096D893 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
