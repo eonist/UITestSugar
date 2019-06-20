@@ -22,7 +22,6 @@
 		9D0073EE22BA5BF30096D893 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D0073FA22BA5BF30096D893 /* UITestSugarIOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestSugarIOSTests.swift; sourceTree = "<group>"; };
 		9D0073FC22BA5BF30096D893 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D00742E22BA651A0096D893 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCTest.framework; sourceTree = "<group>"; };
 		9D00746C22BB7B660096D893 /* XCUIElement+Scroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Scroll.swift"; sourceTree = "<group>"; };
 		9D00746D22BB7B660096D893 /* XCUIElement+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Text.swift"; sourceTree = "<group>"; };
 		9D00746E22BB7B660096D893 /* XCUIElement+Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Filtering.swift"; sourceTree = "<group>"; };
@@ -92,7 +91,6 @@
 		9D00741D22BA5DBF0096D893 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D00742E22BA651A0096D893 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
