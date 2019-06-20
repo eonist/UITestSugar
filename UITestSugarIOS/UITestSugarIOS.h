@@ -1,10 +1,3 @@
-//
-//  UITestSugarIOS.h
-//  UITestSugarIOS
-//
-//  Created by André Jørgensen on 19/06/2019.
-//  Copyright © 2019 futurelab. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 
