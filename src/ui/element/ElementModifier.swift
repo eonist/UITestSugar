@@ -115,7 +115,34 @@ extension ElementModifier {
     * - Note: you can also do: XCUIApplication().staticTexts["content"]
     * - Parameter link: could be the link text or id ⚠️️ testing needed
     */
-   public static func link(app: XCUIApplication, title: String) -> XCUIElement{
+   public static func link(app: XCUIApplication, title: String) -> XCUIElement {
       return app.links[title]
+   }
+}
+/**
+ * Alert
+ */
+extension ElementModifier {
+   /**
+    * Return a button in an alert
+    * - Important: ⚠️️ You can setup handlers for random alert screens: addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in alert.buttons["Allow"].tap() return true }
+    * - 
+    */
+   public static func alert(app: XCUIApplication, alertTitle: String, alerButtonTitle: String) -> XCUIElement{
+      return app.alerts[alertTitle].buttons[alerButtonTitle]
+   }
+}
+/**
+ * Table
+ */
+extension ElementModifier {
+   /**
+    * ⚠️️ Beta ⚠️️
+    */
+   func pullToRefresh(tableElement: XCUIElement) {
+      let firstCell: XCUIElement = tableElement.children(matching: .cell).firstMatch
+      let start = firstCell.coordinate(withNormalizedOffset: CGVector.init(dx: 0, dy: 0))
+      let finish = firstCell.coordinate(withNormalizedOffset: CGVector.init(dx: 0, dy: 6))
+      start.press(forDuration: 0, thenDragTo: finish)
    }
 }
