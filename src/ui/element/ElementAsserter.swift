@@ -31,8 +31,8 @@ public class ElementAsserter {
     * ## Examples:
     * ElementAsserter.exists(element: app.buttons[“Sign up”], timeout: 10)
     */
-   func exists(element: XCUIElement, timeout: Double) -> Bool{
-      return element.waitForExistence(timeout:timeout)
+   func exists(element: XCUIElement, timeout: Double) -> Bool {
+      return element.waitForExistence(timeout: timeout)
    }
    /**
     * Asserts if all elements in an array exists
