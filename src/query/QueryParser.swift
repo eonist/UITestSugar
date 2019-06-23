@@ -39,7 +39,7 @@ public class QueryParser {
    public static func firstElement(query: XCUIElementQuery, containing labels: String...) -> XCUIElement? {
       return labels.map { label in
          query.containing(NSPredicate(format: "label CONTAINS %@", label))
-         }.compactMap { $0 }.first?.element
+      }.compactMap { $0 }.first?.element
    }
    /**
     * Find element that has either of the labels provided in strings
