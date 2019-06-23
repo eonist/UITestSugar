@@ -139,10 +139,16 @@ extension ElementModifier {
    /**
     * ⚠️️ Beta ⚠️️
     */
-   func pullToRefresh(tableElement: XCUIElement) {
+   public static func pullToRefresh(tableElement: XCUIElement) {
       let firstCell: XCUIElement = tableElement.children(matching: .cell).firstMatch
       let start = firstCell.coordinate(withNormalizedOffset: CGVector.init(dx: 0, dy: 0))
       let finish = firstCell.coordinate(withNormalizedOffset: CGVector.init(dx: 0, dy: 6))
       start.press(forDuration: 0, thenDragTo: finish)
+   }
+   /**
+    * ⚠️️ Beta ⚠️️
+    */
+   public static func cell(app: XCUIApplication, idx: Int) -> XCUIElement {
+      return app.tables.cells.element(boundBy: idx)
    }
 }
