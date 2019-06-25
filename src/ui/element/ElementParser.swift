@@ -33,7 +33,7 @@ public class ElementParser {
     * Helps debug an element
     */
    public static func debug(element: XCUIElement, indentation: String = "") {
-      Swift.print("\(indentation)identifier:  \(element.identifier) accessibilityLabel:  \(String(describing: element.accessibilityLabel)) label:  \(element.label) elementType:  \(element.elementType.rawValue) title:  \(element.title)")
+      Swift.print("\(indentation)identifier:  \(element.identifier) accessibilityLabel:  \(String(describing: element.accessibilityLabel)) label:  \(element.label) elementType:  \(String(describing: element.elementType)) title:  \(element.title)")
    }
    /**
     * Helps debug a hierarchy
@@ -41,7 +41,7 @@ public class ElementParser {
     * ElementParser.debugHierarchy(element: app, type: .any, indentaionLevel: 1)
     * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
     */
-   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 0) {
+   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) {
       let children = element.children(matching: type).allElementsBoundByIndex
       children.forEach {
          let indentationLevel: Int = indentationLevel + 1
