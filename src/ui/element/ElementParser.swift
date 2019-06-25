@@ -56,6 +56,7 @@ public class ElementParser {
  */
 extension XCUIElement.ElementType {
    enum ElementTypeName : String, CaseIterable {
+      case any
       case other
       case application
       case group
