@@ -33,7 +33,7 @@ public class ElementParser {
     * Helps debug an element
     */
    public static func debug(element: XCUIElement, indentation: String = "") {
-      Swift.print("\(indentation)identifier:  \(element.identifier) accessibilityLabel:  \(String(describing: element.accessibilityLabel)) label:  \(element.label) elementType:  \(String(describing: element.elementType)) title:  \(element.title)")
+      Swift.print("\(indentation)identifier:  \(element.identifier) accessibilityLabel:  \(String(describing: element.accessibilityLabel)) label:  \(element.label) elementType:  \(String(describing: XCUIElement.ElementType.init(rawValue:  element.elementType.rawValue))) title:  \(element.title)")
    }
    /**
     * Helps debug a hierarchy
