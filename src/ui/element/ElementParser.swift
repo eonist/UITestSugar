@@ -52,14 +52,14 @@ public class ElementParser {
    }
 }
 extension ElementParser {
-   public typealias MatchCondition = (_ a: XCUIElement, _ b: XCUIElement) -> Bool
+   public typealias MatchCondition = (_ element: XCUIElement) -> Bool
    /**
     * Returns an array of ancestral elements (alt name: heritage)
     * - Parameter condition: a closure that evaluates to true or false
     * - Parameter element: the point to search from
     * ## Example:
     * let imgElement = XCUIApplication().descendants(matching: .image).firstMatch
-    * let condition: ElementParser.MatchCondition = { a, b in a.screenshot().image.size == b.screenshot().image.size }
+    * let condition: ElementParser.MatchCondition = { element in element.screenshot().image.size == CGSize(width: 200, height: 50)) }
     * let ancestry: [XCUIElement]? = ElementParser.ancestry(element: imgElement, condition: condition)
     * let ImgElementParent: XCUIElement? = ancestry?.last
     * - Fixme: ⚠️️ Refactor with .map or .flatMap on this method when u have time
@@ -67,7 +67,7 @@ extension ElementParser {
    public static func ancestry(element: XCUIElement, condition: MatchCondition) -> [XCUIElement]? {
       var collector: [XCUIElement]? = []
       for elmt in element.children(matching: .any).allElementsBoundByIndex {
-         if condition(element, elmt) {
+         if condition(elmt) {
             collector! += [element] // found the item, we don't include the actual item we are looking for
          } else if let descendants = ancestry(element: elmt, condition: condition) { // try to traverse the descendants
             collector! += [element] + descendants
@@ -180,6 +180,6 @@ extension XCUIElement.ElementType {
 
 
 //let imgElement = XCUIApplication().descendants(matching: .image).firstMatch
-//let condition: ElementParser.MatchCondition = { a, b in a.screenshot().image.size == b.screenshot().image.size }
+//let condition: ElementParser.MatchCondition = { element in element.screenshot().image.size == CGSize(width: 200, height: 50)) }
 //let ancestry: [XCUIElement]? = ElementParser.ancestry(element: imgElement, condition: condition)
 //let ImgElementParent: XCUIElement? = ancestry?.last
