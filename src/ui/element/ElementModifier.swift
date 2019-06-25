@@ -52,7 +52,7 @@ extension ElementModifier {
       return text
    }
    /**
-    * Remove text from textField or secureTextField.
+    * Remove text from textField or secureTextField. ⚠️️ Beta ⚠️️ 
     * ## Examples:
     * clearTextField(element: app.textFields.element)
     */
