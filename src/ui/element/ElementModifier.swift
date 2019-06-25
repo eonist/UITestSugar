@@ -29,9 +29,9 @@ public class ElementModifier {
     * - Note try to set cells: cell.accessibilityIdentifer = "cell \(indexPath.row)"
     * - Note: there is also Native: firstScrollView.scrollToElement(element: seventhChild)
     */
-   public static func scrollToElement(element: XCUIElement) {
+   public static func scrollToElement(parent: XCUIElement, element: XCUIElement) {
       while !ElementAsserter.visible(element: element) {
-         element.swipeDown()
+         parent.swipeUp()
       }
    }
 }

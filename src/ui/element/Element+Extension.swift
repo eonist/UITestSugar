@@ -12,3 +12,14 @@ extension XCUIElement {
       ElementModifier.clearAndTypeText(element: self, text: text)
    }
 }
+/**
+ * Scrolling
+ */
+extension XCUIElement {
+   /**
+    * Scrolling
+    */
+   public func scrollToElement(element: XCUIElement) {
+      ElementModifier.scrollToElement(parent: self, element: element)
+   }
+}
