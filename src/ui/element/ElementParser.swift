@@ -37,14 +37,16 @@ public class ElementParser {
    }
    /**
     * Helps debug a hierarchy
+    * ## Examples:
+    * ElementParser.debugHierarchy(element: app, type: .any, indentaionLevel: 0)
     */
-   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentaionLevel: Int = 0) {
+   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 0) {
       let children = element.children(matching: type).allElementsBoundByIndex
       children.forEach {
-         let indentationLevel: Int = indentaionLevel + 1
+         let indentationLevel: Int = indentationLevel + 1
          let identation: String = String(repeating: "-", count: indentationLevel)
          debug(element: $0, indentation: identation)
-         debugHierarchy(element: $0, type: type, indentaionLevel: indentationLevel) // keep traversing down the hierarchy
+         debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // keep traversing down the hierarchy
       }
    }
 }
