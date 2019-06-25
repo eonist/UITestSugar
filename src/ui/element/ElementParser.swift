@@ -38,7 +38,8 @@ public class ElementParser {
    /**
     * Helps debug a hierarchy
     * ## Examples:
-    * ElementParser.debugHierarchy(element: app, type: .any, indentaionLevel: 0)
+    * ElementParser.debugHierarchy(element: app, type: .any, indentaionLevel: 1)
+    * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
     */
    public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 0) {
       let children = element.children(matching: type).allElementsBoundByIndex
