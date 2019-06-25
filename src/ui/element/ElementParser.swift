@@ -26,12 +26,25 @@ public class ElementParser {
     * - Note: to debug descendants use the descendants call in the query
     */
    public static func debug(query: XCUIElementQuery) {
-      let elements = query.allElementsBoundByIndex
-      elements.forEach {
-         Swift.print("$0.identifier:  \($0.identifier)")
-         Swift.print("$0.accessibilityLabel:  \(String(describing: $0.accessibilityLabel))")
-         Swift.print("$0.label:  \($0.label)")
-         Swift.print("$0.elementType:  \($0.elementType.rawValue)")
+      let elements: [XCUIElement] = query.allElementsBoundByIndex
+      elements.forEach { debug(element: $0) }
+   }
+   /**
+    * Helps debug an element
+    */
+   public static func debug(element: XCUIElement, indentation: String = "") {
+      Swift.print("\(indentation)identifier:  \(element.identifier) accessibilityLabel:  \(String(describing: element.accessibilityLabel)) label:  \(element.label) elementType:  \(element.elementType.rawValue) title:  \(element.title)")
+   }
+   /**
+    * Helps debug a hierarchy
+    */
+   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentaionLevel: Int = 0) {
+      let children = element.children(matching: type).allElementsBoundByIndex
+      children.forEach {
+         let indentationLevel: Int = indentaionLevel + 1
+         let identation: String = String(repeating: "-", count: indentationLevel)
+         debug(element: $0, indentation: identation)
+         debugHierarchy(element: $0, type: type, indentaionLevel: indentationLevel) // keep traversing down the hierarchy
       }
    }
 }

@@ -62,7 +62,8 @@ public class QueryParser {
       // Fixme: ⚠️️ Use .map or reduce or flatmap here
       var retVal: [XCUIElement] = []
       for string in strings {
-         let elementQuery: XCUIElementQuery = query.containing(NSPredicate(format: "label CONTAINS %@", string))
+         let predicate = NSPredicate(format: "label CONTAINS %@", string)
+         let elementQuery: XCUIElementQuery = query.containing(predicate)
          let elements: [XCUIElement] = QueryParser.elements(query: elementQuery)
          retVal += elements
       }
