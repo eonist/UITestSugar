@@ -45,17 +45,44 @@ public class ElementParser {
       let children = element.children(matching: type).allElementsBoundByIndex
       children.forEach {
          let indentationLevel: Int = indentationLevel + 1
-         let identation: String = String(repeating: "-", count: indentationLevel)
+         let identation: String = .init(repeating: "-", count: indentationLevel)
          debug(element: $0, indentation: identation)
          debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // keep traversing down the hierarchy
       }
+   }
+}
+extension ElementParser {
+   public typealias MatchCondition = (_ a: XCUIElement, _ b: XCUIElement) -> Bool
+   /**
+    * Returns an array of ancestral elements (alt name: heritage)
+    * - Parameter condition: a closure that evaluates to true or false
+    * - Parameter element: the point to search from
+    * ## Example:
+    * let imgElement = XCUIApplication().descendants(matching: .image).firstMatch
+    * let condition: ElementParser.MatchCondition = { a, b in a.screenshot().image.size == b.screenshot().image.size }
+    * let ancestry: [XCUIElement]? = ElementParser.ancestry(element: imgElement, condition: condition)
+    * let ImgElementParent: XCUIElement? = ancestry?.last
+    * - Fixme: ⚠️️ Refactor with .map or .flatMap on this method when u have time
+    */
+   public static func ancestry(element: XCUIElement, condition: MatchCondition) -> [XCUIElement]? {
+      var collector: [XCUIElement]? = []
+      for elmt in element.children(matching: .any).allElementsBoundByIndex {
+         if condition(element, elmt) {
+            collector! += [element] // found the item, we don't include the actual item we are looking for
+         } else if let descendants = ancestry(element: elmt, condition: condition) { // try to traverse the descendants
+            collector! += [element] + descendants
+         } else {
+            collector = nil // dead end, return nil all the way up to the caller
+         }
+      }
+      return collector
    }
 }
 /**
  * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
  */
 extension XCUIElement.ElementType {
-   enum ElementTypeName : String, CaseIterable {
+   enum ElementTypeName: String, CaseIterable {
       case any
       case other
       case application
@@ -149,3 +176,10 @@ extension XCUIElement.ElementType {
       return ElementTypeName.allCases[Int(self.rawValue)].rawValue
    }
 }
+
+
+
+//let imgElement = XCUIApplication().descendants(matching: .image).firstMatch
+//let condition: ElementParser.MatchCondition = { a, b in a.screenshot().image.size == b.screenshot().image.size }
+//let ancestry: [XCUIElement]? = ElementParser.ancestry(element: imgElement, condition: condition)
+//let ImgElementParent: XCUIElement? = ancestry?.last
