@@ -51,9 +51,9 @@ public class ElementParser {
       }
    }
 }
-
 /**
  * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
+ * - Fixme: ⚠️️ move somewhere else
  */
 extension XCUIElement.ElementType {
    enum ElementTypeName: String, CaseIterable {
