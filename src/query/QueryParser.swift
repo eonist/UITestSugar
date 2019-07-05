@@ -5,27 +5,12 @@ public class QueryParser {
    /**
     * Returns first element by identifier
     * ## Examples:
-    * firstElement(query: app.descendants(matching: .any), identifier:"Featured Playlists-View all")
+    * firstElement(query: app.descendants(matching: .any), identifier: "Featured Playlists-View all")
     * firstElement(query: app.scrollViews.descendants(matching: .any), id: "leftAlignedIconButton", type: .button)
     * - Parameter type: .other (UIView), .cell (UICollectionViewCell or UITableViewCell), .button (UIButton)
     */
     public static func firstElement(query: XCUIElementQuery, id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       return query.element(matching: type, identifier: id).firstMatch
-   }
-   //   public static func firstElement(query: XCUIElementQuery, identifier: String, type: XCUIElement.ElementType = .any) -> XCUIElement? {
-   //      let elements: [XCUIElement] = QueryParser.elements(query: query, type: type)
-   //      return elements.first { $0.identifier == identifier }
-   //   }
-   /**
-    * Returns elements in query
-    * - Parameter query: the search query to match parent element
-    * - Fixme: ⚠️️ write example
-    * - Important: you can use the native: .allElementsBoundByIndex, there is also one for only items with accessibility
-    */
-   public static func elements(query: XCUIElementQuery, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      return (0..<query.count).indices.map { i in
-         query.children(matching: type).element(boundBy: i)// bound by is a way to access element by index
-      }
    }
    /**
     * Returns element of ElementType
@@ -41,10 +26,23 @@ public class QueryParser {
     * let firstElement = app.filterElements(query: app.children, labels: ["Sugar", "500 g"]).first?.element
     * firstElement.tap()
     */
-   public static func firstElement(query: XCUIElementQuery, labels: [String] ) -> XCUIElement? {
+   public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
       return labels.map { label in
          query.containing(NSPredicate(format: "label CONTAINS %@", label))
       }.compactMap { $0 }.first?.element
+   }
+   /**
+    * Returns elements in query
+    * - Parameter query: the search query to match parent element
+    * - Important: ⚠️️ you can use the native: .allElementsBoundByIndex, there is also one for only items with accessibility
+    * - Important: ⚠️️ you can use the native: XCUIApplication.init().children(matching: .button) instead of this method
+    * ## Example:
+    * QueryParser.elements(query: app.children, type: .button)
+    */
+   public static func elements(query: XCUIElementQuery, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
+      return (0..<query.count).indices.map { i in
+         query.children(matching: type).element(boundBy: i) // bound by is a way to access element by index
+      }
    }
    /**
     * Find element that has either of the labels provided in strings
@@ -70,3 +68,7 @@ public class QueryParser {
       return retVal
    }
 }
+//   public static func firstElement(query: XCUIElementQuery, identifier: String, type: XCUIElement.ElementType = .any) -> XCUIElement? {
+//      let elements: [XCUIElement] = QueryParser.elements(query: query, type: type)
+//      return elements.first { $0.identifier == identifier }
+//   }

@@ -5,6 +5,24 @@ import XCTest
  */
 public class ElementParser {
    /**
+    * Find first matching item in children based on condition
+    * ## Examples:
+    * let viewAllButton: XCUIElement? = firstChild(element: app, condition: { $0.identifier == "View all" })
+    */
+   public static func firstChild(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
+      let children = ElementParser.children(element: element, type: type)
+      return children.first { condition($0) }
+   }
+   /**
+    * Find first matching item in descendants based on condition
+    * ## Examples:
+    * let viewAllButton: XCUIElement? = firstDescendant(element: app, condition: { $0.identifier == "View all" })
+    */
+   public static func firstDescendant(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
+      let descendants = ElementParser.descendants(element: element, type: type)
+      return descendants.first { condition($0) }
+   }
+   /**
     * Returns children elements for element
     * - Parameter element: parent element
     */
@@ -19,41 +37,18 @@ public class ElementParser {
       let query: XCUIElementQuery = element.descendants(matching: type)
       return QueryParser.elements(query: query)
    }
-   /**
-    * Helps identify elements (Useful when there is localization involved)
-    * ## Examples:
-    * debugChildren(query: app.scrollViews.otherElements.buttons)
-    * - Note: to debug descendants use the descendants call in the query
-    */
-   public static func debug(query: XCUIElementQuery) {
-      let elements: [XCUIElement] = query.allElementsBoundByIndex
-      elements.forEach { debug(element: $0) }
-   }
-   /**
-    * Helps debug an element
-    */
-   public static func debug(element: XCUIElement, indentation: String = "") {
-      Swift.print("\(indentation)identifier:  \(element.identifier) accessibilityLabel:  \(String(describing: element.accessibilityLabel)) label:  \(element.label) type:  \(element.elementType.string) title:  \(element.title)")
-   }
-   /**
-    * Helps debug a hierarchy
-    * ## Examples:
-    * ElementParser.debugHierarchy(element: app, type: .any, indentaionLevel: 1)
-    * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
-    */
-   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) {
-      let children = element.children(matching: type).allElementsBoundByIndex
-      children.forEach {
-         let indentationLevel: Int = indentationLevel + 1
-         let identation: String = .init(repeating: "-", count: indentationLevel)
-         debug(element: $0, indentation: identation)
-         debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // keep traversing down the hierarchy
-      }
-   }
 }
-
+/**
+ * Type
+ */
 extension ElementParser {
    public typealias MatchCondition = (_ element: XCUIElement) -> Bool
+}
+/**
+ * Hierarchy parser
+ */
+extension ElementParser {
+   
    /**
     * Returns an array of ancestral elements (alt name: heritage)
     * - Parameter condition: a closure that evaluates to true or false
@@ -65,6 +60,7 @@ extension ElementParser {
     * let index: [Int] = ancestry!.map { $0.0 }
     * let descendant: XCUIElement? = ElementParser.element(root: app, index: index)
     * - Fixme: ⚠️️ Refactor with .map or .flatMap on this method when u have time
+    * - Fixme: ⚠️️ You can also use elementAtIndex and element.count
     */
    public static func ancestry(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
       var collector: [(Int, XCUIElement)]?
@@ -85,7 +81,8 @@ extension ElementParser {
    }
    /**
     * Returns element in a hierarchy based on a mapIndex
-    * Fixme: Base it on query instead, because its faster
+    * - Fixme: Base it on query instead, because its faster
+    * - Fixme: ⚠️️ You can also use elementAtIndex and element.count
     */
    public static func element(root: XCUIElement, index: [Int]) -> XCUIElement? {
       let children: [XCUIElement] = root.children(matching: .any).allElementsBoundByIndex
@@ -105,109 +102,6 @@ extension ElementParser {
       Swift.print("⚠️️ not in use yet ⚠️️")
    }
 }
-
-/**
- * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
- * - Fixme: ⚠️️ move somewhere else
- */
-extension XCUIElement.ElementType {
-   enum ElementTypeName: String, CaseIterable {
-      case any
-      case other
-      case application
-      case group
-      case window
-      case sheet
-      case drawer
-      case alert
-      case dialog
-      case button
-      case radioButton
-      case radioGroup
-      case checkBox
-      case disclosureTriangle
-      case popUpButton
-      case comboBox
-      case menuButton
-      case toolbarButton
-      case popover
-      case keyboard
-      case key
-      case navigationBar
-      case tabBar
-      case tabGroup
-      case toolbar
-      case statusBar
-      case table
-      case tableRow
-      case tableColumn
-      case outline
-      case outlineRow
-      case browser
-      case collectionView
-      case slider
-      case pageIndicator
-      case progressIndicator
-      case activityIndicator
-      case segmentedControl
-      case picker
-      case pickerWheel
-      case `switch`
-      case toggle
-      case link
-      case image
-      case icon
-      case searchField
-      case scrollView
-      case scrollBar
-      case staticText
-      case textField
-      case secureTextField
-      case datePicker
-      case textView
-      case menu
-      case menuItem
-      case menuBar
-      case menuBarItem
-      case map
-      case webView
-      case incrementArrow
-      case decrementArrow
-      case timeline
-      case ratingIndicator
-      case valueIndicator
-      case splitGroup
-      case splitter
-      case relevanceIndicator
-      case colorWell
-      case helpTag
-      case matte
-      case dockItem
-      case ruler
-      case rulerMarker
-      case grid
-      case levelIndicator
-      case cell
-      case layoutArea
-      case layoutItem
-      case handle
-      case stepper
-      case tab
-      case touchBar
-      case statusItem
-   }
-}
-extension XCUIElement.ElementType {
-   /**
-    * XCUIElement.ElementType.button.string // button
-    */
-   public var string: String {
-      return ElementTypeName.allCases[Int(self.rawValue)].rawValue
-   }
-}
-
-
-
 
 //let imgElement = XCUIApplication().descendants(matching: .image).firstMatch
 //let condition: ElementParser.MatchCondition = { element in element.screenshot().image.size == CGSize(width: 200, height: 50)) }
