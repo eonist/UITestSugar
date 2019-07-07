@@ -4,6 +4,10 @@ import XCTest
 public class QueryAsserter {
    /**
     * ⚠️️ Beta ⚠️️
+    * - Parameter app: The app to target
+    * - Parameter testCase: ?
+    * - Parameter labelString: ?
+    * - Parameter timeOut: time to wait before failing
     */
    public static func waitFor(app: XCUIApplication, testCase: XCTestCase, labelString: String, timeOut: Double = 5) {
       let label = app.staticTexts[labelString]
@@ -16,6 +20,8 @@ public class QueryAsserter {
     * ⚠️️ Beta ⚠️️
     * - Note: wait(for:timeout:) returns an XCTestWaiterResult, an enum representing the result of the test. It can be one of four possible values: completed, timedOut, incorrectOrder, or invertedFulfillment. Only the first, completed, indicates that the element was successfully found within the allotted timeout.
     * - Remark: A big advantage of this approach is that the test suite reads as a synchronous flow. There is no callback block or completion handler. The helper method simply returns a boolean indicating if the element appeared or not.
+    * - Parameter element: The element to wait for to appear
+    * - Parameter timeOut: time to wait before failing
     */
    public static func waitForElementToAppear(element: XCUIElement, timeOut: Double = 5) -> Bool {
       let existsPredicate = NSPredicate(format: "exists == true")

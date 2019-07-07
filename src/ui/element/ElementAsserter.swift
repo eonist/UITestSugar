@@ -16,7 +16,7 @@ public class ElementAsserter {
     * isVisibleInWindow(element: app) // true / false
     * - Parameter element: The element to assert if is visible in window
     */
-   public static func isVisibleInWindow(element: XCUIElement) -> Bool {
+   public static func isVisibleInWindow(element: XCUIElement) -> Bool { // was named visible
       guard element.exists && !element.frame.isEmpty else { return false }
       return XCUIApplication().windows.element(boundBy: 0).frame.contains(element.frame)
    }
@@ -67,20 +67,5 @@ public class ElementAsserter {
     */
    public static func hasText(element: XCUIElement, text: String) -> Bool {
       return element.staticTexts[text].exists
-   }
-}
-extension ElementAsserter {
-   /**
-    * - Abstract: Search down a scroll view until it finds a certain element
-    * - Note: there is also: firstScrollView.scrollToElement(element: seventhChild)
-    * - Parameter app:
-    */
-   public static func scrollDownUntilFound(element: XCUIElement, id: String, type: XCUIElement.ElementType, timeOut: Double = 10) {
-      var exists: Bool = false
-      repeat {
-         let element: XCUIElement = element.descendants(matching: type).element(matching: type, identifier: id).firstMatch
-         exists = ElementAsserter.exists(element: element, timeout: timeOut)
-         if exists { element.swipeUp() } // no need to swipeUp if found
-      } while !exists
    }
 }

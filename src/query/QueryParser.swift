@@ -8,15 +8,18 @@ public class QueryParser {
     * firstElement(query: app.descendants(matching: .any), identifier: "Featured Playlists-View all")
     * firstElement(query: app.scrollViews.descendants(matching: .any), id: "leftAlignedIconButton", type: .button)
     * - Parameter type: .other (UIView), .cell (UICollectionViewCell or UITableViewCell), .button (UIButton)
+    * - Parameter id: The accessibility identifier
+    * - Parameter query: The query to target
     */
     public static func firstElement(query: XCUIElementQuery, id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       return query.element(matching: type, identifier: id).firstMatch
    }
    /**
     * Returns element of ElementType
-    * - Parameter: .button, .scrollBar, .checkButton etc
+    * - Parameter type: .button, .scrollBar, .checkButton etc
+    * - Parameter query: The query to target
     * ## Example:
-    * app.element(query: app.children, type: .button)
+    * app.element(query: app.children, type: .button) //
     */
    public static func firstElement(query: XCUIElementQuery, type: XCUIElement.ElementType) -> XCUIElement {
       return query.children(matching: type).element
@@ -25,6 +28,8 @@ public class QueryParser {
     * ## Example:
     * let firstElement = app.filterElements(query: app.children, labels: ["Sugar", "500 g"]).first?.element
     * firstElement.tap()
+    * - Parameter query: The query to target
+    * - Parameter labels: labels tp search for
     */
    public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
       return labels.map { label in
@@ -34,6 +39,7 @@ public class QueryParser {
    /**
     * Returns elements in query
     * - Parameter query: the search query to match parent element
+    * - Parameter type: Filter against a speccific type to get a more presice result
     * - Important: ⚠️️ you can use the native: .allElementsBoundByIndex, there is also one for only items with accessibility
     * - Important: ⚠️️ you can use the native: XCUIApplication.init().children(matching: .button) instead of this method
     * ## Example:
@@ -46,6 +52,9 @@ public class QueryParser {
    }
    /**
     * Find element that has either of the labels provided in strings
+    * - Parameter query: The query to target
+    * - Parameter strings: the strings to match against
+    * - Parameter type: Filter against a speccific type
     * ## Examples:
     * let app = XCUIApplication()
     * let element: AppParser.filterElements(query: app.children, strings: ["Sugar", "500 g"], type: .any).element

@@ -1,9 +1,10 @@
 import Foundation
 import XCTest
-/**
- * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
- */
+
 extension XCUIElement.ElementType {
+   /**
+    * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
+    */
    enum ElementTypeName: String, CaseIterable {
       case any
       case other
@@ -92,8 +93,9 @@ extension XCUIElement.ElementType {
 }
 extension XCUIElement.ElementType {
    /**
+    * Returns a human readable representation of what kind of elementType the element is
     * ## Examples:
-    * someButtonXCUIElement.elementType.string // button
+    * app.buttons.firstMatch.elementType.string // button
     */
    public var string: String {
       return ElementTypeName.allCases[Int(self.rawValue)].rawValue

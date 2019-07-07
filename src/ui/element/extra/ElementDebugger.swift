@@ -5,46 +5,54 @@ import XCTest
  */
 public class ElementDebugger {
    /**
-    * Helps identify elements (Useful when there is localization involved)
+    * Debug query (can target children or desendants)
+    * - Abstract: Helps identify elements (Useful when there is localization involved)
     * ## Examples:
-    * debugChildren(query: app.scrollViews.otherElements.buttons)
+    * debug(query: app.scrollViews.otherElements.buttons)
+    * debug(query: app.children)
+    * debug(query: app.desendants)
     * - Note: to debug descendants use the descendants call in the query
     * - Parameter query: Debug all elements of this query
     */
-   public static func debug(query: XCUIElementQuery) {
+   public static func debug(query: XCUIElementQuery) -> String {
       let elements: [XCUIElement] = query.allElementsBoundByIndex
-      elements.forEach { debug(element: $0) }
+      return elements.map { debug(element: $0) }.joined(separator: "\n")
    }
    /**
     * Helps debug an element
     * - Parameter element: The element to debug
     * - Parameter indentation: Used to indent the print, so debugging hierarchy becomes more readable
+    * ## Examples:
+    * Swift.print(debug(element: app))
     */
-   public static func debug(element: XCUIElement, indentation: String = "") {
+   public static func debug(element: XCUIElement, indentation: String = "") -> String {
       let id = element.identifier
       let aLable = String(describing: element.accessibilityLabel)
       let lable = element.label
       let type = element.elementType.string
       let title = element.title
-      Swift.print("\(indentation)identifier:  \(id) accessibilityLabel:  \(aLable) label:  \(lable) type:  \(type) title:  \(title)")
+      let str = "\(indentation)identifier:  \(id) accessibilityLabel:  \(aLable) label:  \(lable) type:  \(type) title:  \(title)"
+      return str
    }
    /**
     * Helps debug a hierarchy
     * ## Examples:
-    * ElementParser.debugHierarchy(element: app, type: .any, indentaionLevel: 1)
+    * let hierarchyStr: String = ElementParser.debugHierarchy(element: app, type: .any, indentationLevel: 1)
+    * Swift.print("Hierarchy: \n" + hierarchyStr)
     * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
     * - Fixme: ⚠️️ ⚠️️ ⚠️️ Instead of printing directly, rather return a string that can be printed, because UITesting is so messy for the log
     * - Parameter element: The root element of the hierarchy
     * - Parameter type: the element type to drill down against. More speccific means less wasted CPU
     * - Parameter indentationLevel: This is used to make the log read more like a hierachy. The more indentation the further down in the hierarchy the item is
     */
-   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) {
+   public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) -> String {
       let children = element.children(matching: type).allElementsBoundByIndex
-      children.forEach {
+      return children.map {
          let indentationLevel: Int = indentationLevel + 1
          let identation: String = .init(repeating: "-", count: indentationLevel)
-         debug(element: $0, indentation: identation)
-         debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // keep traversing down the hierarchy
-      }
+         let retVal1: String = debug(element: $0, indentation: identation)
+         let retVal2: String = debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // keep traversing down the hierarchy
+         return retVal1 + "\n" + retVal2
+      }.joined(separator: "\n")
    }
 }

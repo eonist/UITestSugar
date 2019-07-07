@@ -8,6 +8,9 @@ public class ElementParser {
     * Find first matching item in children based on condition
     * ## Examples:
     * let viewAllButton: XCUIElement? = firstChild(element: app, condition: { $0.identifier == "View all" })
+    * - Parameter element: the element to target
+    * - Parameter condition: the condition that the result must satisfy
+    * - Parameter type: Make the search more speccific  y providing a type
     */
    public static func firstChild(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       let children = ElementParser.children(element: element, type: type)
@@ -48,7 +51,6 @@ extension ElementParser {
  * Hierarchy parser
  */
 extension ElementParser {
-   
    /**
     * Returns an array of ancestral elements (alt name: heritage)
     * - Parameter condition: a closure that evaluates to true or false

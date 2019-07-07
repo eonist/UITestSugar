@@ -26,7 +26,7 @@ extension XCUIElement {
 /**
  * Tapping
  */
-extension XCUIElement{
+extension XCUIElement {
    /**
     * Helps to tap things that dont work with regular .tap() calls. as .tap() calls must be on .isHittable items
     */
