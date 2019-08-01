@@ -45,7 +45,7 @@ public class ElementAsserter {
     * - Note: This method is syncronouse. So it will wait and then call the next item once its complete
     * ## Examples:
     * ElementAsserter.exists(element: app.buttons[“Sign up”], timeout: 10)
-    * - Remark: ⚠️️ Prefer the natice waitForExistance if possible
+    * - Remark: ⚠️️ Prefer the native waitForExistance if possible
     * - Parameter element: The element to check if exists
     * - Parameter timeout: the amount of wating until it fails
     */
@@ -60,6 +60,7 @@ public class ElementAsserter {
       return elements.first { !$0.exists } == nil
    }
    /**
+    * Asserts if an element has a speccific text
     * ## Examples
     * hasText(element: app.alerts.element,"Please enter a valid email address")
     * - Parameter element: The element to assert if has text

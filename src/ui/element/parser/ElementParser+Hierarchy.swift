@@ -1,53 +1,6 @@
 import Foundation
 import XCTest
 /**
- * Parser
- */
-public class ElementParser {
-   /**
-    * Find first matching item in children based on condition
-    * ## Examples:
-    * let viewAllButton: XCUIElement? = firstChild(element: app, condition: { $0.identifier == "View all" })
-    * - Parameter element: the element to target
-    * - Parameter condition: the condition that the result must satisfy
-    * - Parameter type: Make the search more speccific  y providing a type
-    */
-   public static func firstChild(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
-      let children = ElementParser.children(element: element, type: type)
-      return children.first { condition($0) }
-   }
-   /**
-    * Find first matching item in descendants based on condition
-    * ## Examples:
-    * let viewAllButton: XCUIElement? = firstDescendant(element: app, condition: { $0.identifier == "View all" })
-    */
-   public static func firstDescendant(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
-      let descendants = ElementParser.descendants(element: element, type: type)
-      return descendants.first { condition($0) }
-   }
-   /**
-    * Returns children elements for element
-    * - Parameter element: parent element
-    */
-   public static func children(element: XCUIElement, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      let query: XCUIElementQuery = element.children(matching: type)
-      return QueryParser.elements(query: query)
-   }
-   /**
-    * Returns all children 
-    */
-   public static func descendants(element: XCUIElement, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      let query: XCUIElementQuery = element.descendants(matching: type)
-      return QueryParser.elements(query: query)
-   }
-}
-/**
- * Type
- */
-extension ElementParser {
-   public typealias MatchCondition = (_ element: XCUIElement) -> Bool
-}
-/**
  * Hierarchy parser
  */
 extension ElementParser {
@@ -67,10 +20,8 @@ extension ElementParser {
    public static func ancestry(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
       var collector: [(Int, XCUIElement)]?
       let children: [XCUIElement] = root.element.children(matching: .any).allElementsBoundByIndex
-//      Swift.print("children.count:  \(children.count)")
       for (i, child) in children.enumerated() {
          let metCondition: Bool = condition(child)
-//         Swift.print("metCondition:  \(metCondition)")
          if metCondition {
             collector = [(i, child)] // found the item, we don't include the actual item we are looking for
             break
@@ -83,7 +34,7 @@ extension ElementParser {
    }
    /**
     * Returns element in a hierarchy based on a mapIndex
-    * - Fixme: Base it on query instead, because its faster
+    * - Fixme: Base it on query instead, because it's faster
     * - Fixme: ⚠️️ You can also use elementAtIndex and element.count
     */
    public static func element(root: XCUIElement, index: [Int]) -> XCUIElement? {
@@ -103,6 +54,12 @@ extension ElementParser {
    public func parent(element: XCUIElement) {
       Swift.print("⚠️️ not in use yet ⚠️️")
    }
+}
+/**
+ * Type for ancestry method
+ */
+extension ElementParser {
+   public typealias MatchCondition = (_ element: XCUIElement) -> Bool
 }
 
 //let imgElement = XCUIApplication().descendants(matching: .image).firstMatch

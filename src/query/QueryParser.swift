@@ -60,7 +60,7 @@ public class QueryParser {
     * let element: AppParser.filterElements(query: app.children, strings: ["Sugar", "500 g"], type: .any).element
     * element.exists // true , false
     * element.first.tap()
-    * // Cells
+    * // Cell example
     * let cells = AppParser.children(query: app.children, strings: "Sugar", "500 g", .cells).element
     * cells.exists // true , false
     * cells.firstMatch.tap()
