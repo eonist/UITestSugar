@@ -37,7 +37,7 @@ public class ElementDebugger {
    /**
     * Helps debug a hierarchy
     * ## Examples:
-    * let hierarchyStr: String = ElementParser.debugHierarchy(element: app, type: .any, indentationLevel: 1)
+    * let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
     * Swift.print("Hierarchy: \n" + hierarchyStr)
     * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
     * - Fixme: ⚠️️ ⚠️️ ⚠️️ Instead of printing directly, rather return a string that can be printed, because UITesting is so messy for the log
