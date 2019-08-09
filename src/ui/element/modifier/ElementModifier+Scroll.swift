@@ -8,26 +8,28 @@ extension ElementModifier {
     * Scrolls until element is visible
     * - Parameter parent: the element to swipe
     * - Parameter element: the element to swipe to
+    * - Parameter dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
     * - Note: try to set cells: cell.accessibilityIdentifer = "cell \(indexPath.row)"
     * - Note: there is also Native: firstScrollView.scrollToElement(element: seventhChild)
     */
-   public static func scrollToElement(parent: XCUIElement, element: XCUIElement) {
+   public static func scrollToElement(parent: XCUIElement, element: XCUIElement, dir: Direction = .up) {
       while !ElementAsserter.isVisibleInWindow(element: element) {
-         parent.swipeUp()
+         dir == .up ? element.swipeUp() : element.swipeDown()
       }
    }
    /**
     * Search down a scroll view until searchCondition is met (⚠️️ Beta ⚠️️)
     * - Parameter element: The root to search from
+    * - Parameter dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
     * - Parameter searchCondition:
     * ## Examples:
     * let condA: ElementParser.MatchCondition = { $0.title == "Featured playlist" }
     * let condB: ElementParser.MatchCondition = { $0.identifier == "Featured Playlists-View all" }
-    * scrollTo(root: app, searchCondition: { ElementParser.firstDescendant(element: $0, condition: condA) && ElementParser.firstDescendant(element: $0, condition: condB) })
+    * scrollTo(root: app, dir: .up, searchCondition: { ElementParser.firstDescendant(element: $0, condition: condA) && ElementParser.firstDescendant(element: $0, condition: condB) })
     */
-   public static func scrollTo(element: XCUIElement, searchCondition: ElementParser.MatchCondition) {
+   public static func scrollTo(element: XCUIElement, dir: Direction, searchCondition: ElementParser.MatchCondition) {
       while !searchCondition(element) {
-         element.swipeUp()
+         dir == .up ? element.swipeUp() : element.swipeDown()
       }
    }
    /**
@@ -43,4 +45,10 @@ extension ElementModifier {
          if exists { element.swipeUp() } // no need to swipeUp if found
       } while !exists
    }
+}
+/**
+ * Type
+ */
+extension ElementModifier {
+   public enum Direction { case up, down}
 }
