@@ -48,12 +48,13 @@ public class ElementDebugger {
     */
    public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) -> String {
       let children: [XCUIElement] = element.children(matching: type).allElementsBoundByIndex
-      return children.map {
+      let str: String = children.map {
          let indentationLevel: Int = indentationLevel + 1
          let identation: String = .init(repeating: "-", count: indentationLevel)
          let retVal1: String = debug(element: $0, indentation: identation)
          let retVal2: String = debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // keep traversing down the hierarchy
-         return retVal1 + (retVal2.isEmpty ? "" : "\n" + retVal2) //if retval2 is empty, dont append it
+         return retVal1 + (retVal2.isEmpty ? "" : "\n" + retVal2) //if retval2 is empty, don't append it
       }.joined(separator: "\n") // if there are items, then seperate them with a line-break
+      return str.suffix(2) == "\n" ? String(str.dropLast(2)) : str // remove the end \n
    }
 }
