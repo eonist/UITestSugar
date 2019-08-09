@@ -5,7 +5,7 @@ import XCTest
  */
 public class ElementParser {
    /**
-    * Find first matching item in children based on condition
+    * Find first matching item in children based on condition (Only works for immediate chilren not grandchildren etc)
     * ## Examples:
     * let viewAllButton: XCUIElement? = firstChild(element: app, condition: { $0.identifier == "View all" })
     * - Parameter element: the element to target
@@ -17,7 +17,7 @@ public class ElementParser {
       return children.first { condition($0) }
    }
    /**
-    * Find first matching item in descendants based on condition
+    * Find first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
     * ## Examples:
     * let viewAllButton: XCUIElement? = firstDescendant(element: app, condition: { $0.identifier == "View all" })
     */
