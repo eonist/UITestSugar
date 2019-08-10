@@ -62,14 +62,14 @@ extension XCUIElement {
     * Find first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
     * - Remark: Being able to do element?.firstDescendant(..) is powerfull when you need to chain calls. As you cant do that when you provide the elemnt as a parameter in the method call
     */
-   public func firstDescendant(condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
+   public func firstDescendant(_ condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       return ElementParser.firstDescendant(element: self, condition: condition)
    }
    /**
     * Find first matching item in children based on condition (Only works for immediate chilren not grandchildren etc)
     * - Remark: Being able to do element?.firstDescendant(..) is powerfull when you need to chain calls. As you cant do that when you provide the elemnt as a parameter in the method call
     */
-   public func firstChild(condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
+   public func firstChild(_ condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       let children: [XCUIElement] = ElementParser.children(element: self, type: type)
       return children.first { condition($0) }
    }
