@@ -51,7 +51,7 @@ public class QueryParser {
       }
    }
    /**
-    * Find element that has either of the labels provided in strings
+    * Find element that has either of the labels provided in strings parameter
     * - Parameter query: The query to target
     * - Parameter strings: the strings to match against
     * - Parameter type: Filter against a speccific type

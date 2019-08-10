@@ -47,8 +47,8 @@ extension ElementModifier {
    }
 }
 /**
- * Type
+ * Type For scrolling methods
  */
 extension ElementModifier {
-   public enum Direction { case up, down}
+   public enum Direction { case up, down }
 }

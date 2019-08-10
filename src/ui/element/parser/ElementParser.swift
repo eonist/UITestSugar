@@ -19,7 +19,9 @@ public class ElementParser {
    /**
     * Find first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
     * ## Examples:
-    * let viewAllButton: XCUIElement? = firstDescendant(element: app, condition: { $0.identifier == "View all" })
+    * let viewAllButton: XCUIElement? = firstDescendant(element: app, condition: { $0.identifier == "View all" }) // find button with accebility identifier
+    * let button = ElementParser.firstDescendant(element: app, condition: { $0.label == "Detail" })
+    * Swift.print("button?.label:  \(button?.label)") // "Detail"
     * - Parameter element: The element to find descendants in
     * - Parameter condition: the condition that the result must satisfy
     * - Parameter type: Only return descendats with this type

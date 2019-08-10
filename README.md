@@ -6,7 +6,24 @@ Sugar for UITesting
 - Manual Open `.xcodeproj`
 - CocoaPod (Coming soon)
 
-### Example:
+
+### By button label title
+
+```swift
+let app = XCUIApplication()
+let button = ElementParser.firstDescendant(element: app, condition: { $0.label == "Detail" })
+Swift.print("button?.label:  \(button?.label)")
+```
+
+### By button accessibility
+
+```swift
+btn.isAccessibilityElement = true // set this in the app code
+btn.accessibilityIdentifier = "detailBtn" // set this in the app code
+let button = ElementParser.firstDescendant(element: app, condition: { $0.identifier == "detailBtn" }) 
+```
+
+### Generic example:
 ```swift
 let app = XCUIApplication()
 let searchedElement = app.filterElements(containing: "Sugar", "500 g").element

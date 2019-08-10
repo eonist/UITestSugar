@@ -26,6 +26,7 @@
 		F11CF28222BF5DFB0022C28D /* QueryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11CF28122BF5DFB0022C28D /* QueryParser.swift */; };
 		F11CF28422BF5EE80022C28D /* ElementAsserter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11CF28322BF5EE80022C28D /* ElementAsserter.swift */; };
 		F11CF2CB22C01EC90022C28D /* QueryAsserter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11CF2CA22C01EC90022C28D /* QueryAsserter.swift */; };
+		F1E7871722FEB0CD002007EE /* Query+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E7871622FEB0CD002007EE /* Query+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		F11CF28122BF5DFB0022C28D /* QueryParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParser.swift; sourceTree = "<group>"; };
 		F11CF28322BF5EE80022C28D /* ElementAsserter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementAsserter.swift; sourceTree = "<group>"; };
 		F11CF2CA22C01EC90022C28D /* QueryAsserter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryAsserter.swift; sourceTree = "<group>"; };
+		F1E7871622FEB0CD002007EE /* Query+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Query+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				9D00744622BA718F0096D893 /* QueryHelper.swift */,
 				F11CF28122BF5DFB0022C28D /* QueryParser.swift */,
+				F1E7871622FEB0CD002007EE /* Query+Extension.swift */,
 				F11CF2CA22C01EC90022C28D /* QueryAsserter.swift */,
 			);
 			path = query;
@@ -281,6 +284,7 @@
 				9D05880622F2D58C00F0A2BE /* ElementModifier+Web.swift in Sources */,
 				9D00730622B92FE80096D893 /* Sleep.swift in Sources */,
 				9D0587FE22CE03E400F0A2BE /* ElementDebugger.swift in Sources */,
+				F1E7871722FEB0CD002007EE /* Query+Extension.swift in Sources */,
 				9D05880222F2D55600F0A2BE /* ElementModifier+Table.swift in Sources */,
 				9D05880C22F2D5FC00F0A2BE /* ElementModifier+Pickerwheel.swift in Sources */,
 				9D05880822F2D5B900F0A2BE /* ElementModifier+TextField.swift in Sources */,
