@@ -22,8 +22,14 @@ public class ElementDebugger {
     * Helps debug an element
     * - Parameter element: The element to debug
     * - Parameter indentation: Used to indent the print, so debugging hierarchy becomes more readable
+    * - Returns:
+    *  - id: acceccibilityIdentifier
+    *  - aLabel: accessibilityLabel
+    *  - label: the button.label.text
+    *  - type: the XCUIElement type
+    *  - title: ?
     * ## Examples:
-    * Swift.print(debug(element: app))
+    * Swift.print(debug(element: app)) // id, label, type, title
     */
    public static func debug(element: XCUIElement, indentation: String = "") -> String {
       let id = element.identifier

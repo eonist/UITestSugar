@@ -37,7 +37,7 @@
 		9D00744522BA718F0096D893 /* TabBarHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarHelper.swift; sourceTree = "<group>"; };
 		9D00744622BA718F0096D893 /* QueryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryHelper.swift; sourceTree = "<group>"; };
 		9D0587FA22CDF3F500F0A2BE /* ElementType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ElementType+Extension.swift"; sourceTree = "<group>"; };
-		9D0587FD22CE03E400F0A2BE /* ElementDebugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementDebugger.swift; sourceTree = "<group>"; };
+		9D0587FD22CE03E400F0A2BE /* ElementDebugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ElementDebugger.swift; path = ../extra/ElementDebugger.swift; sourceTree = "<group>"; };
 		9D05880122F2D55600F0A2BE /* ElementModifier+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ElementModifier+Table.swift"; sourceTree = "<group>"; };
 		9D05880322F2D57E00F0A2BE /* ElementModifier+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ElementModifier+Scroll.swift"; sourceTree = "<group>"; };
 		9D05880522F2D58C00F0A2BE /* ElementModifier+Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ElementModifier+Web.swift"; sourceTree = "<group>"; };
@@ -104,6 +104,7 @@
 		9D00744122BA718F0096D893 /* element */ = {
 			isa = PBXGroup;
 			children = (
+				F1E7871B22FEE26F002007EE /* debug */,
 				9D05881322F2D9BA00F0A2BE /* parser */,
 				9D05880022F2D4CA00F0A2BE /* modifier */,
 				F11CF28322BF5EE80022C28D /* ElementAsserter.swift */,
@@ -152,7 +153,6 @@
 		9D0587FF22CE180F00F0A2BE /* extra */ = {
 			isa = PBXGroup;
 			children = (
-				9D0587FD22CE03E400F0A2BE /* ElementDebugger.swift */,
 				9D0587FA22CDF3F500F0A2BE /* ElementType+Extension.swift */,
 			);
 			path = extra;
@@ -179,6 +179,14 @@
 				9D05880F22F2D72B00F0A2BE /* ElementParser.swift */,
 			);
 			path = parser;
+			sourceTree = "<group>";
+		};
+		F1E7871B22FEE26F002007EE /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				9D0587FD22CE03E400F0A2BE /* ElementDebugger.swift */,
+			);
+			path = debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
