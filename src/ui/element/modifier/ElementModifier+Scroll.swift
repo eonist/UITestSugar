@@ -5,19 +5,6 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Scrolls until element is visible
-    * - Parameter parent: the element to swipe
-    * - Parameter element: the element to swipe to
-    * - Parameter dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
-    * - Note: try to set cells: cell.accessibilityIdentifer = "cell \(indexPath.row)"
-    * - Note: there is also Native: firstScrollView.scrollToElement(element: seventhChild)
-    */
-   public static func scrollToElement(parent: XCUIElement, element: XCUIElement, dir: Direction = .up) {
-      while !ElementAsserter.isVisibleInWindow(element: element) {
-         dir == .up ? element.swipeUp() : element.swipeDown()
-      }
-   }
-   /**
     * Search down a scroll view until searchCondition is met (⚠️️ Beta ⚠️️)
     * - Parameter element: The root to search from
     * - Parameter dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
@@ -29,6 +16,25 @@ extension ElementModifier {
     */
    public static func scrollTo(element: XCUIElement, dir: Direction, searchCondition: ElementParser.MatchCondition) {
       while !searchCondition(element) {
+         dir == .up ? element.swipeUp() : element.swipeDown()
+      }
+   }
+   
+}
+/**
+ * Beta
+ */
+extension ElementModifier {
+   /**
+    * Scrolls until element is visible
+    * - Parameter parent: the element to swipe
+    * - Parameter element: the element to swipe to
+    * - Parameter dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
+    * - Note: try to set cells: cell.accessibilityIdentifer = "cell \(indexPath.row)"
+    * - Note: there is also Native: firstScrollView.scrollToElement(element: seventhChild)
+    */
+   public static func scrollToElement(parent: XCUIElement, element: XCUIElement, dir: Direction = .up) {
+      while !ElementAsserter.isVisibleInWindow(element: element) {
          dir == .up ? element.swipeUp() : element.swipeDown()
       }
    }
