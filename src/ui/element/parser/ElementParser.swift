@@ -47,6 +47,7 @@ public class ElementParser {
     */
    public static func descendants(element: XCUIElement, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
       let query: XCUIElementQuery = element.descendants(matching: type)
-      return QueryParser.elements(query: query)
+      return query.allElementsBoundByIndex
+//      return QueryParser.elements(query: query)
    }
 }
