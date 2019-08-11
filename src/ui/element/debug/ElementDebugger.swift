@@ -2,6 +2,7 @@ import Foundation
 import XCTest
 /**
  * Debugger
+ * - Fixme: ⚠️️ Make debugStr, debugHeirarchyStr that returns string, and actual, debug calls that prints the debug string etc
  */
 public class ElementDebugger {
    /**

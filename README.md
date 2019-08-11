@@ -20,8 +20,16 @@ Swift.print("button?.label:  \(button?.label)")
 ```swift
 btn.isAccessibilityElement = true // set this in the app code
 btn.accessibilityIdentifier = "detailBtn" // set this in the app code
-let button = ElementParser.firstDescendant(element: app, condition: { $0.identifier == "detailBtn" }) 
+let button = ElementParser.firstDescendant(element: app, condition: { $0.identifier == "detailBtn" })
 ```
+
+### Get label-text from cell:
+
+```swift
+let labelText: String? = app.firstDescendant({$0.elementType == .table})?.descendants(matching: .cell).firstMatch.children(matching: .staticText).element.label
+Swift.print("labelText:  \(labelText)") // some cell text
+```
+
 
 ### Generic example:
 ```swift

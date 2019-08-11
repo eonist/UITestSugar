@@ -4,6 +4,7 @@ import XCTest
 extension XCUIElement.ElementType {
    /**
     * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
+    * - Remark: label is .staticText 🤷
     */
    enum ElementTypeName: String, CaseIterable {
       case any, other, application, group, window, sheet, drawer, alert, dialog, button, radioButton

@@ -49,7 +49,7 @@ extension ElementParser {
       return nil
    }
    /**
-    * Fixme: Since XCUIElement isnt comparable
+    * Fixme: Since XCUIElement isn't comparable
     */
    public func parent(element: XCUIElement) {
       Swift.print("⚠️️ not in use yet ⚠️️")
