@@ -19,6 +19,12 @@ extension XCUIElement {
    /**
     * Scrolling
     */
+   public func scrollTo(dir: ElementModifier.Direction, searchCondition: ElementParser.MatchCondition) {
+      ElementModifier.scrollTo(element: self, dir: dir, searchCondition: searchCondition)
+   }
+   /**
+    * Scrolling (beta)
+    */
    public func scrollToElement(element: XCUIElement) {
       ElementModifier.scrollToElement(parent: self, element: element)
    }
