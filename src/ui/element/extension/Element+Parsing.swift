@@ -33,4 +33,13 @@ extension XCUIElement {
    public func firstChild(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
       return self.firstChild(type: .any, condition)
    }
+   /**
+    * ## Examples
+    * app.descendants(type:.button) { $0.identifier == "specialBtn" }.tap() // find button based on button.acceccibilityIdentifier
+    * app.descendants(type:.button) { $0.label == "play" }.tap() // find button based on button.title
+    * - Fixme: ⚠️️ make this method for children too
+    */
+   public func descendants(type: XCUIElement.ElementType = .any, condition: ElementParser.MatchCondition) -> [XCUIElement] {
+      return ElementParser.descendants(element: self, condition: condition, type: type)
+   }
 }
