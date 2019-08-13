@@ -17,13 +17,15 @@ extension XCUIElementQuery {
 /**
  * Query extension for element
  */
-extension Optional where Wrapped == XCUIElement {
+
+extension Swift.Optional where Wrapped == XCUIElement {
    /**
     * - Abstract: This method is needed because the native `.waitForExistence(timeOut:)` doesn't work on optional elements
+    * - Remark we had to change the name to something different than waitToAppear, or else chaining would be ambigouse
     * ## Examples:
-    * let didAppear: Bool = app.firstDescendant { $0.elementType == .table }.waitToAppear(10)
+    * let didAppear: Bool = app.firstDescendant { $0.elementType == .table }.waitForAppearance(10)
     */
-   public func waitToAppear(_ timOut: Double = 5) -> Bool {
+   public func waitForAppearance(_ timOut: Double = 5) -> Bool {
       return QueryAsserter.waitForElementToAppear(element: self, timeOut: timOut)
    }
    /**

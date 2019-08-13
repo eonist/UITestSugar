@@ -42,4 +42,11 @@ extension XCUIElement {
    public func descendants(type: XCUIElement.ElementType = .any, condition: ElementParser.MatchCondition) -> [XCUIElement] {
       return ElementParser.descendants(element: self, condition: condition, type: type)
    }
+//   /**
+//    * delete this
+//    */
+//   func del() {
+//      let optionalSelf:XCUIElement? = Optional(self)
+//      optionalSelf.waitToAppear(10)?.tap()
+//   }
 }
