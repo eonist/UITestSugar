@@ -30,6 +30,12 @@ public class ElementParser {
       return ElementParser.descendants(element: element, type: type).first { condition($0) }
    }
    /**
+    *
+    */
+//   func firstDescendingElement(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement {
+//      element.descendants(matching: type).
+//   }
+   /**
     * Returns children elements for element (Only for immediate children)
     * - Parameter element: parent element for the children to be found
     * - Parameter type: When this is set to a speccific type it only returns children of a speccific type

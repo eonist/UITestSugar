@@ -26,7 +26,7 @@ public class QueryAsserter {
     * ## Examples:
     * waitForElementToAppear(app.firstDescendant { $0.elementType == .table }, timeOut: 10)
     */
-   public static func waitForElementToAppear(element: XCUIElement?, timeOut: Double = 5) -> Bool {
+   public static func waitForElementToAppear(element: XCUIElement, timeOut: Double = 5) -> Bool {
       let existsPredicate = NSPredicate(format: "exists == true")
       let expectation = XCTNSPredicateExpectation(predicate: existsPredicate, object: element)
       let result = XCTWaiter().wait(for: [expectation], timeout: timeOut)
