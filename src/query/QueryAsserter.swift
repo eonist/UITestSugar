@@ -22,6 +22,9 @@ public class QueryAsserter {
     * - Remark: A big advantage of this approach is that the test suite reads as a synchronous flow. There is no callback block or completion handler. The helper method simply returns a boolean indicating if the element appeared or not.
     * - Parameter element: The element to wait for to appear
     * - Parameter timeOut: time to wait before failing
+    * - Important: ⚠️️ as oppose to the native method element.waitForExistence(timeOut:) This method supports optional elements. where as the native method wouldnt even be able to evaluate it because the element is nil
+    * ## Examples:
+    * waitForElementToAppear(app.firstDescendant { $0.elementType == .table }, timeOut: 10)
     */
    public static func waitForElementToAppear(element: XCUIElement?, timeOut: Double = 5) -> Bool {
       let existsPredicate = NSPredicate(format: "exists == true")
