@@ -23,7 +23,7 @@ public class QueryAsserter {
     * - Parameter element: The element to wait for to appear
     * - Parameter timeOut: time to wait before failing
     */
-   public static func waitForElementToAppear(element: XCUIElement, timeOut: Double = 5) -> Bool {
+   public static func waitForElementToAppear(element: XCUIElement?, timeOut: Double = 5) -> Bool {
       let existsPredicate = NSPredicate(format: "exists == true")
       let expectation = XCTNSPredicateExpectation(predicate: existsPredicate, object: element)
       let result = XCTWaiter().wait(for: [expectation], timeout: timeOut)

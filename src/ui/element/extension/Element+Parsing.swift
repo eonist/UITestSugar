@@ -34,7 +34,7 @@ extension XCUIElement {
       return self.firstChild(type: .any, condition)
    }
    /**
-    * ## Examples
+    * ## Examples:
     * app.descendants(type:.button) { $0.identifier == "specialBtn" }.tap() // find button based on button.acceccibilityIdentifier
     * app.descendants(type:.button) { $0.label == "play" }.tap() // find button based on button.title
     * - Fixme: ⚠️️ make this method for children too
