@@ -17,8 +17,6 @@ extension XCUIElementQuery {
 /**
  * Query extension for element
  */
-
-
 extension XCUIElement {
    /**
     * - Abstract: This method is needed because the native `.waitForExistence(timeOut:)` doesn't work on optional elements

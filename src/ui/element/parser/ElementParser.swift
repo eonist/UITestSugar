@@ -4,6 +4,12 @@ import XCTest
  * Element Parser
  */
 public class ElementParser {
+   
+}
+/**
+ * Beta
+ */
+extension ElementParser {
    /**
     * Find first matching item in children based on condition (Only works for immediate chilren not grandchildren etc)
     * ## Examples:
@@ -29,12 +35,6 @@ public class ElementParser {
    public static func firstDescendant(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       return ElementParser.descendants(element: element, type: type).first { condition($0) }
    }
-   /**
-    *
-    */
-//   func firstDescendingElement(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement {
-//      element.descendants(matching: type).
-//   }
    /**
     * Returns children elements for element (Only for immediate children)
     * - Parameter element: parent element for the children to be found
