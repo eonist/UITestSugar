@@ -23,6 +23,7 @@ extension XCUIElement {
     * - Remark we had to change the name to something different than waitToAppear, or else chaining would be ambigouse
     * ## Examples:
     * let didAppear: Bool = app.firstDescendant { $0.elementType == .table }.waitForAppearance(10)
+    * - Fixme: ⚠️️ you could implement the: native: waitForExistence call and the just return the element
     */
    public func waitForAppearance(_ timOut: Double = 5) -> Bool {
       return QueryAsserter.waitForElementToAppear(element: self, timeOut: timOut)

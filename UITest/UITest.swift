@@ -1,6 +1,8 @@
 import XCTest
 import UITestSugar
-
+/**
+ * UITest for UITestSugar
+ */
 class UITest: XCTestCase {
    override func setUp() {
       super.setUp()
@@ -8,8 +10,10 @@ class UITest: XCTestCase {
       let app = XCUIApplication()
       app.launch()
       // Some tests
-      app.firstDescendant(id: "someBtn", type: .button).waitToAppear(5)?.tap(wait: 2)
-      app.firstChild(id: "otherBtn", type: .button).waitToAppear(4)?.tap(wait: 3)
+      app.firstDescendant(type: .button).waitToAppear(5)?.tap(wait: 2)
+      app.firstDescendant(id: "someBtn").waitToAppear(5)?.tap(wait: 2)
+      app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(wait: 2)
+      app.firstChild(type: .button, id: "otherBtn").waitToAppear(4)?.tap(wait: 3)
    }
 //   override func tearDown() {}
 //   func testExample() {

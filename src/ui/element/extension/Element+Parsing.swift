@@ -1,20 +1,40 @@
 import Foundation
 import XCTest
 /**
- * Parser
+ * Parser (Descendant)
  */
 extension XCUIElement {
+   public typealias SearchType = (type: XCUIElement.ElementType, id: String?)
    /**
-    * firstDescendant
+    * Returns an XCUIElement
+    * ## Examples:
+    * app.descendant((.table,nil),(.button,”refreshBtn”))
     */
-   public func firstDescendant(type: XCUIElement.ElementType = .any) -> XCUIElement{
-      return self.descendants(matching: type).firstMatch
+   public func descendant(_ map: [SearchType]) -> XCUIElement {
+      if map.count == 1, let search = map.first {
+         return self.firstDescendant(type: search.type, id: search.id)
+      } else if map.count > 1, let search: SearchType = map.first {
+         let element = self.firstDescendant(type: search.type, id: search.id)
+         let newMap = Array(map[1..<map.count])
+         return element.descendant(newMap)
+      } else {
+         Swift.print("🚫 map is an empty array 🚫")// fatalError("🚫 map is an empty array 🚫")
+         return self // the logic is that it will work with waiter calls
+      }
    }
    /**
     * firstDescendant
+    * ## Examples:
+    * app.firstDescendant(type: .button).waitToAppear(5)?.tap(wait: 2)
+    * app.firstDescendant(id: "someBtn").waitToAppear(5)?.tap(wait: 2)
+    * app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(wait: 2)
     */
-   public func firstDescendant(id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      return self.descendants(id: id, type: type).firstMatch
+   public func firstDescendant(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
+      if let id = id {
+         return self.descendants(id: id, type: type).firstMatch
+      } else {
+         return self.descendants(matching: type).firstMatch
+      }
    }
    /**
     * descendants
@@ -22,17 +42,20 @@ extension XCUIElement {
    public func descendants(id: String, type: XCUIElement.ElementType = .any) -> XCUIElementQuery {
       return self.descendants(matching: type).matching(identifier: id)
    }
+}
+/**
+ * Parser (Children)
+ */
+extension XCUIElement {
    /**
     * firstChild
     */
-   public func firstChild(type: XCUIElement.ElementType = .any) -> XCUIElement{
-      return self.children(matching: type).firstMatch
-   }
-   /**
-    * firstChild
-    */
-   public func firstChild(id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      return children(id: id, type: type).firstMatch
+   public func firstChild(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
+      if let id = id {
+         return self.children(id: id, type: type).firstMatch
+      } else {
+         return self.children(matching: type).firstMatch
+      }
    }
    /**
     * children
@@ -42,7 +65,7 @@ extension XCUIElement {
    }
 }
 /**
- * Beta (⚠️️ these wont work with waiter calls, but can be good for syncronouse exist calls ⚠️️)
+ * Beta (⚠️️ these won't work with waiter calls, but can be good for syncronouse exist calls ⚠️️)
  */
 extension XCUIElement {
    /**
