@@ -7,6 +7,12 @@ extension XCUIElement {
    /**
     * firstDescendant
     */
+   public func firstDescendant(type: XCUIElement.ElementType = .any) -> XCUIElement{
+      return self.descendants(matching: type).firstMatch
+   }
+   /**
+    * firstDescendant
+    */
    public func firstDescendant(id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       return self.descendants(id: id, type: type).firstMatch
    }
@@ -15,6 +21,12 @@ extension XCUIElement {
     */
    public func descendants(id: String, type: XCUIElement.ElementType = .any) -> XCUIElementQuery {
       return self.descendants(matching: type).matching(identifier: id)
+   }
+   /**
+    * firstChild
+    */
+   public func firstChild(type: XCUIElement.ElementType = .any) -> XCUIElement{
+      return self.children(matching: type).firstMatch
    }
    /**
     * firstChild
