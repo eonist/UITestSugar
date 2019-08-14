@@ -48,10 +48,19 @@ extension XCUIElement {
     * Adds convenient way to tap and then wait for a duration (seconds)
     * - Abstract: It looks more natural to wait a bit after a tap
     * ## Examples:
-    * app.buttons.firstMatch.tap(wait: 0.2)
+    * app.buttons.firstMatch.tap(waitAfter: 0.2)
     */
-   public func tap(wait sec: Double) {
+   public func tap(waitAfter sec: Double) {
       self.tap()
       sleep(sec: sec)
+   }
+   /**
+    * Wait for existence then tap
+    * ## Examples:
+    * app.buttons.firstMatch.tap(waitForExistance: 0.2)
+    */
+   public func tap(waitForExistance sec: Double) {
+      _ = self.waitForExistence(timeout: sec)
+      self.tap()
    }
 }

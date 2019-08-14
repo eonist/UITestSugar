@@ -8,7 +8,7 @@ extension XCUIElement {
    /**
     * Returns an XCUIElement
     * ## Examples:
-    * app.descendant((.table,nil),(.button,”refreshBtn”))
+    * app.descendant((.table,nil),(.button,”refreshBtn”)).tap()
     */
    public func descendant(_ map: [SearchType]) -> XCUIElement {
       if map.count == 1, let search = map.first {
@@ -23,6 +23,24 @@ extension XCUIElement {
       }
    }
    /**
+    * Returns XCUIElementQuery
+    * - Abstract: Traverses down the hierarchy to the end element, then returns all matching results
+    * ## Examples:
+    * app.descendants((.table,nil),(.button,”addBtn”)).shuffledElement().tap() // taps random button
+    */
+   public func descendants(_ map: [SearchType]) -> XCUIElementQuery {
+      if map.count == 1, let search = map.first {
+         return self.descendants(type: search.type, id: search.id)
+      } else if map.count > 1, let search: SearchType = map.first {
+         let element = self.firstDescendant(type: search.type, id: search.id)
+         let newMap = Array(map[1..<map.count])
+         return element.descendants(newMap)
+      } else {
+         Swift.print("🚫 map is an empty array 🚫") // fatalError("🚫 map is an empty array 🚫")
+         return self.otherElements // the logic is that it will work with waiter calls
+      }
+   }
+   /**
     * firstDescendant
     * ## Examples:
     * app.firstDescendant(type: .button).waitToAppear(5)?.tap(wait: 2)
@@ -31,7 +49,7 @@ extension XCUIElement {
     */
    public func firstDescendant(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
       if let id = id {
-         return self.descendants(id: id, type: type).firstMatch
+         return self.descendants(type: type, id: id).firstMatch
       } else {
          return self.descendants(matching: type).firstMatch
       }
@@ -39,8 +57,12 @@ extension XCUIElement {
    /**
     * descendants
     */
-   public func descendants(id: String, type: XCUIElement.ElementType = .any) -> XCUIElementQuery {
-      return self.descendants(matching: type).matching(identifier: id)
+   public func descendants(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElementQuery {
+      if let id = id {
+         return self.descendants(matching: type).matching(identifier: id)
+      } else {
+         return self.descendants(matching: type)
+      }
    }
 }
 /**
@@ -84,7 +106,6 @@ extension XCUIElement {
    private func firstDescendant(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
       return self.firstDescendant(type: .any, condition)
    }
-   
    /**
     * ## Examples:
     * app.descendants(type:.button) { $0.identifier == "specialBtn" }.tap() // find button based on button.acceccibilityIdentifier

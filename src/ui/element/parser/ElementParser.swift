@@ -3,9 +3,7 @@ import XCTest
 /**
  * Element Parser
  */
-public class ElementParser {
-   
-}
+public class ElementParser {}
 /**
  * Beta
  */

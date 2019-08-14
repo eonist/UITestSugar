@@ -19,7 +19,6 @@ extension ElementModifier {
          dir == .up ? element.swipeUp() : element.swipeDown()
       }
    }
-   
 }
 /**
  * Beta
