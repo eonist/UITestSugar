@@ -25,16 +25,27 @@ public class QueryParser {
       return query.children(matching: type).element
    }
    /**
+    * Beta warn
     * ## Example:
-    * let firstElement = app.filterElements(query: app.children, labels: ["Sugar", "500 g"]).first?.element
+    * let firstElement = app.firstElement(query: app.children, labels: ["Sugar", "500 g"]).first?.element
     * firstElement.tap()
     * - Parameter query: The query to target
-    * - Parameter labels: labels tp search for
+    * - Parameter labels: labels to search for
     */
    public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
       return labels.map { label in
          query.containing(NSPredicate(format: "label CONTAINS %@", label))
       }.compactMap { $0 }.first?.element
+   }
+   /**
+    * Find the first match that has a lable
+    * ## Examples:
+    * firstElement(app.descendants().buttons, label: "Edit list").tap(waitForExistance: 5)
+    * - Parameter query: The query to target
+    * - Parameter label: label to search for
+    */
+   public static func firstElement(_ query: XCUIElementQuery, label: String) -> XCUIElement {
+      return query.containing(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
    }
    /**
     * Returns elements in query
