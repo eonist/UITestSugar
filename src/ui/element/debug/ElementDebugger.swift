@@ -42,6 +42,19 @@ public class ElementDebugger {
       return str
    }
    /**
+    * debug multiple elements (⚠️️ New ⚠️️)
+    * ## Examples:
+    * let ancestry = ElementParser.ancestry(root: (0, app), condition: { $0.label == "Edit list" })
+    * let elements: [XCUIElement] = ancestry?.map { $0.1 }
+    * let debugStr: String = elements.debug()
+    * Swift.print(debugStr)
+    */
+   public static func debug(elements: [XCUIElement]) -> String {
+      let strings: [String] = elements.map { ElementDebugger.debug(element: $0) }
+      let str = strings.joined(separator: "\n")
+      return str.suffix(2) == "\n" ? String(str.dropLast(2)) : str // removes the end linebreak \n
+   }
+   /**
     * Helps debug a hierarchy
     * ## Examples:
     * let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
@@ -63,5 +76,13 @@ public class ElementDebugger {
          return retVal1 + (retVal2.isEmpty ? "" : "\n" + retVal2) //if retval2 is empty, don't append it
       }.joined(separator: "\n") // if there are items, then seperate them with a line-break
       return str.suffix(2) == "\n" ? String(str.dropLast(2)) : str // remove the end \n
+   }
+}
+/**
+ * Extension
+ */
+extension Array where Element: XCUIElement {
+   public func debug() -> String {
+      return ElementDebugger.debug(elements: self)
    }
 }

@@ -68,7 +68,7 @@ extension XCUIElement {
     * Find first descendant of type that has a label (⚠️️ New ⚠️️)
     * ## Examples:
     * app.firstDescendant(label: "Edit list", type: .button).tap(waitForExistance: 5)
-    * - Parameter query: The query to target
+    * - Parameter type: The type to target
     * - Parameter label: label to search for
     */
    public func firstDescendant(label: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
