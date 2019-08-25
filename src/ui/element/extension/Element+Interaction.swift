@@ -78,7 +78,7 @@ extension XCUIElement {
     * - Remark: waitForExistence is a natice call
     */
    @discardableResult
-   public func tap(waitForExistence sec: Double) -> XCUIElement{
+   public func tap(waitForExistence sec: Double) -> XCUIElement {
       _ = self.waitForExistence(timeout: sec)
       self.tap()
       return self
