@@ -102,6 +102,7 @@ extension XCUIElement {
  */
 extension XCUIElement {
    /**
+    *
     * Find first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
     * - Remark: Being able to do element?.firstDescendant(..) is powerfull when you need to chain calls. As you can't do that when you provide the elemnt as a parameter in the method call
     * ## Examples:
