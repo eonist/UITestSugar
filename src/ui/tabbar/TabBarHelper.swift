@@ -7,6 +7,7 @@ public class TabBarHelper {
     * TabBarHelper.tabButton(tabButtonName: "homeButton").tap()
     * - Note: It could be useful to store names of tabbar ids in an enum like: TabButtonType: String { case homeButton, exploreButton, searchButton, myCollectionButton }
     * - Remark: can also be done: app.descendants(matching: .staticText).allElementsBoundByIndex.first { $0.label == "tabBtn1"}
+    * - Remark: Can also be done: app.tabBars.buttons["Favorites"].tap(waitForExistence: 5, waitAfter: 2)
     * - Parameter tabButtonName: same as: acceccebiltyIdentifier
     */
    public static func tabButton(tabButtonName: String) -> XCUIElement {

@@ -8,7 +8,7 @@ extension XCUIElement {
    /**
     * Returns an XCUIElement
     * ## Examples:
-    * app.descendant((.table,nil),(.button,”refreshBtn”)).tap()
+    * app.descendant([(.table,nil),(.button,”refreshBtn”)]).tap()
     */
    public func descendant(_ map: [SearchType]) -> XCUIElement {
       if map.count == 1, let search = map.first {
@@ -26,7 +26,7 @@ extension XCUIElement {
     * Returns XCUIElementQuery
     * - Abstract: Traverses down the hierarchy to the end element, then returns all matching results
     * ## Examples:
-    * app.descendants((.table,nil),(.button,”addBtn”)).shuffledElement().tap() // taps random button
+    * app.descendants([(.table,nil),(.button,”addBtn”)]).shuffledElement().tap() // taps random button
     */
    public func descendants(_ map: [SearchType]) -> XCUIElementQuery {
       if map.count == 1, let search = map.first {

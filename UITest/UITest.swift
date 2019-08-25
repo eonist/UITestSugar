@@ -14,6 +14,7 @@ class UITest: XCTestCase {
       app.firstDescendant(id: "someBtn").waitToAppear(5)?.tap(wait: 2)
       app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(wait: 2)
       app.firstChild(type: .button, id: "otherBtn").waitToAppear(4)?.tap(wait: 3)
+      app.descendants([(.table,nil),(.button)])
    }
 //   override func tearDown() {}
 //   func testExample() {
