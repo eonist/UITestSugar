@@ -29,7 +29,7 @@ extension XCUIElement {
    /**
     * Scrolling
     */
-    @discardableResult
+   @discardableResult
    public func scrollTo(dir: ElementModifier.Direction, searchCondition: ElementParser.MatchCondition) -> XCUIElement {
       ElementModifier.scrollTo(element: self, dir: dir, searchCondition: searchCondition)
       return self
@@ -37,7 +37,7 @@ extension XCUIElement {
    /**
     * Scrolling (beta)
     */
-    @discardableResult
+   @discardableResult
    public func scrollToElement(element: XCUIElement) -> XCUIElement {
       ElementModifier.scrollToElement(parent: self, element: element)
       return self
@@ -50,7 +50,7 @@ extension XCUIElement {
    /**
     * Helps to tap things that doesn't work with regular .tap() calls. as .tap() calls must be on .isHittable items
     */
-    @discardableResult
+   @discardableResult
    public func forceTapElement() -> XCUIElement {
       if self.isHittable {
          self.tap()
@@ -78,8 +78,8 @@ extension XCUIElement {
     * - Remark: waitForExistence is a natice call
     */
    @discardableResult
-   public func tap(waitForExistence sec: Double) -> XCUIElement {
-      _ = self.waitForExistence(timeout: sec)
+   public func tap(waitForExistence sec: Double) -> XCUIElement? {
+      guard self.waitForExistence(timeout: sec) else { return nil }
       self.tap()
       return self
    }
@@ -89,8 +89,8 @@ extension XCUIElement {
     * app.buttons.firstMatch.tap(waitForExistence: 0.2, waitAfter: 2.0)
     */
    @discardableResult
-   public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement {
-      _ = self.waitForExistence(timeout: secs)
+   public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement? {
+      guard self.waitForExistence(timeout: secs) else { return nil }
       self.tap()
       return self.wait(after: sleepSecs)
    }
