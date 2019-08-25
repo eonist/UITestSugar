@@ -34,7 +34,7 @@ extension XCUIElement {
  */
 extension XCUIElement {
    /**
-    * Helps to tap things that don't work with regular .tap() calls. as .tap() calls must be on .isHittable items
+    * Helps to tap things that doesn't work with regular .tap() calls. as .tap() calls must be on .isHittable items
     */
    public func forceTapElement() {
       if self.isHittable {
@@ -46,7 +46,7 @@ extension XCUIElement {
    }
    /**
     * Adds convenient way to tap and then wait for a duration (seconds)
-    * - Abstract: It looks more natural to wait a bit after a tap
+    * - Abstract: It's more natural to wait a bit after a tap
     * ## Examples:
     * app.buttons.firstMatch.tap(waitAfter: 0.2)
     */
@@ -62,5 +62,15 @@ extension XCUIElement {
    public func tap(waitForExistance sec: Double) {
       _ = self.waitForExistence(timeout: sec)
       self.tap()
+   }
+   /**
+    * Wait for existence, then tap, then sleep
+    * ## Examples:
+    * app.buttons.firstMatch.tap(waitForExistance: 0.2, waitAfter: 2.0)
+    */
+   public func tap(waitForExistance secs: Double, waitAfter sleepSecs: Double) {
+      _ = self.waitForExistence(timeout: secs)
+      self.tap()
+      sleep(sec: sleepSecs)
    }
 }
