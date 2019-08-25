@@ -53,6 +53,7 @@ extension ElementModifier {
 }
 /**
  * Type For scrolling methods
+ * - Fixme: ⚠️️ add support for left right
  */
 extension ElementModifier {
    public enum Direction { case up, down }

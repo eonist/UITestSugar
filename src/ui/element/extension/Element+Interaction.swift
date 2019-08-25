@@ -53,8 +53,7 @@ extension XCUIElement {
    @discardableResult
    public func tap(waitAfter sec: Double) -> XCUIElement {
       self.tap()
-      sleep(sec: sec)
-      return self
+      return self.wait(after: sec)
    }
    /**
     * Wait for existence then tap
@@ -77,6 +76,16 @@ extension XCUIElement {
    public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement {
       _ = self.waitForExistence(timeout: secs)
       self.tap()
+      return self.wait(after: sleepSecs)
+   }
+}
+// Other
+extension XCUIElement {
+   /**
+    * A convenient way to add some time after a call
+    */
+   @discardableResult
+   public func wait(after sleepSecs: Double) -> XCUIElement {
       sleep(sec: sleepSecs)
       return self
    }
