@@ -13,6 +13,14 @@ extension XCUIElement {
       ElementModifier.clearAndTypeText(element: self, text: text)
       return self
    }
+   /**
+    * Same as typeText, but returns self for chaining calls
+    */
+   @discardableResult
+   public func typeString(_ text: String) -> XCUIElement {
+      self.typeText(text)
+      return self
+   }
 }
 /**
  * Scrolling
