@@ -57,18 +57,19 @@ extension XCUIElement {
    /**
     * Wait for existence then tap
     * ## Examples:
-    * app.buttons.firstMatch.tap(waitForExistance: 0.2)
+    * app.buttons.firstMatch.tap(waitForExistence: 0.2)
+    * - Remark: waitForExistence is a natice call
     */
-   public func tap(waitForExistance sec: Double) {
+   public func tap(waitForExistence sec: Double) {
       _ = self.waitForExistence(timeout: sec)
       self.tap()
    }
    /**
     * Wait for existence, then tap, then sleep
     * ## Examples:
-    * app.buttons.firstMatch.tap(waitForExistance: 0.2, waitAfter: 2.0)
+    * app.buttons.firstMatch.tap(waitForExistence: 0.2, waitAfter: 2.0)
     */
-   public func tap(waitForExistance secs: Double, waitAfter sleepSecs: Double) {
+   public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) {
       _ = self.waitForExistence(timeout: secs)
       self.tap()
       sleep(sec: sleepSecs)
