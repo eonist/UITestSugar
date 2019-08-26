@@ -15,10 +15,20 @@ extension XCUIElement {
    }
    /**
     * Same as typeText, but returns self for chaining calls
+    * - Remark: We can't use typeText as it's a native call
     */
    @discardableResult
    public func typeString(_ text: String) -> XCUIElement {
       self.typeText(text)
+      return self
+   }
+   /**
+    * Same as adjust, but returns self for chaining calls
+    * - Remark: We can't use typeText as it's a native call
+    */
+   @discardableResult
+   func slide(_ scalar: CGFloat) -> XCUIElement {
+      self.adjust(toNormalizedSliderPosition: scalar)
       return self
    }
 }
