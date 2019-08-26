@@ -115,4 +115,15 @@ extension XCUIElement {
       sleep(sec: sleepSecs)
       return self
    }
+   /**
+    * Checks if an item exists and is hittable, if it's not hittable then the app is tapped so that the tooltip goes away
+    */
+   @discardableResult
+   public func disregardToolTip() -> XCUIElement {
+      let elementExists = self.waitForExistence(timeout: 10)
+      if elementExists && self.isHittable == false { // Most likely tooltip is beeing show and this needs to be dismissed
+         XCUIApplication().tap(waitForExistence: 5, waitAfter: 2)
+      }
+      return self
+   }
 }
