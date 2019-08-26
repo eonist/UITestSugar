@@ -24,7 +24,7 @@ extension XCUIElement {
    }
    /**
     * Same as adjust, but returns self for chaining calls
-    * - Remark: We can't use typeText as it's a native call
+    * - Remark: We can't use adjust as it's a native call
     */
    @discardableResult
    public func slide(_ scalar: CGFloat) -> XCUIElement {
