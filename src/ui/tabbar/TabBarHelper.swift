@@ -11,7 +11,8 @@ public class TabBarHelper {
     * - Parameter tabButtonName: same as: acceccebiltyIdentifier
     */
    public static func tabButton(tabButtonName: String) -> XCUIElement {
-      return XCUIApplication().descendants(matching: .any).matching(identifier: tabButtonName).element
+      return XCUIApplication().firstDescendant(type: .button, id: tabButtonName)
+//      return XCUIApplication().descendants(matching: .any).matching(identifier: tabButtonName).element
    }
    /**
     * Returns tabBar buttons based on index of the tabbar.item

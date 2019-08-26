@@ -6,6 +6,7 @@ import XCTest
 public class ElementModifier {
    /**
     * Removes any current text in the field before typing in the new value
+    * - Important: ⚠️️ This solution has problems with long pre-existing texts. Basically it taps in the middle of the textfield, and thus half doesnt get cleared. Try to find a better solution
     * - Parameter element: the element to clear and type text into
     * - Parameter text: the text to enter into the field
     * - Fixme: ⚠️️ Consider making this a try error method
@@ -17,12 +18,22 @@ public class ElementModifier {
          XCTFail("Tried to clear and enter text into a non string value")
          return
       }
-      element.tap()
+      element.tap(waitForExistence: 5, waitAfter: 0.5)
       for _ in 0..<stringValue.count { // Fixme: ⚠️️ do stringValue.forEach {_ in } here, test first
          element.typeText(XCUIKeyboardKey.delete.rawValue)
       }
       if stringValue.isEmpty { element.tap() }
       element.typeText(text)
+   }
+   /**
+    * Clears searchfield and types text
+    * ## Examples:
+    * app.searchFields.firstMatch
+    */
+   public static func clearSearchFieldAndType(searchField: XCUIElement, text: String) {
+      searchField.tap(waitForExistence: 5, waitAfter: 0.2)
+      searchField.buttons.firstMatch.tap(waitForExistence: 5, waitAfter: 0.2)
+      searchField.typeText(text)
    }
 }
 /**

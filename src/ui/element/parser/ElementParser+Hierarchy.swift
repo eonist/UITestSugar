@@ -76,6 +76,9 @@ extension ElementParser {
  * Type for ancestry method
  */
 extension ElementParser {
+   /**
+    * - Remark: doing element == otherElement or element.isEqual(otherElement) usually doesn't work
+    */
    public typealias MatchCondition = (_ element: XCUIElement) -> Bool
 }
 
