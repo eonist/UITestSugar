@@ -52,7 +52,7 @@ extension ElementParser {
    /**
     * Returns ancestry
     */
-   func ancestry(root: XCUIElement, index: [Int]) -> [XCUIElement?] {
+   public func ancestry(root: XCUIElement, index: [Int]) -> [XCUIElement?] {
       var index = index
       var ancestry: [XCUIElement?] = []
       while !index.isEmpty {
