@@ -21,6 +21,7 @@ public class ElementDebugger {
    }
    /**
     * Helps debug an element
+    * - Remark: there is also the native: albumArtwork.debugDescription
     * - Parameter element: The element to debug
     * - Parameter indentation: Used to indent the print, so debugging hierarchy becomes more readable
     * - Returns:
