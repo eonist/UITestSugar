@@ -51,6 +51,9 @@ extension ElementParser {
    }
    /**
     * Returns ancestry
+    * ## Examples:
+    * let ancestry: [XCUIElement?] = ElementParser.ancestry(root: self.app, index: pathToElement)
+    * let debugAncestry: String = ElementDebugger.debug(elements: ancestry.compactMap { $0 })
     */
    public static func ancestry(root: XCUIElement, index: [Int]) -> [XCUIElement?] {
       var index = index
