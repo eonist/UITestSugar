@@ -60,7 +60,7 @@ extension ElementParser {
          ancestry.append(element)
          _ = index.popLast()
       }
-      return ancestry
+      return ancestry.reversed()
    }
    /**
     * Fixme: ⚠️️ Since XCUIElement isn't comparable
