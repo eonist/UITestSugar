@@ -5,15 +5,16 @@ import XCTest
  */
 extension ElementParser {
    /**
-    * Returns an array of ancestral elements (alt name: heritage)
+    * Returns an array of ancestral elements (basically you find the parents of an element all the way to the root) (alt name: heritage)
     * - Parameter condition: a closure that evaluates to true or false
     * - Parameter element: the point to search from
     * ## Example:
     * let condition: ElementParser.MatchCondition = { element in let s = element.screenshot().image.size; Swift.print("s:  \(s)"); return s == size/*element == btn*/} // .screenshot().image.size == size
     * let ancestry: [(Int, XCUIElement)]? = ElementParser.ancestry(root: (0, app), condition: condition)
     * let imgElementParent  = ancestry?.last
-    * let index: [Int] = ancestry!.map { $0.0 }
-    * let descendant: XCUIElement? = ElementParser.element(root: app, index: index)
+    * let indices: [Int] = ancestry!.map { $0.0 }
+    * let elements: [XCUIElement] = ancestry!.map { $0.1 }
+    * let descendant: XCUIElement? = ElementParser.element(root: app, index: indices)
     * - Fixme: ⚠️️ Refactor with .map or .flatMap on this method when u have time
     * - Fixme: ⚠️️ You can also use elementAtIndex and element.count
     */
@@ -49,7 +50,20 @@ extension ElementParser {
       return nil
    }
    /**
-    * Fixme: Since XCUIElement isn't comparable
+    * Returns ancestry
+    */
+   func ancestry(root: XCUIElement, index: [Int]) -> [XCUIElement?] {
+      var index = index
+      var ancestry: [XCUIElement?] = []
+      while !index.isEmpty {
+         let element = ElementParser.element(root: root, index: index)
+         ancestry.append(element)
+         _ = index.popLast()
+      }
+      return ancestry
+   }
+   /**
+    * Fixme: ⚠️️ Since XCUIElement isn't comparable
     */
    public func parent(element: XCUIElement) {
       Swift.print("⚠️️ not in use yet ⚠️️")
