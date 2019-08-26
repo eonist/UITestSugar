@@ -27,7 +27,7 @@ extension XCUIElement {
     * - Remark: We can't use typeText as it's a native call
     */
    @discardableResult
-   func slide(_ scalar: CGFloat) -> XCUIElement {
+   public func slide(_ scalar: CGFloat) -> XCUIElement {
       self.adjust(toNormalizedSliderPosition: scalar)
       return self
    }
