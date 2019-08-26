@@ -23,12 +23,11 @@ extension XCUIElement {
       return self
    }
    /**
-    * Same as adjust, but returns self for chaining calls
-    * - Remark: We can't use adjust as it's a native call
+    * Clear SearchField and type
     */
    @discardableResult
-   public func slide(_ scalar: CGFloat) -> XCUIElement {
-      self.adjust(toNormalizedSliderPosition: scalar)
+   public func clearSearchFieldAndType(text: String) -> XCUIElement {
+      ElementModifier.clearSearchFieldAndType(searchField: self, text: text)
       return self
    }
 }
@@ -124,6 +123,15 @@ extension XCUIElement {
       if elementExists && self.isHittable == false { // Most likely tooltip is beeing show and this needs to be dismissed
          XCUIApplication().tap(waitForExistence: 5, waitAfter: 2)
       }
+      return self
+   }
+   /**
+    * Same as adjust, but returns self for chaining calls
+    * - Remark: We can't use adjust as it's a native call
+    */
+   @discardableResult
+   public func slide(_ scalar: CGFloat) -> XCUIElement {
+      self.adjust(toNormalizedSliderPosition: scalar)
       return self
    }
 }
