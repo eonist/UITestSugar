@@ -43,6 +43,8 @@ extension ElementParser {
       if index.isEmpty { return root }/*returns the root*/
       else if index.count == 1 && index[0] < children.count { return children[index[0]] }/* the index is at it's end point, cut of the branch */
       else if index.count > 1 && !children.isEmpty && index[0] < children.count {
+//         Swift.print("index.count:  \(index.count)")
+//         Swift.print("index:  \(index)")
          let newIndex = Array(index[1..<index.count])
          let child: XCUIElement = children[index[0]]
          return element(root: child, index: newIndex)
