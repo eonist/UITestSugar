@@ -8,7 +8,7 @@ extension XCUIElement {
    /**
     * Returns an XCUIElement
     * ## Examples:
-    * app.descendant([(.table,nil),(.button,”refreshBtn”)]).tap()
+    * app.descendant([(.table, nil), (.button, ”refreshBtn”)]).tap()
     */
    public func descendant(_ map: [SearchType]) -> XCUIElement {
       if map.count == 1, let search = map.first {
@@ -18,7 +18,7 @@ extension XCUIElement {
          let newMap = Array(map[1..<map.count])
          return element.descendant(newMap)
       } else {
-         Swift.print("🚫 map is an empty array 🚫")// fatalError("🚫 map is an empty array 🚫")
+         Swift.print("🚫 map is an empty array 🚫")
          return self // the logic is that it will work with waiter calls
       }
    }
@@ -26,7 +26,7 @@ extension XCUIElement {
     * Returns XCUIElementQuery
     * - Abstract: Traverses down the hierarchy to the end element, then returns all matching results
     * ## Examples:
-    * app.descendants([(.table,nil),(.button,”addBtn”)]).shuffledElement().tap() // taps random button
+    * app.descendants([(.table, nil), (.button, ”addBtn”)]).shuffledElement().tap() // taps random button
     */
    public func descendants(_ map: [SearchType]) -> XCUIElementQuery {
       if map.count == 1, let search = map.first {
@@ -36,7 +36,7 @@ extension XCUIElement {
          let newMap = Array(map[1..<map.count])
          return element.descendants(newMap)
       } else {
-         Swift.print("🚫 map is an empty array 🚫") // fatalError("🚫 map is an empty array 🚫")
+         Swift.print("🚫 map is an empty array 🚫")
          return self.otherElements // the logic is that it will work with waiter calls
       }
    }
