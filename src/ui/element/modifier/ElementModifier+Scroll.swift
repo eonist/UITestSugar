@@ -63,3 +63,19 @@ extension ElementModifier {
 extension ElementModifier {
    public enum Direction { case up, down, left, right }
 }
+
+extension ElementModifier {
+   /**
+    Scrolls to a particular element until it is rendered in the visible rect
+    - Parameter elememt: the element we want to scroll to
+    */
+   static func scrollToElement(element: XCUIElement, searchCondition: ElementParser.MatchCondition) {
+      while !searchCondition(element) {
+         let startCoord = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+         let endCoord = startCoord.withOffset(CGVector(dx: 0.0, dy: -262))
+         startCoord.press(forDuration: 0.01, thenDragTo: endCoord)
+      }
+   }
+}
+
+ 

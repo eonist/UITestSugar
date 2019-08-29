@@ -20,4 +20,12 @@ extension XCUIElement {
       ElementModifier.scrollToElement(parent: self, element: element)
       return self
    }
+   /**
+    * Scrolling (beta)
+    */
+   @discardableResult
+   public func scrollTo(searchCondition: ElementParser.MatchCondition) -> XCUIElement {
+      ElementModifier.scrollToElement(element: self, searchCondition: searchCondition)
+      return self
+   }
 }
