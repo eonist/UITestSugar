@@ -16,7 +16,12 @@ extension ElementModifier {
     */
    public static func scrollTo(element: XCUIElement, dir: Direction, searchCondition: ElementParser.MatchCondition) {
       while !searchCondition(element) {
-         dir == .up ? element.swipeUp() : element.swipeDown()
+         switch dir {
+         case .up: element.swipeUp()
+         case .down: element.swipeDown()
+         case .left: element.swipeLeft()
+         case .right: element.swipeRight()
+         }
       }
    }
 }
@@ -56,5 +61,5 @@ extension ElementModifier {
  * - Fixme: ⚠️️ add support for left right
  */
 extension ElementModifier {
-   public enum Direction { case up, down }
+   public enum Direction { case up, down, left, right }
 }
