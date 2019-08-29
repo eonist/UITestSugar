@@ -81,12 +81,19 @@ extension XCUIElement {
  */
 extension XCUIElement {
    /**
-    * firstDescendant
+    * Returns firstDescendant based on partial identifier
+    * - Abstract: Great for finding identifiers that you only have partial information about (Edge cases were the app was developed with localized ids etc, which is wrong but sometimes you have to work around it)
     * - Remark: An alternative is that you can use `a.range(of: b) != nil` and check all ids of all elements
+    * - Reference: In the future you could add more Predicate args like: https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElementQuery.swift
+    * ## Example:
+    * // The button has an id of `theBtn`
+    * app.firstDescendant(partialId: "theBtn", type: .button).waitForExistence(timeout: 5) // true
+    * app.firstDescendant(partialId: "heBt", type: .button).waitForExistence(timeout: 5) // true
+    * app.firstDescendant(partialId: "theBtnX", type: .button).waitForExistence(timeout: 5) (( false
     */
-   public func firstDescendant(containing id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
+   public func firstDescendant(partialId:String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       let query = self.descendants(matching: type)
-      let predicate = NSPredicate(format: "identifier CONTAINS %@", id)
+      let predicate = NSPredicate(format: "identifier CONTAINS %@", partialId)
       let elementQuery: XCUIElementQuery = query.containing(predicate) // there is also .matching(predicate:)
       return elementQuery.firstMatch
    }
