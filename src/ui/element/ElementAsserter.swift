@@ -26,7 +26,7 @@ public class ElementAsserter {
     * - Important: ⚠️️ When accessing properties of XCUIElement, XCTest works differently than in a case of actions on elements, there is no waiting for the app to idle and to finish all animations., This can lead to problems and test flakiness as the test will evaluate a query before e.g. view transition has been completed.
     * - Parameter element: Checks if the element exists and isHittable
     */
-   func existsAndIsHittable(element: XCUIElement) -> Bool {
+   public static func existsAndIsHittable(element: XCUIElement) -> Bool {
      return element.exists && element.isHittable
    }
    /**
