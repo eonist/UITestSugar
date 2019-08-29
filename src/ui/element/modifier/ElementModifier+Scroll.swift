@@ -63,11 +63,15 @@ extension ElementModifier {
 extension ElementModifier {
    public enum Direction { case up, down, left, right }
 }
-
+/**
+ * Beta
+ */
 extension ElementModifier {
    /**
     Scrolls to a particular element until it is rendered in the visible rect
-    - Parameter elememt: the element we want to scroll to
+    * - Parameter elememt: the element we want to scroll to
+    * - Reference: https://gist.github.com/ryanmeisters/f4e961731db289f489e1a08183e334d9
+    * - Reference: https://stackoverflow.com/questions/32646539/scroll-until-element-is-visible-ios-ui-automation-with-xcode7
     */
    static func scrollToElement(element: XCUIElement, searchCondition: ElementParser.MatchCondition) {
       while !searchCondition(element) {
