@@ -13,7 +13,7 @@ extension XCUIElement {
       if self.isHittable {
          self.tap()
       } else {
-         let centerOfElement: CGPoint = .init(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
+         let centerOfElement: CGPoint = .init(x: self.frame.origin.x + (self.frame.size.width / 2), y: self.frame.origin.y + (self.frame.size.height / 2))
          let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: .init(dx: centerOfElement.x, dy: centerOfElement.y))
          coordinate.tap()
       }
