@@ -6,13 +6,15 @@ import XCTest
 extension XCUIElement {
    /**
     * Helps to tap things that doesn't work with regular .tap() calls. as .tap() calls must be on .isHittable items
+    * - Caution: ⚠️️ If you use this method in conjunction with: .isVisibleInWindow call. This method can still fail. If something is covering the element or is slightly within window etc
     */
    @discardableResult
    public func forceTapElement() -> XCUIElement {
       if self.isHittable {
          self.tap()
       } else {
-         let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: .init(dx: 0.0, dy: 0.0))
+         let centerOfElement: CGPoint = .init(x: self.frame.size.width / 2, y: self.frame.size.height / 2)
+         let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: .init(dx: centerOfElement.x, dy: centerOfElement.y))
          coordinate.tap()
       }
       return self
