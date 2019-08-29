@@ -77,6 +77,21 @@ extension XCUIElement {
    }
 }
 /**
+ * Experimental
+ */
+extension XCUIElement {
+   /**
+    * firstDescendant
+    * - Remark: An alternative is that you can use `a.range(of: b) != nil` and check all ids of all elements
+    */
+   public func firstDescendant(containing id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
+      let query = self.descendants(matching: type)
+      let predicate = NSPredicate(format: "identifier CONTAINS %@", id)
+      let elementQuery: XCUIElementQuery = query.containing(predicate) // there is also .matching(predicate:)
+      return elementQuery.firstMatch
+   }
+}
+/**
  * Parser (Children)
  */
 extension XCUIElement {
