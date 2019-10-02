@@ -16,9 +16,8 @@ extension XCUIElement {
     * Asserts if an item is visible
     */
    public var isVisible: Bool { return ElementAsserter.isVisibleInWindow(element: self) }
-   
    /**
     * Indicates if the element is currently visible on the screen
     */
-   public var existsAndIsHittable: Bool { return ElementAsserter.existsAndIsHittable(element: self)}
+   public var existsAndIsHittable: Bool { return ElementAsserter.existsAndIsHittable(element: self) }
 }
