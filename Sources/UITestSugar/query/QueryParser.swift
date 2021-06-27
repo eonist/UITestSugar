@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 
@@ -92,3 +93,5 @@ public class QueryParser {
 //      let elements: [XCUIElement] = QueryParser.elements(query: query, type: type)
 //      return elements.first { $0.identifier == identifier }
 //   }
+
+#endif

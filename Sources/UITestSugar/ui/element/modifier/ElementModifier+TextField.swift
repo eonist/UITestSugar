@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -81,3 +82,5 @@ extension ElementModifier {
       }
    }
 }
+
+#endif

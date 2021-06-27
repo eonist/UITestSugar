@@ -1,3 +1,4 @@
+#if os(iOS)
 import XCTest
 
 public class TabBarHelper {
@@ -12,7 +13,7 @@ public class TabBarHelper {
     */
    public static func tabButton(tabButtonName: String) -> XCUIElement {
       XCUIApplication().firstDescendant(type: .button, id: tabButtonName)
-//      return XCUIApplication().descendants(matching: .any).matching(identifier: tabButtonName).element
+      //      return XCUIApplication().descendants(matching: .any).matching(identifier: tabButtonName).element
    }
    /**
     * Returns tabBar buttons based on index of the tabbar.item
@@ -25,3 +26,5 @@ public class TabBarHelper {
       return uiElement
    }
 }
+
+#endif

@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -33,3 +34,5 @@ extension XCUIElement {
       return self
    }
 }
+
+#endif

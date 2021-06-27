@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -61,3 +62,5 @@ extension ElementParser {
       element.descendants(matching: type).allElementsBoundByIndex.filter { condition($0) }
    }
 }
+
+#endif

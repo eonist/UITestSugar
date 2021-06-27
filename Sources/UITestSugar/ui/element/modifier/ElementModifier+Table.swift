@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -23,3 +24,5 @@ extension ElementModifier {
       element.tables.cells.element(boundBy: idx)
    }
 }
+
+#endif

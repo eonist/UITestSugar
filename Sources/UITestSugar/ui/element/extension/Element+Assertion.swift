@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 
@@ -21,3 +22,5 @@ extension XCUIElement {
     */
    public var existsAndIsHittable: Bool { ElementAsserter.existsAndIsHittable(element: self) }
 }
+
+#endif

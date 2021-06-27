@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 
@@ -29,3 +30,5 @@ extension XCUIElement.ElementType {
       ElementTypeName.allCases[Int(self.rawValue)].rawValue
    }
 }
+
+#endif

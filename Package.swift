@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "UITestSugar",
-    platforms: [.iOS(.v13), .macOS(.v10_14)],
+    platforms: [.iOS(.v12), .macOS(.v10_13)],
     products: [
         .library(
             name: "UITestSugar",

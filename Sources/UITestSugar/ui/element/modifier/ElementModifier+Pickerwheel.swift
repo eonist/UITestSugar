@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -16,3 +17,5 @@ extension ElementModifier {
       pickerWheel.adjust(toPickerWheelValue: value)
    }
 }
+
+#endif

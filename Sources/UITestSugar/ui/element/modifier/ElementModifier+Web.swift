@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -19,3 +20,5 @@ extension ElementModifier {
       app.links[title]
    }
 }
+
+#endif

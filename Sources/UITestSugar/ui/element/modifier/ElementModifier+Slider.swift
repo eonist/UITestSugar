@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -14,3 +15,5 @@ extension ElementModifier {
       slider.adjust(toNormalizedSliderPosition: amount)
    }
 }
+
+#endif

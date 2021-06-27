@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 import XCTest
 /**
@@ -88,3 +89,5 @@ extension Array where Element: XCUIElement {
       ElementDebugger.debug(elements: self)
    }
 }
+
+#endif
