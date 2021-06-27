@@ -12,11 +12,11 @@ class UITest: XCTestCase {
       Swift.print("test start")
       // Some tests
       _ = {
-         //      app.firstDescendant(type: .button).waitToAppear(5)?.tap(waitAfter: 2)
-         //      app.firstDescendant(id: "someBtn").waitToAppear(5)?.tap(waitAfter: 2)
-         //      app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(waitAfter: 2)
-         //      app.firstChild(type: .button, id: "otherBtn").waitToAppear(4)?.tap(waitAfter: 2)
-         //      _ = app.descendants([(.table, nil), (.button, nil)])
+         // app.firstDescendant(type: .button).waitToAppear(5)?.tap(waitAfter: 2)
+         // app.firstDescendant(id: "someBtn").waitToAppear(5)?.tap(waitAfter: 2)
+         // app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(waitAfter: 2)
+         // app.firstChild(type: .button, id: "otherBtn").waitToAppear(4)?.tap(waitAfter: 2)
+         // _ = app.descendants([(.table, nil), (.button, nil)])
       }()
       _ = {
          let res1 = ElementParser.element(root: app, index: [3, 0, 0, 0])

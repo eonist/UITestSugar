@@ -119,7 +119,7 @@ extension XCUIElement {
     * children
     */
    public func children(id: String, type: XCUIElement.ElementType = .any) -> XCUIElementQuery {
-      return self.children(matching: type).matching(identifier: id)
+      self.children(matching: type).matching(identifier: id)
    }
 }
 /**
@@ -134,14 +134,14 @@ extension XCUIElement {
     * element.firstDescendant(type: .button) { $0.identifier = "someBtn" }
     */
    private func firstDescendant(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      return ElementParser.firstDescendant(element: self, condition: condition, type: type)
+      ElementParser.firstDescendant(element: self, condition: condition, type: type)
    }
    /**
     * ## Examples:
     * element.firstDescendant { $0.identifier = "someBtn" }
     */
    private func firstDescendant(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      return self.firstDescendant(type: .any, condition)
+      self.firstDescendant(type: .any, condition)
    }
    /**
     * ## Examples:
@@ -150,19 +150,19 @@ extension XCUIElement {
     * - Fixme: ⚠️️ make this method for children too
     */
    private func descendants(type: XCUIElement.ElementType = .any, condition: ElementParser.MatchCondition) -> [XCUIElement] {
-      return ElementParser.descendants(element: self, condition: condition, type: type)
+      ElementParser.descendants(element: self, condition: condition, type: type)
    }
    /**
     * Find first matching item in children based on condition (Only works for immediate chilren not grandchildren etc)
     * - Remark: Being able to do element?.firstDescendant(..) is powerfull when you need to chain calls. As you cant do that when you provide the elemnt as a parameter in the method call
     */
    private func firstChild(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      return ElementParser.firstChild(element: self, condition: condition, type: type)
+      ElementParser.firstChild(element: self, condition: condition, type: type)
    }
    /**
     * Convenient for doing element.firstChild { $0.identifier = "someBtn" }
     */
    private func firstChild(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      return self.firstChild(type: .any, condition)
+      self.firstChild(type: .any, condition)
    }
 }

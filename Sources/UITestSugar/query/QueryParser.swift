@@ -11,8 +11,8 @@ public class QueryParser {
     * - Parameter id: The accessibility identifier
     * - Parameter query: The query to target
     */
-    public static func firstElement(query: XCUIElementQuery, id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      return query.element(matching: type, identifier: id).firstMatch
+   public static func firstElement(query: XCUIElementQuery, id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
+      query.element(matching: type, identifier: id).firstMatch
    }
    /**
     * Returns element of ElementType
@@ -22,7 +22,7 @@ public class QueryParser {
     * app.element(query: app.children, type: .button) //
     */
    public static func firstElement(query: XCUIElementQuery, type: XCUIElement.ElementType) -> XCUIElement {
-      return query.children(matching: type).element
+      query.children(matching: type).element
    }
    /**
     * Beta warn
@@ -33,7 +33,7 @@ public class QueryParser {
     * - Parameter labels: labels to search for
     */
    public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
-      return labels.map { label in
+      labels.map { label in
          query.containing(NSPredicate(format: "label CONTAINS %@", label))
       }.compactMap { $0 }.first?.element
    }
@@ -45,7 +45,7 @@ public class QueryParser {
     * - Parameter label: label to search for
     */
    public static func firstElement(_ query: XCUIElementQuery, label: String) -> XCUIElement {
-      return query.containing(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
+      query.containing(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
    }
    /**
     * Returns elements in query
@@ -57,7 +57,7 @@ public class QueryParser {
     * QueryParser.elements(query: app.children, type: .button)
     */
    public static func elements(query: XCUIElementQuery, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      return (0..<query.count).indices.map { i in
+      (0..<query.count).indices.map { i in
          query.children(matching: type).element(boundBy: i) // bound by is a way to access element by index
       }
    }

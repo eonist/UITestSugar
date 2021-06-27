@@ -11,7 +11,7 @@ extension XCUIElementQuery {
     * XCUIApplication().descendants(matching: .any).hittableElements.count // n
     */
    public var hittableElements: [XCUIElement] {
-      return QueryHelper.hittableElements(query: self)
+      QueryHelper.hittableElements(query: self)
    }
 }
 /**
@@ -27,7 +27,7 @@ extension XCUIElement {
     * - Fixme: ⚠️️ Make this not require result
     */
    public func waitForAppearance(_ timOut: Double = 5) -> Bool {
-      return QueryAsserter.waitForElementToAppear(element: self, timeOut: timOut)
+      QueryAsserter.waitForElementToAppear(element: self, timeOut: timOut)
    }
    /**
     * - Remark: Great for chaining calls (where UI might not be ready because of network delays etc)

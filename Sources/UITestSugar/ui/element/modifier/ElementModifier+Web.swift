@@ -16,6 +16,6 @@ extension ElementModifier {
     * - Parameter link: Could be the link text or id ⚠️️ testing needed
     */
    public static func link(app: XCUIApplication, title: String) -> XCUIElement {
-      return app.links[title]
+      app.links[title]
    }
 }

@@ -85,6 +85,6 @@ public class ElementDebugger {
  */
 extension Array where Element: XCUIElement {
    public func debug() -> String {
-      return ElementDebugger.debug(elements: self)
+      ElementDebugger.debug(elements: self)
    }
 }

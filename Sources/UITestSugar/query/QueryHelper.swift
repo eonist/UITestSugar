@@ -9,7 +9,7 @@ public class QueryHelper {
     * - Important: since we use element boundBy it may not work with waiter calls
     */
    public static func hittableElements(query: XCUIElementQuery) -> [XCUIElement] {
-      return (0..<query.count).indices.map { i in
+      (0..<query.count).indices.map { i in
          let element = query.children(matching: .other).element(boundBy: i)
          return element.isHittable ? element : nil
       }.compactMap { $0 }

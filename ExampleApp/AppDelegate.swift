@@ -22,7 +22,7 @@ class MainVC: UIViewController {
       view = MainView()
       view.backgroundColor = .orange
    }
-   override var prefersStatusBarHidden: Bool { return true }
+   override var prefersStatusBarHidden: Bool { true }
 }
 class MainView: UIView {
    lazy var btn: UIButton = createButton()

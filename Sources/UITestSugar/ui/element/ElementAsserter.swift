@@ -8,7 +8,7 @@ public class ElementAsserter {
     * - Parameter timout: THe duration to wait before failing and returning false
     */
    public static func existsAndVisible(element: XCUIElement, timeout: Double) -> Bool {
-      return element.waitForExistence(timeout: timeout) && isVisibleInWindow(element: element)
+      element.waitForExistence(timeout: timeout) && isVisibleInWindow(element: element)
    }
    /**
     * Asserts if an element is visible on screen (⚠️️ Beta ⚠️️)
@@ -27,7 +27,7 @@ public class ElementAsserter {
     * - Parameter element: Checks if the element exists and isHittable
     */
    public static func existsAndIsHittable(element: XCUIElement) -> Bool {
-     return element.exists && element.isHittable
+      element.exists && element.isHittable
    }
    /**
     * Asserts if an element exists
@@ -37,7 +37,7 @@ public class ElementAsserter {
     * - Note: Does not wait. Asserts immidiatly. use waitForExistence method to assert with wait
     */
    public static func exists(element: XCUIElement) -> Bool {
-      return element.exists
+      element.exists
    }
    /**
     * Asserts if an element exists (with timeout)
@@ -50,14 +50,14 @@ public class ElementAsserter {
     * - Parameter timeout: the amount of wating until it fails
     */
    public static func exists(element: XCUIElement, timeout: Double) -> Bool {
-      return element.waitForExistence(timeout: timeout)
+      element.waitForExistence(timeout: timeout)
    }
    /**
     * Asserts if all elements in an array exists
     * - Parameter elements: the array of elements to check if exists
     */
    public static func allExists(elements: [XCUIElement]) -> Bool {
-      return elements.first { !$0.exists } == nil
+      elements.contains { !$0.exists }
    }
    /**
     * Asserts if an element has a speccific text
@@ -67,6 +67,6 @@ public class ElementAsserter {
     * - Parameter text: The text to assert if exists
     */
    public static func hasText(element: XCUIElement, text: String) -> Bool {
-      return element.staticTexts[text].exists
+      element.staticTexts[text].exists
    }
 }

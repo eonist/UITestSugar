@@ -20,6 +20,6 @@ extension ElementModifier {
     * - Parameter idx: The index of the cell
     */
    public static func cell(element: XCUIElement, idx: Int) -> XCUIElement {
-      return element.tables.cells.element(boundBy: idx)
+      element.tables.cells.element(boundBy: idx)
    }
 }

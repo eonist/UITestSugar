@@ -26,6 +26,6 @@ extension XCUIElement.ElementType {
     * app.buttons.firstMatch.elementType.string // button
     */
    public var string: String {
-      return ElementTypeName.allCases[Int(self.rawValue)].rawValue
+      ElementTypeName.allCases[Int(self.rawValue)].rawValue
    }
 }

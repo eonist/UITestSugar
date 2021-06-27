@@ -14,6 +14,6 @@ extension ElementModifier {
     * ElementModifier.alert(app: app, alertTitle: "Warning", alertButtonTitle: "OK")
     */
    public static func alert(app: XCUIApplication, alertTitle: String, alertButtonTitle: String) -> XCUIElement {
-      return app.alerts[alertTitle].buttons[alertButtonTitle]
+      app.alerts[alertTitle].buttons[alertButtonTitle]
    }
 }
