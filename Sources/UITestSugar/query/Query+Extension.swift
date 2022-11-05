@@ -1,7 +1,6 @@
 #if os(iOS)
 import Foundation
 import XCTest
-
 /**
  * Extension
  */
