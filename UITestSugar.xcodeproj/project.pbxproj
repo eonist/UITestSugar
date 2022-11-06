@@ -36,6 +36,8 @@
 		F13DD8A12688BE930023B3DF /* QueryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13DD8892688BE930023B3DF /* QueryParser.swift */; };
 		F13DD8A22688BE930023B3DF /* QueryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13DD88A2688BE930023B3DF /* QueryHelper.swift */; };
 		F13DD8A32688BE930023B3DF /* QueryAsserter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13DD88B2688BE930023B3DF /* QueryAsserter.swift */; };
+		F1F52CDF2917DC3E00D62EBC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F52CDE2917DC3E00D62EBC /* XCTest.framework */; };
+		F1F52CE02917DC3E00D62EBC /* XCTest.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1F52CDE2917DC3E00D62EBC /* XCTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,20 @@
 			remoteInfo = ExampleApp;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F1F52CE12917DC3E00D62EBC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F1F52CE02917DC3E00D62EBC /* XCTest.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		519E3D541FECAFBA009DD741 /* UITestSugar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITestSugar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +100,7 @@
 		F13DD8892688BE930023B3DF /* QueryParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryParser.swift; sourceTree = "<group>"; };
 		F13DD88A2688BE930023B3DF /* QueryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryHelper.swift; sourceTree = "<group>"; };
 		F13DD88B2688BE930023B3DF /* QueryAsserter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryAsserter.swift; sourceTree = "<group>"; };
+		F1F52CDE2917DC3E00D62EBC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1F52CDF2917DC3E00D62EBC /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +137,7 @@
 				9D597D042303DB0F00652589 /* UITest */,
 				9DECC41F231573910073F3FB /* ExampleApp */,
 				519E3D551FECAFBA009DD741 /* Products */,
+				F1F52CDD2917DC3E00D62EBC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -288,6 +307,14 @@
 			path = query;
 			sourceTree = "<group>";
 		};
+		F1F52CDD2917DC3E00D62EBC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1F52CDE2917DC3E00D62EBC /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -310,6 +337,7 @@
 				519E3D501FECAFBA009DD741 /* Frameworks */,
 				519E3D511FECAFBA009DD741 /* Headers */,
 				F128064E22BE0A5800E7BC7A /* ShellScript */,
+				F1F52CE12917DC3E00D62EBC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -669,9 +697,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = codes.eon;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -698,8 +727,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = codes.eon;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

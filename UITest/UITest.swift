@@ -29,7 +29,7 @@ class UITest: XCTestCase {
          Swift.print("res4:  \(String(describing: res4))")
       }
       let btnExists = app.firstDescendant(type: .button).waitForExistence(timeout: 5)
-      Swift.print("btnExists:  \(btnExists)")
+      Swift.print("btnExists:  \(btnExists ? "✅" : "🚫")")
       let btn2Exists = app.firstDescendant(partialId: "theBtn2", type: .button).waitForExistence(timeout: 5)
       Swift.print("btn2Exists:  \(btn2Exists)")
       Swift.print("test end")
