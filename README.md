@@ -33,8 +33,9 @@ searchedElement.firstMatch.tap()
 ```
 
 ### Note:
-- When you make frameworks that import XCTest, you need to add the correct framework search path in build settings see: [https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest](https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest)
-- You can also see an example of this framework beeing nested into Another TestingFramework: [https://github.com/eonist/TestRunner](https://github.com/eonist/TestRunner)
+- Important: When adding UITestSugar to an xcode project via xcode swift package manager file -> add package. Make sure you pick the UITest target, not the app target. The app target cant load the XCTest.framework that the UITestSugar uses. And will fail.
+- (This is for carthage I think) When you make frameworks that import XCTest, you need to add the correct framework search path in build settings see: [https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest](https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest)
+- You can also see an example of this framework being nested into Another TestingFramework: [https://github.com/eonist/TestRunner](https://github.com/eonist/TestRunner)
 
 ### Todo:
 - Make helper method (reusable routines) for:
