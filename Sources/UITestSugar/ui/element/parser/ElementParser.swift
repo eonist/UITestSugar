@@ -57,10 +57,13 @@ extension ElementParser {
    /**
     * Returns all descendants matching a condition
     * - Fixme: ⚠️️ make this for children too
+    * - Parameters:
+    *   - element: - Fixme: ⚠️️
+    *   - condition: - Fixme: ⚠️️
+    *   - type: - Fixme: ⚠️️
     */
    public static func descendants(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
       element.descendants(matching: type).allElementsBoundByIndex.filter { condition($0) }
    }
 }
-
 #endif

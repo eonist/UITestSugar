@@ -5,8 +5,9 @@ import XCTest
 public class ElementAsserter {
    /**
     * Asserts if item exists in the UI-hierarchy and if its visible with the window-frame (⚠️️ Beta ⚠️️)
-    * - Parameter element: The element to assert if exisit and is visible
-    * - Parameter timout: THe duration to wait before failing and returning false
+    * - Parameters:
+    *   - element: The element to assert if exisit and is visible
+    *   - timout: THe duration to wait before failing and returning false
     */
    public static func existsAndVisible(element: XCUIElement, timeout: Double) -> Bool {
       element.waitForExistence(timeout: timeout) && isVisibleInWindow(element: element)
@@ -47,8 +48,9 @@ public class ElementAsserter {
     * ## Examples:
     * ElementAsserter.exists(element: app.buttons[“Sign up”], timeout: 10)
     * - Remark: ⚠️️ Prefer the native waitForExistance if possible
-    * - Parameter element: The element to check if exists
-    * - Parameter timeout: the amount of wating until it fails
+    * - Parameters:
+    *   - element: The element to check if exists
+    *   - timeout: the amount of wating until it fails
     */
    public static func exists(element: XCUIElement, timeout: Double) -> Bool {
       element.waitForExistence(timeout: timeout)
@@ -64,8 +66,9 @@ public class ElementAsserter {
     * Asserts if an element has a speccific text
     * ## Examples
     * hasText(element: app.alerts.element,"Please enter a valid email address")
-    * - Parameter element: The element to assert if has text
-    * - Parameter text: The text to assert if exists
+    * - Parameters:
+    *   - element: The element to assert if has text
+    *   - text: The text to assert if exists
     */
    public static func hasText(element: XCUIElement, text: String) -> Bool {
       element.staticTexts[text].exists

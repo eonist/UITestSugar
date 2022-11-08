@@ -6,8 +6,9 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * - Parameter slider: The slider to slide
-    * - Parameter amount: The amount to slide the slider to
+    * - Parameters:
+    *   - slider: The slider to slide
+    *   - amount: The amount to slide the slider to
     * ## Examples:
     * slide(slider: app.sliders.element, amount: 0.7)
     */
@@ -15,5 +16,4 @@ extension ElementModifier {
       slider.adjust(toNormalizedSliderPosition: amount)
    }
 }
-
 #endif

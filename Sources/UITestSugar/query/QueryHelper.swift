@@ -16,5 +16,4 @@ public class QueryHelper {
       }.compactMap { $0 }
    }
 }
-
 #endif

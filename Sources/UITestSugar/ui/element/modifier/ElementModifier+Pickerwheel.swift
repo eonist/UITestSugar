@@ -7,8 +7,9 @@ import XCTest
 extension ElementModifier {
    /**
     * Pick a value in pickerWheel
-    * - Parameter pickerWheel: The pickerwheel to use
-    * - Parameter value: The value guess
+    * - Parameters:
+    *   - pickerWheel: The pickerwheel to use
+    *   - value: The value guess
     * ## Examples:
     * pick(pickerWheel: app.pickerWheels.element, value: "Picker Wheel Item Title")
     * pick(pickerWheel: ElementParser.firstElement(query:  app.pickerWheels, identifier: "first picker", type:.picker), value: "Picker Wheel Item Title")

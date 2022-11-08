@@ -17,8 +17,9 @@ extension ElementModifier {
    }
    /**
     * (Untested)
-    * - Parameter element: The element to search from
-    * - Parameter idx: The index of the cell
+    * - Parameters:
+    *   - element: The element to search from
+    *   - idx: The index of the cell
     */
    public static func cell(element: XCUIElement, idx: Int) -> XCUIElement {
       element.tables.cells.element(boundBy: idx)

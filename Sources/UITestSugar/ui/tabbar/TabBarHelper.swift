@@ -13,12 +13,13 @@ public class TabBarHelper {
     */
    public static func tabButton(tabButtonName: String) -> XCUIElement {
       XCUIApplication().firstDescendant(type: .button, id: tabButtonName)
-      //      return XCUIApplication().descendants(matching: .any).matching(identifier: tabButtonName).element
+      // return XCUIApplication().descendants(matching: .any).matching(identifier: tabButtonName).element
    }
    /**
     * Returns tabBar buttons based on index of the tabbar.item
     * ## Examples:
     * pubTabBarHelper.tabButton(tabButtonName: 0).tap()lic static func tabButton(idx: Int) -> XCUIElement {
+    * - Parameter idx: - Fixme: ⚠️️ doc
     */
    public static func tabButton(idx: Int) -> XCUIElement {
       let tabBarsQuery = XCUIApplication().tabBars
@@ -26,5 +27,4 @@ public class TabBarHelper {
       return uiElement
    }
 }
-
 #endif

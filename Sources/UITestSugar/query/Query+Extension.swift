@@ -25,18 +25,20 @@ extension XCUIElement {
     * let didAppear: Bool = app.firstDescendant { $0.elementType == .table }.waitForAppearance(10)
     * - Fixme: ⚠️️ you could implement the: native: waitForExistence call and the just return the element
     * - Fixme: ⚠️️ Make this not require result
+    * - Parameter timeOut: - Fixme: ⚠️️ add doc
     */
-   public func waitForAppearance(_ timOut: Double = 5) -> Bool {
-      QueryAsserter.waitForElementToAppear(element: self, timeOut: timOut)
+   public func waitForAppearance(_ timeOut: Double = 5) -> Bool {
+      QueryAsserter.waitForElementToAppear(element: self, timeOut: timeOut)
    }
    /**
     * - Remark: Great for chaining calls (where UI might not be ready because of network delays etc)
     * ## Examples:
     * app.firstDescendant { $0.elementType == .table }.waitToAppear(10).tap()
     * - Fixme: ⚠️️ Make this not require result
+    * - Parameter timeOut: - Fixme: ⚠️️ add doc
     */
-   public func waitToAppear(_ timOut: Double = 5) -> XCUIElement? {
-      _ = QueryAsserter.waitForElementToAppear(element: self, timeOut: timOut)
+   public func waitToAppear(_ timeOut: Double = 5) -> XCUIElement? {
+      _ = QueryAsserter.waitForElementToAppear(element: self, timeOut: timeOut)
       return self
    }
 }

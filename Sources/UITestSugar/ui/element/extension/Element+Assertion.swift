@@ -21,6 +21,12 @@ extension XCUIElement {
     * Indicates if the element is currently visible on the screen
     */
    public var existsAndIsHittable: Bool { ElementAsserter.existsAndIsHittable(element: self) }
+   /**
+    * - Note: Used for UISwitch ref: https://stackoverflow.com/questions/44222966/from-an-xcuitest-how-can-i-check-the-on-off-state-of-a-uiswitch
+    * XCTAssert(activationSwitch.isOn == true)
+    */
+   public var isOn: Bool {
+      (value as? String) == "1"
+   }
 }
-
 #endif

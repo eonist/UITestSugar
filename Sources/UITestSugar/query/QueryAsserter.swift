@@ -43,5 +43,4 @@ public class QueryAsserter {
 //   let result = XCTWaiter().wait(for: [expectation], timeout: 5)
 //   return result == .completed
 //}
-
 #endif

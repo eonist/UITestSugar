@@ -23,8 +23,9 @@ public class ElementDebugger {
    /**
     * Helps debug an element
     * - Remark: there is also the native: albumArtwork.debugDescription
-    * - Parameter element: The element to debug
-    * - Parameter indentation: Used to indent the print, so debugging hierarchy becomes more readable
+    * - Parameters:
+    *   - element: The element to debug
+    *   - indentation: Used to indent the print, so debugging hierarchy becomes more readable
     * - Returns:
     *  - id: acceccibilityIdentifier
     *  - aLabel: accessibilityLabel
@@ -50,6 +51,7 @@ public class ElementDebugger {
     * let elements: [XCUIElement] = ancestry?.map { $0.1 }
     * let debugStr: String = elements.debug()
     * Swift.print(debugStr)
+    * - Parameter elements: - Fixme: ⚠️️ doc
     */
    public static func debug(elements: [XCUIElement]) -> String {
       let strings: [String] = elements.map { ElementDebugger.debug(element: $0) }
@@ -65,9 +67,10 @@ public class ElementDebugger {
     * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
     * - Fixme: ⚠️️ ⚠️️ ⚠️️ Instead of printing directly, rather return a string that can be printed, because UITesting is so messy for the log
     * - Fixme: ⚠️️ There is too much linebreaks in the output, clean it up
-    * - Parameter element: The root element of the hierarchy
-    * - Parameter type: the element type to drill down against. More speccific means less wasted CPU
-    * - Parameter indentationLevel: This is used to make the log read more like a hierachy. The more indentation the further down in the hierarchy the item is
+    * - Parameters:
+    *   - element: The root element of the hierarchy
+    *   - type: the element type to drill down against. More speccific means less wasted CPU
+    *   - indentationLevel: This is used to make the log read more like a hierachy. The more indentation the further down in the hierarchy the item is
     */
    public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) -> String {
       let children: [XCUIElement] = element.children(matching: type).allElementsBoundByIndex
@@ -89,5 +92,4 @@ extension Array where Element: XCUIElement {
       ElementDebugger.debug(elements: self)
    }
 }
-
 #endif

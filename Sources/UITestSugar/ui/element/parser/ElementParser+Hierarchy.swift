@@ -7,8 +7,9 @@ import XCTest
 extension ElementParser {
    /**
     * Returns an array of ancestral elements (basically you find the parents of an element all the way to the root) (alt name: heritage)
-    * - Parameter condition: a closure that evaluates to true or false
-    * - Parameter element: the point to search from
+    * - Parameters:
+    *   - condition: a closure that evaluates to true or false
+    *   - element: the point to search from
     * ## Example:
     * let condition: ElementParser.MatchCondition = { element in let s = element.screenshot().image.size; Swift.print("s:  \(s)"); return s == size/*element == btn*/} // .screenshot().image.size == size
     * let ancestry: [(Int, XCUIElement)]? = ElementParser.ancestry(root: (0, app), condition: condition)
@@ -38,14 +39,17 @@ extension ElementParser {
     * Returns element in a hierarchy based on a mapIndex
     * - Fixme: Base it on query instead, because it's faster
     * - Fixme: ⚠️️ You can also use elementAtIndex and element.count
+    * - Parameters:
+    *   - root: - Fixme: ⚠️️
+    *   - index: - Fixme: ⚠️️
     */
    public static func element(root: XCUIElement, index: [Int]) -> XCUIElement? {
       let children: [XCUIElement] = root.children(matching: .any).allElementsBoundByIndex
       if index.isEmpty { return root }/*returns the root*/
       else if index.count == 1 && index[0] < children.count { return children[index[0]] }/* the index is at it's end point, cut of the branch */
       else if index.count > 1 && !children.isEmpty && index[0] < children.count {
-         //         Swift.print("index.count:  \(index.count)")
-         //         Swift.print("index:  \(index)")
+         // Swift.print("index.count:  \(index.count)")
+         // Swift.print("index:  \(index)")
          let newIndex = Array(index[1..<index.count])
          let child: XCUIElement = children[index[0]]
          return element(root: child, index: newIndex)
@@ -57,6 +61,9 @@ extension ElementParser {
     * ## Examples:
     * let ancestry: [XCUIElement?] = ElementParser.ancestry(root: self.app, index: pathToElement)
     * let debugAncestry: String = ElementDebugger.debug(elements: ancestry.compactMap { $0 })
+    * - Parameters:
+    *   - root: - Fixme: ⚠️️
+    *   - index: - Fixme: ⚠️️
     */
    public static func ancestry(root: XCUIElement, index: [Int]) -> [XCUIElement?] {
       var index = index
@@ -70,6 +77,7 @@ extension ElementParser {
    }
    /**
     * Fixme: ⚠️️ Since XCUIElement isn't comparable
+    * - Parameter element: - Fixme: ⚠️️
     */
    public func parent(element: XCUIElement) {
       Swift.print("⚠️️ not in use yet ⚠️️")
@@ -84,10 +92,8 @@ extension ElementParser {
     */
    public typealias MatchCondition = (_ element: XCUIElement) -> Bool
 }
-
 //let imgElement = XCUIApplication().descendants(matching: .image).firstMatch
 //let condition: ElementParser.MatchCondition = { element in element.screenshot().image.size == CGSize(width: 200, height: 50)) }
 //let ancestry: [XCUIElement]? = ElementParser.ancestry(element: imgElement, condition: condition)
 //let ImgElementParent: XCUIElement? = ancestry?.last
-
 #endif

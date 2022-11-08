@@ -13,12 +13,12 @@ extension ElementModifier {
     * - Note: you can also use the Accessibility Inspector.app in macos
     * - Note: you can also enable the iOS Simulator's Accessibility Inspector
     * - Note: you can also do: XCUIApplication().staticTexts["content"]
-    * - Parameter app: A reference to the app
-    * - Parameter link: Could be the link text or id ⚠️️ testing needed
+    * - Parameters:
+    *   - app: A reference to the app
+    *   - link: Could be the link text or id ⚠️️ testing needed
     */
    public static func link(app: XCUIApplication, title: String) -> XCUIElement {
       app.links[title]
    }
 }
-
 #endif
