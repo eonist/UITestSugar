@@ -1,4 +1,5 @@
 import Foundation
+#if canImport(XCTest)
 import XCTest
 
 extension XCUIApplication {
@@ -10,3 +11,4 @@ extension XCUIApplication {
       otherElements["dismiss popup"].tap()
    }
 }
+#endif

@@ -1,5 +1,3 @@
-#if os(iOS)
-#endif
 import XCTest
 
 public class TabBarHelper {

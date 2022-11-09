@@ -54,7 +54,7 @@ extension XCUIElement {
     */
    @discardableResult public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement? {
       guard self.waitForExistence(timeout: secs) else { return nil }
-      self.tap()
+      self.tap() // iOS / macOS
       return self.wait(after: sleepSecs)
    }
 }
