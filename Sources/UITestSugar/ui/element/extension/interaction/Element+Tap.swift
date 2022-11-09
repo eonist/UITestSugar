@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
@@ -58,4 +57,4 @@ extension XCUIElement {
       return self.wait(after: sleepSecs)
    }
 }
-
+#endif

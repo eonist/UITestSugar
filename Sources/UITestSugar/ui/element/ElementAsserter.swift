@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 
@@ -75,3 +74,4 @@ public class ElementAsserter {
       element.staticTexts[text].exists
    }
 }
+#endif

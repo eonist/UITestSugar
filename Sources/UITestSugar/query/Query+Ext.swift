@@ -1,6 +1,5 @@
-#if os(iOS)
-#endif
 import Foundation
+#if canImport(XCTest)
 import XCTest
 /**
  * Extension
@@ -44,4 +43,4 @@ extension XCUIElement {
       return self
    }
 }
-
+#endif

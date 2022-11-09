@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import XCTest
 
 public class QueryHelper {
@@ -17,4 +16,4 @@ public class QueryHelper {
       }.compactMap { $0 }
    }
 }
-
+#endif

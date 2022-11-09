@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
@@ -20,4 +19,4 @@ extension ElementModifier {
       app.alerts[alertTitle].buttons[alertButtonTitle]
    }
 }
-
+#endif

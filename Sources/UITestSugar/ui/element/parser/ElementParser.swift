@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
@@ -67,4 +66,4 @@ extension ElementParser {
       element.descendants(matching: type).allElementsBoundByIndex.filter { condition($0) }
    }
 }
-
+#endif

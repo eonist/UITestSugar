@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
@@ -93,3 +92,4 @@ extension Array where Element: XCUIElement {
       ElementDebugger.debug(elements: self)
    }
 }
+#endif

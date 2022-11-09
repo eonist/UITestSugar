@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
@@ -97,4 +96,4 @@ extension ElementParser {
 //let condition: ElementParser.MatchCondition = { element in element.screenshot().image.size == CGSize(width: 200, height: 50)) }
 //let ancestry: [XCUIElement]? = ElementParser.ancestry(element: imgElement, condition: condition)
 //let ImgElementParent: XCUIElement? = ancestry?.last
-
+#endif

@@ -1,5 +1,4 @@
-#if os(iOS)
-#endif
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
@@ -29,4 +28,4 @@ extension XCUIElement {
       (value as? String) == "1"
    }
 }
-
+#endif
