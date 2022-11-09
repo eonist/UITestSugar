@@ -1,7 +1,7 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
-
 /**
  * Assert
  */
@@ -29,4 +29,4 @@ extension XCUIElement {
       (value as? String) == "1"
    }
 }
-#endif
+

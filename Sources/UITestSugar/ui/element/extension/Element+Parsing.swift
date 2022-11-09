@@ -1,4 +1,5 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 /**
@@ -167,4 +168,4 @@ extension XCUIElement {
       self.firstChild(type: .any, condition)
    }
 }
-#endif
+

@@ -1,8 +1,10 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 /**
  * Extension
+ * - Fixme: ⚠️️ rename to XCUIElementQuery+Ext?
  */
 extension XCUIElementQuery {
    /**
@@ -43,4 +45,3 @@ extension XCUIElement {
    }
 }
 
-#endif

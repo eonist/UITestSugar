@@ -1,4 +1,5 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 /**
@@ -37,7 +38,7 @@ public class ElementDebugger {
     */
    public static func debug(element: XCUIElement, indentation: String = "") -> String {
       let id = element.identifier
-      let aLable = String(describing: element.accessibilityLabel)
+      let aLable = String(describing: element.label) // ⚠️️ was .accessibilityLabel but seems it only works in iOS
       let lable = element.label
       let type = element.elementType.string
       let title = element.title
@@ -92,4 +93,3 @@ extension Array where Element: XCUIElement {
       ElementDebugger.debug(elements: self)
    }
 }
-#endif

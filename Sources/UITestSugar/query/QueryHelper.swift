@@ -1,4 +1,5 @@
 #if os(iOS)
+#endif
 import XCTest
 
 public class QueryHelper {
@@ -6,8 +7,8 @@ public class QueryHelper {
     * Returns all descendants of a query that are hittable
     * ## Example:
     * hittableElements(query: app.descendants(matching: .any)).count // n
-    * - Parameter query: can be one element, children or descendants
-    * - Important: since we use element boundBy it may not work with waiter calls
+    * - Parameter query: Can be one element, children or descendants
+    * - Important: Since we use element boundBy it may not work with waiter calls
     */
    public static func hittableElements(query: XCUIElementQuery) -> [XCUIElement] {
       (0..<query.count).indices.map { i in
@@ -16,4 +17,4 @@ public class QueryHelper {
       }.compactMap { $0 }
    }
 }
-#endif
+

@@ -1,4 +1,5 @@
 #if os(iOS)
+#endif
 import XCTest
 
 public class TabBarHelper {
@@ -27,4 +28,4 @@ public class TabBarHelper {
       return uiElement
    }
 }
-#endif
+

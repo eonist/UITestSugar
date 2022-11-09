@@ -1,8 +1,10 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 /**
  * Text
+ * - Fixme: ⚠️️ rename to XCUIElement+Text?
  */
 extension XCUIElement {
    /**
@@ -31,4 +33,4 @@ extension XCUIElement {
       return self
    }
 }
-#endif
+

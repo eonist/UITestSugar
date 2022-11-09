@@ -1,4 +1,5 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 
@@ -84,11 +85,13 @@ public class QueryParser {
     * cells.firstMatch.tap()
     */
    public static func children(query: XCUIElementQuery, strings: [String], type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      strings.flatMap { string in
+      let result: [[XCUIElement]] = strings.map { string in
          let predicate = NSPredicate(format: "label CONTAINS %@", string)
          let elementQuery: XCUIElementQuery = query.containing(predicate)
-         return QueryParser.elements(query: elementQuery)
+         let elements: [XCUIElement] = QueryParser.elements(query: elementQuery)
+         return elements
       }
+      return result.flatMap { $0 } // ⚠️️ Seems odd that flatmap cant be applied to strings, but somehow it wont work etc
    }
 }
 //   public static func firstElement(query: XCUIElementQuery, identifier: String, type: XCUIElement.ElementType = .any) -> XCUIElement? {
@@ -96,4 +99,4 @@ public class QueryParser {
 //      return elements.first { $0.identifier == identifier }
 //   }
 
-#endif
+

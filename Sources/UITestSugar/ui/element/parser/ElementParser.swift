@@ -1,4 +1,5 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 /**
@@ -14,8 +15,8 @@ extension ElementParser {
     * ## Examples:
     * let viewAllButton: XCUIElement? = firstChild(element: app, condition: { $0.identifier == "View all" })
     * - Parameters:
-    *   - element: the element to target
-    *   - condition: the condition that the result must satisfy
+    *   - element: The element to target
+    *   - condition: The condition that the result must satisfy
     *   - type: Make the search more speccific by providing a type
     */
    public static func firstChild(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
@@ -29,7 +30,7 @@ extension ElementParser {
     * Swift.print("button?.label:  \(button?.label)") // "Detail"
     * - Parameters:
     *   - element: The element to find descendants in
-    *   - condition: the condition that the result must satisfy
+    *   - condition: The condition that the result must satisfy
     *   - type: Only return descendats with this type
     * - Caution: ⚠️️ Careful setting the type. Something doesnt work correctly when type is set. (possible apple bug)
     */
@@ -66,4 +67,4 @@ extension ElementParser {
       element.descendants(matching: type).allElementsBoundByIndex.filter { condition($0) }
    }
 }
-#endif
+

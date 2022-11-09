@@ -1,8 +1,10 @@
 #if os(iOS)
+#endif
 import Foundation
 import XCTest
 /**
  * Tapping
+ * - Fixme: ⚠️️ rename to XCUIElement+Tap?
  */
 extension XCUIElement {
    /**
@@ -56,4 +58,4 @@ extension XCUIElement {
       return self.wait(after: sleepSecs)
    }
 }
-#endif
+
