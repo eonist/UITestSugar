@@ -8,7 +8,8 @@ extension XCUIApplication {
     * - Note: ref: https://stackoverflow.com/questions/43904798/how-to-dismiss-a-popover-in-a-ui-test
     */
    public func dismissPopup() {
-      otherElements["dismiss popup"].tap()
+      // - Fixme: ⚠️️ this might not work
+      otherElements["Cancel"].tap()
    }
 }
 #endif
