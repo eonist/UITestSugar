@@ -39,7 +39,7 @@ extension ElementParser {
    /**
     * Returns children elements for element (Only for immediate children)
     * - Parameters:
-    *   - element: parent element for the children to be found
+    *   - element: Parent element for the children to be found
     *   - type: When this is set to a speccific type it only returns children of a speccific type
     */
    public static func children(element: XCUIElement, type: XCUIElement.ElementType = .any) -> [XCUIElement] {

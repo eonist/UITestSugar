@@ -56,10 +56,11 @@ extension XCUIElement {
       }
    }
    /**
-    * descendants
+    * Descendants
     */
    public func descendants(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElementQuery {
       if let id = id {
+         // - Fixme: ⚠️️ we should probably do id check first?
          return self.descendants(matching: type).matching(identifier: id)
       } else {
          return self.descendants(matching: type)

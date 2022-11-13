@@ -3,6 +3,7 @@ import Foundation
 import XCTest
 /**
  * TextField manipulation
+ * - Note: Has hacky code to get keyboard focus: https://stackoverflow.com/a/65208481/5389500
  */
 public class ElementModifier {
    /**
@@ -17,13 +18,13 @@ public class ElementModifier {
     *   - text: the text to enter into the field
     */
    public static func clearAndTypeText(element: XCUIElement, text: String) {
-      guard let stringValue = element.value as? String else {
-         XCTFail("Tried to clear and enter text into a non string value")
+      guard let stringValue: String = element.value as? String else {
+         XCTFail("⚠️️ Tried to clear and enter text into a non string value")
          return
       }
       element.tap(waitForExistence: 5, waitAfter: 0.5)
       for _ in 0..<stringValue.count { // Fixme: ⚠️️ do stringValue.forEach {_ in } here, test first
-         element.typeText(XCUIKeyboardKey.delete.rawValue)
+         element.typeText(XCUIKeyboardKey.delete.rawValue) // this takes a while if there is alot of text
       }
       if stringValue.isEmpty { element.tap() }
       element.typeText(text)
