@@ -1,4 +1,4 @@
-#if os(iOS)
+#if canImport(XCTest)
 import XCTest
 
 public class TabBarHelper {

@@ -1,8 +1,9 @@
-#if os(iOS)
 import Foundation
+#if canImport(XCTest)
 import XCTest
 /**
  * Extension
+ * - Fixme: ⚠️️ rename to XCUIElementQuery+Ext?
  */
 extension XCUIElementQuery {
    /**
@@ -42,5 +43,4 @@ extension XCUIElement {
       return self
    }
 }
-
 #endif

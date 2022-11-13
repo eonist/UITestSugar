@@ -1,8 +1,9 @@
-#if os(iOS)
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
  * Tapping
+ * - Fixme: ⚠️️ rename to XCUIElement+Tap?
  */
 extension XCUIElement {
    /**
@@ -52,7 +53,7 @@ extension XCUIElement {
     */
    @discardableResult public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement? {
       guard self.waitForExistence(timeout: secs) else { return nil }
-      self.tap()
+      self.tap() // iOS / macOS
       return self.wait(after: sleepSecs)
    }
 }

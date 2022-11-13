@@ -1,11 +1,11 @@
-#if os(iOS)
+#if canImport(XCTest)
 import Foundation
 import XCTest
 
 extension XCUIElement.ElementType {
    /**
     * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
-    * - Remark: ⚠️️ label is .staticText 🤷
+    * - Remark: ⚠️️ label is .staticText 🤷 -> because universal OS support etc, macOS doesnt have UILabel etc
     */
    enum ElementTypeName: String, CaseIterable {
       case any, other, application, group, window, sheet, drawer, alert, dialog, button, radioButton

@@ -1,5 +1,5 @@
-#if os(iOS)
 import Foundation
+#if canImport(XCTest)
 import XCTest
 
 public class QueryAsserter {
@@ -37,10 +37,11 @@ public class QueryAsserter {
       return result == .completed
    }
 }
+#endif
 //public static func waitForElementToAppear(element: XCUIElement, testCase: XCTestCase) -> Bool {
 //   let predicate = NSPredicate(format: "exists == true")
 //   let expectation = testCase.expectation(for: predicate, evaluatedWith: element, handler: nil)
 //   let result = XCTWaiter().wait(for: [expectation], timeout: 5)
 //   return result == .completed
 //}
-#endif
+

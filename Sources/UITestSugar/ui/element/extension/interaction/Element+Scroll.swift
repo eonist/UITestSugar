@@ -1,8 +1,9 @@
-#if os(iOS)
+#if canImport(XCTest)
 import Foundation
 import XCTest
 /**
  * Scrolling
+ * - Fixme: ⚠️️ rename to XCUIElement+Scroll?
  */
 extension XCUIElement {
    /**
@@ -32,5 +33,4 @@ extension XCUIElement {
       return self
    }
 }
-
 #endif
