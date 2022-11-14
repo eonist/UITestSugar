@@ -31,7 +31,7 @@ extension ElementParser {
     *   - element: The element to find descendants in
     *   - condition: The condition that the result must satisfy
     *   - type: Only return descendats with this type
-    * - Caution: ⚠️️ Careful setting the type. Something doesnt work correctly when type is set. (possible apple bug)
+    * - Caution: ⚠️️ Careful setting the type. Something doesn't work correctly when type is set. (possible apple bug)
     */
    public static func firstDescendant(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       ElementParser.descendants(element: element, type: type).first { condition($0) }

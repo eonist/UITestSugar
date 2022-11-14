@@ -37,6 +37,10 @@ searchedElement.firstMatch.tap()
 - (This is for carthage I think) When you make frameworks that import XCTest, you need to add the correct framework search path in build settings see: [https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest](https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest)
 - You can also see an example of this framework being nested into Another TestingFramework: [https://github.com/eonist/TestRunner](https://github.com/eonist/TestRunner)
 
+### Gotchas:
+- Sometimes it's hard to get to an element, like button inside a button in a cell. The trick can sometimes be to change the app UI. Like make one button a view. And sometimes just thinking outside the box works. like turning of acceccibility for one button and hitting the cell it self instead, which triggers the button etc.
+- Element label can be used to target elements that has children with textfield or labels with text
+
 ### Todo:
 - Make helper method (reusable routines) for:
 - Press all of the back buttons until there aren’t any
