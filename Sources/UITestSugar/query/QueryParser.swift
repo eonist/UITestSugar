@@ -38,11 +38,13 @@ public class QueryParser {
     */
    public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
       labels.map { label in
-         query.containing(NSPredicate(format: "label CONTAINS %@", label))
+         // ⚠️️ used to be CONTAINS, but thats partial and not exact etc
+         query.containing(NSPredicate(format: "label MATCHES %@", label))
       }.compactMap { $0 }.first?.element
    }
    /**
     * Find the first match that has a lable
+    * - Note: ref https://academy.realm.io/posts/nspredicate-cheatsheet/
     * ## Examples:
     * firstElement(app.descendants().buttons, label: "Edit list").tap(waitForExistance: 5)
     * - Parameters:
@@ -50,7 +52,8 @@ public class QueryParser {
     *   - label: Label to search for
     */
    public static func firstElement(_ query: XCUIElementQuery, label: String) -> XCUIElement {
-      query.containing(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
+      // ⚠️️ used to be CONTAINS, but thats partial and not exact etc
+      query.containing(NSPredicate(format: "label MATCHES %@", label)).firstMatch
    }
    /**
     * Returns elements in query
@@ -85,7 +88,8 @@ public class QueryParser {
     */
    public static func children(query: XCUIElementQuery, strings: [String], type: XCUIElement.ElementType = .any) -> [XCUIElement] {
       let result: [[XCUIElement]] = strings.map { string in
-         let predicate = NSPredicate(format: "label CONTAINS %@", string)
+         // ⚠️️ used to be CONTAINS, but thats partial and not exact etc
+         let predicate = NSPredicate(format: "label MATCHES %@", string)
          let elementQuery: XCUIElementQuery = query.containing(predicate)
          let elements: [XCUIElement] = QueryParser.elements(query: elementQuery)
          return elements

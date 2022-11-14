@@ -31,5 +31,39 @@ extension XCUIElement {
       ElementModifier.clearSearchFieldAndType(searchField: self, text: text)
       return self
    }
+   /**
+    * New ⚠️️
+    * - Description: Removes any current text in the field before typing in the new value
+    * - Note: Solution found here: https://stackoverflow.com/a/59288611/5389500
+    * - Parameter text: the text to enter into the field
+    * ## Examples:
+    * app.textFields["Email"].clearAndEnterText("newemail@domain.example")
+    */
+   public func clearAndEnterText(text: String) {
+      guard let stringValue = self.value as? String else {
+         XCTFail("⚠️️ Tried to clear and enter text into a non string value")
+         return
+      }
+      self.tap(withNumberOfTaps: 2, numberOfTouches: 1)
+      let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+      self.typeText(deleteString)
+      self.typeText(text)
+   }
 }
 #endif
+
+//
+//      app.typeText("New text you want to enter")
+//      // or use app.keys["delete"].tap() if you have keyboard enabled
+//
+//      _ = stringValue
+//      self.tap() // it taps in the center
+//      while ElementModifier.getText(element: self).count != 0 { // Keep removing characters until text is empty, or removing them is not allowed.
+//         let stringVal = ElementModifier.getText(element: self)
+//         // You can create "delete string" in more functional fashion with: let deleteString = stringValue.characters.map { _ in "\u{8}" }.joinWithSeparator("")
+//         let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringVal.count)
+//         self.typeText(deleteString)
+//         let newStringVal = ElementModifier.getText(element: self)
+//         if !newStringVal.isEmpty { self.doubleTap(); } // Ensures that if text is longer than center, that center is reset sort of
+//      }
+//      self.typeText(text)
