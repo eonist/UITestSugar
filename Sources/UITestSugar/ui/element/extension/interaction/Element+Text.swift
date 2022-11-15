@@ -35,6 +35,7 @@ extension XCUIElement {
     * New ⚠️️
     * - Description: Removes any current text in the field before typing in the new value
     * - Note: Solution found here: https://stackoverflow.com/a/59288611/5389500
+    * - Note: Interesting solution: https://stackoverflow.com/a/73847504/5389500
     * - Parameter text: the text to enter into the field
     * ## Examples:
     * app.textFields["Email"].clearAndEnterText("newemail@domain.example")
