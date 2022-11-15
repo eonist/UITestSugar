@@ -10,6 +10,7 @@ extension XCUIElement {
     * Removes any current text in the field before typing in the new value
     * - Parameter text: the text to enter into the field
     */
+   @available(*, deprecated, renamed: "clearAndEnterText")
    @discardableResult public func clearAndTypeText(text: String) -> XCUIElement {
       ElementModifier.clearAndTypeText(element: self, text: text)
       return self
