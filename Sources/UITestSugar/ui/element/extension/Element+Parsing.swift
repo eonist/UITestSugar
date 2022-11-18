@@ -99,7 +99,7 @@ extension XCUIElement {
       let query = self.descendants(matching: type)
       let predicate = NSPredicate(format: "identifier CONTAINS %@", partialId)
       let elementQuery: XCUIElementQuery = query.matching(predicate)
-      Swift.print("matches")
+//      Swift.print("matches")
       return elementQuery.firstMatch
    }
 }
