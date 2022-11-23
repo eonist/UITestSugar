@@ -1,6 +1,47 @@
 #if canImport(XCTest)
 import Foundation
 import XCTest
+extension XCUIElement {
+   public protocol MapType {
+      var type: XCUIElement.ElementType { get }
+   }
+   public struct IDType: MapType {
+      let type: XCUIElement.ElementType
+      let id: String?
+   }
+   public struct LabelType: MapType {
+      let type: XCUIElement.ElementType
+      let label: String?
+   }
+   
+   /**
+    * Returns an XCUIElement for map
+    * - Note. adds support for a SearchType that can be type:id or type:label
+    */
+   public func firstDescendant(_ map: [MapType]) -> XCUIElement {
+      if map.count == 1, let query = map.first { // if map is only 1 level deep
+         return self.firstDescendant(query: query)
+      } else if map.count > 1, let query: SearchType = map.first { // if map is more than 1 level deep
+         let element: XCUIElement = self.firstDescendant(query: query)
+         let newMap: [MapType] = Array(map[1..<map.count]) // substract first element
+         return element.firstDescendant(newMap) // recursive call
+      } else { // map is empty, might never be called
+         Swift.print("🚫 map is an empty array 🚫")
+         return self // the logic is that it will work with waiter calls
+      }
+   }
+   /**
+    * first descendant
+    * - Parameter query: - Fixme: ⚠️️
+    */
+   private func firstDescendant(query: MapType) -> XCUIElement {
+      if let idQuery: IDType = query as? IDType {
+         return self.firstDescendant(type: idQuery.type, id: idQuery.id)
+      } else if let labelQuery: LabelType = query as? LabelType {
+         return self.firstDescendant(type: labelQuery.type, id: labelQuery.id)
+      } else { fatalError("⚠️️ case not supported") }
+   }
+}
 /**
  * Parser (Descendant)
  */
@@ -14,13 +55,13 @@ extension XCUIElement {
     * app.descendant([(.table, nil), (.button, ”refreshBtn”)]).tap()
     */
    public func descendant(_ map: [SearchType]) -> XCUIElement {
-      if map.count == 1, let search = map.first {
-         return self.firstDescendant(type: search.type, id: search.id)
-      } else if map.count > 1, let search: SearchType = map.first {
-         let element = self.firstDescendant(type: search.type, id: search.id)
-         let newMap = Array(map[1..<map.count])
-         return element.descendant(newMap)
-      } else {
+      if map.count == 1, let query = map.first { // if map is only 1 level deep
+         return self.firstDescendant(type: query.type, id: query.id)
+      } else if map.count > 1, let query: SearchType = map.first { // if map is more than 1 level deep
+         let element = self.firstDescendant(type: query.type, id: query.id)
+         let newMap = Array(map[1..<map.count]) // substract first element
+         return element.descendant(newMap) // recursive call
+      } else { // map is empty, might never be called
          Swift.print("🚫 map is an empty array 🚫")
          return self // the logic is that it will work with waiter calls
       }
