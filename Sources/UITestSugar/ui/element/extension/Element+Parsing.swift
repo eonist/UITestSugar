@@ -8,6 +8,8 @@ extension XCUIElement {
    public typealias SearchType = (type: XCUIElement.ElementType, id: String?)
    /**
     * Returns an XCUIElement
+    * - Fixme: ⚠️️ Rename to .firstDescendant
+    * - Fixme: ⚠️️ add support for a SearchType that can be type:id or type:label
     * ## Examples:
     * app.descendant([(.table, nil), (.button, ”refreshBtn”)]).tap()
     */
