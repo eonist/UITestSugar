@@ -1,24 +1,18 @@
 #if canImport(XCTest)
 import Foundation
 import XCTest
+
 extension XCUIElement {
-   public protocol MapType {
-      var type: XCUIElement.ElementType { get }
-   }
-   public struct IDType: MapType {
-      let type: XCUIElement.ElementType
-      let id: String?
-   }
-   public struct LabelType: MapType {
-      let type: XCUIElement.ElementType
-      let label: String?
-   }
-   
+   public typealias IDType = (type: XCUIElementType, id: String?)
+   public typealias LabelType = (type: XCUIElementType, label: String?)
    /**
     * Returns an XCUIElement for map
     * - Note. adds support for a SearchType that can be type:id or type:label
+    * ## Examples
+    * let btn = app.firstDescendant([(type: XCUIElementType.any, id: "mainView"), (type: XCUIElementType.button, label: "actionButton")])
+    * btn.tap()
     */
-   public func firstDescendant(_ map: [MapType]) -> XCUIElement {
+   public func firstDescendant(_ map: [Any]) -> XCUIElement {
       if map.count == 1, let query = map.first { // if map is only 1 level deep
          return self.firstDescendant(query: query)
       } else if map.count > 1, let query: SearchType = map.first { // if map is more than 1 level deep
@@ -34,7 +28,7 @@ extension XCUIElement {
     * first descendant
     * - Parameter query: - Fixme: ⚠️️
     */
-   private func firstDescendant(query: MapType) -> XCUIElement {
+   private func firstDescendant(query: Any) -> XCUIElement {
       if let idQuery: IDType = query as? IDType {
          return self.firstDescendant(type: idQuery.type, id: idQuery.id)
       } else if let labelQuery: LabelType = query as? LabelType {

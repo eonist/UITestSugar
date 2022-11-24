@@ -30,4 +30,5 @@ extension XCUIElement.ElementType {
       ElementTypeName.allCases[Int(self.rawValue)].rawValue
    }
 }
+public typealias XCUIElementType = XCUIElement.ElementType
 #endif
