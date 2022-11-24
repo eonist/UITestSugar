@@ -15,9 +15,9 @@ extension XCUIElement {
    public func firstDescendant(_ map: [Any]) -> XCUIElement {
       if map.count == 1, let query = map.first { // if map is only 1 level deep
          return self.firstDescendant(query: query)
-      } else if map.count > 1, let query: SearchType = map.first { // if map is more than 1 level deep
+      } else if map.count > 1, let query: Any = map.first { // if map is more than 1 level deep
          let element: XCUIElement = self.firstDescendant(query: query)
-         let newMap: [MapType] = Array(map[1..<map.count]) // substract first element
+         let newMap: [Any] = Array(map[1..<map.count]) // substract first element
          return element.firstDescendant(newMap) // recursive call
       } else { // map is empty, might never be called
          Swift.print("🚫 map is an empty array 🚫")
@@ -32,7 +32,7 @@ extension XCUIElement {
       if let idQuery: IDType = query as? IDType {
          return self.firstDescendant(type: idQuery.type, id: idQuery.id)
       } else if let labelQuery: LabelType = query as? LabelType {
-         return self.firstDescendant(type: labelQuery.type, id: labelQuery.id)
+         return self.firstDescendant(label: labelQuery.label, type: labelQuery.type, )
       } else { fatalError("⚠️️ case not supported") }
    }
 }
