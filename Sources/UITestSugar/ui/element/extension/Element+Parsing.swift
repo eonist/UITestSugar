@@ -111,9 +111,9 @@ extension XCUIElement {
     * - Parameter label: label to search for
     */
    public func firstDescendant(label: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      if let label = label {
+      if let lbl: String = label {
          let query = self.descendants(matching: type)
-         return QueryParser.firstElement(query, label: label)
+         return QueryParser.firstElement(query, label: lbl)
 //         return self.descendants(type: type, id: id).firstMatch
       } else {
          return self.descendants(matching: type).firstMatch
