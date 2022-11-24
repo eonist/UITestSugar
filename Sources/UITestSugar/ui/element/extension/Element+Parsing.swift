@@ -32,7 +32,7 @@ extension XCUIElement {
       if let idQuery: IDType = query as? IDType {
          return self.firstDescendant(type: idQuery.type, id: idQuery.id)
       } else if let labelQuery: LabelType = query as? LabelType {
-         return self.firstDescendant(label: labelQuery.label, type: labelQuery.type, )
+         return self.firstDescendant(label: labelQuery.label, type: labelQuery.type)
       } else { fatalError("⚠️️ case not supported") }
    }
 }
@@ -110,9 +110,14 @@ extension XCUIElement {
     * - Parameter type: The type to target
     * - Parameter label: label to search for
     */
-   public func firstDescendant(label: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      let query = self.descendants(matching: type)
-      return QueryParser.firstElement(query, label: label)
+   public func firstDescendant(label: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
+      if let label = label {
+         let query = self.descendants(matching: type)
+         return QueryParser.firstElement(query, label: label)
+//         return self.descendants(type: type, id: id).firstMatch
+      } else {
+         return self.descendants(matching: type).firstMatch
+      }
    }
 }
 /**
