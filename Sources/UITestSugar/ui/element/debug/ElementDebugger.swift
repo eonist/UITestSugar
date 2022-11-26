@@ -63,9 +63,10 @@ public class ElementDebugger {
     * ## Examples:
     * let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
     * Swift.print("Hierarchy: \n" + hierarchyStr)
+    * - Important: ⚠️️⚠️️⚠️️ This takes a long time to run if you pass app as the element. 1-3min etc
     * - Important: ⚠️️ remember you also have the Acceccibility dialog in xcode where you can click an element and get hierarchy and info about it etc
     * - Remark: logs can get messy with UITesting, a way to see the hierarchy more clearly is to use the filter filed and filter for the "-" char
-    * - Fixme: ⚠️️ ⚠️️ ⚠️️ Instead of printing directly, rather return a string that can be printed, because UITesting is so messy for the log
+    * - Remark: Instead of printing directly, wer rather return a string that can be printed, because UITesting is so messy for the log
     * - Fixme: ⚠️️ There is too much linebreaks in the output, clean it up
     * - Parameters:
     *   - element: The root element of the hierarchy
