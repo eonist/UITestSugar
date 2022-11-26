@@ -49,6 +49,13 @@ activityListView.descendants(type: .button, id: nil).allElementsBoundByIndex.for
 }
 ```
 
+Great for debugging hirarchy
+
+```swift
+let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
+Swift.print("Hierarchy: \n" + hierarchyStr)
+```
+
 ### Todo:
 - Make helper method (reusable routines) for:
 - Press all of the back buttons until there aren’t any
