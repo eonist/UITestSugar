@@ -57,7 +57,6 @@ extension XCUIElement {
    }
 }
 #endif
-
 //
 //      app.typeText("New text you want to enter")
 //      // or use app.keys["delete"].tap() if you have keyboard enabled

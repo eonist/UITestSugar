@@ -66,12 +66,21 @@ public class ElementAsserter {
     * Asserts if an element has a speccific text
     * ## Examples
     * hasText(element: app.alerts.element,"Please enter a valid email address")
+    * - Remark: ⚠️️ Doesn't always work with macOS
     * - Parameters:
     *   - element: The element to assert if has text
     *   - text: The text to assert if exists
     */
    public static func hasText(element: XCUIElement, text: String) -> Bool {
       element.staticTexts[text].exists
+   }
+   /**
+    * has label
+    */
+   public static func hasLabel(element: XCUIElement, text: String, type: XCUIElementType) -> Bool {
+      element.firstDescendant(label: text, type: type).exists
+//      element.self.descendants(matching: type).element.label == text
+//      element.staticTexts[text].exists
    }
 }
 #endif
