@@ -14,10 +14,24 @@ extension XCUIElement {
       if self.isHittable {
          self.tap()
       } else {
+         // - Fixme: ⚠️️ this might be broken
          let offset: CGPoint = .zero // .init(x: self.frame.origin.x + (self.frame.size.width / 2), y: self.frame.origin.y + (self.frame.size.height / 2))
          let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: .init(dx: offset.x, dy: offset.y))
          coordinate.tap()
       }
+      return self
+   }
+   /**
+    * Force tap
+    * - Remark: Seems to work better for macOS
+    * - Parameters:
+    *   - waitForExistence: - Fixme: ⚠️️
+    *   - waitAfter: - Fixme: ⚠️️
+    */
+   @discardableResult public func forceTap(waitForExistence: Double = 5, waitAfter: Double = 0.2)  -> XCUIElement {
+      let vector: CGVector = .init(dx: 0.5, dy: 0.5)
+      self.coordinate(withNormalizedOffset: vector).tap()
+      self.tap(waitForExistence: waitForExistence, waitAfter: waitAfter)
       return self
    }
    /**
