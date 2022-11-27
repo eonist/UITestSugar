@@ -49,7 +49,7 @@ extension XCUIElement {
       #if os(iOS)
       self.tap(withNumberOfTaps: 2, numberOfTouches: 1)
       #elseif os(macOS)
-      self.tap(waitForExistence: 2, waitAfter: 1)
+      self.doubleTap() // double tap
       #endif
       let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
       self.typeText(deleteString)
