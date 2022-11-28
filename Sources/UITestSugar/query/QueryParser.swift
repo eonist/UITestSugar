@@ -56,6 +56,12 @@ public class QueryParser {
       query.containing(NSPredicate(format: "label MATCHES %@", label)).firstMatch
    }
    /**
+    * New
+    */
+   public static func firstElement(_ query: XCUIElementQuery, title: String) -> XCUIElement {
+      query.containing(NSPredicate(format: "title MATCHES %@", title)).firstMatch
+   }
+   /**
     * Returns elements in query
     * - Parameters:
     *   - query: the search query to match parent element

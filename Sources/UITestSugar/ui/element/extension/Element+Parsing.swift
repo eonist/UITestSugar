@@ -119,6 +119,18 @@ extension XCUIElement {
          return self.descendants(matching: type).firstMatch
       }
    }
+   /**
+    * New
+    */
+   public func firstDescendant(title: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
+      if let ttl: String = title {
+         let query = self.descendants(matching: type)
+         return QueryParser.firstElement(query, title: ttl)
+         //         return self.descendants(type: type, id: id).firstMatch
+      } else {
+         return self.descendants(matching: type).firstMatch
+      }
+   }
 }
 /**
  * Experimental
