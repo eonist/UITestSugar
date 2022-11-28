@@ -29,10 +29,10 @@ extension XCUIElement {
     *   - waitAfter: - Fixme: ⚠️️
     */
    @discardableResult public func forceTap(waitForExistence: Double = 5, waitAfter: Double = 0.2)  -> XCUIElement {
+      guard self.waitForExistence(timeout: waitForExistence) else { return self }
       let vector: CGVector = .init(dx: 0.5, dy: 0.5)
-      self.coordinate(withNormalizedOffset: vector).tap()
-      self.tap(waitForExistence: waitForExistence, waitAfter: waitAfter)
-      return self
+      self.coordinate(withNormalizedOffset: vector).tap() // iOS / macOS
+      return self.wait(after: waitAfter)
    }
    /**
     * Adds convenient way to tap and then wait for a duration (seconds)
