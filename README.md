@@ -41,6 +41,9 @@ searchedElement.firstMatch.tap()
 - Sometimes it's hard to get to an element, like button inside a button in a cell. The trick can sometimes be to change the app UI. Like make one button a view. And sometimes just thinking outside the box works. like turning of acceccibility for one button and hitting the cell it self instead, which triggers the button etc.
 - Element label can be used to target elements that has children with textfield or labels with text
 
+### Resources:
+- https://github.com/joemasilotti/UI-Testing-Cheat-Sheet
+
 ### Example: 
 When interacting with apples own UI (Example below is the Share modal iOS). Finding labels and ids in Accessibility Inspector might not be enough. In the inspector it will say label is "Activity" but in reality if you log the label its: "XCElementSnapshotPrivilegedValuePlaceholder" // This was found by doing // activityListView.descendants(type: .button, id: nil).allElementsBoundByIndex.forEach {  Swift.print("$0.label: \($0.label) $0.identifier: \($0.identifier) ") } 
 ```swift
