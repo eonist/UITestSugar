@@ -7,15 +7,6 @@ import XCTest
  */
 extension XCUIElement {
    /**
-    * Removes any current text in the field before typing in the new value
-    * - Parameter text: the text to enter into the field
-    */
-   @available(*, deprecated, renamed: "clearAndEnterText")
-   @discardableResult public func clearAndTypeText(text: String) -> XCUIElement {
-      ElementModifier.clearAndTypeText(element: self, text: text)
-      return self
-   }
-   /**
     * Same as typeText, but returns self for chaining calls
     * - Remark: We can't use typeText as it's a native call
     * - Parameter text: - Fixme: ⚠️️ doc
@@ -55,6 +46,50 @@ extension XCUIElement {
 //      Swift.print("deleteString.count:  \(deleteString.count)")
       self.typeText(deleteString)
 //      sleep(sec: 1)
+      self.typeText(text)
+   }
+}
+/**
+ * New
+ */
+extension XCUIElement {
+   /**
+    * Clear and enter text
+    * - Note: ref: https://stackoverflow.com/a/73847504/5389500
+    */
+   public func clearAndWriteText(text: String) {
+      self.clear()
+      // new line at end submits
+      self.typeText("\(text)\n")
+   }
+   /**
+    * Removes any current text in the field before typing in the new value and submitting
+    * Based on: https://stackoverflow.com/a/32894080
+    */
+   public func clear() {
+      if self.value as? String == nil {
+         XCTFail("Tried to clear and enter text into a non string value")
+         return
+      }
+      // Repeatedly delete text as long as there is something in the text field.
+      // This is required to clear text that does not fit in to the textfield and is partially hidden initally.
+      // Important to check for placeholder value, otherwise it gets into an infinite loop.
+      while let stringValue = self.value as? String, !stringValue.isEmpty, stringValue != self.placeholderValue {
+         // Move the cursor to the end of the text field
+         let lowerRightCorner = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
+         lowerRightCorner.tap()
+         let delete = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+         self.typeText(delete)
+      }
+   }
+}
+extension XCUIElement {
+   /**
+    * works for macOS
+    */
+   func selectAllAndWrite(text: String) {
+      self.tap(waitForExistence: 5, waitAfter: 0.2)
+      self.typeKey("a", modifierFlags: .command) // select all (clearAndType doesnt work well on exotic characters)
       self.typeText(text)
    }
 }
