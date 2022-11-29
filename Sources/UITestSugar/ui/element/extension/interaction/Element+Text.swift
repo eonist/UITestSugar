@@ -59,8 +59,7 @@ extension XCUIElement {
     */
    public func clearAndWriteText(text: String) {
       self.clear()
-      // new line at end submits
-      self.typeText("\(text)\n")
+      self.typeText(text) // "\()\n" // new line at end submits
    }
    /**
     * Removes any current text in the field before typing in the new value and submitting
@@ -79,6 +78,7 @@ extension XCUIElement {
          let lowerRightCorner = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
          lowerRightCorner.tap()
          let delete = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+         Swift.print("delete.count:  \(delete.count)")
          self.typeText(delete)
       }
    }
@@ -87,7 +87,7 @@ extension XCUIElement {
    /**
     * works for macOS
     */
-   func selectAllAndWrite(text: String) {
+   public func selectAllAndWrite(text: String) {
       self.tap(waitForExistence: 5, waitAfter: 0.2)
       self.typeKey("a", modifierFlags: .command) // select all (clearAndType doesnt work well on exotic characters)
       self.typeText(text)
