@@ -18,7 +18,7 @@ public class ElementModifier {
     *   - text: the text to enter into the field
     */
    public static func clearAndTypeText(element: XCUIElement, text: String) {
-      // ⚠️️ might not work with secure text now, see older version of this where it worked etc
+      // ⚠️️ Might not work with secure text now, see older version of this where it worked etc
       element.clearAndEnterText(text: text)
    }
    /**

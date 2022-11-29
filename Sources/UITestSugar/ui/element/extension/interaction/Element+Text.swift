@@ -49,10 +49,12 @@ extension XCUIElement {
       #if os(iOS)
       self.tap(withNumberOfTaps: 2, numberOfTouches: 1)
       #elseif os(macOS)
-      self.doubleTap() // double tap
+      self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
       #endif
       let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+//      Swift.print("deleteString.count:  \(deleteString.count)")
       self.typeText(deleteString)
+//      sleep(sec: 1)
       self.typeText(text)
    }
 }
