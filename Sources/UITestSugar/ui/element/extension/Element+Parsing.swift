@@ -131,6 +131,19 @@ extension XCUIElement {
          return self.descendants(matching: type).firstMatch
       }
    }
+   /**
+    * Finds element of a type that has a sub-element that match the provided condition
+    * - Note: This method can be a bit slow, to speed it up. try to narrow down the element it is called on etc
+    * - Fixme: ⚠️️ we could also make a method that has 2 condition params etc
+    * app.firstDescendant(type: .cell) {
+    *    $0.elementType == .textField && $0.value == "data.json"
+    * }
+    */
+   public func firstDescendant(type: XCUIElementType, condition: (XCUIElement) -> Bool) -> XCUIElement? {
+      self.descendants(matching: type).allElementsBoundByIndex.first {
+         $0.firstDescendant(condition) != nil
+      }
+   }
 }
 /**
  * Experimental

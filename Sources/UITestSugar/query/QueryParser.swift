@@ -56,10 +56,16 @@ public class QueryParser {
       query.containing(NSPredicate(format: "label MATCHES %@", label)).firstMatch
    }
    /**
-    * New
+    * title (New)
     */
    public static func firstElement(_ query: XCUIElementQuery, title: String) -> XCUIElement {
       query.containing(NSPredicate(format: "title MATCHES %@", title)).firstMatch
+   }
+   /**
+    * value (New)
+    */
+   public static func firstElement(_ query: XCUIElementQuery, value: String) -> XCUIElement {
+      query.containing(NSPredicate(format: "value MATCHES %@", value)).firstMatch
    }
    /**
     * Returns elements in query
