@@ -132,6 +132,18 @@ extension XCUIElement {
       }
    }
    /**
+    * New
+    */
+   public func firstDescendant(value: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
+      if let val: String = value {
+         let query = self.descendants(matching: type)
+         return QueryParser.firstElement(query, value: val)
+         //         return self.descendants(type: type, id: id).firstMatch
+      } else {
+         return self.descendants(matching: type).firstMatch
+      }
+   }
+   /**
     * Finds element of a type that has a sub-element that match the provided condition
     * - Note: This method can be a bit slow, to speed it up. try to narrow down the element it is called on etc
     * - Fixme: ⚠️️ we could also make a method that has 2 condition params etc
