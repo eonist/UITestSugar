@@ -3,7 +3,7 @@ import Foundation
 import XCTest
 /**
  * Extension
- * - Fixme: ⚠️️ rename to XCUIElementQuery+Ext?
+ * - Fixme: ⚠️️ Rename to XCUIElementQuery+Ext?
  */
 extension XCUIElementQuery {
    /**
@@ -20,12 +20,12 @@ extension XCUIElementQuery {
  */
 extension XCUIElement {
    /**
-    * - Abstract: This method is needed because the native `.waitForExistence(timeOut:)` doesn't work on optional elements
-    * - Remark we had to change the name to something different than waitToAppear, or else chaining would be ambigouse
-    * ## Examples:
-    * let didAppear: Bool = app.firstDescendant { $0.elementType == .table }.waitForAppearance(10)
+    * - Description: This method is needed because the native `.waitForExistence(timeOut:)` doesn't work on optional elements
+    * - Remark: We had to change the name to something different than waitToAppear, or else chaining would be ambigouse
     * - Fixme: ⚠️️ you could implement the: native: waitForExistence call and the just return the element
     * - Fixme: ⚠️️ Make this not require result
+    * ## Examples:
+    * let didAppear: Bool = app.firstDescendant { $0.elementType == .table }.waitForAppearance(10)
     * - Parameter timeOut: - Fixme: ⚠️️ add doc
     */
    public func waitForAppearance(_ timeOut: Double = 5) -> Bool {
@@ -33,9 +33,9 @@ extension XCUIElement {
    }
    /**
     * - Remark: Great for chaining calls (where UI might not be ready because of network delays etc)
+    * - Fixme: ⚠️️ Make this not require result
     * ## Examples:
     * app.firstDescendant { $0.elementType == .table }.waitToAppear(10).tap()
-    * - Fixme: ⚠️️ Make this not require result
     * - Parameter timeOut: - Fixme: ⚠️️ add doc
     */
    public func waitToAppear(_ timeOut: Double = 5) -> XCUIElement? {

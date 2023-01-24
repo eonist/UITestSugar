@@ -7,10 +7,11 @@ extension XCUIElement {
    public typealias LabelType = (type: XCUIElementType, label: String?)
    /**
     * Returns an XCUIElement for map
-    * - Note. adds support for a SearchType that can be type:id or type:label
+    * - Note: Adds support for a `SearchType` that can be `type:id` or `type:label`
     * ## Examples
     * let btn = app.firstDescendant([(type: XCUIElementType.any, id: "mainView"), (type: XCUIElementType.button, label: "actionButton")])
     * btn.tap()
+    * - Parameter map: - Fixme: ⚠️️
     */
    public func firstDescendant(_ map: [Any]) -> XCUIElement {
       if map.count == 1, let query = map.first { // if map is only 1 level deep
@@ -25,7 +26,7 @@ extension XCUIElement {
       }
    }
    /**
-    * first descendant
+    * First descendant
     * - Parameter query: - Fixme: ⚠️️
     */
    private func firstDescendant(query: Any) -> XCUIElement {
@@ -42,9 +43,9 @@ extension XCUIElement {
 extension XCUIElement {
    public typealias SearchType = (type: XCUIElement.ElementType, id: String?)
    /**
-    * Returns an XCUIElement
-    * - Fixme: ⚠️️ Rename to .firstDescendant
-    * - Fixme: ⚠️️ add support for a SearchType that can be type:id or type:label
+    * Returns an `XCUIElement`
+    * - Fixme: ⚠️️ Rename to `.firstDescendant`
+    * - Fixme: ⚠️️ add support for a `SearchType` that can be `type:id` or `type:label`
     * ## Examples:
     * app.descendant([(.table, nil), (.button, ”refreshBtn”)]).tap()
     */
@@ -61,8 +62,8 @@ extension XCUIElement {
       }
    }
    /**
-    * Returns XCUIElementQuery
-    * - Abstract: Traverses down the hierarchy to the end element, then returns all matching results
+    * Returns `XCUIElementQuery`
+    * - Description: Traverses down the hierarchy to the end element, then returns all matching results
     * ## Examples:
     * app.descendants([(.table, nil), (.button, ”addBtn”)]).shuffledElement().tap() // taps random button
     */
@@ -79,7 +80,6 @@ extension XCUIElement {
       }
    }
    /**
-    * firstDescendant
     * ## Examples:
     * app.firstDescendant(type: .button).waitToAppear(5)?.tap(wait: 2)
     * app.firstDescendant(id: "someBtn").waitToAppear(5)?.tap(wait: 2)
@@ -97,7 +97,7 @@ extension XCUIElement {
     */
    public func descendants(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElementQuery {
       if let id = id {
-         // - Fixme: ⚠️️ we should probably do id check first?
+         // - Fixme: ⚠️️ We should probably do id check first?
          return self.descendants(matching: type).matching(identifier: id)
       } else {
          return self.descendants(matching: type)
@@ -107,32 +107,33 @@ extension XCUIElement {
     * Find first descendant of type that has a label (⚠️️ New ⚠️️)
     * ## Examples:
     * app.firstDescendant(label: "Edit list", type: .button).tap(waitForExistance: 5)
-    * - Parameter type: The type to target
-    * - Parameter label: label to search for
+    * - Parameters:
+    *   - type: The type to target
+    *   - label: label to search for
     */
    public func firstDescendant(label: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
       if let lbl: String = label {
          let query = self.descendants(matching: type)
          return QueryParser.firstElement(query, label: lbl)
-//         return self.descendants(type: type, id: id).firstMatch
+         // return self.descendants(type: type, id: id).firstMatch
       } else {
          return self.descendants(matching: type).firstMatch
       }
    }
    /**
-    * New
+    * - Fixme: ⚠️️ add doc
     */
    public func firstDescendant(title: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
       if let ttl: String = title {
-         let query = self.descendants(matching: type)
+         let query: XCUIElementQuery = self.descendants(matching: type)
          return QueryParser.firstElement(query, title: ttl)
-         //         return self.descendants(type: type, id: id).firstMatch
+         // return self.descendants(type: type, id: id).firstMatch
       } else {
          return self.descendants(matching: type).firstMatch
       }
    }
    /**
-    * New
+    * - Fixme: ⚠️️ add doc
     */
    public func firstDescendant(value: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
       if let val: String = value {
@@ -146,7 +147,7 @@ extension XCUIElement {
    /**
     * Finds element of a type that has a sub-element that match the provided condition
     * - Note: This method can be a bit slow, to speed it up. try to narrow down the element it is called on etc
-    * - Fixme: ⚠️️ we could also make a method that has 2 condition params etc
+    * - Fixme: ⚠️️ We could also make a method that has 2 condition params etc
     * app.firstDescendant(type: .cell) {
     *    $0.elementType == .textField && $0.value == "data.json"
     * }
@@ -162,23 +163,26 @@ extension XCUIElement {
  */
 extension XCUIElement {
    /**
-    * Returns firstDescendant based on partial identifier
-    * - Abstract: Great for finding identifiers that you only have partial information about (Edge cases were the app was developed with localized ids etc, which is wrong but sometimes you have to work around it)
+    * Returns `firstDescendant` based on partial identifier
+    * - Description: Great for finding identifiers that you only have partial information about (Edge cases were the app was developed with localized ids etc, which is wrong but sometimes you have to work around it)
     * - Remark: An alternative is that you can use `a.range(of: b) != nil` and check all ids of all elements
-    * - Remark: .matching finds the target, .containing finds a parent that has a child etc
-    * - Fixme: ⚠️️ Write a method: hasDescendant based on this and .containing() call
-    * - Reference: In the future you could add more Predicate args like: https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElementQuery.swift
+    * - Remark: `.matching` finds the target, `.containing` finds a parent that has a child etc
+    * - Remark: In the future you could add more Predicate args like: https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElementQuery.swift
+    * - Fixme: ⚠️️ Write a method: `hasDescendant` based on this and `.containing()` call
     * ## Example:
     * // The button has an id of `theBtn`
     * app.firstDescendant(partialId: "theBtn", type: .button).waitForExistence(timeout: 5) // true
     * app.firstDescendant(partialId: "heBt", type: .button).waitForExistence(timeout: 5) // true
     * app.firstDescendant(partialId: "theBtnX", type: .button).waitForExistence(timeout: 5) (( false
+    * - Parameters:
+    *   - partialId: - Fixme: ⚠️️
+    *   - type: - Fixme: ⚠️️
     */
    public func firstDescendant(partialId: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       let query = self.descendants(matching: type)
       let predicate = NSPredicate(format: "identifier CONTAINS %@", partialId)
       let elementQuery: XCUIElementQuery = query.matching(predicate)
-//      Swift.print("matches")
+      // Swift.print("matches")
       return elementQuery.firstMatch
    }
 }
@@ -187,7 +191,10 @@ extension XCUIElement {
  */
 extension XCUIElement {
    /**
-    * firstChild
+    * - Parameters:
+    *   - type: - Fixme: ⚠️️
+    *   - id: - Fixme: ⚠️️
+    * - Returns: - Fixme: ⚠️️
     */
    public func firstChild(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
       if let id = id {
@@ -197,22 +204,27 @@ extension XCUIElement {
       }
    }
    /**
-    * children
+    * - Parameters:
+    *   - id: - Fixme: ⚠️️
+    *   - type: - Fixme: ⚠️️
+    * - Returns: - Fixme: ⚠️️
     */
    public func children(id: String, type: XCUIElement.ElementType = .any) -> XCUIElementQuery {
       self.children(matching: type).matching(identifier: id)
    }
 }
 /**
- * Beta (⚠️️ these won't work with waiter calls, but can be good for syncronouse exist calls ⚠️️)
+ * Beta (⚠️️ These won't work with waiter calls, but can be good for syncronouse exist calls ⚠️️)
  */
 extension XCUIElement {
    /**
-    *
     * Find first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
-    * - Remark: Being able to do element?.firstDescendant(..) is powerfull when you need to chain calls. As you can't do that when you provide the elemnt as a parameter in the method call
+    * - Remark: Being able to do `element?.firstDescendant(..)` is powerfull when you need to chain calls. As you can't do that when you provide the elemnt as a parameter in the method call
     * ## Examples:
     * element.firstDescendant(type: .button) { $0.identifier = "someBtn" }
+    * - Parameters:
+    *   - type: - Fixme: ⚠️️
+    *   - condition: - Fixme: ⚠️️
     */
    private func firstDescendant(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
       ElementParser.firstDescendant(element: self, condition: condition, type: type)
@@ -220,28 +232,40 @@ extension XCUIElement {
    /**
     * ## Examples:
     * element.firstDescendant { $0.identifier = "someBtn" }
+    * - Parameter condition: - Fixme: ⚠️️
+    * - Returns: - Fixme: ⚠️️
     */
    private func firstDescendant(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
       self.firstDescendant(type: .any, condition)
    }
    /**
+    *  - Fixme: ⚠️️ make this method for children too
     * ## Examples:
     * app.descendants(type:.button) { $0.identifier == "specialBtn" }.tap() // find button based on button.acceccibilityIdentifier
     * app.descendants(type:.button) { $0.label == "play" }.tap() // find button based on button.title
-    * - Fixme: ⚠️️ make this method for children too
+    * - Parameters:
+    *   - type: - Fixme: ⚠️️
+    *   - condition: - Fixme: ⚠️️
+    * - Returns: - Fixme: ⚠️️
     */
    private func descendants(type: XCUIElement.ElementType = .any, condition: ElementParser.MatchCondition) -> [XCUIElement] {
       ElementParser.descendants(element: self, condition: condition, type: type)
    }
    /**
     * Find first matching item in children based on condition (Only works for immediate chilren not grandchildren etc)
-    * - Remark: Being able to do element?.firstDescendant(..) is powerfull when you need to chain calls. As you cant do that when you provide the elemnt as a parameter in the method call
+    * - Remark: Being able to do `element?.firstDescendant(..)` is powerfull when you need to chain calls. As you cant do that when you provide the elemnt as a parameter in the method call
+    * - Parameters:
+    *   - type: - Fixme: ⚠️️
+    *   - condition: - Fixme: ⚠️️
+    * - Returns: - Fixme: ⚠️️
     */
    private func firstChild(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
       ElementParser.firstChild(element: self, condition: condition, type: type)
    }
    /**
-    * Convenient for doing element.firstChild { $0.identifier = "someBtn" }
+    * Convenient for doing `element.firstChild { $0.identifier = "someBtn" }`
+    * - Parameter condition: - Fixme: ⚠️️
+    * - Returns: - Fixme: ⚠️️
     */
    private func firstChild(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
       self.firstChild(type: .any, condition)

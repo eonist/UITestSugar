@@ -6,7 +6,7 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Pulls a tableview to refresh
+    * Pulls a `TableView` to refresh
     * - Parameter tableElement: The table to pull-refresh
     */
    public static func pullToRefresh(tableElement: XCUIElement) {
@@ -16,7 +16,7 @@ extension ElementModifier {
       start.press(forDuration: 0, thenDragTo: finish)
    }
    /**
-    * (Untested)
+    * Beta ⚠️️
     * - Parameters:
     *   - element: The element to search from
     *   - idx: The index of the cell

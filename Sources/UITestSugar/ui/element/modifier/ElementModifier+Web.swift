@@ -6,7 +6,7 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Return a webview item for title
+    * Return a `WebView` item for title
     * ## Examples:
     * link(app: XCUIApplication(), title: "Tweet this")
     * - Note: you can also do things like: app.webViews.checkBoxes["id"].tap()

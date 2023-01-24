@@ -10,7 +10,7 @@ public class ElementModifier {
     * Removes any current text in the field before typing in the new value
     * - Description: This basically pastes in the content
     * - Important: ⚠️️ This solution has problems with long pre-existing texts. Basically it taps in the middle of the textfield, and thus half doesnt get cleared. Try to find a better solution
-    * - Important: FOR PASSWORD-FIELDS you may need to read this: https://stackoverflow.com/questions/32184837/ui-testing-failure-neither-element-nor-any-descendant-has-keyboard-focus-on-se
+    * - Important: ⚠️️ FOR PASSWORD-FIELDS you may need to read this: https://stackoverflow.com/questions/32184837/ui-testing-failure-neither-element-nor-any-descendant-has-keyboard-focus-on-se
     * - Remark: you can also use: typeKey(_ key: String, modifierFlags flags: XCUIElement.KeyModifierFlags) t
     * - Fixme: ⚠️️ Consider making this a try error method
     * - Parameters:
@@ -36,12 +36,12 @@ public class ElementModifier {
    }
 }
 /**
- * Alternate Clear and type methodology
+ * Alternate clear and type methodology
  */
 extension ElementModifier {
    /**
     * Returns `value` as a String
-    * - Fixme: ⚠️️ move to parser?
+    * - Fixme: ⚠️️ Move to parser?
     * - Parameter element: The element to get text from
     * ## Examples:
     * app.textFields.element.text

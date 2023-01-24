@@ -7,8 +7,8 @@ import XCTest
  */
 extension XCUIElement {
    /**
-    * Helps to tap things that doesn't work with regular .tap() calls. as .tap() calls must be on .isHittable items
-    * - Caution: ⚠️️ If you use this method in conjunction with: .isVisibleInWindow call. This method can still fail. If something is covering the element or is slightly within window etc
+    * Helps to tap things that doesn't work with regular `.tap()` calls. as `.tap()` calls must be on .isHittable items
+    * - Caution: ⚠️️ If you use this method in conjunction with: `.isVisibleInWindow` call. This method can still fail. If something is covering the element or is slightly within window etc
     */
    @discardableResult public func forceTapElement() -> XCUIElement {
       if self.isHittable {
@@ -23,7 +23,7 @@ extension XCUIElement {
    }
    /**
     * Force tap
-    * - Remark: Seems to work better for macOS
+    * - Remark: Seems to work better for `macOS`
     * - Parameters:
     *   - waitForExistence: - Fixme: ⚠️️
     *   - waitAfter: - Fixme: ⚠️️
@@ -36,7 +36,7 @@ extension XCUIElement {
    }
    /**
     * Adds convenient way to tap and then wait for a duration (seconds)
-    * - Abstract: It's more natural to wait a bit after a tap
+    * - Description: It's more natural to wait a bit after a tap
     * ## Examples:
     * app.buttons.firstMatch.tap(waitAfter: 0.2)
     * - Parameter sec: - Fixme: ⚠️️ doc
@@ -47,9 +47,9 @@ extension XCUIElement {
    }
    /**
     * Wait for existence then tap
+    * - Remark: `waitForExistence` is a natice call
     * ## Examples:
     * app.buttons.firstMatch.tap(waitForExistence: 0.2)
-    * - Remark: waitForExistence is a natice call
     * - Parameter sec: - Fixme: ⚠️️ doc
     */
    @discardableResult public func tap(waitForExistence sec: Double) -> XCUIElement? {

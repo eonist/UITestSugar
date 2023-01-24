@@ -8,6 +8,7 @@ extension XCUIElement {
    /**
     * Asert if exists and is visible in window
     * - Caution: ⚠️️ in some cases its visible but may be under neat something and thus isHittable returns false.
+    * - Parameter timeOut: - Fixme: ⚠️️
     */
    public func doesExistAndIsVisible(timeOut: Double) -> Bool {
       ElementAsserter.existsAndVisible(element: self, timeout: timeOut)

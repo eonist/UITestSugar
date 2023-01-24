@@ -7,7 +7,7 @@ import XCTest
 extension ElementModifier {
    /**
     * Return a button in an alert
-    * - Important: ⚠️️ You can setup handlers for random alert screens: addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in alert.buttons["Allow"].tap() return true }
+    * - Important: ⚠️️ You can setup handlers for random alert screens: `addUIInterruptionMonitor(withDescription: "Location Dialog") { (alert) -> Bool in alert.buttons["Allow"].tap() return true }`
     * - Parameters:
     *   - app: A reference to the app
     *   - alertTitle: The id of the alert

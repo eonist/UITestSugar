@@ -17,7 +17,7 @@ public class QueryParser {
       query.element(matching: type, identifier: id).firstMatch
    }
    /**
-    * Returns element of ElementType
+    * Returns element of `ElementType
     * - Parameters:
     *   - type: .button, .scrollBar, .checkButton etc
     *   - query: The query to target
@@ -28,7 +28,7 @@ public class QueryParser {
       query.children(matching: type).element
    }
    /**
-    * Beta warn
+    * Beta ⚠️️
     * ## Example:
     * let firstElement = app.firstElement(query: app.children, labels: ["Sugar", "500 g"]).first?.element
     * firstElement.tap()
@@ -52,28 +52,28 @@ public class QueryParser {
     *   - label: Label to search for
     */
    public static func firstElement(_ query: XCUIElementQuery, label: String) -> XCUIElement {
-      // ⚠️️ used to be CONTAINS, but thats partial and not exact etc
+      // ⚠️️ Used to be CONTAINS, but thats partial and not exact etc
       query.containing(NSPredicate(format: "label MATCHES %@", label)).firstMatch
    }
    /**
-    * title (New)
+    * Element for title
     */
    public static func firstElement(_ query: XCUIElementQuery, title: String) -> XCUIElement {
       query.containing(NSPredicate(format: "title MATCHES %@", title)).firstMatch
    }
    /**
-    * value (New)
+    * Element for value
     */
    public static func firstElement(_ query: XCUIElementQuery, value: String) -> XCUIElement {
       query.containing(NSPredicate(format: "value MATCHES %@", value)).firstMatch
    }
    /**
     * Returns elements in query
+    * - Important: ⚠️️ you can use the native: `.allElementsBoundByIndex`, there is also one for only items with accessibility
+    * - Important: ⚠️️ you can use the native: `XCUIApplication.init().children(matching: .button)` instead of this method
     * - Parameters:
     *   - query: the search query to match parent element
     *   - type: Filter against a speccific type to get a more presice result
-    * - Important: ⚠️️ you can use the native: .allElementsBoundByIndex, there is also one for only items with accessibility
-    * - Important: ⚠️️ you can use the native: XCUIApplication.init().children(matching: .button) instead of this method
     * ## Example:
     * QueryParser.elements(query: app.children, type: .button)
     */
@@ -109,8 +109,8 @@ public class QueryParser {
       return result.flatMap { $0 } // ⚠️️ Seems odd that flatmap cant be applied to strings, but somehow it wont work etc
    }
 }
-//   public static func firstElement(query: XCUIElementQuery, identifier: String, type: XCUIElement.ElementType = .any) -> XCUIElement? {
-//      let elements: [XCUIElement] = QueryParser.elements(query: query, type: type)
-//      return elements.first { $0.identifier == identifier }
-//   }
 #endif
+// public static func firstElement(query: XCUIElementQuery, identifier: String, type: XCUIElement.ElementType = .any) -> XCUIElement? {
+//    let elements: [XCUIElement] = QueryParser.elements(query: query, type: type)
+//    return elements.first { $0.identifier == identifier }
+// }

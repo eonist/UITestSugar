@@ -6,7 +6,7 @@ import XCTest
  */
 public class ElementParser {}
 /**
- * Beta
+ * Beta ⚠️️
  */
 extension ElementParser {
    /**
@@ -23,6 +23,7 @@ extension ElementParser {
    }
    /**
     * Find first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
+    * - Caution: ⚠️️ Careful setting the type. Something doesn't work correctly when type is set. (possible apple bug)
     * ## Examples:
     * let viewAllButton: XCUIElement? = firstDescendant(element: app, condition: { $0.identifier == "View all" }) // find button with accebility identifier
     * let button = ElementParser.firstDescendant(element: app, condition: { $0.label == "Detail" })
@@ -31,7 +32,6 @@ extension ElementParser {
     *   - element: The element to find descendants in
     *   - condition: The condition that the result must satisfy
     *   - type: Only return descendats with this type
-    * - Caution: ⚠️️ Careful setting the type. Something doesn't work correctly when type is set. (possible apple bug)
     */
    public static func firstDescendant(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       ElementParser.descendants(element: element, type: type).first { condition($0) }
@@ -46,7 +46,7 @@ extension ElementParser {
       element.children(matching: type).allElementsBoundByIndex
    }
    /**
-    * Returns all descendants of an element of a speccific UIXUElement type
+    * Returns all descendants of an element of a speccific `UIXUElement` type
     * - Parameters:
     *   - element: The element to find descendants in
     *   - type: Only return descendats with this type
@@ -56,7 +56,7 @@ extension ElementParser {
    }
    /**
     * Returns all descendants matching a condition
-    * - Fixme: ⚠️️ make this for children too
+    * - Fixme: ⚠️️ Make this for children too
     * - Parameters:
     *   - element: - Fixme: ⚠️️
     *   - condition: - Fixme: ⚠️️

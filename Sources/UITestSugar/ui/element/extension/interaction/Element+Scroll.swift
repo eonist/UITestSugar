@@ -3,7 +3,7 @@ import Foundation
 import XCTest
 /**
  * Scrolling
- * - Fixme: ⚠️️ rename to XCUIElement+Scroll?
+ * - Fixme: ⚠️️ Rename to XCUIElement+Scroll?
  */
 extension XCUIElement {
    /**

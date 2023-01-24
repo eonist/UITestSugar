@@ -6,7 +6,7 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Search down a scroll view until searchCondition is met (⚠️️ Beta ⚠️️)
+    * Search down a scroll view until `searchCondition` is met (⚠️️ Beta ⚠️️)
     * - Parameters:
     *   - element: The root to search from
     *   - dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
@@ -33,12 +33,12 @@ extension ElementModifier {
 extension ElementModifier {
    /**
     * Scrolls until element is visible
+    * - Note: Try to set cells: `cell.accessibilityIdentifer = "cell \(indexPath.row)"`
+    * - Note: There is also native: `firstScrollView.scrollToElement(element: seventhChild)`
     * - Parameters:
-    *   - parent: the element to swipe
-    *   - element: the element to swipe to
-    *   - dir: Use .up for scrolling a list to the last item in the list, use .down to scroll the list to first item
-    * - Note: try to set cells: cell.accessibilityIdentifer = "cell \(indexPath.row)"
-    * - Note: there is also Native: firstScrollView.scrollToElement(element: seventhChild)
+    *   - parent: The element to swipe
+    *   - element: The element to swipe to
+    *   - dir: Use `.up` for scrolling a list to the last item in the list, use `.down` to scroll the list to first item
     */
    public static func scrollToElement(parent: XCUIElement, element: XCUIElement, dir: Direction = .up) {
       while !ElementAsserter.isVisibleInWindow(element: element) {
@@ -47,7 +47,7 @@ extension ElementModifier {
    }
    /**
     * Search down a scroll view until it finds a certain element (⚠️️ Beta ⚠️️)
-    * - Note: there is also: firstScrollView.scrollToElement(element: seventhChild)
+    * - Note: There is also: `firstScrollView.scrollToElement(element: seventhChild)`
     * - Parameters:
     *   - element: Can be the app
     *   - id: - Fixme: ⚠️️
@@ -75,12 +75,12 @@ extension ElementModifier {
 extension ElementModifier {
    /**
     * Scrolls to a particular element until it is rendered in the visible rect
+    * - Note: https://gist.github.com/ryanmeisters/f4e961731db289f489e1a08183e334d9
+    * - Note: https://stackoverflow.com/questions/32646539/scroll-until-element-is-visible-ios-ui-automation-with-xcode7
     * - Parameters:
     *   - elememt: the element we want to scroll to
     *   - element: - Fixme: ⚠️️ doc
     *   - searchCondition: - Fixme: ⚠️️ doc
-    * - Reference: https://gist.github.com/ryanmeisters/f4e961731db289f489e1a08183e334d9
-    * - Reference: https://stackoverflow.com/questions/32646539/scroll-until-element-is-visible-ios-ui-automation-with-xcode7
     */
    static func scrollToElement(element: XCUIElement, searchCondition: ElementParser.MatchCondition) {
       while !searchCondition(element) {
