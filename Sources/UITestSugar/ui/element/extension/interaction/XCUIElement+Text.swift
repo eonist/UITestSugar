@@ -3,7 +3,6 @@ import Foundation
 import XCTest
 /**
  * Text
- * - Fixme: ⚠️️ Rename to `XCUIElement+Text?`
  */
 extension XCUIElement {
    /**

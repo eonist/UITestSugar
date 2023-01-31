@@ -3,7 +3,6 @@ import Foundation
 import XCTest
 /**
  * Other
- * - Fixme: ⚠️️ Rename to `XCUIElement+Other?
  */
 extension XCUIElement {
    /**

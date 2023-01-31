@@ -44,18 +44,17 @@ extension XCUIElement {
    public typealias SearchType = (type: XCUIElement.ElementType, id: String?)
    /**
     * Returns an `XCUIElement`
-    * - Fixme: ⚠️️ Rename to `.firstDescendant`
     * - Fixme: ⚠️️ add support for a `SearchType` that can be `type:id` or `type:label`
     * ## Examples:
     * app.descendant([(.table, nil), (.button, ”refreshBtn”)]).tap()
     */
-   public func descendant(_ map: [SearchType]) -> XCUIElement {
+   public func firstDescendant(_ map: [SearchType]) -> XCUIElement {
       if map.count == 1, let query = map.first { // if map is only 1 level deep
          return self.firstDescendant(type: query.type, id: query.id)
       } else if map.count > 1, let query: SearchType = map.first { // if map is more than 1 level deep
          let element = self.firstDescendant(type: query.type, id: query.id)
          let newMap = Array(map[1..<map.count]) // substract first element
-         return element.descendant(newMap) // recursive call
+         return element.firstDescendant(newMap) // recursive call
       } else { // map is empty, might never be called
          Swift.print("🚫 map is an empty array 🚫")
          return self // the logic is that it will work with waiter calls
@@ -269,6 +268,14 @@ extension XCUIElement {
     */
    private func firstChild(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
       self.firstChild(type: .any, condition)
+   }
+}
+// deprecated ⚠️️
+extension XCUIElement {
+   // deprecated ⚠️️
+   @available(*, deprecated, renamed: "firstDescendant")
+   public func descendant(_ map: [SearchType]) -> XCUIElement {
+      firstDescendant(map)
    }
 }
 #endif

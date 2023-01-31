@@ -3,7 +3,6 @@ import Foundation
 import XCTest
 /**
  * Tapping
- * - Fixme: ⚠️️ rename to XCUIElement+Tap?
  */
 extension XCUIElement {
    /**
