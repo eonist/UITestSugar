@@ -7,7 +7,7 @@ extension XCUIElement {
    public typealias LabelType = (type: XCUIElementType, label: String?)
    /**
     * Returns an XCUIElement for map
-    * - Note: Adds support for a `SearchType` that can be `type:id` or `type:label`
+    * - Remark: Adds support for a `SearchType` that can be `type:id` or `type:label`
     * ## Examples
     * let btn = app.firstDescendant([(type: XCUIElementType.any, id: "mainView"), (type: XCUIElementType.button, label: "actionButton")])
     * btn.tap()
@@ -145,7 +145,7 @@ extension XCUIElement {
    }
    /**
     * Finds element of a type that has a sub-element that match the provided condition
-    * - Note: This method can be a bit slow, to speed it up. try to narrow down the element it is called on etc
+    * - Remark: This method can be a bit slow, to speed it up. try to narrow down the element it is called on etc
     * - Fixme: ⚠️️ We could also make a method that has 2 condition params etc
     * app.firstDescendant(type: .cell) {
     *    $0.elementType == .textField && $0.value == "data.json"

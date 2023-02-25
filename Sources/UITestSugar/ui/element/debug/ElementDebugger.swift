@@ -13,7 +13,7 @@ public class ElementDebugger {
     * debug(query: app.scrollViews.otherElements.buttons)
     * debug(query: app.children)
     * debug(query: app.desendants)
-    * - Note: to debug descendants use the descendants call in the query
+    * - Remark: To debug descendants use the descendants call in the query
     * - Parameter query: Debug all elements of this query
     */
    public static func debug(query: XCUIElementQuery) -> String {

@@ -9,10 +9,10 @@ extension ElementModifier {
     * Return a `WebView` item for title
     * ## Examples:
     * link(app: XCUIApplication(), title: "Tweet this")
-    * - Note: you can also do things like: app.webViews.checkBoxes["id"].tap()
-    * - Note: you can also use the Accessibility Inspector.app in macos
-    * - Note: you can also enable the iOS Simulator's Accessibility Inspector
-    * - Note: you can also do: XCUIApplication().staticTexts["content"]
+    * - Remark: you can also do things like: app.webViews.checkBoxes["id"].tap()
+    * - Remark: you can also use the Accessibility Inspector.app in macos
+    * - Remark: you can also enable the iOS Simulator's Accessibility Inspector
+    * - Remark: you can also do: XCUIApplication().staticTexts["content"]
     * - Parameters:
     *   - app: A reference to the app
     *   - link: Could be the link text or id ⚠️️ testing needed

@@ -33,7 +33,7 @@ public class ElementAsserter {
    }
    /**
     * Asserts if an element exists
-    * - Note: Does not wait. Asserts immidiatly. use waitForExistence method to assert with wait
+    * - Remark: Does not wait. Asserts immidiatly. use waitForExistence method to assert with wait
     * ## Examples:
     * XCTAsserstTrue(ElementAsserter.exists(element: app.buttons[“Sign up”])) // ✅
     * - Parameter element: The element to check if exists
@@ -44,7 +44,7 @@ public class ElementAsserter {
    /**
     * Asserts if an element exists (with timeout)
     * - Description: This method can be used when you expect for an element to appear on the screen but needs to wait for something like an animation, or a video ad, or simply because of load time. This property was introduced in XCode 9, though we have used API similar to this to test features that involve waiting through video ads.
-    * - Note: This method is syncronouse. So it will wait and then call the next item once its complete
+    * - Remark: This method is syncronouse. So it will wait and then call the next item once its complete
     * - Remark: ⚠️️ Prefer the native `waitForExistance` if possible
     * ## Examples:
     * ElementAsserter.exists(element: app.buttons[“Sign up”], timeout: 10)

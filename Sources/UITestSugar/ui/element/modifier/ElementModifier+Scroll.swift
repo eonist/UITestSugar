@@ -33,8 +33,8 @@ extension ElementModifier {
 extension ElementModifier {
    /**
     * Scrolls until element is visible
-    * - Note: Try to set cells: `cell.accessibilityIdentifer = "cell \(indexPath.row)"`
-    * - Note: There is also native: `firstScrollView.scrollToElement(element: seventhChild)`
+    * - Remark: Try to set cells: `cell.accessibilityIdentifer = "cell \(indexPath.row)"`
+    * - Remark: There is also native: `firstScrollView.scrollToElement(element: seventhChild)`
     * - Parameters:
     *   - parent: The element to swipe
     *   - element: The element to swipe to
@@ -47,7 +47,7 @@ extension ElementModifier {
    }
    /**
     * Search down a scroll view until it finds a certain element (⚠️️ Beta ⚠️️)
-    * - Note: There is also: `firstScrollView.scrollToElement(element: seventhChild)`
+    * - Remark: There is also: `firstScrollView.scrollToElement(element: seventhChild)`
     * - Parameters:
     *   - element: Can be the app
     *   - id: - Fixme: ⚠️️
