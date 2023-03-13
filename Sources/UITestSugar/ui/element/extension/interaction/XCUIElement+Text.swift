@@ -82,6 +82,7 @@ extension XCUIElement {
       }
    }
 }
+#if os(macOS)
 extension XCUIElement {
    /**
     * Works for `macOS`
@@ -93,6 +94,7 @@ extension XCUIElement {
       self.typeText(text)
    }
 }
+#endif
 #endif
 // app.typeText("New text you want to enter")
 // // or use app.keys["delete"].tap() if you have keyboard enabled
