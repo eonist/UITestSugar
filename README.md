@@ -45,6 +45,7 @@ searchedElement.firstMatch.tap()
 
 ### Resources:
 - https://github.com/joemasilotti/UI-Testing-Cheat-Sheet
+- Great primer for iOS UITesting: https://medium.com/tauk-blog/fundamentals-of-xcuitest-7dcbc23c4ee
 
 ### Example: 
 When interacting with apples own UI (Example below is the Share modal iOS). Finding labels and ids in Accessibility Inspector might not be enough. In the inspector it will say label is "Activity" but in reality if you log the label its: "XCElementSnapshotPrivilegedValuePlaceholder" // This was found by doing // activityListView.descendants(type: .button, id: nil).allElementsBoundByIndex.forEach {  Swift.print("$0.label: \($0.label) $0.identifier: \($0.identifier) ") } 
@@ -62,5 +63,5 @@ Swift.print("Hierarchy: \n" + hierarchyStr)
 ```
 
 ### Todo:
-- Add github actions 👈
+- Add github actions ✅
 - Maybe add some of the method in the Kif.framework?
