@@ -1,3 +1,5 @@
+[![Tests](https://github.com/eonist/UITestSugar/actions/workflows/Tests.yml/badge.svg)](https://github.com/eonist/UITestSugar/actions/workflows/Tests.yml)
+
 # UITestSugar
 Sugar for UITesting
 
