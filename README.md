@@ -56,11 +56,16 @@ activityListView.descendants(type: .button, id: nil).allElementsBoundByIndex.for
 }
 ```
 
-Great for debugging hirarchy
+### Great for debugging hirarchy
 
 ```swift
 let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
 Swift.print("Hierarchy: \n" + hierarchyStr)
+```
+
+### Take screenshot:
+```swift
+ScreenShotMaker.makeScreenShot() // Put this line in your UITests where you want the screenshot to be taken
 ```
 
 ### Todo:
