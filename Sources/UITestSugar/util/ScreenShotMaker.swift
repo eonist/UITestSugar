@@ -21,7 +21,7 @@ private final class ScreenShotMaker {
         attachment.name = "Screenshot-\(name)-macOS.png"
         #endif
     	attachment.lifetime = .keepAlways
-    	app.add(attachment)
+    	//app.add(attachment)
 	}
 }
 #endif
