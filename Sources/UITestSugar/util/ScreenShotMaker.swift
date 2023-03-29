@@ -19,6 +19,10 @@ public final class ScreenShotMaker {
     */
    public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil) {
       let screenshot = app?.screenshot() ?? XCUIScreen.main.screenshot()
+      if screenshot == nil {
+         Swift.print("screenshot: \(String(describing: screenshot))")
+      }
+      XCTAssertNotNil(screenshot)
       // let screenshot = app.windows.firstMatch.screenshot()
       let attachment = XCTAttachment(screenshot: screenshot)
       #if os(iOS)
