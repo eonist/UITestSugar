@@ -11,13 +11,13 @@ public final class ScreenShotMaker {
     * - Note: There is a xcode gallary feature to browse screenshots see: https://stackoverflow.com/a/74678917/5389500
     * Take a screenshot of a given app and add it to the test attachements.
     * - Parameters:
-    *   - testCase: Needed to add the attachment
+    *   - testCase: Needed to add the attachment (is optional to avoid guard in caller etc)
     *   - app: The app to take a screenshot of.
     *   - name: The name of the screenshot.
     * ## Examples:
     * ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests where you want the screenshot to be taken
     */
-   @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase, app: XCUIApplication? = nil) -> XCUIScreenshot? {
+   @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil) -> XCUIScreenshot? {
       let screenshot = app?.screenshot() ?? XCUIScreen.main.screenshot()
       // let screenshot = app.windows.firstMatch.screenshot()
       let attachment = XCTAttachment(screenshot: screenshot)
@@ -27,7 +27,7 @@ public final class ScreenShotMaker {
       attachment.name = "Screenshot-\(name)-macOS.png"
       #endif
       attachment.lifetime = .keepAlways
-      testCase.add(attachment)
+      testCase?.add(attachment)
       return screenshot
    }
 }
