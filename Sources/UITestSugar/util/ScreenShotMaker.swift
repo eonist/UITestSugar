@@ -4,6 +4,7 @@ import XCTest
 
 public final class ScreenShotMaker {
    /**
+    * Screen-shot for iOS / macOS
     * - Remark: You can find screenshots in Xcode -> Report navigator -> select your test
     * - Remark: Or go to: DerivedData -> ProjectName... -> Logs -> Test -> find .xcresult -> Show Package Contents -> Attachments
     * - Remark: Or search for the file `Screenshot` in deriveddata root folder
