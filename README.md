@@ -71,3 +71,4 @@ ScreenShotMaker.makeScreenShot() // Put this line in your UITests where you want
 ### Todo:
 - Add github actions ✅
 - Maybe add some of the method in the Kif.framework?
+- UITest tap should have param to set shouldFail: true
