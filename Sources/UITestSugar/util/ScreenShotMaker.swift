@@ -10,17 +10,22 @@ public final class ScreenShotMaker {
     * - Remark: Or search for the file `Screenshot` in deriveddata root folder
     * - Note: Ref: https://stackoverflow.com/a/56345842/5389500
     * - Note: There is a xcode gallary feature to browse screenshots see: https://stackoverflow.com/a/74678917/5389500
+    * - Note: https://www.appsdeveloperblog.com/xcuiscreenshot-creating-screenshots-in-ui-test/
     * Take a screenshot of a given app and add it to the test attachements.
     * - Parameters:
     *   - testCase: Needed to add the attachment (is optional to avoid guard in caller etc)
     *   - app: The app to take a screenshot of.
     *   - name: The name of the screenshot.
+    *   - useWin: capture only window in app (relevant for macOS)
     * ## Examples:
     * ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests where you want the screenshot to be taken
     */
-   @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil) -> XCUIScreenshot? {
+   @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil, useWin: Bool = false) -> XCUIScreenshot? {
       guard let testCase = testCase else { Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil"); return nil }
-      let screenshot = app?.screenshot() ?? XCUIScreen.main.screenshot()
+      let screenshot: XCUIScreenshot = {
+         guard let app = app else { return XCUIScreen.main.screenshot() }
+         return useWin ? app.windows.firstMatch.screenshot() : app.screenshot()
+      }()
       // let screenshot = app.windows.firstMatch.screenshot()
       let attachment = XCTAttachment(screenshot: screenshot)
       #if os(iOS)
