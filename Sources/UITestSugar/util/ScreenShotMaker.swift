@@ -33,7 +33,7 @@ public final class ScreenShotMaker {
    /**
     * Screenshot app
     */
-   public static func screenShotApp(name: String, testCase: XCTestCase?, app: XCUIApplication) -> XCUIScreenshot?  {
+   @discardableResult public static func screenShotApp(name: String, testCase: XCTestCase?, app: XCUIApplication) -> XCUIScreenshot?  {
       guard let testCase = testCase else { Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil"); return nil }
       let screenshot = app.screenshot()
       testCase.add(attachment(name: name, screenshot: screenshot)) // add screenshot to test directory
