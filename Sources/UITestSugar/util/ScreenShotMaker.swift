@@ -22,13 +22,22 @@ public final class ScreenShotMaker {
     * ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests where you want the screenshot to be taken
     */
    @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil, useWin: Bool = false) -> XCUIScreenshot? {
-      if useWin {
-         guard let win: XCUIElement = app?.windows.firstMatch else { Swift.print("⚠️️ Err, ScreenShotMaker - No win"); return nil }
+      if useWin, let win = app?.windows.firstMatch {
          return screenShotWindow(name: name, testCase: testCase, window: win)
+      } else if let app: XCUIApplication = app {
+         return screenShotApp(name: name, testCase: testCase, app: app)
       } else {
-         guard let app: XCUIApplication = app else { Swift.print("Err ⚠️️ ScreenShotMaker - No app"); return nil }
-         return makeScreenShot(name: name, testCase: testCase, app: app)
+         return screenShotScreen(name: name, testCase: testCase)
       }
+   }
+   /**
+    * Screenshot screen
+    */
+   @discardableResult public static func screenShotScreen(name: String, testCase: XCTestCase?)  -> XCUIScreenshot? {
+      guard let testCase = testCase else { Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil"); return nil }
+      let screenshot = XCUIScreen.main.screenshot()
+      testCase.add(attachment(name: name, screenshot: screenshot)) // add screenshot to test directory
+      return screenshot
    }
    /**
     * Screenshot app
