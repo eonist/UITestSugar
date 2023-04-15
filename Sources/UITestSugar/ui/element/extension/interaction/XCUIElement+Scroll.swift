@@ -19,8 +19,8 @@ extension XCUIElement {
     * Scrolling (beta)
     * - Parameter element: - Fixme: ⚠️️ doc
     */
-   @discardableResult public func scrollToElement(element: XCUIElement) -> XCUIElement {
-      ElementModifier.scrollToElement(parent: self, element: element)
+   @discardableResult public func scrollToElement(element: XCUIElement, dir: ElementModifier.Direction = .up) -> XCUIElement {
+      ElementModifier.scrollToElement(parent: self, element: element, dir: dir)
       return self
    }
    /**

@@ -77,6 +77,7 @@ extension ElementModifier {
     * Scrolls to a particular element until it is rendered in the visible rect
     * - Note: https://gist.github.com/ryanmeisters/f4e961731db289f489e1a08183e334d9
     * - Note: https://stackoverflow.com/questions/32646539/scroll-until-element-is-visible-ios-ui-automation-with-xcode7
+    * - Fixme: ⚠️️ which dir?
     * - Parameters:
     *   - elememt: the element we want to scroll to
     *   - element: - Fixme: ⚠️️ doc
