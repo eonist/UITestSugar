@@ -28,42 +28,57 @@ extension XCUIElement {
       return self
    }
    /**
-    * - Description: Removes any current text in the field before typing in the new value
+    * Removes any current text in the field before typing in the new value.
+    * If the element's value is not a string, the function fails with an error message.
+    *
     * - Note: Solution found here: https://stackoverflow.com/a/59288611/5389500
-    * - Note: Interesting solution: https://stackoverflow.com/a/73847504/5389500
-    * - Parameter text: The text to enter into the field
+    * - Note: Interesting solution: https://stackoverflow.com/a/73847504/5389500 (The link is a Stack Overflow answer that provides a Swift code snippet for a function that clears the text of a UI element and enters new text into it. The function is part of an extension to the XCUIElement class, which is used for UI testing in Xcode. The answer also includes improved comments for the code snippet)
+    * 
+    * On iOS, the function double-taps the element to select all text before deleting it.
+    * On macOS, the function triple-taps the element to select all text before deleting it.
+    * 
+    * After deleting the old text, the function types in the new text.
+    * 
+    * - Parameter text: The text to enter into the field.
+    * 
     * ## Examples:
     * app.textFields["Email"].clearAndEnterText("newemail@domain.example")
     */
    public func clearAndEnterText(text: String) {
+      // Check if the element's value is a string
       guard let stringValue = self.value as? String else {
          XCTFail("⚠️️ Tried to clear and enter text into a non string value")
          return
       }
+      // Double-tap the element on iOS, triple-tap on macOS to select all text before deleting it
       #if os(iOS)
       self.tap(withNumberOfTaps: 2, numberOfTouches: 1)
       #elseif os(macOS)
       self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
       #endif
+      // Delete the old text by typing the delete key repeatedly
       let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
-      // Swift.print("deleteString.count:  \(deleteString.count)")
       self.typeText(deleteString)
-      // sleep(sec: 1)
+      // Type in the new text
       self.typeText(text)
    }
 }
+
+
 /**
  * New
  */
 extension XCUIElement {
    /**
-    * Clear and enter text
+    * Clear and enter text into a UI element
+    * - Note: This method clears the existing text in the element and enters the new text.
     * - Note: ref: https://stackoverflow.com/a/73847504/5389500
-    * - Parameter text: - Fixme: ⚠️️
+    * - Parameter text: The text to enter into the element.
     */
    public func clearAndWriteText(text: String) {
-      self.clear()
-      self.typeText(text) // "\()\n" // new line at end submits
+      self.clear() // Clear the existing text in the element.
+      self.typeText(text) // Enter the new text into the element.
+      // Note: You can add "\n" at the end of the text to submit the input.
    }
    /**
     * Removes any current text in the field before typing in the new value and submitting
