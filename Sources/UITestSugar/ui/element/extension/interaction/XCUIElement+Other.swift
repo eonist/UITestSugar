@@ -1,13 +1,11 @@
 #if canImport(XCTest)
 import Foundation
 import XCTest
-
 /**
  * Other
  * This extension provides additional convenience methods for XCUIElement.
  */
 extension XCUIElement {
-   
    /**
     * A convenient way to add some time after a call.
     * - Parameter sleepSecs: The number of seconds to sleep.
@@ -37,7 +35,9 @@ extension XCUIElement {
     * - Returns: The current XCUIElement instance.
     */
    @discardableResult public func slide(_ scalar: CGFloat) -> XCUIElement {
+      // Adjust the slider to the normalized position specified by the scalar
       self.adjust(toNormalizedSliderPosition: scalar)
+      // Return the adjusted slider element
       return self
    }
 }

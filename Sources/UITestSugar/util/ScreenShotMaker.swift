@@ -2,7 +2,7 @@ import Foundation
 #if canImport(XCTest)
 import XCTest
 /*
-This is the ScreenShotMaker class, which provides functions for taking screenshots of windows and apps and attaching them to XCTestCases.
+* This is the ScreenShotMaker class, which provides functions for taking screenshots of windows and apps and attaching them to XCTestCases.
 */
 public final class ScreenShotMaker {
    /**
@@ -88,7 +88,9 @@ public final class ScreenShotMaker {
    @discardableResult static public func screenShotWindow(name: String, testCase: XCTestCase?, window: XCUIElement) -> XCUIScreenshot? {
       // Check if the provided XCTestCase is not nil
       guard let testCase = testCase else {
+         // Print an error message indicating that the testcase is nil
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
+         // Return nil
          return nil
       }
       // Take a screenshot of the provided window
@@ -109,17 +111,14 @@ public final class ScreenShotMaker {
    fileprivate static func attachment(name: String, screenshot: XCUIScreenshot) -> XCTAttachment {
       // Create an XCTAttachment instance from the provided screenshot and name
       let attachment = XCTAttachment(screenshot: screenshot)
-      
       // Set the name of the attachment based on the platform
       #if os(iOS)
       attachment.name = "Screenshot-\(name)-\(UIDevice.current.name).png"
       #else
       attachment.name = "Screenshot-\(name)-macOS.png"
       #endif
-      
       // Set the lifetime of the attachment to keepAlways
       attachment.lifetime = .keepAlways
-      
       // Return the XCTAttachment instance of the screenshot attachment
       return attachment
    }

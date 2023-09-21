@@ -90,9 +90,13 @@ extension ElementModifier {
     * - Fixme: ⚠️️ doc. The second parameter is named `element` instead of `searchCondition`.
     */
    public static func scrollToElement(element: XCUIElement, searchCondition: ElementParser.MatchCondition) {
+      // Scroll the element until the search condition is met
       while !searchCondition(element) {
+         // Get the center coordinate of the element
          let startCoord = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+         // Get the coordinate of the element after scrolling
          let endCoord = startCoord.withOffset(CGVector(dx: 0.0, dy: -262))
+         // Press and drag the element to scroll it
          startCoord.press(forDuration: 0.01, thenDragTo: endCoord)
       }
    }

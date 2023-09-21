@@ -192,26 +192,25 @@ extension XCUIElement {
  */
 extension XCUIElement {
    /**
-    * Returns `firstDescendant` based on partial identifier
-    * - Description: Great for finding identifiers that you only have partial information about (Edge cases were the app was developed with localized ids etc, which is wrong but sometimes you have to work around it)
-    * - Remark: An alternative is that you can use `a.range(of: b) != nil` and check all ids of all elements
-    * - Remark: `.matching` finds the target, `.containing` finds a parent that has a child etc
-    * - Remark: In the future you could add more Predicate args like: https://github.com/PGSSoft/AutoMate/blob/master/AutoMate/XCTest%20extensions/XCUIElementQuery.swift
-    * - Fixme: ⚠️️ Write a method: `hasDescendant` based on this and `.containing()` call
+    * Returns the first descendant element of the current element that matches the specified partial identifier and type.
+    * This method is useful for finding elements with identifiers that you only have partial information about, such as when the app was developed with localized IDs.
+    * - Important: ⚠️️ This method uses `CONTAINS` in the predicate, which may match elements with similar but not identical identifiers.
+    * - Parameters:
+    *   - partialId: The partial identifier to search for.
+    *   - type: The type of element to search for. Defaults to `.any`.
+    * - Returns: The first descendant element of the current element that matches the specified partial identifier and type.
     * ## Example:
+    * ```
     * // The button has an id of `theBtn`
     * app.firstDescendant(partialId: "theBtn", type: .button).waitForExistence(timeout: 5) // true
     * app.firstDescendant(partialId: "heBt", type: .button).waitForExistence(timeout: 5) // true
-    * app.firstDescendant(partialId: "theBtnX", type: .button).waitForExistence(timeout: 5) (( false
-    * - Parameters:
-    *   - partialId: - Fixme: ⚠️️
-    *   - type: - Fixme: ⚠️️
+    * app.firstDescendant(partialId: "theBtnX", type: .button).waitForExistence(timeout: 5) // false
+    * ```
     */
    public func firstDescendant(partialId: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       let query = self.descendants(matching: type)
       let predicate = NSPredicate(format: "identifier CONTAINS %@", partialId) // Create a predicate that matches elements with an identifier that contains the specified partial ID
       let elementQuery: XCUIElementQuery = query.matching(predicate) // Find all descendants that match the predicate
-      // Swift.print("matches")
       return elementQuery.firstMatch // Return the first descendant that matches the predicate
    }
 }
@@ -274,6 +273,7 @@ extension XCUIElement {
     * element.firstDescendant { $0.identifier == "someBtn" }
     */
    private func firstDescendant(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
+      // Get the first descendant element of the current element that matches the specified condition and type
       self.firstDescendant(type: .any, condition)
    }
    /**
@@ -301,15 +301,19 @@ extension XCUIElement {
     * element.firstChild(type: .button) { $0.identifier == "someBtn" }
     */
    private func firstChild(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
+      // Get the first child element of the current element that matches the specified condition and type
       ElementParser.firstChild(element: self, condition: condition, type: type)
    }
    /**
+    * Returns the first child element of the current element that matches the specified condition and type.
+    * This method is a convenient shorthand for calling `firstChild(type: .any, condition)` with a closure that sets the `identifier` property of the child element.
+    * ## Examples:
     * Convenient for doing `element.firstChild { $0.identifier = "someBtn" }`
-    * - Parameter condition: - Fixme: ⚠️️
-    * - Returns: - Fixme: ⚠️️
+    * - Parameter condition: A closure that sets the `identifier` property of the child element.
+    * - Returns: The first child element of the current element that matches the specified condition and type.
     */
    private func firstChild(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      self.firstChild(type: .any, condition) // Find the first child of the element that matches the specified condition
+      self.firstChild(type: .any, condition)
    }
 }
 // deprecated ⚠️️

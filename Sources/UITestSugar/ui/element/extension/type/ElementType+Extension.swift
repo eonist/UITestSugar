@@ -102,8 +102,14 @@ extension XCUIElement.ElementType {
    * app.buttons.firstMatch.elementType.string // "button"
    */
    public var string: String {
+      // 1. Get the raw value of the element type as an integer
+      // 2. Get the corresponding element type name from the allCases array
+      // 3. Return the element type name
       ElementTypeName.allCases[Int(self.rawValue)].rawValue
    }
 }
+/**
+ * This typealias allows us to use `XCUIElementType` instead of `XCUIElement.ElementType` for brevity and readability.
+ */
 public typealias XCUIElementType = XCUIElement.ElementType
 #endif

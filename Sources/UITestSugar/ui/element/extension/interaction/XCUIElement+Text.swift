@@ -14,7 +14,9 @@ extension XCUIElement {
     * - Returns: The receiver, after typing the given `text`.
     */
    @discardableResult public func typeString(_ text: String) -> XCUIElement {
+      // Type the specified text into the element
       self.typeText(text)
+      // Return the modified element
       return self
    }
    /**
@@ -24,7 +26,9 @@ extension XCUIElement {
     * - Warning: The returned value is unused, but the function has side effects.
     */
    @discardableResult public func clearSearchFieldAndType(text: String) -> XCUIElement {
+      // Clear the search field and type the specified text
       ElementModifier.clearSearchFieldAndType(searchField: self, text: text)
+      // Return the modified element
       return self
    }
    /**
@@ -97,7 +101,6 @@ extension XCUIElement {
          // Move the cursor to the end of the text field
          let lowerRightCorner = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
          lowerRightCorner.tap()
-         
          // Delete the current text by typing the delete key repeatedly
          let delete = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
          // Swift.print("delete.count:  \(delete.count)")
@@ -115,10 +118,8 @@ extension XCUIElement {
    public func selectAllAndWrite(text: String) {
       // Tap the element to make sure it's focused.
       self.tap(waitForExistence: 5, waitAfter: 0.2)
-      
       // Select all text in the element.
       self.typeKey("a", modifierFlags: .command)
-      
       // Type the given text.
       self.typeText(text)
    }

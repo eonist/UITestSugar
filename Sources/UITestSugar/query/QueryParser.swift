@@ -140,13 +140,13 @@ public class QueryParser {
     * cells.firstMatch.tap()
     */
    public static func children(query: XCUIElementQuery, strings: [String], type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      let result: [[XCUIElement]] = strings.map { string in
-         let predicate = NSPredicate(format: "label MATCHES %@", string)
-         let elementQuery: XCUIElementQuery = query.containing(predicate)
-         let elements: [XCUIElement] = QueryParser.elements(query: elementQuery)
-         return elements
+      let result: [[XCUIElement]] = strings.map { string in // Map over each string in the array
+         let predicate = NSPredicate(format: "label MATCHES %@", string) // Create a predicate to match the string
+         let elementQuery: XCUIElementQuery = query.containing(predicate) // Create an element query with the predicate
+         let elements: [XCUIElement] = QueryParser.elements(query: elementQuery) // Get the elements matching the query
+         return elements // Return the elements
       }
-      return result.flatMap { $0 }
+      return result.flatMap { $0 } // Flatten the array of arrays and return the result
    }
 }
 #endif

@@ -90,6 +90,7 @@ public class ElementAsserter {
     * - Parameter elements: the array of elements to check if exists
     */
    public static func allExists(elements: [XCUIElement]) -> Bool {
+      // Check if any element in the array does not exist
       elements.contains { !$0.exists }
    }
    /**

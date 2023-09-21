@@ -15,6 +15,7 @@ extension ElementModifier {
     * pick(pickerWheel: ElementParser.firstElement(query:  app.pickerWheels, identifier: "first picker", type:.picker), value: "Picker Wheel Item Title")
     */
    public static func pick(pickerWheel: XCUIElement, value: String) {
+      // Adjust the picker wheel to the specified value
       pickerWheel.adjust(toPickerWheelValue: value)
    }
 }

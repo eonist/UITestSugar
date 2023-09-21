@@ -6,15 +6,10 @@ import XCTest
 public class QueryHelper {
    /**
     * Returns an array of all hittable descendants of a given query.
-    *
     * This function searches for all descendants of a query that are hittable, and returns them as an array.
-    *
     * - Important: ⚠️️ This function uses `element(boundBy:)`, which may not work with waiter calls.
-    *
     * - Parameter query: The query to search for hittable descendants. This can be a single element, or a collection of children or descendants.
-    *
     * - Returns: An array of all hittable descendants found in the query.
-    *
     * ## Example:
     * ```
     * hittableElements(query: app.descendants(matching: .any)).count // n

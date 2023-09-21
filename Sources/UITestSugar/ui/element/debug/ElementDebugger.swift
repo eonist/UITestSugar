@@ -103,8 +103,14 @@ public class ElementDebugger {
  * Extension
  */
 extension Array where Element: XCUIElement {
+   /**
+    * Generates a debug string for the current element and its descendants.
+    * This method calls the `debug` method of the `ElementDebugger` class to generate a debug string for the elements.
+    * - Returns: A debug string for the current element and its descendants.
+    */
    public func debug() -> String {
-      ElementDebugger.debug(elements: self)
+      // Call the `debug` method of the `ElementDebugger` class to generate a debug string for the elements
+      return ElementDebugger.debug(elements: self)
    }
 }
 #endif
