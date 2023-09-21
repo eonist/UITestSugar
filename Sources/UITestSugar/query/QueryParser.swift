@@ -3,39 +3,54 @@ import Foundation
 import XCTest
 
 public class QueryParser {
-   /**
-    * Returns first element by identifier
-    * ## Examples:
-    * firstElement(query: app.descendants(matching: .any), identifier: "Featured Playlists-View all")
-    * firstElement(query: app.scrollViews.descendants(matching: .any), id: "leftAlignedIconButton", type: .button)
-    * - Parameters:
-    *   - type: .other (UIView), .cell (UICollectionViewCell or UITableViewCell), .button (UIButton)
-    *   - id: The accessibility identifier
-    *   - query: The query to target
-    */
+  /**
+   * Returns the first element that matches the given identifier in the provided query.
+   * 
+   * ## Examples:
+   * 
+   * // Returns the first element with accessibility identifier "Featured Playlists-View all" in any descendant view of `app`
+   * firstElement(query: app.descendants(matching: .any), identifier: "Featured Playlists-View all")
+   * 
+   * // Returns the first button with accessibility identifier "leftAlignedIconButton" in any descendant scroll view of `app`
+   * firstElement(query: app.scrollViews.descendants(matching: .any), id: "leftAlignedIconButton", type: .button)
+   * 
+   * - Parameters:
+   *   - type: The type of element to search for. Valid values are `.other` (UIView), `.cell` (UICollectionViewCell or UITableViewCell), and `.button` (UIButton).
+   *   - identifier: The accessibility identifier to search for.
+   *   - query: The query to target.
+   * - Returns: The first element that matches the given identifier and type in the provided query, or `nil` if no such element is found.
+   */
    public static func firstElement(query: XCUIElementQuery, id: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
       query.element(matching: type, identifier: id).firstMatch
    }
    /**
-    * Returns element of `ElementType
-    * - Parameters:
-    *   - type: .button, .scrollBar, .checkButton etc
-    *   - query: The query to target
-    * ## Example:
-    * app.element(query: app.children, type: .button)
-    */
+   * Returns the first element of the specified type in the provided query.
+   * 
+   * - Parameters:
+   *   - type: The type of element to search for. Valid values are `.button`, `.scrollBar`, `.checkButton`, and so on.
+   *   - query: The query to target.
+   * - Returns: The first element of the specified type in the provided query, or `nil` if no such element is found.
+   *
+   * ## Example:
+   * // Returns the first button element in any descendant view of `app`
+   * app.element(query: app.descendants(matching: .any), type: .button)
+   */
    public static func firstElement(query: XCUIElementQuery, type: XCUIElement.ElementType) -> XCUIElement {
       query.children(matching: type).element
    }
    /**
     * Beta ⚠️️
-    * ## Example:
-    * let firstElement = app.firstElement(query: app.children, labels: ["Sugar", "500 g"]).first?.element
-    * firstElement.tap()
-    * - Parameters:
-    *   - query: The query to target
-    *   - labels: Labels to search for
-    */
+   * Returns an array of elements that match the provided labels in the given query.
+   * 
+   * ## Example:
+   * // Returns an array of elements with labels "Sugar" and "500 g" in any child view of `app`
+   * let elements = app.firstElement(query: app.children, labels: ["Sugar", "500 g"])
+   * 
+   * - Parameters:
+   *   - query: The query to target.
+   *   - labels: The labels to search for.
+   * - Returns: An array of elements that match the provided labels in the given query.
+   */
    public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
       labels.map { label in
          // ⚠️️ used to be CONTAINS, but thats partial and not exact etc
@@ -43,39 +58,58 @@ public class QueryParser {
       }.compactMap { $0 }.first?.element
    }
    /**
-    * Find the first match that has a lable
+    * Finds the first element in the provided query that has the specified label and taps it.
+    * - Note: The link bellow is a blog post on the Realm Academy website titled "NSPredicate Cheatsheet". The post provides a comprehensive guide to using NSPredicate, which is a class used to define logical conditions used to constrain searches through collections of objects. The cheatsheet covers a wide range of topics, including basic syntax, comparison operators, compound predicates, and more advanced topics such as regular expressions and block predicates. The post is a useful resource for iOS developers who want to learn more about using NSPredicate in their apps.
     * - Note: ref https://academy.realm.io/posts/nspredicate-cheatsheet/
     * ## Examples:
-    * firstElement(app.descendants().buttons, label: "Edit list").tap(waitForExistance: 5)
+    * // Finds the first button element with label "Edit list" in any descendant view of `app` and taps it, waiting up to 5 seconds for the element to appear
+    * firstElement(app.descendants().buttons, label: "Edit list").tap(waitForExistence: 5)
+    * 
     * - Parameters:
-    *   - query: The query to target
-    *   - label: Label to search for
+    *   - query: The query to target.
+    *   - label: The label to search for.
     */
    public static func firstElement(_ query: XCUIElementQuery, label: String) -> XCUIElement {
       // ⚠️️ Used to be CONTAINS, but thats partial and not exact etc
       query.containing(NSPredicate(format: "label MATCHES %@", label)).firstMatch
    }
    /**
-    * Element for title
+    * Returns the first element in the given query that has a title matching the specified string.
+    * 
+    * - Parameter query: The query to search within.
+    * - Parameter title: The title to match against.
+    * - Returns: The first matching element, or nil if no matches were found.
     */
    public static func firstElement(_ query: XCUIElementQuery, title: String) -> XCUIElement {
       query.containing(NSPredicate(format: "title MATCHES %@", title)).firstMatch
    }
    /**
-    * Element for value
+    * Returns the first element in the given query that has a value matching the specified string.
+    * 
+    * - Parameter query: The query to search within.
+    * - Parameter value: The value to match against.
+    * - Returns: The first matching element, or nil if no matches were found.
     */
    public static func firstElement(_ query: XCUIElementQuery, value: String) -> XCUIElement {
       query.containing(NSPredicate(format: "value MATCHES %@", value)).firstMatch
    }
    /**
-    * Returns elements in query
-    * - Important: ⚠️️ you can use the native: `.allElementsBoundByIndex`, there is also one for only items with accessibility
+    * Returns an array of elements that match the specified query and type.
+    * 
+    * - Important: ⚠️️ You can use the native `.allElementsBoundByIndex` method or `XCUIApplication.init().children(matching: .button)` instead of this method.
     * - Important: ⚠️️ you can use the native: `XCUIApplication.init().children(matching: .button)` instead of this method
+    *
     * - Parameters:
-    *   - query: the search query to match parent element
-    *   - type: Filter against a speccific type to get a more presice result
+    *   - query: The query to search within.
+    *   - type: The type of element to filter against.
+    * 
+    * - Returns: An array of elements that match the specified query and type.
+    * 
     * ## Example:
-    * QueryParser.elements(query: app.children, type: .button)
+    * ```
+    * let app = XCUIApplication()
+    * let buttons = QueryParser.elements(query: app.children, type: .button)
+    * ```
     */
    public static func elements(query: XCUIElementQuery, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
       (0..<query.count).indices.map { i in
@@ -83,16 +117,23 @@ public class QueryParser {
       }
    }
    /**
-    * Find element that has either of the labels provided in strings parameter
+    * Returns an array of elements that match the specified query and have labels matching any of the provided strings.
+    * 
     * - Parameters:
-    *   - query: The query to target
-    *   - strings: The strings to match against
-    *   - type: Filter against a speccific type
-    * ## Examples:
+    *   - query: The query to target.
+    *   - strings: The strings to match against.
+    *   - type: The type of element to filter against.
+    * 
+    * - Returns: An array of elements that match the specified query and have labels matching any of the provided strings.
+    * 
+    * ## Example:
+    * ```
     * let app = XCUIApplication()
-    * let element: AppParser.filterElements(query: app.children, strings: ["Sugar", "500 g"], type: .any).element
-    * element.exists // true , false
-    * element.first.tap()
+    * let elements = QueryParser.children(query: app.children, strings: ["Sugar", "500 g"], type: .any)
+    * let element = elements.first // get the first matching element
+    * element?.exists // true or false
+    * element?.tap()
+    *
     * // Cell example
     * let cells = AppParser.children(query: app.children, strings: "Sugar", "500 g", .cells).element
     * cells.exists // true , false
@@ -100,13 +141,12 @@ public class QueryParser {
     */
    public static func children(query: XCUIElementQuery, strings: [String], type: XCUIElement.ElementType = .any) -> [XCUIElement] {
       let result: [[XCUIElement]] = strings.map { string in
-         // ⚠️️ used to be CONTAINS, but thats partial and not exact etc
          let predicate = NSPredicate(format: "label MATCHES %@", string)
          let elementQuery: XCUIElementQuery = query.containing(predicate)
          let elements: [XCUIElement] = QueryParser.elements(query: elementQuery)
          return elements
       }
-      return result.flatMap { $0 } // ⚠️️ Seems odd that flatmap cant be applied to strings, but somehow it wont work etc
+      return result.flatMap { $0 }
    }
 }
 #endif

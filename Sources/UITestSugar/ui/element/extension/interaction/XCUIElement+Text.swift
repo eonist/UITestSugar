@@ -6,17 +6,22 @@ import XCTest
  */
 extension XCUIElement {
    /**
-    * Same as typeText, but returns self for chaining calls
+    * Types the given `text` into the receiver and returns the receiver for chaining calls.
+    * This method is equivalent to `typeText`, but returns the receiver instead of `Void`.
+    * - Note: Same as typeText, but returns self for chaining calls
     * - Remark: We can't use `typeText` as it's a native call
-    * - Parameter text: - Fixme: ⚠️️ doc
+    * - Parameter text: The text to type into the receiver.
+    * - Returns: The receiver, after typing the given `text`.
     */
    @discardableResult public func typeString(_ text: String) -> XCUIElement {
       self.typeText(text)
       return self
    }
    /**
-    * Clear `SearchField` and type
-    * - Parameter text: - Fixme: ⚠️️ doc
+    * Clears the given search field and types the provided text.
+    * - Parameter text: The text to be typed in the search field.
+    * - Returns: The `XCUIElement` representing the search field.
+    * - Warning: The returned value is unused, but the function has side effects.
     */
    @discardableResult public func clearSearchFieldAndType(text: String) -> XCUIElement {
       ElementModifier.clearSearchFieldAndType(searchField: self, text: text)
