@@ -91,13 +91,10 @@ public final class ScreenShotMaker {
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
          return nil
       }
-      
       // Take a screenshot of the provided window
       let screenshot = window.screenshot()
-      
       // Add the screenshot as an attachment to the provided XCTestCase
       testCase.add(attachment(name: name, screenshot: screenshot)) // add screenshot to test directory
-      
       // Return the XCUIScreenshot instance of the screenshot taken
       return screenshot
    }

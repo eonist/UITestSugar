@@ -2,28 +2,32 @@
 import Foundation
 import XCTest
 /**
- * Assert
+ * Provides assertion methods for checking the visibility and existence of UI elements in a UI testing framework like XCUITest.
  */
 extension XCUIElement {
    /**
-    * Asert if exists and is visible in window
-    * - Caution: ⚠️️ in some cases its visible but may be under neat something and thus isHittable returns false.
-    * - Parameter timeOut: - Fixme: ⚠️️
+    * Asserts if the element exists and is visible in the window.
+    * - Caution: ⚠️️ In some cases, the element may be visible but may be underneath something else, causing `isHittable` to return false.
+    * - Parameter timeOut: The maximum amount of time to wait for the element to become visible.
+    * - Returns: `true` if the element exists and is visible within the specified timeout, `false` otherwise.
     */
    public func doesExistAndIsVisible(timeOut: Double) -> Bool {
       ElementAsserter.existsAndVisible(element: self, timeout: timeOut)
    }
    /**
-    * Asserts if an item is visible
+    * Asserts if the element is currently visible on the screen.
+    * - Returns: `true` if the element is visible, `false` otherwise.
     */
    public var isVisible: Bool { ElementAsserter.isVisibleInWindow(element: self) }
    /**
-    * Indicates if the element is currently visible on the screen
+    * Asserts if the element exists and is currently hittable.
+    * - Returns: `true` if the element exists and is hittable, `false` otherwise.
     */
    public var existsAndIsHittable: Bool { ElementAsserter.existsAndIsHittable(element: self) }
    /**
-    * - Note: Used for UISwitch ref: https://stackoverflow.com/questions/44222966/from-an-xcuitest-how-can-i-check-the-on-off-state-of-a-uiswitch
-    * XCTAssert(activationSwitch.isOn == true)
+    * Returns the state of a `UISwitch` element.
+    * - Note: This property is useful for checking the state of a `UISwitch` element in a UI testing scenario.
+    * - Returns: `true` if the switch is on, `false` otherwise.
     */
    public var isOn: Bool {
       (value as? String) == "1"

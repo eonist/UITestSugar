@@ -4,55 +4,85 @@ import XCTest
 
 public class ElementAsserter {
    /**
-    * Asserts if item exists in the UI-hierarchy and if it's visible with the window-frame (⚠️️ Beta ⚠️️)
+    * Asserts if an item exists in the UI hierarchy and if it's visible with the window frame.
     * - Parameters:
-    *   - element: The element to assert if exisit and is visible
-    *   - timout: The duration to wait before failing and returning false
+    *   - element: The element to assert if it exists and is visible.
+    *   - timeout: The duration to wait before failing and returning false.
+    * - Remark: This function waits for the specified element to exist in the UI hierarchy and checks if it's visible with the window frame. If the element exists and is visible, this function returns true. If the element doesn't exist or isn't visible, this function returns false.
+    * - Remark: This function is useful for asserting the existence and visibility of UI elements in UI testing. You can use it to ensure that the UI elements in your app are present and visible to the user.
+    * ## Example:
+    * let app = XCUIApplication()
+    * let button = app.buttons["myButton"]
+    * XCTAssertTrue(ElementAsserter.existsAndVisible(element: button, timeout: 5))
     */
    public static func existsAndVisible(element: XCUIElement, timeout: Double) -> Bool {
-      element.waitForExistence(timeout: timeout) && isVisibleInWindow(element: element)
+      // Wait for the specified element to exist in the UI hierarchy
+      let exists = element.waitForExistence(timeout: timeout)
+      // Check if the element is visible with the window frame
+      let visible = isVisibleInWindow(element: element)
+      // Return true if the element exists and is visible, false otherwise
+      return exists && visible
    }
    /**
-    * Asserts if an element is visible on screen (⚠️️ Beta ⚠️️)
-    * ## Examples:
-    * isVisibleInWindow(element: app) // true / false
-    * - Parameter element: The element to assert if is visible in window
+    * Asserts if an element is visible on screen.
+    * - Parameter element: The element to assert if it's visible in the window.
+    * - Remark: This function checks if the specified element exists and has a non-empty frame. If the element exists and has a non-empty frame, this function checks if the element's frame is contained within the frame of the main window. If the element's frame is contained within the frame of the main window, this function returns true. If the element doesn't exist, has an empty frame, or its frame isn't contained within the frame of the main window, this function returns false.
+    * - Remark: This function is useful for asserting the visibility of UI elements in UI testing. You can use it to ensure that the UI elements in your app are visible to the user.
+    * ## Example:
+    * let app = XCUIApplication()
+    * let button = app.buttons["myButton"]
+    * XCTAssertTrue(ElementAsserter.isVisibleInWindow(element: button))
     */
-   public static func isVisibleInWindow(element: XCUIElement) -> Bool { // was named visible
+   public static func isVisibleInWindow(element: XCUIElement) -> Bool {
+      // Check if the element exists and has a non-empty frame
       guard element.exists && !element.frame.isEmpty else { return false }
+      
+      // Check if the element's frame is contained within the frame of the main window
       return XCUIApplication().windows.element(boundBy: 0).frame.contains(element.frame)
    }
    /**
-    * Indicates if the element is currently visible on the screen (⚠️️ Beta ⚠️️)
-    * ## Examples: XCTAssertTrue(app.buttons.element.isVisible) // ✅
-    * - Important: ⚠️️ When accessing properties of `XCUIElement`, `XCTest` works differently than in a case of actions on elements, there is no waiting for the app to idle and to finish all animations., This can lead to problems and test flakiness as the test will evaluate a query before e.g. view transition has been completed.
-    * - Parameter element: Checks if the element exists and isHittable
+    * Checks if an element exists and is hittable.
+    * - Parameter element: The element to check if it exists and is hittable.
+    * - Remark: This function checks if the specified element exists and is hittable. If the element exists and is hittable, this function returns true. If the element doesn't exist or isn't hittable, this function returns false.
+    * - Remark: This function is useful for checking the existence and hittability of UI elements in UI testing. You can use it to ensure that the UI elements in your app are present and can be interacted with by the user.
+    * ## Example:
+    * let app = XCUIApplication()
+    * let button = app.buttons["myButton"]
+    * XCTAssertTrue(ElementAsserter.existsAndIsHittable(element: button))
     */
    public static func existsAndIsHittable(element: XCUIElement) -> Bool {
-      element.exists && element.isHittable
+      // Check if the element exists and is hittable
+      return element.exists && element.isHittable
    }
    /**
-    * Asserts if an element exists
-    * - Remark: Does not wait. Asserts immidiatly. use waitForExistence method to assert with wait
-    * ## Examples:
-    * XCTAsserstTrue(ElementAsserter.exists(element: app.buttons[“Sign up”])) // ✅
-    * - Parameter element: The element to check if exists
+    * Asserts if an element exists.
+    * - Remark: This function checks if the specified element exists. If the element exists, this function returns true. If the element doesn't exist, this function returns false.
+    * - Remark: This function is useful for checking the existence of UI elements in UI testing. You can use it to ensure that the UI elements in your app are present and can be interacted with by the user.
+    * ## Example:
+    * let app = XCUIApplication()
+    * let button = app.buttons["myButton"]
+    * XCTAssertTrue(ElementAsserter.exists(element: button))
     */
    public static func exists(element: XCUIElement) -> Bool {
-      element.exists
+      // Check if the element exists
+      return element.exists
    }
    /**
-    * Asserts if an element exists (with timeout)
-    * - Description: This method can be used when you expect for an element to appear on the screen but needs to wait for something like an animation, or a video ad, or simply because of load time. This property was introduced in XCode 9, though we have used API similar to this to test features that involve waiting through video ads.
-    * - Remark: This method is syncronouse. So it will wait and then call the next item once its complete
-    * - Remark: ⚠️️ Prefer the native `waitForExistance` if possible
-    * ## Examples:
-    * ElementAsserter.exists(element: app.buttons[“Sign up”], timeout: 10)
+    * Asserts if an element exists (with timeout).
+    * - Description: This method can be used when you expect an element to appear on the screen but need to wait for something like an animation, a video ad, or simply because of load time. This property was introduced in Xcode 9, though we have used API similar to this to test features that involve waiting through video ads.
+    * - Remark: This method is synchronous. It waits for the specified element to exist in the UI hierarchy and returns true if the element exists within the specified timeout. If the element doesn't exist within the specified timeout, this method returns false.
+    * - Remark: ⚠️️ Prefer the native `waitForExistence` if possible.
     * - Parameters:
-    *   - element: The element to check if exists
-    *   - timeout: the amount of wating until it fails
+    *   - element: The element to check if it exists.
+    *   - timeout: The duration to wait before failing and returning false.
+    * - Returns: A boolean value that indicates whether the element exists within the specified timeout.
+    * ## Examples:
+    * let app = XCUIApplication()
+    * let button = app.buttons["myButton"]
+    * XCTAssertTrue(ElementAsserter.exists(element: button, timeout: 5))
     */
    public static func exists(element: XCUIElement, timeout: Double) -> Bool {
+      // Wait for the specified element to exist in the UI hierarchy
       element.waitForExistence(timeout: timeout)
    }
    /**
@@ -63,26 +93,35 @@ public class ElementAsserter {
       elements.contains { !$0.exists }
    }
    /**
-    * Asserts if an element has a speccific text
-    * - Remark: ⚠️️ Doesn't always work with `macOS`
-    * ## Examples
-    * hasText(element: app.alerts.element,"Please enter a valid email address")
-    * - Parameters:
-    *   - element: The element to assert if has text
-    *   - text: The text to assert if exists
+    * Asserts if an element has a specific text.
+    * - Remark: This function checks if the specified element has the specified text. If the element has the specified text, this function returns true. If the element doesn't have the specified text, this function returns false.
+    * - Remark: This function is useful for asserting the text of UI elements in UI testing. You can use it to ensure that the UI elements in your app have the correct text and are accessible to users.
+    * - Remark: ⚠️️ This function doesn't always work with `macOS`.
+    * ## Example:
+    * let app = XCUIApplication()
+    * let alert = app.alerts.element
+    * XCTAssertTrue(ElementAsserter.hasText(element: alert, text: "Please enter a valid email address"))
     */
    public static func hasText(element: XCUIElement, text: String) -> Bool {
-      element.staticTexts[text].exists
+      // Check if the specified element has the specified text
+      return element.staticTexts[text].exists
    }
    /**
-    * Has label
+    * Checks if an element has a label.
     * - Parameters:
-    *   - element: - Fixme: ⚠️️
-    *   - text: - Fixme: ⚠️️
-    *   - type: - Fixme: ⚠️️
+    *   - element: The element to check if it has a label.
+    *   - text: The label text to check for.
+    *   - type: The element type to check for.
+    * - Remark: This function checks if the specified element has a label with the specified text and type. If the element has a label with the specified text and type, this function returns true. If the element doesn't have a label with the specified text and type, this function returns false.
+    * - Remark: This function is useful for checking the label of UI elements in UI testing. You can use it to ensure that the UI elements in your app have the correct labels and are accessible to users with visual impairments.
+    * ## Example:
+    * let app = XCUIApplication()
+    * let button = app.buttons["myButton"]
+    * XCTAssertTrue(ElementAsserter.hasLabel(element: button, text: "My Button", type: .button))
     */
    public static func hasLabel(element: XCUIElement, text: String, type: XCUIElementType) -> Bool {
-      element.firstDescendant(label: text, type: type).exists
+      // Check if the specified element has a label with the specified text and type
+      return element.firstDescendant(label: text, type: type).exists
    }
 }
 #endif
