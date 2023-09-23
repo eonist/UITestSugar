@@ -12,10 +12,11 @@ extension XCUIElement {
     * - Returns: The current XCUIElement instance.
     */
    @discardableResult public func wait(after sleepSecs: Double) -> XCUIElement {
+      // Sleep for the specified number of seconds
       sleep(sec: sleepSecs)
+      // Return the modified element
       return self
    }
-   
    /**
     * Checks if an item exists and is hittable. If it's not hittable, then the app is tapped so that the tooltip goes away.
     * - Returns: The current XCUIElement instance.
@@ -27,7 +28,6 @@ extension XCUIElement {
       }
       return self
    }
-   
    /**
     * Same as adjust, but returns self for chaining calls.
     * - Remark: We can't use adjust as it's a native call.
@@ -35,10 +35,8 @@ extension XCUIElement {
     * - Returns: The current XCUIElement instance.
     */
    @discardableResult public func slide(_ scalar: CGFloat) -> XCUIElement {
-      // Adjust the slider to the normalized position specified by the scalar
-      self.adjust(toNormalizedSliderPosition: scalar)
-      // Return the adjusted slider element
-      return self
+      self.adjust(toNormalizedSliderPosition: scalar) // Adjust the slider to the normalized position specified by the scalar
+      return self // Return the adjusted slider element
    }
 }
 #endif

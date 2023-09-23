@@ -42,6 +42,12 @@ public final class ScreenShotMaker {
     *   - name: The name of the screenshot file.
     *   - testCase: The XCTestCase instance that the screenshot will be attached to.
     * - Returns: An XCUIScreenshot instance representing the screenshot taken.
+    *
+    * Example usage:
+    * ```
+    * let screenshot = ScreenShotMaker.screenShotScreen(name: "myScreenshot", testCase: self)
+    * XCTAssertNotNil(screenshot)
+    * ```
     */
    @discardableResult public static func screenShotScreen(name: String, testCase: XCTestCase?)  -> XCUIScreenshot? {
       // Make sure that the testCase parameter is not nil
@@ -57,12 +63,20 @@ public final class ScreenShotMaker {
       return screenshot
    }
    /**
-    * This function takes a screenshot of the provided app and saves it as an attachment to the provided XCTestCase.
+    * Takes a screenshot of the provided app and saves it as an attachment to the provided XCTestCase.
     * - Parameters:
     *   - name: The name of the screenshot attachment.
     *   - testCase: The XCTestCase to which the screenshot attachment should be added.
     *   - app: The XCUIApplication instance to be screenshot.
     * - Returns: The XCUIScreenshot instance of the screenshot taken.
+    *
+    * Example usage:
+    * ```
+    * let app = XCUIApplication()
+    * app.launch()
+    * let screenshot = ScreenShotMaker.screenShotApp(name: "myScreenshot", testCase: self, app: app)
+    * XCTAssertNotNil(screenshot)
+    * ```
     */
    @discardableResult public static func screenShotApp(name: String, testCase: XCTestCase?, app: XCUIApplication) -> XCUIScreenshot?  {
       // Check if the provided XCTestCase is not nil

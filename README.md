@@ -1,14 +1,12 @@
 [![Tests](https://github.com/eonist/UITestSugar/actions/workflows/Tests.yml/badge.svg)](https://github.com/eonist/UITestSugar/actions/workflows/Tests.yml)
 [![codebeat badge](https://codebeat.co/badges/ab6aca0b-c9eb-486a-8209-6b0113840e0c)](https://codebeat.co/projects/github-com-eonist-uitestsugar-master)
 
-
 # UITestSugar
 Sugar for UITesting
 
 ### Brief overview of what UITestSugar
 
 UITestSugar is a library that provides a set of utilities and extensions for UI testing in iOS. It can be used to simplify and streamline the process of writing UI tests, making it easier to find and interact with UI elements in your app. With UITestSugar, you can write more effective and efficient UI tests, reducing the time and effort required to test your app's user interface.
-
 
 ### How do I get it
 - SPM: `"https://github.com/eonist/UITestSugar"`
@@ -74,6 +72,12 @@ Swift.print("Hierarchy: \n" + hierarchyStr)
 ```swift
 ScreenShotMaker.makeScreenShot() // Put this line in your UITests where you want the screenshot to be taken
 ```
+
+### More advance screenshots:
+```swift
+ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests where you want the screenshot to be taken
+```
+
 
 ### Installation
 

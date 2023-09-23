@@ -42,17 +42,17 @@ extension MainView {
     * Creates button
     */
    func createButton() -> UIButton {
-      let btn: UIButton = .init(type: .system)
-      btn.backgroundColor = .gray
-      btn.setTitle("Button", for: .normal)
-      btn.setTitleColor(.black, for: .normal)
-      btn.titleLabel?.textAlignment = .center
-      btn.titleLabel?.font =  .systemFont(ofSize: 12)
-      btn.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-      btn.addTarget(self, action: #selector(buttonTouched), for: .touchUpInside)
-      btn.accessibilityIdentifier = "theBtn"
-      self.addSubview(btn)
-      return btn
+      let btn: UIButton = .init(type: .system) // Create a new UIButton instance with the specified type
+      btn.backgroundColor = .gray // Set the background color of the button
+      btn.setTitle("Button", for: .normal) // Set the title of the button for the normal state
+      btn.setTitleColor(.black, for: .normal) // Set the title color of the button for the normal state
+      btn.titleLabel?.textAlignment = .center // Set the text alignment of the button's title label
+      btn.titleLabel?.font =  .systemFont(ofSize: 12) // Set the font of the button's title label
+      btn.frame = CGRect(x: 0, y: 0, width: 100, height: 50) // Set the frame of the button
+      btn.addTarget(self, action: #selector(buttonTouched), for: .touchUpInside) // Add a target and action for the button
+      btn.accessibilityIdentifier = "theBtn" // Set the accessibility identifier of the button
+      self.addSubview(btn) // Add the button as a subview of the current view
+      return btn // Return the button instance
    }
    @objc func buttonTouched(sender: UIButton) {
       Swift.print("It Works!!!")

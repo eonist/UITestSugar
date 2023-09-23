@@ -13,7 +13,6 @@ extension XCUIElement {
    * - Fixme: ⚠️️ Make this not require result.
    * - Parameter timeOut: The maximum amount of time to wait for the element to appear, in seconds. Defaults to 5 seconds.
    * - Returns: `true` if the element appears within the specified time, `false` otherwise.
-   * 
    * ## Example:
    * ```
    * let app = XCUIApplication()
@@ -40,7 +39,9 @@ extension XCUIElement {
    * ```
    */
    public func waitToAppear(_ timeOut: Double = 5) -> XCUIElement? {
+      // Wait for the element to appear within the provided timeout
       _ = QueryAsserter.waitForElementToAppear(element: self, timeOut: timeOut)
+      // Return the modified element
       return self
    }
 }

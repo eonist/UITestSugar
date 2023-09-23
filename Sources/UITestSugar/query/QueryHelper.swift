@@ -1,8 +1,8 @@
 #if canImport(XCTest)
 import XCTest
 /**
- A utility class that provides helper methods for working with `XCUIElementQuery` objects.
-*/
+ * A utility class that provides helper methods for working with `XCUIElementQuery` objects.
+ */
 public class QueryHelper {
    /**
     * Returns an array of all hittable descendants of a given query.

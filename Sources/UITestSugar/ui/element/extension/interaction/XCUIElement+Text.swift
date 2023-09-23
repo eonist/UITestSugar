@@ -14,10 +14,8 @@ extension XCUIElement {
     * - Returns: The receiver, after typing the given `text`.
     */
    @discardableResult public func typeString(_ text: String) -> XCUIElement {
-      // Type the specified text into the element
-      self.typeText(text)
-      // Return the modified element
-      return self
+      self.typeText(text) // Type the specified text into the element
+      return self// Return the modified element
    }
    /**
     * Clears the given search field and types the provided text.
@@ -26,25 +24,18 @@ extension XCUIElement {
     * - Warning: The returned value is unused, but the function has side effects.
     */
    @discardableResult public func clearSearchFieldAndType(text: String) -> XCUIElement {
-      // Clear the search field and type the specified text
-      ElementModifier.clearSearchFieldAndType(searchField: self, text: text)
-      // Return the modified element
-      return self
+      ElementModifier.clearSearchFieldAndType(searchField: self, text: text) // Clear the search field and type the specified text
+      return self // Return the modified element
    }
    /**
     * Removes any current text in the field before typing in the new value.
     * If the element's value is not a string, the function fails with an error message.
-    *
     * - Note: Solution found here: https://stackoverflow.com/a/59288611/5389500
     * - Note: Interesting solution: https://stackoverflow.com/a/73847504/5389500 (The link is a Stack Overflow answer that provides a Swift code snippet for a function that clears the text of a UI element and enters new text into it. The function is part of an extension to the XCUIElement class, which is used for UI testing in Xcode. The answer also includes improved comments for the code snippet)
-    * 
     * On iOS, the function double-taps the element to select all text before deleting it.
     * On macOS, the function triple-taps the element to select all text before deleting it.
-    * 
     * After deleting the old text, the function types in the new text.
-    * 
     * - Parameter text: The text to enter into the field.
-    * 
     * ## Examples:
     * app.textFields["Email"].clearAndEnterText("newemail@domain.example")
     */
@@ -93,7 +84,6 @@ extension XCUIElement {
          XCTFail("Tried to clear and enter text into a non string value")
          return
       }
-      
       // Repeatedly delete text as long as there is something in the text field.
       // This is required to clear text that does not fit in to the textfield and is partially hidden initially.
       // It's important to check for the placeholder value, otherwise it gets into an infinite loop.
@@ -116,12 +106,9 @@ extension XCUIElement {
     * - Parameter text: The text to type.
     */
    public func selectAllAndWrite(text: String) {
-      // Tap the element to make sure it's focused.
-      self.tap(waitForExistence: 5, waitAfter: 0.2)
-      // Select all text in the element.
-      self.typeKey("a", modifierFlags: .command)
-      // Type the given text.
-      self.typeText(text)
+      self.tap(waitForExistence: 5, waitAfter: 0.2) // Tap the element to make sure it's focused.
+      self.typeKey("a", modifierFlags: .command) // Select all text in the element.
+      self.typeText(text) // Type the given text.
    }
 }
 #endif // end if for macos

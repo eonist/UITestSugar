@@ -13,10 +13,8 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func scrollTo(dir: ElementModifier.Direction, searchCondition: ElementParser.MatchCondition) -> XCUIElement {
-      // Scroll the element in the specified direction until the search condition is met
-      ElementModifier.scrollTo(element: self, dir: dir, searchCondition: searchCondition)
-      // Return the modified element
-      return self
+      ElementModifier.scrollTo(element: self, dir: dir, searchCondition: searchCondition)// Scroll the element in the specified direction until the search condition is met
+      return self// Return the modified element
    }
    /**
     * Scrolls the parent element until the specified child element is visible.
@@ -26,10 +24,8 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func scrollToElement(element: XCUIElement, dir: ElementModifier.Direction = .up) -> XCUIElement {
-      // Scroll the parent element in the specified direction until the child element is visible
-      ElementModifier.scrollToElement(parent: self, element: element, dir: dir)
-      // Return the modified element
-      return self
+      ElementModifier.scrollToElement(parent: self, element: element, dir: dir) // Scroll the parent element in the specified direction until the child element is visible
+      return self // Return the modified element
    }
    /**
     * Scrolls the element until the search condition is met.
@@ -37,10 +33,8 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func scrollTo(searchCondition: ElementParser.MatchCondition) -> XCUIElement {
-      // Scroll the element in the specified direction until the search condition is met
-      ElementModifier.scrollToElement(element: self, searchCondition: searchCondition)
-      // Return the modified element
-      return self
+      ElementModifier.scrollToElement(element: self, searchCondition: searchCondition) // Scroll the element in the specified direction until the search condition is met
+      return self // Return the modified element
    }
 }
 #endif

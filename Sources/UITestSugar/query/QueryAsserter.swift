@@ -17,16 +17,11 @@ public class QueryAsserter {
     * - Fixme: ⚠️️ write example
     */
    public static func waitFor(app: XCUIApplication, testCase: XCTestCase, labelString: String, timeOut: Double = 5) {
-      // Get the XCUIElement instance of the label with the provided string
-      let label = app.staticTexts[labelString]
-      // Create a predicate to check if the label exists
-      let exists = NSPredicate(format: "exists == true")
-      // Create an expectation for the label to exist
-      testCase.expectation(for: exists, evaluatedWith: label, handler: nil)
-      // Wait for the expectation to be fulfilled within the provided timeout
-      testCase.waitForExpectations(timeout: timeOut, handler: nil)
-      // Assert that the label exists
-      XCTAssert(label.exists)
+      let label = app.staticTexts[labelString] // Get the XCUIElement instance of the label with the provided string
+      let exists = NSPredicate(format: "exists == true") // Create a predicate to check if the label exists
+      testCase.expectation(for: exists, evaluatedWith: label, handler: nil) // Create an expectation for the label to exist
+      testCase.waitForExpectations(timeout: timeOut, handler: nil) // Wait for the expectation to be fulfilled within the provided timeout
+      XCTAssert(label.exists) // Assert that the label exists
    }
    /**
     * ⚠️️ Beta ⚠️️
@@ -44,14 +39,10 @@ public class QueryAsserter {
     *   ```
     */
    public static func waitForElementToAppear(element: XCUIElement, timeOut: Double = 5) -> Bool {
-      // Create a predicate to check if the element exists
-      let existsPredicate = NSPredicate(format: "exists == true")
-      // Create an expectation for the element to exist
-      let expectation = XCTNSPredicateExpectation(predicate: existsPredicate, object: element)
-      // Wait for the expectation to be fulfilled within the provided timeout
-      let result = XCTWaiter().wait(for: [expectation], timeout: timeOut)
-      // Return a boolean indicating whether the element appeared within the provided timeout
-      return result == .completed
+      let existsPredicate = NSPredicate(format: "exists == true") // Create a predicate to check if the element exists
+      let expectation = XCTNSPredicateExpectation(predicate: existsPredicate, object: element) // Create an expectation for the element to exist
+      let result = XCTWaiter().wait(for: [expectation], timeout: timeOut) // Wait for the expectation to be fulfilled within the provided timeout
+      return result == .completed // Return a boolean indicating whether the element appeared within the provided timeout
    }
 }
 #endif

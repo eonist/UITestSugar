@@ -3,7 +3,9 @@ import Foundation
 import XCTest
 
 extension XCUIElement {
+   // Define type aliases for element IDs and labels
    public typealias IDType = (type: XCUIElementType, id: String?)
+   // Define a type alias for a tuple that represents an element type and an optional label
    public typealias LabelType = (type: XCUIElementType, label: String?)
    /**
     * Returns an XCUIElement for map
@@ -101,10 +103,10 @@ extension XCUIElement {
    * app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(wait: 2)
    */
    public func firstDescendant(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
-      if let id = id {
-         return self.descendants(type: type, id: id).firstMatch
-      } else {
-         return self.descendants(matching: type).firstMatch
+      if let id = id { // If an ID is provided
+         return self.descendants(type: type, id: id).firstMatch // Find the first descendant element with the specified type and ID
+      } else { // If no ID is provided
+         return self.descendants(matching: type).firstMatch // Find the first descendant element with the specified type
       }
    }
    /**
@@ -182,9 +184,14 @@ extension XCUIElement {
     * }
     */
    public func firstDescendant(type: XCUIElementType, condition: (XCUIElement) -> Bool) -> XCUIElement? {
-      self.descendants(matching: type).allElementsBoundByIndex.first {
-         $0.firstDescendant(condition) != nil
+      // Find all descendant elements with the specified type
+      let descendants = self.descendants(matching: type)
+      // Find the first element that has a descendant that satisfies the given condition
+      let firstMatch = descendants.allElementsBoundByIndex.first {
+         $0.firstDescendant(condition) != nil // Check if the descendant satisfies the given condition
       }
+      return firstMatch // Return the first matching element, or nil if no match is found
+      return firstMatch // Return the first matching element, or nil if no match is found
    }
 }
 /**

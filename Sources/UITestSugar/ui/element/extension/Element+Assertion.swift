@@ -30,8 +30,7 @@ extension XCUIElement {
     * - Returns: `true` if the switch is on, `false` otherwise.
     */
    public var isOn: Bool {
-      // Check if the value is a string and equal to "1"
-      (value as? String) == "1"
+      (value as? String) == "1" // Check if the value is a string and equal to "1"
    }
 }
 #endif

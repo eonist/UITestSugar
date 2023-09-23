@@ -44,7 +44,8 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func tap(waitAfter sec: Double) -> XCUIElement {
-      self.tap()
+      // Tap the element
+      self.tap() // Wait for the specified amount of time after the tap
       return self.wait(after: sec)
    }
    /**
@@ -63,20 +64,21 @@ extension XCUIElement {
       return self
    }
    /**
-    * Wait for existence, then tap, then sleep
+    * Wait for the element to exist within the specified timeout, then tap the element, and wait for the specified amount of time.
     * ## Examples:
+    * ```
+    * // Tap the first button element that appears within 0.2 seconds of waiting for its existence, then wait for 2 seconds
     * app.buttons.firstMatch.tap(waitForExistence: 0.2, waitAfter: 2.0)
+    * ```
     * - Parameters:
-    *   - secs: - Fixme: ⚠️️ doc
-    *   - sleepSecs: - Fixme: ⚠️️ doc
+    *   - secs: The maximum amount of time to wait for the element to exist.
+    *   - sleepSecs: The amount of time to wait after tapping the element.
+    * - Returns: The tapped element, or `nil` if it does not exist within the specified timeout.
     */
    @discardableResult public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement? {
-      // Wait for the element to exist within the specified timeout
-      guard self.waitForExistence(timeout: secs) else { return nil }
-      // Tap the element on iOS/macOS
-      self.tap()
-      // Wait for the specified amount of time after the tap
-      return self.wait(after: sleepSecs)
+      guard self.waitForExistence(timeout: secs) else { return nil } // Wait for the element to exist within the specified timeout
+      self.tap() // Tap the element on iOS/macOS
+      return self.wait(after: sleepSecs) // Wait for the specified amount of time after the tap
    }
 }
 #endif

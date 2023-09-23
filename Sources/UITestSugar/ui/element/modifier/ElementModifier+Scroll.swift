@@ -18,7 +18,8 @@ extension ElementModifier {
     * scrollTo(element: app, dir: .down, searchCondition: { ElementParser.firstDescendant(element: $0, condition: condA) && ElementParser.firstDescendant(element: $0, condition: condB) })
     */
    public static func scrollTo(element: XCUIElement, dir: Direction, searchCondition: ElementParser.MatchCondition) {
-      while !searchCondition(element) {
+      // Keep scrolling until the search condition is met
+      while !searchCondition(element) { 
          switch dir { // Perform a swipe in the specified direction
             case .up: element.swipeUp() // Swipe up
             case .down: element.swipeDown() // Swipe down
@@ -56,8 +57,8 @@ extension ElementModifier {
     *   - timeOut: The maximum amount of time to wait for the element to be found. Default is 10 seconds.
     */
    public static func scrollDownUntilFound(element: XCUIElement, id: String, type: XCUIElement.ElementType, timeOut: Double = 10) {
-      var exists: Bool = false
-      repeat {
+      var exists: Bool = false // Initialize a boolean variable to keep track of whether the element exists or not
+      repeat { // Repeat the following block until the condition is met
          let element: XCUIElement = element.descendants(matching: type).element(matching: type, identifier: id).firstMatch // Find the first descendant that matches the specified search types and identifier
          exists = ElementAsserter.exists(element: element, timeout: timeOut) // Check if the element exists within the specified timeout
          if exists { element.swipeUp() } // If the element exists, swipe up to stop searching
@@ -68,7 +69,7 @@ extension ElementModifier {
  * Type For scrolling methods
  */
 extension ElementModifier {
-   public enum Direction {
+   public enum Direction { // Define an enumeration for the scrolling direction
       case up // Swipe up
       case down // Swipe down
       case left // Swipe left

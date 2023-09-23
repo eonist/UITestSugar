@@ -8,8 +8,8 @@ extension XCUIElement.ElementType {
     * - Remark: ⚠️️ label is .staticText 🤷 -> because universal OS support etc, macOS doesnt have UILabel etc
     */
    enum ElementTypeName: String, CaseIterable {
-      case any
-      case other
+      case any // Represents any type of element
+      case other // Represents any other type of element not covered by the other cases
       case application // The application case represents the main application element.
       case group // The group case represents a group of elements, such as a table or a collection view.
       case window // The window case represents a window element, such as a dialog or an alert.

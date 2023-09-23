@@ -36,20 +36,13 @@ public class ElementDebugger {
     * - Example: `Swift.print(debug(element: app))` prints the accessibility properties of the `app` element.
     */
    public static func debug(element: XCUIElement, indentation: String = "") -> String {
-          // Get the identifier of the element
-    let id = element.identifier
-    // Get the accessibility label of the element
-    let aLable = String(describing: element.label) // ⚠️️ was .accessibilityLabel but seems it only works in iOS
-    // Get the label of the element
-    let lable = element.label
-    // Get the type of the element
-    let type = element.elementType.string
-    // Get the title of the element
-    let title = element.title
-    // Combine the information into a string
-    let str = "\(indentation)identifier:  \(id) accessibilityLabel:  \(aLable) label:  \(lable) type:  \(type) title:  \(title)"
-    // Return the string
-    return str
+      let id = element.identifier // Get the identifier of the element
+      let aLable = String(describing: element.label) // Get the accessibility label of the element ⚠️️ was .accessibilityLabel but seems it only works in iOS
+      let lable = element.label // Get the label of the element
+      let type = element.elementType.string // Get the type of the element
+      let title = element.title // Get the title of the element
+      let str = "\(indentation)identifier:  \(id) accessibilityLabel:  \(aLable) label:  \(lable) type:  \(type) title:  \(title)" // Combine the information into a string
+      return str // Return the string
    }
    /**
     * Debugs multiple elements by printing their information to the console.
@@ -65,7 +58,9 @@ public class ElementDebugger {
     * - Returns: A string containing the debug information of the elements.
     */
    public static func debug(elements: [XCUIElement]) -> String {
+      // Map each element to a debug string using the `debug` method of the `ElementDebugger` class
       let strings: [String] = elements.map { ElementDebugger.debug(element: $0) }
+      // Join the debug strings into a single string separated by newlines
       let str = strings.joined(separator: "\n")
       return str.suffix(2) == "\n" ? String(str.dropLast(2)) : str // removes the end linebreak \n
    }
