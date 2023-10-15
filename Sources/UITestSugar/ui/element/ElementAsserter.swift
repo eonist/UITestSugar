@@ -36,7 +36,7 @@ public class ElementAsserter {
    public static func isVisibleInWindow(element: XCUIElement) -> Bool {
       // Check if the element exists and has a non-empty frame
       guard element.exists && !element.frame.isEmpty else { return false }
-      
+
       // Check if the element's frame is contained within the frame of the main window
       return XCUIApplication().windows.element(boundBy: 0).frame.contains(element.frame)
    }

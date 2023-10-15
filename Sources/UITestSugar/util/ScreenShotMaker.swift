@@ -49,7 +49,7 @@ public final class ScreenShotMaker {
     * XCTAssertNotNil(screenshot)
     * ```
     */
-   @discardableResult public static func screenShotScreen(name: String, testCase: XCTestCase?)  -> XCUIScreenshot? {
+   @discardableResult public static func screenShotScreen(name: String, testCase: XCTestCase?) -> XCUIScreenshot? {
       // Make sure that the testCase parameter is not nil
       guard let testCase = testCase else {
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
@@ -78,7 +78,7 @@ public final class ScreenShotMaker {
     * XCTAssertNotNil(screenshot)
     * ```
     */
-   @discardableResult public static func screenShotApp(name: String, testCase: XCTestCase?, app: XCUIApplication) -> XCUIScreenshot?  {
+   @discardableResult public static func screenShotApp(name: String, testCase: XCTestCase?, app: XCUIApplication) -> XCUIScreenshot? {
       // Check if the provided XCTestCase is not nil
       guard let testCase = testCase else {
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
@@ -99,7 +99,7 @@ public final class ScreenShotMaker {
     *   - window: The XCUIElement instance of the window to be screenshot.
     * - Returns: The XCUIScreenshot instance of the screenshot taken.
     */
-   @discardableResult static public func screenShotWindow(name: String, testCase: XCTestCase?, window: XCUIElement) -> XCUIScreenshot? {
+   @discardableResult public static func screenShotWindow(name: String, testCase: XCTestCase?, window: XCUIElement) -> XCUIScreenshot? {
       // Check if the provided XCTestCase is not nil
       guard let testCase = testCase else {
          // Print an error message indicating that the testcase is nil

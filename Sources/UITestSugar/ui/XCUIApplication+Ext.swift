@@ -12,7 +12,7 @@ extension XCUIApplication {
     * - Fixme: ⚠️️ This function should be added to UITestSugar.
     * - Note: ref: https://stackoverflow.com/questions/43904798/how-to-dismiss-a-popover-in-a-ui-test (The selected link provides a solution for dismissing a popover in UI testing by using the XCUIApplication class and tapping on the "Dismiss" button.)
     */
-    
+
    public func dismissPopup() {
       // Dismiss the popup by tapping the "Cancel" button
       otherElements["Cancel"].tap()

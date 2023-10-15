@@ -33,7 +33,7 @@ extension ElementParser {
          if metCondition {
             collector = [(i, child)] // Found the item, we don't include the actual item we are looking for
             break
-         } 
+         }
          // If the child doesn't satisfy the condition, recursively call the ancestry function on the child
          // and add the child and its descendants to the collector array
          else if let descendants = ancestry(root: (0, child), condition: condition) {
