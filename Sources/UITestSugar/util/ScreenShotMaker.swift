@@ -3,6 +3,7 @@ import Foundation
 import XCTest
 /*
 * This is the ScreenShotMaker class, which provides functions for taking screenshots of windows and apps and attaching them to XCTestCases.
+* - Fix: Maybe spin this class out into its own framework / repo?
 */
 public final class ScreenShotMaker {
    /**
@@ -27,13 +28,27 @@ public final class ScreenShotMaker {
    @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil, useWin: Bool = false) -> XCUIScreenshot? {
        // If useWin is true and an app is provided, take a screenshot of the first window of the app
       if useWin, let win = app?.windows.firstMatch {
-         return screenShotWindow(name: name, testCase: testCase, window: win)
+         // Take a screenshot of the specified window
+         return screenShotWindow(
+            name: name, // The name to use for the screenshot
+            testCase: testCase, // The test case that the screenshot is associated with
+            window: win // The window to take the screenshot of
+         )
       // If an app is provided, take a screenshot of the app
       } else if let app: XCUIApplication = app {
-         return screenShotApp(name: name, testCase: testCase, app: app)
+         // Take a screenshot of the entire app
+         return screenShotApp(
+            name: name, // The name to use for the screenshot
+            testCase: testCase, // The test case that the screenshot is associated with
+            app: app // The app to take the screenshot of
+         )
       // Otherwise, take a screenshot of the entire screen
       } else {
-         return screenShotScreen(name: name, testCase: testCase)
+         // Take a screenshot of the entire screen
+         return screenShotScreen(
+            name: name, // The name to use for the screenshot
+            testCase: testCase // The test case that the screenshot is associated with
+         )
       }
    }
    /**
@@ -51,14 +66,19 @@ public final class ScreenShotMaker {
     */
    @discardableResult public static func screenShotScreen(name: String, testCase: XCTestCase?) -> XCUIScreenshot? {
       // Make sure that the testCase parameter is not nil
-      guard let testCase = testCase else {
+      guard let testCase: XCTestCase = testCase else {
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
          return nil
       }
       // Take a screenshot of the entire screen
-      let screenshot = XCUIScreen.main.screenshot()
+      let screenshot: XCUIScreenshot = XCUIScreen.main.screenshot()
+      // Create an attachment with the specified name and screenshot
+      let attachment: XCTAttachment = Self.attachment(
+         name: name, // The name to use for the attachment
+         screenshot: screenshot // The screenshot to attach
+      )
       // Attach the screenshot to the test case (test directory)
-      testCase.add(attachment(name: name, screenshot: screenshot))
+      testCase.add(attachment)
       // Return the screenshot instance
       return screenshot
    }
@@ -80,14 +100,19 @@ public final class ScreenShotMaker {
     */
    @discardableResult public static func screenShotApp(name: String, testCase: XCTestCase?, app: XCUIApplication) -> XCUIScreenshot? {
       // Check if the provided XCTestCase is not nil
-      guard let testCase = testCase else {
+      guard let testCase: XCTestCase = testCase else {
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
          return nil
       }
       // Take a screenshot of the provided app
-      let screenshot = app.screenshot()
+      let screenshot: XCUIScreenshot = app.screenshot()
+      // Create an attachment with the specified name and screenshot
+      let attachment: XCTAttachment = Self.attachment(
+         name: name, // The name to use for the attachment
+         screenshot: screenshot // The screenshot to attach
+      )
       // Add the screenshot as an attachment to the provided XCTestCase (add screenshot to test directory)
-      testCase.add(attachment(name: name, screenshot: screenshot))
+      testCase.add(attachment)
       // Return the XCUIScreenshot instance of the screenshot taken
       return screenshot
    }
@@ -101,16 +126,21 @@ public final class ScreenShotMaker {
     */
    @discardableResult public static func screenShotWindow(name: String, testCase: XCTestCase?, window: XCUIElement) -> XCUIScreenshot? {
       // Check if the provided XCTestCase is not nil
-      guard let testCase = testCase else {
+      guard let testCase: XCTestCase = testCase else {
          // Print an error message indicating that the testcase is nil
          Swift.print("⚠️️ Err, ScreenShotMaker.makeScreenShot() - testcase is nil")
          // Return nil
          return nil
       }
       // Take a screenshot of the provided window
-      let screenshot = window.screenshot()
+      let screenshot: XCUIScreenshot = window.screenshot()
+      // Create an attachment with the specified name and screenshot
+      let attachment: XCTAttachment = Self.attachment(
+         name: name, // The name to use for the attachment
+         screenshot: screenshot // The screenshot to attach
+      )
       // Add the screenshot as an attachment to the provided XCTestCase
-      testCase.add(attachment(name: name, screenshot: screenshot)) // add screenshot to test directory
+      testCase.add(attachment) // add screenshot to test directory
       // Return the XCUIScreenshot instance of the screenshot taken
       return screenshot
    }
@@ -124,7 +154,7 @@ public final class ScreenShotMaker {
     */
    fileprivate static func attachment(name: String, screenshot: XCUIScreenshot) -> XCTAttachment {
       // Create an XCTAttachment instance from the provided screenshot and name
-      let attachment = XCTAttachment(screenshot: screenshot)
+      let attachment: XCTAttachment = .init(screenshot: screenshot)
       // Set the name of the attachment based on the platform
       #if os(iOS)
       attachment.name = "Screenshot-\(name)-\(UIDevice.current.name).png"

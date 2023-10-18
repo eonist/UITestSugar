@@ -50,6 +50,7 @@ extension ElementModifier {
    /**
     * Searches down a scroll view until it finds a certain element.
     * - Remark: There is also a similar function `firstScrollView.scrollToElement(element: seventhChild)` that can be used to scroll to an element.
+    * - fix: since we already matched the type, we could just match id
     * - Parameters:
     *   - element: The root element to search from.
     *   - id: The identifier of the element being searched for.
@@ -59,8 +60,16 @@ extension ElementModifier {
    public static func scrollDownUntilFound(element: XCUIElement, id: String, type: XCUIElement.ElementType, timeOut: Double = 10) {
       var exists = false // Initialize a boolean variable to keep track of whether the element exists or not
       repeat { // Repeat the following block until the condition is met
-         let element: XCUIElement = element.descendants(matching: type).element(matching: type, identifier: id).firstMatch // Find the first descendant that matches the specified search types and identifier
-         exists = ElementAsserter.exists(element: element, timeout: timeOut) // Check if the element exists within the specified timeout
+         // Get all descendants of the element that match the specified type
+         let elementQuery: XCUIElementQuery = element.descendants(matching: type)
+         // Get the descendant element with the specified identifier and type
+         let element: XCUIElement = elementQuery.element(
+            matching: type, // The type of element to search for
+            identifier: id // The identifier of the element to search for
+         )
+         // Find the first descendant that matches the specified search types and identifier
+         let match: XCUIElement = element.firstMatch
+         exists = ElementAsserter.exists(element: match, timeout: timeOut) // Check if the element exists within the specified timeout
          if exists { element.swipeUp() } // If the element exists, swipe up to stop searching
       } while !exists // Repeat until the element is found
    }

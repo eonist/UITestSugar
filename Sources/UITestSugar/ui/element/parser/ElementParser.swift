@@ -23,7 +23,7 @@ extension ElementParser {
     */
    public static func firstChild(element: XCUIElement, condition: ElementParser.MatchCondition, type: XCUIElement.ElementType = .any) -> XCUIElement? {
       // Get the immediate children of the specified element that match the specified type
-      // and return the first element that satisfies the specified condition
+      // And return the first element that satisfies the specified condition
       element.children(matching: type).allElementsBoundByIndex.first { condition($0) }
    }
    /**

@@ -13,7 +13,11 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func scrollTo(dir: ElementModifier.Direction, searchCondition: ElementParser.MatchCondition) -> XCUIElement {
-      ElementModifier.scrollTo(element: self, dir: dir, searchCondition: searchCondition)// Scroll the element in the specified direction until the search condition is met
+      ElementModifier.scrollTo(
+         element: self, // The element to scroll to
+         dir: dir, // The direction to scroll in
+         searchCondition: searchCondition // The condition that must be met for the scrolling to stop
+      ) // Scroll the element in the specified direction until the search condition is met
       return self// Return the modified element
    }
    /**
@@ -24,7 +28,11 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func scrollToElement(element: XCUIElement, dir: ElementModifier.Direction = .up) -> XCUIElement {
-      ElementModifier.scrollToElement(parent: self, element: element, dir: dir) // Scroll the parent element in the specified direction until the child element is visible
+      ElementModifier.scrollToElement(
+         parent: self, // The parent element to scroll within
+         element: element, // The element to scroll to
+         dir: dir // The direction to scroll in
+      ) // Scroll the parent element in the specified direction until the child element is visible
       return self // Return the modified element
    }
    /**
@@ -33,7 +41,10 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func scrollTo(searchCondition: ElementParser.MatchCondition) -> XCUIElement {
-      ElementModifier.scrollToElement(element: self, searchCondition: searchCondition) // Scroll the element in the specified direction until the search condition is met
+      ElementModifier.scrollToElement(
+         element: self, // The element to scroll to
+         searchCondition: searchCondition // The condition that must be met for the scrolling to stop
+      ) // Scroll the element in the specified direction until the search condition is met
       return self // Return the modified element
    }
 }

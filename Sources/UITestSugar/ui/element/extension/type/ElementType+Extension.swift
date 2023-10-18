@@ -93,6 +93,9 @@ extension XCUIElement.ElementType {
       case statusItem // Represents a status item element. A status item is an icon or label that appears in the status bar of a macOS application, often used to provide information or quick access to frequently used features or functions.
    }
 }
+/**
+ * Ext - Getter
+ */
 extension XCUIElement.ElementType {
    /**
    * Returns a human-readable representation of the type of UI element that the elementType property represents.

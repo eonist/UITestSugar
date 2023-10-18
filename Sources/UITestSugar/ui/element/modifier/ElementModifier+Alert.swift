@@ -17,9 +17,10 @@ extension ElementModifier {
     */
    public static func alert(app: XCUIApplication, alertTitle: String, alertButtonTitle: String) -> XCUIElement {
       // Get the `alerts` query for the current application
+      let alert: XCUIElement = app.alerts[alertTitle] // Get the alert element with the specified title
       // Get the button element with the specified title in the alert with the specified title
-      // Return the button element
-      app.alerts[alertTitle].buttons[alertButtonTitle]
+      let button: XCUIElement = alert.buttons[alertButtonTitle] // Get the button element with the specified title from the alert
+      return button // Return the button element
    }
 }
 #endif

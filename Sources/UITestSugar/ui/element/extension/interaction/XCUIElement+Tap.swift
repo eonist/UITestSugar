@@ -17,7 +17,12 @@ extension XCUIElement {
       } else {
          // - Fixme: ⚠️️ this might be broken
          let offset: CGPoint = .zero // Calculates the center point of the element
-         let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: .init(dx: offset.x, dy: offset.y)) // Gets the coordinate of the center point
+         let coordinate: XCUICoordinate = self.coordinate(
+            withNormalizedOffset: .init(
+               dx: offset.x, // The x-coordinate offset from the center of the element
+               dy: offset.y // The y-coordinate offset from the center of the element
+            )
+         ) // Gets the coordinate of the center point
          coordinate.tap() // Taps the coordinate of the center point
       }
       return self // Returns the element after tapping it
@@ -31,7 +36,9 @@ extension XCUIElement {
     * - Returns: The same XCUIElement object.
     */
    @discardableResult public func forceTap(waitForExistence: Double = 5, waitAfter: Double = 0.2) -> XCUIElement {
-      guard self.waitForExistence(timeout: waitForExistence) else { return self } // Wait for the element to exist
+      guard self.waitForExistence(timeout: waitForExistence) else { 
+         return self 
+      } // Wait for the element to exist
       let vector: CGVector = .init(dx: 0.5, dy: 0.5) // Set the vector
       self.coordinate(withNormalizedOffset: vector).tap() // Tap the element
       return self.wait(after: waitAfter) // Wait for the element to load
@@ -50,10 +57,10 @@ extension XCUIElement {
    }
    /**
     * Wait for existence then tap
-    * - Remark: `waitForExistence` is a natice call
+    * - Remark: `waitForExistence` is a native call
     * ## Examples:
     * app.buttons.firstMatch.tap(waitForExistence: 0.2)
-    * - Parameter sec: - Fixme: ⚠️️ doc
+    * - Parameter waitForExistence: The maximum amount of time to wait for the element to exist before tapping it.
     */
    @discardableResult public func tap(waitForExistence sec: Double) -> XCUIElement? {
       guard self.waitForExistence(timeout: sec) else {
@@ -76,7 +83,9 @@ extension XCUIElement {
     * - Returns: The tapped element, or `nil` if it does not exist within the specified timeout.
     */
    @discardableResult public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement? {
-      guard self.waitForExistence(timeout: secs) else { return nil } // Wait for the element to exist within the specified timeout
+      guard self.waitForExistence(timeout: secs) else { 
+         return nil 
+      } // Wait for the element to exist within the specified timeout
       self.tap() // Tap the element on iOS/macOS
       return self.wait(after: sleepSecs) // Wait for the specified amount of time after the tap
    }

@@ -26,9 +26,9 @@ public class TabBarHelper {
     */
    public static func tabButton(idx: Int) -> XCUIElement {
       // Get the `tabBars` query for the current application
-      let tabBarsQuery = XCUIApplication().tabBars
+      let tabBarsQuery: XCUIElementQuery = XCUIApplication().tabBars
       // Get the button element at the specified index in the `tabBars` query
-      let uiElement = tabBarsQuery.buttons.element(boundBy: idx)
+      let uiElement: XCUIElement = tabBarsQuery.buttons.element(boundBy: idx)
       // Return the button element
       return uiElement
    }

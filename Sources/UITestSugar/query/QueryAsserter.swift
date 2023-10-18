@@ -19,8 +19,15 @@ public class QueryAsserter {
    public static func waitFor(app: XCUIApplication, testCase: XCTestCase, labelString: String, timeOut: Double = 5) {
       let label = app.staticTexts[labelString] // Get the XCUIElement instance of the label with the provided string
       let exists = NSPredicate(format: "exists == true") // Create a predicate to check if the label exists
-      testCase.expectation(for: exists, evaluatedWith: label, handler: nil) // Create an expectation for the label to exist
-      testCase.waitForExpectations(timeout: timeOut, handler: nil) // Wait for the expectation to be fulfilled within the provided timeout
+      testCase.expectation(
+         for: exists, // The expectation to evaluate
+         evaluatedWith: label, // The object to evaluate the expectation against
+         handler: nil // The handler to call when the expectation is fulfilled
+      ) // Create an expectation for the label to exist
+      testCase.waitForExpectations(
+         timeout: timeOut, // The maximum amount of time to wait for the expectation to be fulfilled
+         handler: nil // The handler to call when the expectation is fulfilled or times out
+      ) // Wait for the expectation to be fulfilled within the provided timeout
       XCTAssert(label.exists) // Assert that the label exists
    }
    /**
@@ -39,9 +46,16 @@ public class QueryAsserter {
     *   ```
     */
    public static func waitForElementToAppear(element: XCUIElement, timeOut: Double = 5) -> Bool {
-      let existsPredicate = NSPredicate(format: "exists == true") // Create a predicate to check if the element exists
-      let expectation = XCTNSPredicateExpectation(predicate: existsPredicate, object: element) // Create an expectation for the element to exist
-      let result = XCTWaiter().wait(for: [expectation], timeout: timeOut) // Wait for the expectation to be fulfilled within the provided timeout
+      let existsPredicate: NSPredicate = .init(format: "exists == true") // Create a predicate to check if the element exists
+      let expectation: XCTNSPredicateExpectation = .init(
+         predicate: existsPredicate, // The predicate to evaluate
+         object: element // The element to evaluate the predicate against
+      ) // Create an expectation for the element to exist
+      let waiter = XCTWaiter() // Create a new XCTWaiter instance
+      let result: XCTWaiter.Result = waiter.wait(
+         for: [expectation], // The expectations to wait for
+         timeout: timeOut // The maximum amount of time to wait for the expectations to be fulfilled
+      ) // Wait for the expectation to be fulfilled within the provided timeout
       return result == .completed // Return a boolean indicating whether the element appeared within the provided timeout
    }
 }

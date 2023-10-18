@@ -24,7 +24,10 @@ extension XCUIElement {
     * - Warning: The returned value is unused, but the function has side effects.
     */
    @discardableResult public func clearSearchFieldAndType(text: String) -> XCUIElement {
-      ElementModifier.clearSearchFieldAndType(searchField: self, text: text) // Clear the search field and type the specified text
+      ElementModifier.clearSearchFieldAndType(
+         searchField: self, // The search field to clear and type into
+         text: text // The text to type into the search field
+      ) // Clear the search field and type the specified text
       return self // Return the modified element
    }
    /**
@@ -47,12 +50,18 @@ extension XCUIElement {
       }
       // Double-tap the element on iOS, triple-tap on macOS to select all text before deleting it
       #if os(iOS)
-      self.tap(withNumberOfTaps: 2, numberOfTouches: 1)
+      self.tap(
+         withNumberOfTaps: 2, // The number of taps to perform
+         numberOfTouches: 1 // The number of fingers to use for the tap
+      )
       #elseif os(macOS)
       self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
       #endif
       // Delete the old text by typing the delete key repeatedly
-      let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+      let deleteString = String(
+         repeating: XCUIKeyboardKey.delete.rawValue, // The string to repeat
+         count: stringValue.count // The number of times to repeat the string
+      )
       self.typeText(deleteString)
       // Type in the new text
       self.typeText(text)
@@ -92,7 +101,10 @@ extension XCUIElement {
          let lowerRightCorner = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
          lowerRightCorner.tap()
          // Delete the current text by typing the delete key repeatedly
-         let delete = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+         let delete = String(
+            repeating: XCUIKeyboardKey.delete.rawValue, // The string to repeat
+            count: stringValue.count // The number of times to repeat the string
+         )
          // Swift.print("delete.count:  \(delete.count)")
          self.typeText(delete)
       }
@@ -111,8 +123,8 @@ extension XCUIElement {
       self.typeText(text) // Type the given text.
    }
 }
-#endif // end if for macos
-#endif // end if for xctest
+#endif // ⚠️️ end if for macos
+#endif // ⚠️️ end if for xctest
 // app.typeText("New text you want to enter")
 // // or use app.keys["delete"].tap() if you have keyboard enabled
 //

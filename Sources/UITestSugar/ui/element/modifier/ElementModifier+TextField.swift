@@ -40,13 +40,15 @@ public class ElementModifier {
     */
    public static func clearSearchFieldAndType(searchField: XCUIElement, text: String) {
       // Tap the search field to activate it
-      // and wait for it to exist for up to 5 seconds
-      // with a wait time of 0.2 seconds after tapping
-      searchField.tap(waitForExistence: 5, waitAfter: 0.2)
+      searchField.tap(
+         waitForExistence: 5, // The maximum amount of time to wait for the element to exist
+         waitAfter: 0.2 // The amount of time to wait after tapping the element
+      )
       // Tap the clear button of the search field
-      // and wait for it to exist for up to 5 seconds
-      // with a wait time of 0.2 seconds after tapping
-      searchField.buttons.firstMatch.tap(waitForExistence: 5, waitAfter: 0.2)
+      searchField.buttons.firstMatch.tap(
+         waitForExistence: 5, // The maximum amount of time to wait for the element to exist
+         waitAfter: 0.2 // The amount of time to wait after tapping the element
+      )
       // Type the new text into the search field
       searchField.typeText(text)
    }

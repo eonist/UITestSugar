@@ -81,9 +81,6 @@ ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests 
 
 ### Installation
 
-GitHub Copilot: Sure, here's an example of what a section on installing `UITestSugar` using Swift Package Manager and Carthage could look like:
-
-
 To install `UITestSugar` using Swift Package Manager, follow these steps:
 
 1. In Xcode, select File > Swift Packages > Add Package Dependency.
@@ -96,22 +93,6 @@ If you encounter any issues with the installation process, try the following tro
 
 - Make sure that you have the latest version of Xcode installed.
 - Make sure that your project is configured to use Swift Package Manager. To do this, select your project in the Project navigator, select the Swift Packages tab, and make sure that the "Enable Swift Packages" checkbox is selected.
-- Make sure that your project is configured to use the correct version of Swift. To do this, select your project in the Project navigator, select the Build Settings tab, and make sure that the "Swift Language Version" setting is set to the correct version of Swift.
-
-### Carthage
-
-To install `UITestSugar` using Carthage, follow these steps:
-
-1. Add the following line to your Cartfile: `github "eonist/UITestSugar"`.
-2. Run `carthage update` to download and build the framework.
-3. Drag the built framework into your Xcode project.
-4. In the General tab of your app target, add the `UITestSugar.framework` to the "Frameworks, Libraries, and Embedded Content" section.
-5. In the Build Phases tab of your app target, add a new "Run Script" phase with the following script: `/usr/local/bin/carthage copy-frameworks`. Add the path to the `UITestSugar.framework` to the "Input Files" section.
-
-If you encounter any issues with the installation process, try the following troubleshooting tips:
-
-- Make sure that you have the latest version of Carthage installed.
-- Make sure that your project is configured to use Carthage. To do this, create a Cartfile in the root of your project and add the dependencies that you want to use.
 - Make sure that your project is configured to use the correct version of Swift. To do this, select your project in the Project navigator, select the Build Settings tab, and make sure that the "Swift Language Version" setting is set to the correct version of Swift.
 
 ## General UITesting tips:

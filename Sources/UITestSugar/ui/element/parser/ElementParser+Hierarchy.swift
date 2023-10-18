@@ -36,7 +36,7 @@ extension ElementParser {
          }
          // If the child doesn't satisfy the condition, recursively call the ancestry function on the child
          // and add the child and its descendants to the collector array
-         else if let descendants = ancestry(root: (0, child), condition: condition) {
+         else if let descendants: [(Int, XCUIElement)] = ancestry(root: (0, child), condition: condition) {
             collector = [(i, child)] + descendants
             break
          }
@@ -60,10 +60,14 @@ extension ElementParser {
     */
    public static func element(root: XCUIElement, index: [Int]) -> XCUIElement? {
       let children: [XCUIElement] = root.children(matching: .any).allElementsBoundByIndex
-      // If the index is empty, return the root element
-      if index.isEmpty { return root }
+
+      if index.isEmpty { // If the index is empty, 
+         return root // return the root element
+      }
       // If the index is at its end point, cut off the branch and return the element at the specified index
-      else if index.count == 1 && index[0] < children.count { return children[index[0]] }
+      else if index.count == 1 && index[0] < children.count { 
+         return children[index[0]] 
+      }
       // If the index is not at its end point, recursively call the element function on the child element at the specified index
       else if index.count > 1 && !children.isEmpty && index[0] < children.count {
          // Create a new index array that excludes the first index
@@ -92,19 +96,19 @@ extension ElementParser {
     * // debugAncestry contains a string representation of the ancestral elements
     */
    public static func ancestry(root: XCUIElement, index: [Int]) -> [XCUIElement?] {
-      var index = index
+      var index: [Int] = index // Store temp var
       var ancestry: [XCUIElement?] = []
       // Loop through the index array and add each ancestral element to the ancestry array
       while !index.isEmpty {
          // Get the element at the specified index
-         let element = ElementParser.element(root: root, index: index)
-         // Add the element to the ancestry array
-         ancestry.append(element)
-         // Remove the last index from the index array
-         _ = index.popLast()
+         let element: XCUIElement? = ElementParser.element(
+            root: root, // The root element to search from
+            index: index // The index of the element to retrieve
+         )
+         ancestry.append(element) // Add the element to the ancestry array
+         _ = index.popLast() // Remove the last index from the index array
       }
-      // Reverse the ancestry array and return it
-      return ancestry.reversed()
+      return ancestry.reversed() // Reverse the ancestry array and return it
    }
    /**
     * - Fixme: ⚠️️ Since `XCUIElement` isn't comparable

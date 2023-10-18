@@ -21,7 +21,10 @@ extension XCUIElement {
    * ```
    */
    public func waitForAppearance(_ timeOut: Double = 5) -> Bool {
-      QueryAsserter.waitForElementToAppear(element: self, timeOut: timeOut)
+      QueryAsserter.waitForElementToAppear(
+         element: self, // The element to wait for
+         timeOut: timeOut // The maximum amount of time to wait for the element to appear
+      )
    }
    /**
    * Waits for the element to appear on the screen.
@@ -40,7 +43,10 @@ extension XCUIElement {
    */
    public func waitToAppear(_ timeOut: Double = 5) -> XCUIElement? {
       // Wait for the element to appear within the provided timeout
-      _ = QueryAsserter.waitForElementToAppear(element: self, timeOut: timeOut)
+      _ = QueryAsserter.waitForElementToAppear(
+         element: self, // The element to wait for
+         timeOut: timeOut // The maximum amount of time to wait for the element to appear
+      )
       // Return the modified element
       return self
    }

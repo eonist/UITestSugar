@@ -12,10 +12,8 @@ extension XCUIElement {
     * - Returns: The current XCUIElement instance.
     */
    @discardableResult public func wait(after sleepSecs: Double) -> XCUIElement {
-      // Sleep for the specified number of seconds
-      sleep(sec: sleepSecs)
-      // Return the modified element
-      return self
+      sleep(sec: sleepSecs)  // Sleep for the specified number of seconds
+      return self // Return the modified element
    }
    /**
     * Checks if an item exists and is hittable. If it's not hittable, then the app is tapped so that the tooltip goes away.

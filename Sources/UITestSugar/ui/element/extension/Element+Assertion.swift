@@ -12,18 +12,25 @@ extension XCUIElement {
     * - Returns: `true` if the element exists and is visible within the specified timeout, `false` otherwise.
     */
    public func doesExistAndIsVisible(timeOut: Double) -> Bool {
-      ElementAsserter.existsAndVisible(element: self, timeout: timeOut)
+      ElementAsserter.existsAndVisible(
+         element: self, // The element to check for existence and visibility
+         timeout: timeOut // The maximum amount of time to wait for the element to be both existent and visible
+      )
    }
    /**
     * Asserts if the element is currently visible on the screen.
     * - Returns: `true` if the element is visible, `false` otherwise.
     */
-   public var isVisible: Bool { ElementAsserter.isVisibleInWindow(element: self) }
+   public var isVisible: Bool { 
+      ElementAsserter.isVisibleInWindow(element: self) 
+   }
    /**
     * Asserts if the element exists and is currently hittable.
     * - Returns: `true` if the element exists and is hittable, `false` otherwise.
     */
-   public var existsAndIsHittable: Bool { ElementAsserter.existsAndIsHittable(element: self) }
+   public var existsAndIsHittable: Bool { 
+      ElementAsserter.existsAndIsHittable(element: self) 
+   }
    /**
     * Returns the state of a `UISwitch` element.
     * - Note: This property is useful for checking the state of a `UISwitch` element in a UI testing scenario.

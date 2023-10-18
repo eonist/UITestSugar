@@ -191,7 +191,6 @@ extension XCUIElement {
          $0.firstDescendant(condition) != nil // Check if the descendant satisfies the given condition
       }
       return firstMatch // Return the first matching element, or nil if no match is found
-      return firstMatch // Return the first matching element, or nil if no match is found
    }
 }
 /**
@@ -215,8 +214,8 @@ extension XCUIElement {
     * ```
     */
    public func firstDescendant(partialId: String, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      let query = self.descendants(matching: type)
-      let predicate = NSPredicate(format: "identifier CONTAINS %@", partialId) // Create a predicate that matches elements with an identifier that contains the specified partial ID
+      let query: XCUIElementQuery = self.descendants(matching: type) // Get all descendants of the element that match the specified type
+      let predicate: NSPredicate = .init(format: "identifier CONTAINS %@", partialId) // Create a predicate to filter the results by the specified identifier // Create a predicate that matches elements with an identifier that contains the specified partial ID
       let elementQuery: XCUIElementQuery = query.matching(predicate) // Find all descendants that match the predicate
       return elementQuery.firstMatch // Return the first descendant that matches the predicate
    }
@@ -268,7 +267,11 @@ extension XCUIElement {
     * element.firstDescendant(type: .button) { $0.identifier == "someBtn" }
     */
    private func firstDescendant(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      ElementParser.firstDescendant(element: self, condition: condition, type: type) // Find the first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
+      ElementParser.firstDescendant(
+         element: self, // The element to search for descendants
+         condition: condition, // The condition that must be met for a descendant to be included in the results
+         type: type // The type of element to search for
+      ) // Find the first matching item in descendants based on condition (Works on immediate children and grandchildren and so on)
    }
    /**
     * Finds the first matching item in descendants based on condition.
@@ -294,7 +297,11 @@ extension XCUIElement {
     * app.descendants(type:.button) { $0.label == "play" }.tap() // find button based on button.title
     */
    private func descendants(type: XCUIElement.ElementType = .any, condition: ElementParser.MatchCondition) -> [XCUIElement] {
-      ElementParser.descendants(element: self, condition: condition, type: type) // Find all descendants of the element that match the specified condition
+      ElementParser.descendants(
+         element: self, // The element to search for descendants
+         condition: condition, // The condition that must be met for a descendant to be included in the results
+         type: type // The type of element to search for
+      ) // Find all descendants of the element that match the specified condition
    }
    /**
     * Finds the first matching item in children based on condition (Only works for immediate children not grandchildren etc).
@@ -309,7 +316,11 @@ extension XCUIElement {
     */
    private func firstChild(type: XCUIElement.ElementType = .any, _ condition: ElementParser.MatchCondition) -> XCUIElement? {
       // Get the first child element of the current element that matches the specified condition and type
-      ElementParser.firstChild(element: self, condition: condition, type: type)
+      ElementParser.firstChild(
+         element: self, // The element to search for the first child of
+         condition: condition, // The condition that must be met for a child to be included in the results
+         type: type // The type of element to search for
+      )
    }
    /**
     * Returns the first child element of the current element that matches the specified condition and type.
@@ -320,7 +331,10 @@ extension XCUIElement {
     * - Returns: The first child element of the current element that matches the specified condition and type.
     */
    private func firstChild(_ condition: ElementParser.MatchCondition) -> XCUIElement? {
-      self.firstChild(type: .any, condition)
+      self.firstChild(
+         type: .any, // The type of element to search for
+         condition // The condition that must be met for a child to be included in the results
+      )
    }
 }
 // deprecated ⚠️️

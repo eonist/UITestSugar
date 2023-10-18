@@ -36,12 +36,12 @@ public class ElementDebugger {
     * - Example: `Swift.print(debug(element: app))` prints the accessibility properties of the `app` element.
     */
    public static func debug(element: XCUIElement, indentation: String = "") -> String {
-      let id = element.identifier // Get the identifier of the element
-      let aLable = String(describing: element.label) // Get the accessibility label of the element ⚠️️ was .accessibilityLabel but seems it only works in iOS
-      let lable = element.label // Get the label of the element
-      let type = element.elementType.string // Get the type of the element
-      let title = element.title // Get the title of the element
-      let str = "\(indentation)identifier:  \(id) accessibilityLabel:  \(aLable) label:  \(lable) type:  \(type) title:  \(title)" // Combine the information into a string
+      let id: String = element.identifier // Get the identifier of the element
+      let aLable: String = .init(describing: element.label) // Get the accessibility label of the element ⚠️️ was .accessibilityLabel but seems it only works in iOS
+      let lable: String = element.label // Get the label of the element
+      let type: String = element.elementType.string // Get the type of the element
+      let title: String = element.title // Get the title of the element
+      let str: String = "\(indentation)identifier:  \(id) accessibilityLabel:  \(aLable) label:  \(lable) type:  \(type) title:  \(title)" // Combine the information into a string
       return str // Return the string
    }
    /**
@@ -76,11 +76,10 @@ public class ElementDebugger {
     * let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
     * Swift.print("Hierarchy: \n" + hierarchyStr)
     * - Parameters:
-   *   - element: The root element of the hierarchy.
-   *   - type: The element type to drill down against. More specific means less wasted CPU.
-   *   - indentationLevel: The indentation level used to make the log read more like a hierarchy. The more indentation, the further down in the hierarchy the item is.
-   * 
-   * - Returns: A string containing the hierarchy of the element and its descendants.
+    *   - element: The root element of the hierarchy.
+    *   - type: The element type to drill down against. More specific means less wasted CPU.
+    *   - indentationLevel: The indentation level used to make the log read more like a hierarchy. The more indentation, the further down in the hierarchy the item is.
+    * - Returns: A string containing the hierarchy of the element and its descendants.
     */
    public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) -> String {
       let children: [XCUIElement] = element.children(matching: type).allElementsBoundByIndex // get all children of the element that match the given type
@@ -88,7 +87,11 @@ public class ElementDebugger {
          let indentationLevel: Int = indentationLevel + 1 // increment the indentation level for the child
          let identation: String = .init(repeating: "-", count: indentationLevel) // create a string of "-" characters to represent the indentation level
          let retVal1: String = debug(element: $0, indentation: identation) // get the string representation of the child element
-         let retVal2: String = debugHierarchy(element: $0, type: type, indentationLevel: indentationLevel) // recursively call debugHierarchy on the child element to get its descendants' hierarchy
+         let retVal2: String = debugHierarchy(
+            element: $0, // The element to debug
+            type: type, // The type of element to debug
+            indentationLevel: indentationLevel // The current indentation level
+         ) // recursively call debugHierarchy on the child element to get its descendants' hierarchy
          return retVal1 + (retVal2.isEmpty ? "" : "\n" + retVal2) // concatenate the string representations of the child element and its descendants' hierarchy
       }.joined(separator: "\n") // join the string representations of all children with a line break
       return str.suffix(2) == "\n" ? String(str.dropLast(2)) : str // remove the last line break from the string if it exists
