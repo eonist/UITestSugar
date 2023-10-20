@@ -15,7 +15,7 @@ extension XCUIElement {
     */
    @discardableResult public func typeString(_ text: String) -> XCUIElement {
       self.typeText(text) // Type the specified text into the element
-      return self// Return the modified element
+      return self // Return the modified element
    }
    /**
     * Clears the given search field and types the provided text.
@@ -44,7 +44,7 @@ extension XCUIElement {
     */
    public func clearAndEnterText(text: String) {
       // Check if the element's value is a string
-      guard let stringValue = self.value as? String else {
+      guard let stringValue: String = self.value as? String else {
          XCTFail("⚠️️ Tried to clear and enter text into a non string value")
          return
       }
@@ -58,7 +58,7 @@ extension XCUIElement {
       self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
       #endif
       // Delete the old text by typing the delete key repeatedly
-      let deleteString = String(
+      let deleteString: String = .init(
          repeating: XCUIKeyboardKey.delete.rawValue, // The string to repeat
          count: stringValue.count // The number of times to repeat the string
       )
@@ -96,12 +96,12 @@ extension XCUIElement {
       // Repeatedly delete text as long as there is something in the text field.
       // This is required to clear text that does not fit in to the textfield and is partially hidden initially.
       // It's important to check for the placeholder value, otherwise it gets into an infinite loop.
-      while let stringValue = self.value as? String, !stringValue.isEmpty, stringValue != self.placeholderValue {
+      while let stringValue: String = self.value as? String, !stringValue.isEmpty, stringValue != self.placeholderValue {
          // Move the cursor to the end of the text field
-         let lowerRightCorner = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
+         let lowerRightCorner: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.9))
          lowerRightCorner.tap()
          // Delete the current text by typing the delete key repeatedly
-         let delete = String(
+         let delete: String = .init(
             repeating: XCUIKeyboardKey.delete.rawValue, // The string to repeat
             count: stringValue.count // The number of times to repeat the string
          )

@@ -60,7 +60,6 @@ extension ElementParser {
     */
    public static func element(root: XCUIElement, index: [Int]) -> XCUIElement? {
       let children: [XCUIElement] = root.children(matching: .any).allElementsBoundByIndex
-
       if index.isEmpty { // If the index is empty, 
          return root // return the root element
       }
@@ -71,7 +70,7 @@ extension ElementParser {
       // If the index is not at its end point, recursively call the element function on the child element at the specified index
       else if index.count > 1 && !children.isEmpty && index[0] < children.count {
          // Create a new index array that excludes the first index
-         let newIndex = Array(index[1..<index.count])
+         let newIndex: [Int] = Array(index[1..<index.count])
          // Get the child element at the specified index
          let child: XCUIElement = children[index[0]]
          // Recursively call the element function on the child element with the new index array

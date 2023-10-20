@@ -16,6 +16,7 @@ extension ElementModifier {
       // Get the first cell in the table
       let firstCell: XCUIElement = tableElement.children(matching: .cell).firstMatch
       // Get the start coordinate of the pull-to-refresh gesture
+      // fix: use .zero here?
       let start: XCUICoordinate = firstCell.coordinate(withNormalizedOffset: .init(dx: 0, dy: 0))
       // Get the end coordinate of the pull-to-refresh gesture
       let finish: XCUICoordinate = firstCell.coordinate(withNormalizedOffset: .init(dx: 0, dy: 6))

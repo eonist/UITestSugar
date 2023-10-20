@@ -44,7 +44,12 @@ extension ElementModifier {
     */
    public static func scrollToElement(parent: XCUIElement, element: XCUIElement, dir: Direction = .up) {
       while !ElementAsserter.isVisibleInWindow(element: element) { // While the element is not visible
-         dir == .up ? element.swipeUp() : element.swipeDown() // Swipe up or down depending on the direction
+         // Swipe up or down depending on the direction
+         if dir == .up {
+            element.swipeUp()
+         } else {
+            element.swipeDown()
+         } 
       }
    }
    /**
@@ -103,9 +108,9 @@ extension ElementModifier {
       // Scroll the element until the search condition is met
       while !searchCondition(element) {
          // Get the center coordinate of the element
-         let startCoord = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+         let startCoord: XCUICoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
          // Get the coordinate of the element after scrolling
-         let endCoord = startCoord.withOffset(CGVector(dx: 0.0, dy: -262))
+         let endCoord: XCUICoordinate = startCoord.withOffset(CGVector(dx: 0.0, dy: -262))
          // Press and drag the element to scroll it
          startCoord.press(forDuration: 0.01, thenDragTo: endCoord)
       }

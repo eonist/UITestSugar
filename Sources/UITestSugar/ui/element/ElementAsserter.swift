@@ -17,9 +17,9 @@ public class ElementAsserter {
     */
    public static func existsAndVisible(element: XCUIElement, timeout: Double) -> Bool {
       // Wait for the specified element to exist in the UI hierarchy
-      let exists = element.waitForExistence(timeout: timeout)
+      let exists: Bool = element.waitForExistence(timeout: timeout)
       // Check if the element is visible with the window frame
-      let visible = isVisibleInWindow(element: element)
+      let visible: Bool = isVisibleInWindow(element: element)
       // Return true if the element exists and is visible, false otherwise
       return exists && visible
    }

@@ -71,7 +71,7 @@ extension ElementModifier {
     */
    internal static func getText(element: XCUIElement) -> String {
       // Get the text of the element as a string
-      guard let text = element.value as? String else {
+      guard let text: String = element.value as? String else {
          // If the value is not a string, fail with a precondition
          preconditionFailure("Value: \(String(describing: element.value)) is not a String")
       }

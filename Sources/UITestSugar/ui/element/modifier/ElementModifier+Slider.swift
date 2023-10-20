@@ -8,7 +8,7 @@ extension ElementModifier {
    /**
     * Slides a slider to a specified position.
     * - Parameters:
-    *   - slider: The slider to slide.
+    *   - slider: The slider to slide
     *   - amount: The amount to slide the slider to. The value should be between 0.0 and 1.0, where 0.0 represents the minimum value and 1.0 represents the maximum value.
     * - Remark: This function uses the `adjust(toNormalizedSliderPosition:)` method of `XCUIElement` to slide the slider to the specified position.
     * ## Examples:

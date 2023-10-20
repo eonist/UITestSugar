@@ -17,8 +17,8 @@ public class QueryAsserter {
     * - Fixme: ⚠️️ write example
     */
    public static func waitFor(app: XCUIApplication, testCase: XCTestCase, labelString: String, timeOut: Double = 5) {
-      let label = app.staticTexts[labelString] // Get the XCUIElement instance of the label with the provided string
-      let exists = NSPredicate(format: "exists == true") // Create a predicate to check if the label exists
+      let label: XCUIElement = app.staticTexts[labelString] // Get the XCUIElement instance of the label with the provided string
+      let exists: NSPredicate = .init(format: "exists == true") // Create a predicate to check if the label exists
       testCase.expectation(
          for: exists, // The expectation to evaluate
          evaluatedWith: label, // The object to evaluate the expectation against
@@ -51,7 +51,7 @@ public class QueryAsserter {
          predicate: existsPredicate, // The predicate to evaluate
          object: element // The element to evaluate the predicate against
       ) // Create an expectation for the element to exist
-      let waiter = XCTWaiter() // Create a new XCTWaiter instance
+      let waiter: XCTWaiter = .init() // Create a new XCTWaiter instance
       let result: XCTWaiter.Result = waiter.wait(
          for: [expectation], // The expectations to wait for
          timeout: timeOut // The maximum amount of time to wait for the expectations to be fulfilled

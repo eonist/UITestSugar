@@ -16,7 +16,7 @@ extension XCUIElement {
     * - Parameter map: - Fixme: ⚠️️
     */
    public func firstDescendant(_ map: [Any]) -> XCUIElement {
-      if map.count == 1, let query = map.first { // if map is only 1 level deep
+      if map.count == 1, let query: Any = map.first { // if map is only 1 level deep
          return self.firstDescendant(query: query)
       } else if map.count > 1, let query: Any = map.first { // if map is more than 1 level deep
          let element: XCUIElement = self.firstDescendant(query: query)
@@ -59,11 +59,11 @@ extension XCUIElement {
     * - Returns: The first descendant of the element that matches the specified query.
     */
    public func firstDescendant(_ map: [SearchType]) -> XCUIElement {
-      if map.count == 1, let query = map.first { // if map is only 1 level deep
+      if map.count == 1, let query: XCUIElement.SearchType = map.first { // if map is only 1 level deep
          return self.firstDescendant(type: query.type, id: query.id)
       } else if map.count > 1, let query: SearchType = map.first { // if map is more than 1 level deep
-         let element = self.firstDescendant(type: query.type, id: query.id)
-         let newMap = Array(map[1..<map.count]) // substract first element
+         let element: XCUIElement = self.firstDescendant(type: query.type, id: query.id)
+         let newMap: [XCUIElement.SearchType] = Array(map[1..<map.count]) // substract first element
          return element.firstDescendant(newMap) // recursive call
       } else { // map is empty, might never be called
          Swift.print("🚫 map is an empty array 🚫")
@@ -78,11 +78,11 @@ extension XCUIElement {
     * - Returns: A query for all descendants of the element that match the specified query.
     */
    public func descendants(_ map: [SearchType]) -> XCUIElementQuery {
-      if map.count == 1, let search = map.first { // if map is only 1 level deep
+      if map.count == 1, let search: XCUIElement.SearchType = map.first { // if map is only 1 level deep
          return self.descendants(type: search.type, id: search.id)
       } else if map.count > 1, let search: SearchType = map.first { // if map is more than 1 level deep
-         let element = self.firstDescendant(type: search.type, id: search.id)
-         let newMap = Array(map[1..<map.count])
+         let element: XCUIElement = self.firstDescendant(type: search.type, id: search.id)
+         let newMap: [XCUIElement.SearchType] = Array(map[1..<map.count])
          return element.descendants(newMap) // recursive call
       } else { // map is empty, might never be called
          Swift.print("🚫 map is an empty array 🚫")
@@ -103,7 +103,7 @@ extension XCUIElement {
    * app.firstDescendant(type: .button, id: "someBtn").waitToAppear(5)?.tap(wait: 2)
    */
    public func firstDescendant(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
-      if let id = id { // If an ID is provided
+      if let id: String = id { // If an ID is provided
          return self.descendants(type: type, id: id).firstMatch // Find the first descendant element with the specified type and ID
       } else { // If no ID is provided
          return self.descendants(matching: type).firstMatch // Find the first descendant element with the specified type
@@ -118,7 +118,7 @@ extension XCUIElement {
     * - Returns: A query for all descendants of the element that match the specified type and ID.
     */
    public func descendants(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElementQuery {
-      if let id = id { // Check if the `id` parameter is not `nil`
+      if let id: String = id { // Check if the `id` parameter is not `nil`
          return self.descendants(matching: type).matching(identifier: id) // If so, find all descendants with the specified type and then filter the results to include only those with the specified ID
       } else { // If the `id` parameter is `nil`
          return self.descendants(matching: type) // Find all descendants with the specified type
@@ -134,7 +134,7 @@ extension XCUIElement {
     */
    public func firstDescendant(label: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
       if let lbl: String = label { // Check if the `label` parameter is not `nil`
-         let query = self.descendants(matching: type) // Find all descendants with the specified type
+         let query: XCUIElementQuery = self.descendants(matching: type) // Find all descendants with the specified type
          return QueryParser.firstElement(query, label: lbl) // If so, find the first element with the specified label
       } else { // If the `label` parameter is `nil`
          return self.descendants(matching: type).firstMatch // Find the first descendant with the specified type
@@ -144,13 +144,14 @@ extension XCUIElement {
     * Returns the first descendant of the element that matches the specified title and type.
     * If the `title` parameter is not `nil`, the function calls the `descendants(matching:)` method to find all descendants with the specified type and then filters the results to include only those with the specified title.
     * If the `title` parameter is `nil`, the function calls the `descendants(matching:)` method to find the first descendant with the specified type.
-    * - Parameter title: The title of the UI element being searched for.
-    * - Parameter type: The type of UI element being searched for.
+    * - Parameters:
+    *   - title: The title of the UI element being searched for.
+    *   - type: The type of UI element being searched for.
     * - Returns: The first descendant of the element that matches the specified title and type.
     */
    public func firstDescendant(title: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      if let title = title { // Check if the `title` parameter is not `nil`
-         let query = self.descendants(matching: type) // Find all descendants with the specified type
+      if let title: String = title { // Check if the `title` parameter is not `nil`
+         let query: XCUIElementQuery = self.descendants(matching: type) // Find all descendants with the specified type
          return QueryParser.firstElement(query, title: title) // If so, find the first element with the specified title
       } else { // If the `title` parameter is `nil`
          return self.descendants(matching: type).firstMatch // Find the first descendant with the specified type
@@ -160,13 +161,14 @@ extension XCUIElement {
     * Returns the first descendant of the element that matches the specified value and type.
     * If the `value` parameter is not `nil`, the function calls the `descendants(matching:)` method to find all descendants with the specified type and then filters the results to include only those with the specified value.
     * If the `value` parameter is `nil`, the function calls the `descendants(matching:)` method to find the first descendant with the specified type.
-    * - Parameter value: The value of the UI element being searched for.
-    * - Parameter type: The type of UI element being searched for.
+    * - Parameters:
+    *   - value: The value of the UI element being searched for.
+    *   - type: The type of UI element being searched for.
     * - Returns: The first descendant of the element that matches the specified value and type.
     */
    public func firstDescendant(value: String?, type: XCUIElement.ElementType = .any) -> XCUIElement {
-      if let value = value { // Check if the `value` parameter is not `nil`
-         let query = self.descendants(matching: type) // Find all descendants with the specified type
+      if let value: String = value { // Check if the `value` parameter is not `nil`
+         let query: XCUIElementQuery = self.descendants(matching: type) // Find all descendants with the specified type
          return QueryParser.firstElement(query, value: value) // If so, find the first element with the specified value
       } else { // If the `value` parameter is `nil`
          return self.descendants(matching: type).firstMatch // Find the first descendant with the specified type
@@ -175,8 +177,9 @@ extension XCUIElement {
    /**
     * Finds the first element of the specified type that has a sub-element that matches the provided condition.
     * - Remark: This method can be a bit slow, to speed it up, try to narrow down the element it is called on.
-    * - Parameter type: The type of UI element being searched for.
-    * - Parameter condition: A closure that takes an `XCUIElement` and returns a `Bool`. The closure is used to check if a sub-element of the element being searched has a certain condition.
+    * - Parameters:
+    *   - type: The type of UI element being searched for.
+    *   - condition: A closure that takes an `XCUIElement` and returns a `Bool`. The closure is used to check if a sub-element of the element being searched has a certain condition.
     * - Returns: The first element of the specified type that has a sub-element that matches the provided condition.
     * ## Example:
     * app.firstDescendant(type: .cell) {
@@ -185,9 +188,9 @@ extension XCUIElement {
     */
    public func firstDescendant(type: XCUIElementType, condition: (XCUIElement) -> Bool) -> XCUIElement? {
       // Find all descendant elements with the specified type
-      let descendants = self.descendants(matching: type)
+      let descendants: XCUIElementQuery = self.descendants(matching: type)
       // Find the first element that has a descendant that satisfies the given condition
-      let firstMatch = descendants.allElementsBoundByIndex.first {
+      let firstMatch: XCUIElement? = descendants.allElementsBoundByIndex.first {
          $0.firstDescendant(condition) != nil // Check if the descendant satisfies the given condition
       }
       return firstMatch // Return the first matching element, or nil if no match is found
@@ -228,12 +231,13 @@ extension XCUIElement {
     * Returns the first child of the element that matches the specified type and ID.
     * If the `id` parameter is not `nil`, the function calls the `children(id:type:)` method to find all children with the specified type and ID and then returns the first match.
     * If the `id` parameter is `nil`, the function calls the `children(matching:)` method to find the first child with the specified type.
-    * - Parameter type: The type of UI element being searched for.
-    * - Parameter id: The ID of the UI element being searched for.
+    * - Parameters:
+    *   - type: The type of UI element being searched for.
+    *   - id: The ID of the UI element being searched for.
     * - Returns: The first child of the element that matches the specified type and ID.
     */
    public func firstChild(type: XCUIElement.ElementType = .any, id: String? = nil) -> XCUIElement {
-      if let id = id { // Check if the `id` parameter is not `nil`
+      if let id: String = id { // Check if the `id` parameter is not `nil`
          return self.children(id: id, type: type).firstMatch // If so, find all children with the specified type and ID and return the first match
       } else { // If the `id` parameter is `nil`
          return self.children(matching: type).firstMatch // This line of code is incomplete and will cause a compilation error

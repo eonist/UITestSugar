@@ -12,7 +12,7 @@ extension XCUIElement {
     * - Returns: The current XCUIElement instance.
     */
    @discardableResult public func wait(after sleepSecs: Double) -> XCUIElement {
-      sleep(sec: sleepSecs)  // Sleep for the specified number of seconds
+      sleep(sec: sleepSecs) // Sleep for the specified number of seconds
       return self // Return the modified element
    }
    /**
@@ -20,7 +20,7 @@ extension XCUIElement {
     * - Returns: The current XCUIElement instance.
     */
    @discardableResult public func disregardToolTip() -> XCUIElement {
-      let elementExists = self.waitForExistence(timeout: 10)
+      let elementExists: Bool = self.waitForExistence(timeout: 10)
       if elementExists && self.isHittable == false { // Most likely tooltip is being shown and this needs to be dismissed.
          XCUIApplication().tap(waitForExistence: 5, waitAfter: 2)
       }

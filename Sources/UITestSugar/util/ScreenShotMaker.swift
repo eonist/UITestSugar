@@ -27,7 +27,7 @@ public final class ScreenShotMaker {
     */
    @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil, useWin: Bool = false) -> XCUIScreenshot? {
        // If useWin is true and an app is provided, take a screenshot of the first window of the app
-      if useWin, let win = app?.windows.firstMatch {
+      if useWin, let win: XCUIElement = app?.windows.firstMatch {
          // Take a screenshot of the specified window
          return screenShotWindow(
             name: name, // The name to use for the screenshot
