@@ -10,7 +10,7 @@ public final class ScreenShotMaker {
     * Screen-shot for iOS / macOS
     * - Abstract: This function takes a screenshot of either a window, an app, or the entire screen, depending on the parameters passed in.
     * - Description: Take a screenshot of a given app and add it to the test attachements.
-    * - Remark: You can find screenshots in Xcode -> Report navigator -> select your test
+    * - Remark: You can find screenshots in Xcode -> Report navigator -> select your test -> show gallery
     * - Remark: Or go to: DerivedData -> ProjectName... -> Logs -> Test -> find .xcresult -> Show Package Contents -> Attachments
     * - Remark: Or search for the file `Screenshot` in deriveddata root folder
     * - Note: Ref: https://stackoverflow.com/a/56345842/5389500
