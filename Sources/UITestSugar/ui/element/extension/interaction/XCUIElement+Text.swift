@@ -51,7 +51,7 @@ extension XCUIElement {
       // Double-tap the element on iOS, triple-tap on macOS to select all text before deleting it
       #if os(iOS)
       self.tap(
-         withNumberOfTaps: 2, // The number of taps to perform
+         withNumberOfTaps: 3, // The number of taps to perform (was 2, but fails at selecting all text)
          numberOfTouches: 1 // The number of fingers to use for the tap
       )
       #elseif os(macOS)
