@@ -26,13 +26,13 @@ public class ElementDebugger {
     * - Remark: There is also the native `debugDescription` property of `XCUIElement`.
     * - Parameters:
     *   - element: The element to debug.
-    *   - indentation: The number of spaces to indent the output for readability.
+    *   - indentation: The number of spaces to indent the output for readability
     * - Returns: A dictionary containing the element's accessibility properties, including:
-    *   - `id`: The `accessibilityIdentifier` property.
-    *   - `aLabel`: The `accessibilityLabel` property.
+    *   - `id`: The `accessibilityIdentifier` property
+    *   - `aLabel`: The `accessibilityLabel` property
     *   - `label`: The `label` property of the `XCUIElement`'s `button` object.
-    *   - `type`: The type of the `XCUIElement`.
-    *   - `title`: The `title` property of the `XCUIElement`.
+    *   - `type`: The type of the `XCUIElement`
+    *   - `title`: The `title` property of the `XCUIElement`
     * - Example: `Swift.print(debug(element: app))` prints the accessibility properties of the `app` element.
     */
    public static func debug(element: XCUIElement, indentation: String = "") -> String {
@@ -45,8 +45,7 @@ public class ElementDebugger {
       return str // Return the string
    }
    /**
-    * Debugs multiple elements by printing their information to the console.
-    * 
+    * Debugs multiple elements by printing their information to the console
     * ## Examples:
     * let ancestry = ElementParser.ancestry(root: (0, app), condition: { $0.label == "Edit list" })
     * let elements: [XCUIElement] = ancestry?.map { $0.1 }

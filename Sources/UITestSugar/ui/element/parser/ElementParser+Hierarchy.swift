@@ -9,11 +9,11 @@ extension ElementParser {
     * Returns an array of ancestral elements for a specified element.
     * - Fixme: ⚠️️ Refactor with `.map` or `.flatMap` on this method when u have time
     * - Fixme: ⚠️️ You can also use `elementAtIndex` and `element.count`
+    * - Remark: This function recursively searches the ancestors of the specified element to find the first element that satisfies the specified condition. It then returns an array of all ancestral elements from the specified element to the element that satisfies the condition.
+    * - Remark: If no element satisfies the condition, this function returns nil.
     * - Parameters:
     *   - root: The point to search from.
     *   - condition: A closure that evaluates to true or false.
-    * - Remark: This function recursively searches the ancestors of the specified element to find the first element that satisfies the specified condition. It then returns an array of all ancestral elements from the specified element to the element that satisfies the condition.
-    * - Remark: If no element satisfies the condition, this function returns nil.
     * ## Example:
     * let app = XCUIApplication()
     * let condition: ElementParser.MatchCondition = { element in let s = element.screenshot().image.size; Swift.print("s:  \(s)"); return s == size/*element == btn*/} // .screenshot().image.size == size
@@ -45,15 +45,15 @@ extension ElementParser {
    }
    /**
     * Returns an element in a hierarchy based on a `mapIndex`.
+    * - Remark: This function recursively searches the hierarchy of the specified root element to find the element at the specified index. It returns the element if it exists, or nil if it doesn't.
+    * - Remark: If the index is empty, this function returns the root element.
+    * - Remark: If the index is at its end point, this function cuts off the branch and returns the element at the specified index.
+    * - Remark: If the index is not at its end point, this function recursively calls itself on the child element at the specified index.
     * - Fixme: ⚠️️ Base it on query instead, because it's faster.
     * - Fixme: ⚠️️ You can also use `elementAtIndex` and `element.count`.
     * - Parameters:
     *   - root: The root element to search from.
     *   - index: An array of integers that represents the path to the desired element.
-    * - Remark: This function recursively searches the hierarchy of the specified root element to find the element at the specified index. It returns the element if it exists, or nil if it doesn't.
-    * - Remark: If the index is empty, this function returns the root element.
-    * - Remark: If the index is at its end point, this function cuts off the branch and returns the element at the specified index.
-    * - Remark: If the index is not at its end point, this function recursively calls itself on the child element at the specified index.
     * ## Example:
     * let app = XCUIApplication()
     * let element = ElementParser.element(root: app, index: [0, 1, 2])

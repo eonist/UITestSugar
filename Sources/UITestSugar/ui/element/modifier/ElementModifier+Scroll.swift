@@ -6,10 +6,10 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Searches down a scroll view until `searchCondition` is met.
+    * Searches down a scroll view until `searchCondition` is met
     * - Parameters:
-    *   - element: The root element to search from.
-    *   - dir: The direction to scroll in.
+    *   - element: The root element to search from
+    *   - dir: The direction to scroll in
     *   - searchCondition: A closure that takes an `XCUIElement` and returns a `Bool`. The closure is used to check if an element being searched has a certain condition.
     * ## Example:
     * // Scroll down a list until the first item with a title of "Featured playlist" and an identifier of "Featured Playlists-View all" is found
@@ -37,6 +37,7 @@ extension ElementModifier {
     * Scrolls until `element` is visible.
     * - Remark: Try to set cells: `cell.accessibilityIdentifer = "cell \(indexPath.row)"`
     * - Remark: There is also a native function `firstScrollView.scrollToElement(element: seventhChild)` that can be used to scroll to an element.
+    * - Fixme: ⚠️️ doc each line, use copilot
     * - Parameters:
     *   - parent: The element to swipe.
     *   - element: The element to swipe to.

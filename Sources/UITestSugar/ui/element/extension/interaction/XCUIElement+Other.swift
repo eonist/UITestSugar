@@ -17,7 +17,8 @@ extension XCUIElement {
    }
    /**
     * Checks if an item exists and is hittable. If it's not hittable, then the app is tapped so that the tooltip goes away.
-    * - Returns: The current XCUIElement instance.
+    * - Returns: The current XCUIElement instance
+    * - Fixme: ⚠️️ doc each line, use copilot
     */
    @discardableResult public func disregardToolTip() -> XCUIElement {
       let elementExists: Bool = self.waitForExistence(timeout: 10)

@@ -58,6 +58,7 @@ extension XCUIElement {
    /**
     * Wait for existence then tap
     * - Remark: `waitForExistence` is a native call
+    * - Fixme: ⚠️️ doc each line, use copilot
     * ## Examples:
     * app.buttons.firstMatch.tap(waitForExistence: 0.2)
     * - Parameter waitForExistence: The maximum amount of time to wait for the element to exist before tapping it.

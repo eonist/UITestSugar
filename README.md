@@ -108,6 +108,8 @@ If you encounter any issues with the installation process, try the following tro
 - Add github actions ✅
 - Maybe add some of the method in the Kif.framework?
 - UITest tap should have param to set shouldFail: true
+- Add example gif to readme
+- Write about things that are different when using this with SwiftUI
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. The MIT License is a permissive open source license that allows you to use, copy, modify, and distribute the software for any purpose, as long as you include the original copyright and license notice.

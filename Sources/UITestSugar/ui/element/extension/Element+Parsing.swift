@@ -3,9 +3,13 @@ import Foundation
 import XCTest
 
 extension XCUIElement {
-   // Define type aliases for element IDs and labels
+   /**
+    * Define type aliases for element IDs and labels
+    */
    public typealias IDType = (type: XCUIElementType, id: String?)
-   // Define a type alias for a tuple that represents an element type and an optional label
+   /**
+    * Define a type alias for a tuple that represents an element type and an optional label
+    */
    public typealias LabelType = (type: XCUIElementType, label: String?)
    /**
     * Returns an XCUIElement for map
@@ -29,7 +33,7 @@ extension XCUIElement {
    }
    /**
     * Returns the first descendant of the element that matches the specified query.
-    * The query parameter can be either an `IDType` or a `LabelType`.
+    * - Note: The query parameter can be either an `IDType` or a `LabelType`.
     * If the query is an `IDType`, the function calls the `firstDescendant(type:id:)` method to find the first descendant with the specified type and ID.
     * If the query is a `LabelType`, the function calls the `firstDescendant(label:type:)` method to find the first descendant with the specified label and type.
     * If the query is neither an `IDType` nor a `LabelType`, the function raises a fatal error.
@@ -53,8 +57,8 @@ extension XCUIElement {
    public typealias SearchType = (type: XCUIElement.ElementType, id: String?)
    /**
     * Returns the first descendant of the element that matches the specified query.
-    * The query is represented as an array of `SearchType` tuples, where each tuple contains the type and ID or label of the UI element being searched for.
-    * The function uses recursion to search for the element in a nested hierarchy of UI elements.
+    * - Note: The query is represented as an array of `SearchType` tuples, where each tuple contains the type and ID or label of the UI element being searched for.
+    * - Note: The function uses recursion to search for the element in a nested hierarchy of UI elements.
     * - Parameter map: The query to use when searching for the descendant.
     * - Returns: The first descendant of the element that matches the specified query.
     */
@@ -72,8 +76,9 @@ extension XCUIElement {
    }
    /**
     * Returns a query for all descendants of the element that match the specified query.
-    * The query is represented as an array of `SearchType` tuples, where each tuple contains the type and ID or label of the UI element being searched for.
-    * The function uses recursion to search for the element in a nested hierarchy of UI elements.
+    * - Note: The query is represented as an array of `SearchType` tuples, where each tuple contains the type and ID or label of the UI element being searched for.
+    * - Note: The function uses recursion to search for the element in a nested hierarchy of UI elements.
+    * - Fixme: ⚠️️ doc each line, use copilot
     * - Parameter map: The query to use when searching for the descendants.
     * - Returns: A query for all descendants of the element that match the specified query.
     */

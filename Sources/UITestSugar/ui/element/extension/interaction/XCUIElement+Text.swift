@@ -7,7 +7,7 @@ import XCTest
 extension XCUIElement {
    /**
     * Types the given `text` into the receiver and returns the receiver for chaining calls.
-    * This method is equivalent to `typeText`, but returns the receiver instead of `Void`.
+    * - Note: This method is equivalent to `typeText`, but returns the receiver instead of `Void`.
     * - Note: Same as typeText, but returns self for chaining calls
     * - Remark: We can't use `typeText` as it's a native call
     * - Parameter text: The text to type into the receiver.
@@ -80,11 +80,12 @@ extension XCUIElement {
    public func clearAndWriteText(text: String) {
       self.clear() // Clear the existing text in the element.
       self.typeText(text) // Enter the new text into the element.
-      // Note: You can add "\n" at the end of the text to submit the input.
+      // - Note: You can add "\n" at the end of the text to submit the input.
    }
    /**
     * Removes any current text in the field before typing in the new value and submitting
-    * Based on: https://stackoverflow.com/a/32894080 (The link provided is a reference to a Stack Overflow answer that provides a solution for selecting all text in a NSTextField or NSTextView on macOS. The solution involves using the selectAll(_:) method of the NSText class to select all the text in the field or view, and then using the writeSelection(to:) method to write the selected text to the pasteboard. This allows the selected text to be copied or replaced with new text. The code in the link is similar to the code in the previous message, but it's written in Objective-C and uses the NSTextField and NSTextView classes instead of the XCUIElement class.)
+    * - Note: Based on: https://stackoverflow.com/a/32894080 (The link provided is a reference to a Stack Overflow answer that provides a solution for selecting all text in a NSTextField or NSTextView on macOS. The solution involves using the selectAll(_:) method of the NSText class to select all the text in the field or view, and then using the writeSelection(to:) method to write the selected text to the pasteboard. This allows the selected text to be copied or replaced with new text. The code in the link is similar to the code in the previous message, but it's written in Objective-C and uses the NSTextField and NSTextView classes instead of the XCUIElement class.)
+    * - Fixme: ⚠️️ doc each line, use copilot
     */
    public func clear() {
       // Check if the current value is a string
