@@ -104,7 +104,8 @@ If you encounter any issues with the installation process, try the following tro
 - Use the XCTContext.runActivity method to group related test steps: The XCTContext.runActivity method can be used to group related test steps together in the Xcode test report. This can make it easier to understand the flow of the test and identify any issues that may arise.
 - Use the XCTAssert methods to verify expected behavior: The XCTAssert methods can be used to verify that the app is behaving as expected during the test. Use these methods to check that UI elements are displayed correctly, that data is being loaded correctly, and that the app is responding to user input as expected.
 - If you encounter strage bugs whule using doing UITesting in XCode. It is recommend you clean and delete derived data often, as well as restart XCode from time to time.
-  
+- Print the entire UI:  `Swift.print(app.debugDescription)` 
+
 ### Todo:
 - Add github actions ✅
 - Maybe add some of the method in the Kif.framework?
