@@ -37,13 +37,13 @@ extension XCUIElement {
     * - Note: Interesting solution: https://stackoverflow.com/a/73847504/5389500 (The link is a Stack Overflow answer that provides a Swift code snippet for a function that clears the text of a UI element and enters new text into it. The function is part of an extension to the XCUIElement class, which is used for UI testing in Xcode. The answer also includes improved comments for the code snippet)
     * - Note: On iOS, the function double-taps the element to select all text before deleting it. // - Fixme: ⚠️️ this seems wrong
     * - Note: On macOS, the function triple-taps the element to select all text before deleting it. // - Fixme: ⚠️️ this seems wrong
+    * - Fixme: ⚠️️ this is buggy for macOS with swiftui textfield, use vector tap + select all
     * After deleting the old text, the function types in the new text.
     * ## Examples:
     * app.textFields["Email"].clearAndEnterText("newemail@domain.example")
     * - Parameter text: The text to enter into the field.
-    * - Parameter forceTrippleTap: swiftUI textfield for macOS seems to require tripple tap to select all
     */
-   public func clearAndEnterText(text: String, forceTrippleTap: Bool = false) {
+   public func clearAndEnterText(text: String) {
       // Check if the element's value is a string - Fixme: ⚠️️ add more doc how this works
       guard let stringValue: String = self.value as? String else {
          XCTFail("⚠️️ Tried to clear and enter text into a non string value")
@@ -56,13 +56,7 @@ extension XCUIElement {
          numberOfTouches: 1 // The number of fingers to use for the tap
       )
       #elseif os(macOS)
-      if forceTrippleTap {
-         (0..<3).forEach { _ in
-            self.tap()
-         }
-      } else {
-         self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
-      }
+      self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
       #endif
       deleteAllAndEnterText(stringValue: stringValue, text: text)
    }
@@ -130,9 +124,16 @@ extension XCUIElement {
     * Selects all text in the element and types the given text.
     * Only works for macOS.
     * - Parameter text: The text to type.
+    * - Parameter tapBegining: - Fixme: ⚠️️ add doc
     */
-   public func selectAllAndWrite(text: String) {
-      self.tap(waitForExistence: 5, waitAfter: 0.2) // Tap the element to make sure it's focused.
+   public func selectAllAndWrite(text: String, tapBegining: Bool = false) {
+      if tapBegining { // ⚠️️ hack to set focus, bug in TextField in List for macOS
+         let centerLeftVector: CGVector = .init(dx: 0.1, dy: 0.5) // Center left
+         let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: centerLeftVector) // iOS / macOS
+         coordinate.tap()
+      } else {
+         self.tap(waitForExistence: 5, waitAfter: 0.2) // Tap the element to make sure it's focused.
+      }
       self.typeKey("a", modifierFlags: .command) // Select all text in the element.
       self.typeText(text) // Type the given text.
    }
