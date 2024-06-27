@@ -57,10 +57,9 @@ extension XCUIElement {
       )
       #elseif os(macOS)
       if forceTrippleTap {
-         self.tap(
-            waitForExistence: 3, // The number of taps to perform (was 2, but fails at selecting all text)
-            waitAfter: 1 // The number of fingers to use for the tap
-         )
+         (0..<3).forEach { _ in
+            self.tap()
+         }
       } else {
          self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
       }
