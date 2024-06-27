@@ -35,15 +35,16 @@ extension XCUIElement {
     * If the element's value is not a string, the function fails with an error message.
     * - Note: Solution found here: https://stackoverflow.com/a/59288611/5389500
     * - Note: Interesting solution: https://stackoverflow.com/a/73847504/5389500 (The link is a Stack Overflow answer that provides a Swift code snippet for a function that clears the text of a UI element and enters new text into it. The function is part of an extension to the XCUIElement class, which is used for UI testing in Xcode. The answer also includes improved comments for the code snippet)
-    * On iOS, the function double-taps the element to select all text before deleting it.
-    * On macOS, the function triple-taps the element to select all text before deleting it.
+    * - Note: On iOS, the function double-taps the element to select all text before deleting it. // - Fixme: ⚠️️ this seems wrong
+    * - Note: On macOS, the function triple-taps the element to select all text before deleting it. // - Fixme: ⚠️️ this seems wrong
     * After deleting the old text, the function types in the new text.
-    * - Parameter text: The text to enter into the field.
     * ## Examples:
     * app.textFields["Email"].clearAndEnterText("newemail@domain.example")
+    * - Parameter text: The text to enter into the field.
+    * - Parameter forceTrippleTap: swiftUI textfield for macOS seems to require tripple tap to select all
     */
-   public func clearAndEnterText(text: String) {
-      // Check if the element's value is a string
+   public func clearAndEnterText(text: String, forceTrippleTap: Bool = false) {
+      // Check if the element's value is a string - Fixme: ⚠️️ add more doc how this works
       guard let stringValue: String = self.value as? String else {
          XCTFail("⚠️️ Tried to clear and enter text into a non string value")
          return
@@ -55,8 +56,21 @@ extension XCUIElement {
          numberOfTouches: 1 // The number of fingers to use for the tap
       )
       #elseif os(macOS)
-      self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
+      if forceTrippleTap {
+         self.tap(
+            waitForExistence: 3, // The number of taps to perform (was 2, but fails at selecting all text)
+            waitAfter: 1 // The number of fingers to use for the tap
+         )
+      } else {
+         self.doubleTap() // ⚠️️ We need 3 taps to select all, 2 taps sometimes fail to select all if there are special characters etc
+      }
       #endif
+      deleteAllAndEnterText(stringValue: stringValue, text: text)
+   }
+   /**
+    * - Note requires textfield is in focus and all text is selected
+    */
+   public func deleteAllAndEnterText(stringValue: String, text: String) {
       // Delete the old text by typing the delete key repeatedly
       let deleteString: String = .init(
          repeating: XCUIKeyboardKey.delete.rawValue, // The string to repeat
