@@ -49,6 +49,7 @@ searchedElement.firstMatch.tap()
 ### Gotchas:
 - Sometimes it can be difficult to access an element, such as a button inside a button in a cell. In these cases, you can try changing the app UI to make the element more accessible. For example, you can turn one button into a view or disable accessibility for one button and hit the cell itself instead, which triggers the button.
 - Element labels can be used to target elements that have children with text fields or labels with text. This can be useful for finding elements that might be difficult to access using other methods.
+- QuickTime can be used to record UItests, in order to pinpoint errors that happend etc. Sometimes logs can be hard to decipher etc.
 
 ### Resources:
 - https://github.com/joemasilotti/UI-Testing-Cheat-Sheet (The selected link is a GitHub repository that provides a cheat sheet for UI testing in iOS, including tips and tricks for using Xcode's UI testing framework)
