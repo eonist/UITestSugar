@@ -47,9 +47,9 @@ extension ElementModifier {
       while !ElementAsserter.isVisibleInWindow(element: element) { // While the element is not visible
          // Swipe up or down depending on the direction
          if dir == .up {
-            element.swipeUp()
+            parent.swipeUp()
          } else {
-            element.swipeDown()
+            parent.swipeDown()
          } 
       }
    }
