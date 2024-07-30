@@ -4,7 +4,8 @@ import XCTest
 
 extension XCUIApplication {
    /**
-    * Dismisses a popup.
+    * Dismisses a popup by tapping the "Cancel" button.
+    * - Description: This method attempts to dismiss any currently displayed popup by tapping a button with the accessibility identifier set to "Cancel". It is specifically designed for use in UI testing environments where popups need to be programmatically dismissed to continue test execution.
     * - Remark: This function dismisses a popup by tapping the "Cancel" button. It searches for the "Cancel" button by its accessibility identifier, which should be set to "Cancel".
     * - Remark: This function is useful for dismissing popups in UI testing. You can use it to ensure that the popups in your app are dismissed correctly and that the user can continue interacting with the app.
     * - Remark: ⚠️️ This function might not work in all cases. If the "Cancel" button doesn't exist or has a different accessibility identifier, this function won't work.

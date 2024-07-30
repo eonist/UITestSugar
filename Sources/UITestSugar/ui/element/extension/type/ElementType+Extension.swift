@@ -4,8 +4,8 @@ import XCTest
 
 extension XCUIElement.ElementType {
    /**
-    * Helps identify ElementType (some bug in apples code prevents this with regular String(describing:))
-    * - Remark: ⚠️️ label is .staticText 🤷 -> because universal OS support etc, macOS doesnt have UILabel etc
+    * Provides a workaround for identifying `ElementType` due to a known issue with `String(describing:)` in Apple's implementation.
+    * - Remark: The `.staticText` label is used universally across OS platforms, accommodating environments like macOS that do not support `UILabel`.
     */
    enum ElementTypeName: String, CaseIterable {
       case any // Represents any type of element

@@ -7,10 +7,11 @@ import XCTest
 extension ElementModifier {
    /**
     * Slides a slider to a specified position.
+    * - Description: This method is used to adjust the position of a slider element within a user interface. It sets the slider's value to a specific point along its track, based on a normalized value range.
     * - Parameters:
-    *   - slider: The slider to slide
-    *   - amount: The amount to slide the slider to. The value should be between 0.0 and 1.0, where 0.0 represents the minimum value and 1.0 represents the maximum value.
-    * - Remark: This function uses the `adjust(toNormalizedSliderPosition:)` method of `XCUIElement` to slide the slider to the specified position.
+    *   - slider: The slider element to be adjusted.
+    *   - amount: The target position for the slider, expressed as a normalized value between 0.0 (minimum) and 1.0 (maximum).
+    * - Remark: This function utilizes the `adjust(toNormalizedSliderPosition:)` method of `XCUIElement` to accurately set the slider to the desired position.
     * ## Examples:
     * slide(slider: app.sliders.element, amount: 0.7)
     */

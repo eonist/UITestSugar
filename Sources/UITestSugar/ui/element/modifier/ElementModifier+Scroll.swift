@@ -6,16 +6,17 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Searches down a scroll view until `searchCondition` is met
+    * Scrolls within a scrollable element until a specified condition is met.
+    * This method continuously scrolls in a given direction until an element that satisfies the `searchCondition` is found.
     * - Parameters:
-    *   - element: The root element to search from
-    *   - dir: The direction to scroll in
-    *   - searchCondition: A closure that takes an `XCUIElement` and returns a `Bool`. The closure is used to check if an element being searched has a certain condition.
+    *   - element: The root element from which the scrolling starts.
+    *   - dir: The direction in which to scroll (`up`, `down`, `left`, `right`).
+    *   - searchCondition: A closure that evaluates an `XCUIElement` and returns a `Bool`. This closure is used to determine if the desired element has been found based on specific conditions.
     * ## Example:
-    * // Scroll down a list until the first item with a title of "Featured playlist" and an identifier of "Featured Playlists-View all" is found
-    * let condA: ElementParser.MatchCondition = { $0.title == "Featured playlist" }
-    * let condB: ElementParser.MatchCondition = { $0.identifier == "Featured Playlists-View all" }
-    * scrollTo(element: app, dir: .down, searchCondition: { ElementParser.firstDescendant(element: $0, condition: condA) && ElementParser.firstDescendant(element: $0, condition: condB) })
+    * // Example usage: Scroll down a list until an item with a specific title and identifier is found.
+    * let conditionForTitle: ElementParser.MatchCondition = { $0.title == "Featured playlist" }
+    * let conditionForIdentifier: ElementParser.MatchCondition = { $0.identifier == "Featured Playlists-View all" }
+    * scrollTo(element: app, dir: .down, searchCondition: { ElementParser.firstDescendant(element: $0, condition: conditionForTitle) && ElementParser.firstDescendant(element: $0, condition: conditionForIdentifier) })
     */
    public static func scrollTo(element: XCUIElement, dir: Direction, searchCondition: ElementParser.MatchCondition) {
       // Keep scrolling until the search condition is met
@@ -34,34 +35,36 @@ extension ElementModifier {
  */
 extension ElementModifier {
    /**
-    * Scrolls until `element` is visible.
-    * - Remark: Try to set cells: `cell.accessibilityIdentifer = "cell \(indexPath.row)"`
-    * - Remark: There is also a native function `firstScrollView.scrollToElement(element: seventhChild)` that can be used to scroll to an element.
-    * - Fixme: ⚠️️ doc each line, use copilot
+    * Scrolls the parent element until the specified child element is visible on the screen.
+    * This method performs a series of swipe actions in the specified direction until the child element becomes visible within the parent element's viewport.
+    * - Remark: Ensure that cells have unique accessibility identifiers, e.g., `cell.accessibilityIdentifier = "cell \(indexPath.row)"`
+    * - Remark: Alternatively, the native function `firstScrollView.scrollToElement(element: seventhChild)` can be used for a similar purpose.
     * - Parameters:
-    *   - parent: The element to swipe.
-    *   - element: The element to swipe to.
-    *   - dir: The direction to swipe in. Use `.up` for scrolling a list to the last item in the list, use `.down` to scroll the list to the first item.
+    *   - parent: The scrollable element within which the swiping will occur.
+    *   - element: The target element that needs to be visible after scrolling.
+    *   - dir: The direction to swipe. Use `.up` to scroll towards the end of the content, and `.down` to scroll towards the beginning of the content.
     */
    public static func scrollToElement(parent: XCUIElement, element: XCUIElement, dir: Direction = .up) {
       while !ElementAsserter.isVisibleInWindow(element: element) { // While the element is not visible
          // Swipe up or down depending on the direction
-         if dir == .up {
-            parent.swipeUp()
-         } else {
-            parent.swipeDown()
+         if dir == .up { // Check if the direction is upwards
+            parent.swipeUp() // Perform an upward swipe on the parent element
+         } else { // If the direction is not upwards
+            parent.swipeDown() // Perform a downward swipe on the parent element
          } 
       }
    }
    /**
-    * Searches down a scroll view until it finds a certain element.
-    * - Remark: There is also a similar function `firstScrollView.scrollToElement(element: seventhChild)` that can be used to scroll to an element.
-    * - fix: since we already matched the type, we could just match id
+    * Continuously scrolls down within a scroll view until a specified element is located.
+    * This method scrolls through the content of a scroll view, searching for an element that matches the given identifier and type. It stops scrolling once the element is found or the timeout expires.
+    * - Remark: For a similar functionality with predefined elements, consider using `firstScrollView.scrollToElement(element: seventhChild)`.
+    * - Note: This function optimizes the search by directly matching the identifier since the type is already specified.
+    * - Fixme: ⚠️️ since we already matched the type, we could just match id?
     * - Parameters:
-    *   - element: The root element to search from.
-    *   - id: The identifier of the element being searched for.
-    *   - type: The type of UI element being searched for.
-    *   - timeOut: The maximum amount of time to wait for the element to be found. Default is 10 seconds.
+    *   - element: The root element from which the scrolling starts.
+    *   - id: The identifier of the target element to find.
+    *   - type: The type of the UI element being searched for.
+    *   - timeOut: The maximum duration in seconds to attempt finding the element, with a default of 10 seconds.
     */
    public static func scrollDownUntilFound(element: XCUIElement, id: String, type: XCUIElement.ElementType, timeOut: Double = 10) {
       var exists = false // Initialize a boolean variable to keep track of whether the element exists or not
@@ -81,14 +84,15 @@ extension ElementModifier {
    }
 }
 /**
- * Type For scrolling methods
+ * Enumerates the possible directions for scrolling actions within UI tests.
+ * This enumeration defines the directions in which an element can be scrolled, including vertical and horizontal movements.
  */
 extension ElementModifier {
-   public enum Direction { // Define an enumeration for the scrolling direction
-      case up // Swipe up
-      case down // Swipe down
-      case left // Swipe left
-      case right // Swipe right
+   public enum Direction {
+      case up // Represents a swipe action moving upwards.
+      case down // Represents a swipe action moving downwards.
+      case left // Represents a swipe action moving to the left.
+      case right // Represents a swipe action moving to the right.
    }
 }
 /**
@@ -97,22 +101,23 @@ extension ElementModifier {
 extension ElementModifier {
    /**
     * Scrolls to a particular element until it is rendered in the visible rect.
-    * - Note: https://gist.github.com/ryanmeisters/f4e961731db289f489e1a08183e334d9 (The selected link is a GitHub Gist that provides an example of how to scroll to an element in a table view using UI testing in Xcode.)
-    * - Note: https://stackoverflow.com/questions/32646539/scroll-until-element-is-visible-ios-ui-automation-with-xcode7 (The selected link is a Stack Overflow post that provides a solution for scrolling until an element is visible in iOS UI automation with Xcode 7)
+    * This method performs a scroll action to bring the specified element into the visible area of the app's interface. It continues to scroll until the `searchCondition` closure returns `true`, indicating that the desired visibility condition has been met.
+    * - Note: For implementation examples, see:
+    *   - https://gist.github.com/ryanmeisters/f4e961731db289f489e1a08183e334d9 (Example of scrolling to an element in a table view using UI testing in Xcode.)
+    *   - https://stackoverflow.com/questions/32646539/scroll-until-element-is-visible-ios-ui-automation-with-xcode7 (Discussion on scrolling until an element is visible in iOS UI automation with Xcode 7)
     * - Parameters:
-    *   - element: The element to scroll to.
-    *   - searchCondition: A closure that takes an `XCUIElement` and returns a `Bool`. The closure is used to check if an element being searched has a certain condition.
-    * - Fixme: ⚠️️ which dir? The direction of the swipe is not specified in the code.
-    * - Fixme: ⚠️️ doc. The second parameter is named `element` instead of `searchCondition`.
+    *   - element: The element to which the method will scroll.
+    *   - searchCondition: A closure that evaluates whether the specified element meets a certain condition. It takes an `XCUIElement` as its parameter and returns a `Bool`.
+    * - Fixme: ⚠️️ The direction of the swipe is not specified in the code. Consider adding a parameter to specify the direction.
+    * - Fixme: ⚠️️ The documentation for the second parameter should correctly reflect its purpose and name.
     */
    public static func scrollToElement(element: XCUIElement, searchCondition: ElementParser.MatchCondition) {
-      // Scroll the element until the search condition is met
+      // Continuously scroll until the search condition is satisfied
       while !searchCondition(element) {
-         // Get the center coordinate of the element
+         // Calculate the start and end coordinates for the scroll action
          let startCoord: XCUICoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-         // Get the coordinate of the element after scrolling
          let endCoord: XCUICoordinate = startCoord.withOffset(CGVector(dx: 0.0, dy: -262))
-         // Press and drag the element to scroll it
+         // Perform the scroll action by dragging from start to end coordinate
          startCoord.press(forDuration: 0.01, thenDragTo: endCoord)
       }
    }

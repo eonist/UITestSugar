@@ -6,11 +6,11 @@ import XCTest
  */
 extension XCUIElement {
    /**
-    * Scrolls the element in the specified direction until the search condition is met.
+    * This method scrolls the current XCUIElement in a specified direction until a given condition is satisfied.
     * - Parameters:
-    *   - dir: The direction in which to scroll.
-    *   - searchCondition: The condition to search for.
-    * - Returns: The same XCUIElement object.
+    *   - dir: The direction to scroll. This can be up, down, left, or right.
+    *   - searchCondition: A closure that defines the condition to be met for the scrolling to stop. This closure takes an XCUIElement as its parameter and returns a Boolean value indicating whether the condition is satisfied.
+    * - Returns: The same XCUIElement object after the scrolling action. This allows for method chaining.
     */
    @discardableResult public func scrollTo(dir: ElementModifier.Direction, searchCondition: ElementParser.MatchCondition) -> XCUIElement {
       ElementModifier.scrollTo(
@@ -21,11 +21,11 @@ extension XCUIElement {
       return self// Return the modified element
    }
    /**
-    * Scrolls the parent element until the specified child element is visible.
+    * This method scrolls the current XCUIElement (parent) until a specified child element becomes visible on the screen.
     * - Parameters:
-    *   - element: The child element to scroll to.
-    *   - dir: The direction in which to scroll.
-    * - Returns: The same XCUIElement object.
+    *   - element: The child XCUIElement that needs to be visible on the screen.
+    *   - dir: The direction to scroll. This can be up, down, left, or right.
+    * - Returns: The same XCUIElement object after the scrolling action. This allows for method chaining.
     */
    @discardableResult public func scrollToElement(element: XCUIElement, dir: ElementModifier.Direction = .up) -> XCUIElement {
       ElementModifier.scrollToElement(
@@ -36,9 +36,9 @@ extension XCUIElement {
       return self // Return the modified element
    }
    /**
-    * Scrolls the element until the search condition is met.
-    * - Parameter searchCondition: The condition to search for.
-    * - Returns: The same XCUIElement object.
+    * This method scrolls the current XCUIElement until a specified condition is met.
+    * - Parameter searchCondition: A closure that defines the condition to be met for the scrolling to stop. This closure takes an XCUIElement as its parameter and returns a Boolean value indicating whether the condition is satisfied.
+    * - Returns: The same XCUIElement object after the scrolling action. This allows for method chaining.
     */
    @discardableResult public func scrollTo(searchCondition: ElementParser.MatchCondition) -> XCUIElement {
       ElementModifier.scrollToElement(

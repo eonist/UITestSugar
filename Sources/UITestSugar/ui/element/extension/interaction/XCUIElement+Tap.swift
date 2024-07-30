@@ -6,10 +6,10 @@ import XCTest
  */
 extension XCUIElement {
    /**
-    * Helps to tap things that doesn't work with regular `.tap()` calls. as `.tap()` calls must be on .isHittable items
-    * - Description: Taps the element, even if it is not currently hittable.
-    * - Caution: ⚠️️ If you use this method in conjunction with: `.isVisibleInWindow` call. This method can still fail. If something is covering the element or is slightly within window etc
-    * - Returns: The same XCUIElement object.
+    * This method is designed to tap elements that are not responsive to the standard `.tap()` call, as `.tap()` requires elements to be .isHittable.
+    * - Description: This method attempts to tap the element regardless of its current hittability status.
+    * - Caution: ⚠️️ If this method is used in conjunction with the `.isVisibleInWindow` call, it may still fail. This can occur if an element is obstructed or only partially within the window.
+    * - Returns: The same XCUIElement object after the tap attempt.
     */
    @discardableResult public func forceTapElement() -> XCUIElement {
       if self.isHittable {
@@ -28,12 +28,12 @@ extension XCUIElement {
       return self // Returns the element after tapping it
    }
    /**
-    * Taps the element, with optional wait time before and after the tap.
-    * - Remark: This method may work better for macOS.
+    * Executes a tap action on the element, with the ability to specify a wait time before and after the tap.
+    * - Remark: This method may be more effective for macOS.
     * - Parameters:
-    *   - waitForExistence: The maximum time to wait for the element to exist before tapping it.
-    *   - waitAfter: The time to wait after tapping the element.
-    * - Returns: The same XCUIElement object.
+    *   - waitForExistence: The maximum duration (in seconds) to wait for the element to become available before executing the tap action.
+    *   - waitAfter: The duration (in seconds) to pause execution after the tap action has been performed.
+    * - Returns: The same XCUIElement instance, allowing for method chaining.
     */
    @discardableResult public func forceTap(waitForExistence: Double = 5, waitAfter: Double = 0.2) -> XCUIElement {
       guard self.waitForExistence(timeout: waitForExistence) else { 
@@ -44,11 +44,11 @@ extension XCUIElement {
       return self.wait(after: waitAfter) // Wait for the element to load
    }
    /**
-    * Taps the element and waits for a specified duration.
-    * - Description: This method provides a convenient way to tap and then wait for a duration (in seconds).
-    * - Example: `app.buttons.firstMatch.tap(waitAfter: 0.2)`
-    * - Parameter sec: The time to wait after tapping the element.
-    * - Returns: The same XCUIElement object.
+    * Executes a tap action on the element and then pauses execution for a specified duration.
+    * - Description: This method is useful when you want to simulate user interaction with the UI and then wait for a certain period of time, for example, to allow for animations to complete or for the UI to update. The duration of the pause is specified in seconds.
+    * - Example: `app.buttons.firstMatch.tap(waitAfter: 0.2)` This example taps the first matching button element and then pauses execution for 0.2 seconds.
+    * - Parameter sec: The duration of the pause in seconds.
+    * - Returns: The same XCUIElement instance, allowing for method chaining.
     */
    @discardableResult public func tap(waitAfter sec: Double) -> XCUIElement {
       // Tap the element
@@ -56,12 +56,15 @@ extension XCUIElement {
       return self.wait(after: sec)
    }
    /**
-    * Wait for existence then tap
-    * - Remark: `waitForExistence` is a native call
-    * - Fixme: ⚠️️ doc each line, use copilot
+    * Taps the element after waiting for its existence.
+    * - Description: This method waits for the element to exist within the specified timeout before performing a tap action. If the element does not exist within the timeout, the tap action is not performed.
+    * - Remark: `waitForExistence` is a native XCTest call that waits for the element to exist within the specified timeout.
+    * - Parameter waitForExistence: The maximum amount of time, in seconds, to wait for the element to exist before performing the tap action.
     * ## Examples:
+    * ```
+    * // Taps the first button element that appears within 0.2 seconds of waiting for its existence
     * app.buttons.firstMatch.tap(waitForExistence: 0.2)
-    * - Parameter waitForExistence: The maximum amount of time to wait for the element to exist before tapping it.
+    * ```
     */
    @discardableResult public func tap(waitForExistence sec: Double) -> XCUIElement? {
       guard self.waitForExistence(timeout: sec) else {
@@ -72,16 +75,17 @@ extension XCUIElement {
       return self
    }
    /**
-    * Wait for the element to exist within the specified timeout, then tap the element, and wait for the specified amount of time.
-    * ## Examples:
+    * This method performs a tap action on the element after ensuring its existence within a specified timeout. It then introduces a delay for a specified duration after the tap action.
+    * - Description: This method is useful when you want to simulate user interaction with the UI and then wait for a certain period of time, for example, to allow for animations to complete or for the UI to update. The duration of the pause is specified in seconds.
+    * - Example: 
     * ```
-    * // Tap the first button element that appears within 0.2 seconds of waiting for its existence, then wait for 2 seconds
+    * // This example waits for the first button element to appear within 0.2 seconds, taps it, and then pauses execution for 2 seconds.
     * app.buttons.firstMatch.tap(waitForExistence: 0.2, waitAfter: 2.0)
     * ```
     * - Parameters:
-    *   - secs: The maximum amount of time to wait for the element to exist.
-    *   - sleepSecs: The amount of time to wait after tapping the element.
-    * - Returns: The tapped element, or `nil` if it does not exist within the specified timeout.
+    *   - secs: The maximum duration (in seconds) to wait for the element to become available before executing the tap action.
+    *   - sleepSecs: The duration (in seconds) to pause execution after the tap action has been performed.
+    * - Returns: The same XCUIElement instance after performing the tap action and the delay, or `nil` if the element does not become available within the specified timeout.
     */
    @discardableResult public func tap(waitForExistence secs: Double, waitAfter sleepSecs: Double) -> XCUIElement? {
       guard self.waitForExistence(timeout: secs) else { 

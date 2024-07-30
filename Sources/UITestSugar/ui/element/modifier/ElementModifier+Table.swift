@@ -7,7 +7,8 @@ import XCTest
 extension ElementModifier {
    /**
     * Pulls a `TableView` to refresh.
-    * - Parameter tableElement: The table to pull-refresh.
+    * - Description: This method simulates a pull-to-refresh gesture on a specified table view. It is typically used to trigger data reloading in the table view by simulating a user's downward swipe gesture from the top of the table.
+    * - Parameter tableElement: The table view element on which the pull-to-refresh gesture will be performed.
     * - Remark: This function uses the `coordinate(withNormalizedOffset:)` and `press(forDuration:thenDragTo:)` methods of `XCUIElement` to simulate a pull-to-refresh gesture on the specified table.
     * ## Examples:
     * pullToRefresh(tableElement: app.tables.element)
@@ -24,20 +25,21 @@ extension ElementModifier {
       start.press(forDuration: 0, thenDragTo: finish)
    }
    /**
-    * Returns a cell at a specified index in a table.
+    * Retrieves a cell from a table at a specified index.
+    * - Description: This method fetches a cell from a table based on its index. It is particularly useful when you need to interact with a specific cell in a table view during UI tests.
     * - Parameters:
-    *   - element: The element to search from.
-    *   - idx: The index of the cell to return.
+    *   - element: The table element from which the cell will be retrieved.
+    *   - idx: The zero-based index of the cell to retrieve.
     * - Returns: An `XCUIElement` representing the cell at the specified index.
-    * - Remark: This function uses the `element(boundBy:)` method of `XCUIElementQuery` to return the cell at the specified index in the table.
+    * - Remark: This function utilizes the `element(boundBy:)` method of `XCUIElementQuery` to access the cell at the given index.
     * ## Examples:
     * let app = XCUIApplication()
     * let table = app.tables.element
     * let cell = ElementModifier.cell(element: table, idx: 0)
-    * - Note: The `idx` parameter is zero-based, so the first cell has an index of 0, the second cell has an index of 1, and so on.
+    * - Note: The `idx` parameter is zero-based, meaning the first cell is at index 0, the second at index 1, and so on.
     */
    public static func cell(element: XCUIElement, idx: Int) -> XCUIElement {
-      // Return the cell at the specified index in the table
+      // Fetch and return the cell at the specified index from the table
       element.tables.cells.element(boundBy: idx)
    }
 }

@@ -6,22 +6,29 @@ import XCTest
  */
 extension ElementParser {
    /**
-    * Returns an array of ancestral elements for a specified element.
+    * Returns an array of ancestral elements for a specified element, tracing back from a given root.
+    * - Description: This method recursively searches the ancestors of the specified element starting from the provided root. It collects all ancestors until it finds the first element that satisfies the specified condition. The result is an array of tuples, each containing the index and the element itself, tracing the path from the root to the element that meets the condition.
+    * - Remark: If no element satisfies the condition, this function returns nil, indicating that no suitable ancestor was found.
     * - Fixme: ⚠️️ Refactor with `.map` or `.flatMap` on this method when u have time
     * - Fixme: ⚠️️ You can also use `elementAtIndex` and `element.count`
-    * - Remark: This function recursively searches the ancestors of the specified element to find the first element that satisfies the specified condition. It then returns an array of all ancestral elements from the specified element to the element that satisfies the condition.
-    * - Remark: If no element satisfies the condition, this function returns nil.
     * - Parameters:
-    *   - root: The point to search from.
-    *   - condition: A closure that evaluates to true or false.
+    *   - root: The starting point for the search, represented as a tuple containing an index and an element.
+    *   - condition: A closure that evaluates each element to determine if it meets the desired criteria.
     * ## Example:
     * let app = XCUIApplication()
-    * let condition: ElementParser.MatchCondition = { element in let s = element.screenshot().image.size; Swift.print("s:  \(s)"); return s == size/*element == btn*/} // .screenshot().image.size == size
+    * let condition: ElementParser.MatchCondition = { element in
+    *     let size = element.screenshot().image.size
+    *     Swift.print("Size: \(size)")
+    *     return size.width > 100 && size.height > 100 // Example condition based on size
+    * }
     * let ancestry: [(Int, XCUIElement)]? = ElementParser.ancestry(root: (0, app), condition: condition)
-    * let imgElementParent  = ancestry?.last
-    * let indices: [Int] = ancestry!.map { $0.0 }
-    * let elements: [XCUIElement] = ancestry!.map { $0.1 }
-    * let descendant: XCUIElement? = ElementParser.element(root: app, index: indices)
+    * if let ancestry = ancestry {
+    *     let imgElementParent = ancestry.last
+    *     let indices: [Int] = ancestry.map { $0.0 }
+    *     let elements: [XCUIElement] = ancestry.map { $0.1 }
+    *     let descendant: XCUIElement? = ElementParser.element(root: app, index: indices)
+    *     // Further processing or assertions can be done here
+    * }
     */
    public static func ancestry(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
       var collector: [(Int, XCUIElement)]?
@@ -44,19 +51,19 @@ extension ElementParser {
       return collector
    }
    /**
-    * Returns an element in a hierarchy based on a `mapIndex`.
-    * - Remark: This function recursively searches the hierarchy of the specified root element to find the element at the specified index. It returns the element if it exists, or nil if it doesn't.
-    * - Remark: If the index is empty, this function returns the root element.
-    * - Remark: If the index is at its end point, this function cuts off the branch and returns the element at the specified index.
-    * - Remark: If the index is not at its end point, this function recursively calls itself on the child element at the specified index.
-    * - Fixme: ⚠️️ Base it on query instead, because it's faster.
-    * - Fixme: ⚠️️ You can also use `elementAtIndex` and `element.count`.
+    * Retrieves an element from a hierarchical structure based on a specified index path.
+    * - Description: This method navigates through the hierarchy of the specified root element to locate and return an element at a given index path. The index path is an array of integers where each integer represents the child index at that level of the hierarchy.
+    * - Remark: If the index path is empty, the root element itself is returned.
+    * - Remark: If the index path reaches its final value, the search terminates and returns the element at that final index.
+    * - Remark: For non-terminal values in the index path, the method recursively continues the search from the child element at the current index.
+    * - Fixme: ⚠️️ Consider optimizing by using a query-based approach for faster element retrieval.
+    * - Fixme: ⚠️️ Utilize `elementAtIndex` and `element.count` to enhance performance and readability.
     * - Parameters:
-    *   - root: The root element to search from.
-    *   - index: An array of integers that represents the path to the desired element.
+    *   - root: The root element from which the search begins.
+    *   - index: An array of integers representing the hierarchical path to the desired element.
     * ## Example:
     * let app = XCUIApplication()
-    * let element = ElementParser.element(root: app, index: [0, 1, 2])
+    * let targetElement = ElementParser.element(root: app, index: [0, 1, 2])
     */
    public static func element(root: XCUIElement, index: [Int]) -> XCUIElement? {
       let children: [XCUIElement] = root.children(matching: .any).allElementsBoundByIndex
@@ -80,13 +87,13 @@ extension ElementParser {
       return nil
    }
    /**
-    * Returns an array of ancestral elements for a specified element.
+    * Returns an array of ancestral elements for a specified element, tracing the path from the root to the target element.
+    * - Description: This method navigates up the hierarchy from a specified element, identified by an index path, to the root element. It collects all ancestral elements along the path, providing a clear trace of the hierarchy leading to the target element.
     * - Parameters:
-    *   - root: The root element to search from.
-    *   - index: An array of integers that represents the path to the desired element.
-    * - Remark: This function recursively searches the hierarchy of the specified root element to find the element at the specified index. It then returns an array of all ancestral elements from the specified element to the root element.
-    * - Remark: If the index is empty, this function returns an empty array.
-    * - Remark: If the index is not valid, this function returns an empty array.
+    *   - root: The root element from which the search begins.
+    *   - index: An array of integers representing the hierarchical path to the target element.
+    * - Remark: This function performs a recursive search through the hierarchy based on the provided index path. If the index path is valid, it returns an array of all ancestral elements from the target element up to the root. If the index path is empty or invalid, it returns an empty array.
+    * - Remark: This method is particularly useful for debugging purposes or when a clear understanding of the element hierarchy is required.
     * ## Example:
     * let app = XCUIApplication()
     * let pathToElement = [0, 1, 2]

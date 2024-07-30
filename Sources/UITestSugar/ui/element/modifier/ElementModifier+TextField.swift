@@ -8,31 +8,32 @@ import XCTest
  */
 public class ElementModifier {
    /**
-    * Clears any current text in a text field before typing in the new value.
+    * Clears any existing text in a text field and types a new value.
+    * This method first clears any text present in the specified text field and then types the provided text into it.
     * - Parameters:
-    *   - element: The element to clear and type text into.
-    *   - text: The text to enter into the field.
-    * - Remark: This function uses the `clearAndEnterText(text:)` method of `XCUIElement` to clear any current text in the field before typing in the new value.
-    * - Important: ⚠️️ This solution has problems with long pre-existing texts. If the text field already contains a long text, this function may not clear the entire text field. Consider using a different solution if you encounter this issue.
-    * - Important: ⚠️️ FOR PASSWORD-FIELDS you may need to read this: https://stackoverflow.com/questions/32184837/ui-testing-failure-neither-element-nor-any-descendant-has-keyboard-focus-on-se
-    * - Fixme: ⚠️️ Consider making this a try error method.
+    *   - element: The XCUIElement representing the text field to modify.
+    *   - text: The new text to be entered into the text field.
+    * - Remark: Utilizes the `clearAndEnterText(text:)` method of `XCUIElement` to clear existing text and input new text.
+    * - Important: ⚠️️ This method may not effectively clear very long texts. For fields with extensive existing text, consider alternative clearing methods.
+    * - Important: ⚠️️ For password fields, refer to: https://stackoverflow.com/questions/32184837/ui-testing-failure-neither-element-nor-any-descendant-has-keyboard-focus-on-se
+    * - Fixme: ⚠️️ Consider implementing error handling for this method.
     * ## Examples:
     * let app = XCUIApplication()
     * let textField = app.textFields.element
     * ElementModifier.clearAndTypeText(element: textField, text: "Hello, world!")
     */
    public static func clearAndTypeText(element: XCUIElement, text: String) {
-      // ⚠️️ Might not work with secure text now, see older version of this where it worked etc
-      // Clear any current text in the field
-      // and enter the new text
+      // Note: This method may not function correctly with secure text fields. Refer to previous versions for secure text handling.
+      // Clear any existing text and type the new text
       element.clearAndEnterText(text: text)
    }
    /**
-    * Clears a search field and types in the new text.
+    * Clears any existing text from a search field and inputs new text.
+    * This method ensures that the search field is first activated and cleared of any previous entries before new text is typed into it.
     * - Parameters:
-    *   - searchField: The search field to clear and type text into.
-    *   - text: The text to enter into the field.
-    * - Remark: This function uses the `tap(waitForExistence:waitAfter:)` method of `XCUIElement` to tap the search field and its clear button, and the `typeText(_:)` method of `XCUIElement` to enter the new text into the field.
+    *   - searchField: The XCUIElement representing the search field to be modified.
+    *   - text: The new text to be entered into the search field.
+    * - Remark: This function employs the `tap(waitForExistence:waitAfter:)` method to focus the search field and the `typeText(_:)` method to input text. It ensures the search field's clear button is tapped to remove old text.
     * ## Examples:
     * let app = XCUIApplication()
     * let searchField = app.searchFields.firstMatch
@@ -58,12 +59,13 @@ public class ElementModifier {
  */
 extension ElementModifier {
    /**
-    * Returns `value` as a String.
+    * Retrieves the text content of an element.
+    * This method extracts the text content from the `value` property of an `XCUIElement`, typically used for elements like text fields and labels.
     * - Parameters:
-    *   - element: The element to get text from.
-    * - Remark: This function uses the `value` property of `XCUIElement` to get the text of the specified element as a string.
-    * - Important: ⚠️️ This function will fail if `value` is not a `String` type. Consider using a different solution if you encounter this issue.
-    * - Fixme: ⚠️️ Consider moving this function to a parser.
+    *   - element: The XCUIElement from which to retrieve the text.
+    * - Remark: This function directly accesses the `value` property of `XCUIElement` to obtain the text as a string.
+    * - Important: ⚠️️ This function will return an error if the `value` property does not contain a `String`. Use alternative methods if this issue arises.
+    * - Fixme: ⚠️️ Consider refactoring this function into a more appropriate class, such as a parser, to improve modularity.
     * ## Examples:
     * let app = XCUIApplication()
     * let textField = app.textFields.element
@@ -80,16 +82,3 @@ extension ElementModifier {
    }
 }
 #endif
-//guard let stringValue: String = element.value as? String else {
-//   XCTFail("⚠️️ Tried to clear and enter text into a non string value")
-//   return
-//}
-//element.tap(waitForExistence: 5, waitAfter: 0.5) // it taps in the center
-//for _ in 0..<stringValue.count { // Fixme: ⚠️️ do stringValue.forEach {_ in } here, test first
-//   element.typeText(XCUIKeyboardKey.delete.rawValue) // this takes a while if there is alot of text
-//   // - Fixme: ⚠️️ fix this, google etc
-//   element.tap() // Ensures that if text is longer than center, that center is reset sort of
-//}
-////      clearTextField(element: element) // extra
-//if stringValue.isEmpty { element.tap() } // ⚠️️ unsure why we tap again?
-//element.typeText(text)

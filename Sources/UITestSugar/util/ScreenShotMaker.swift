@@ -7,23 +7,21 @@ import XCTest
 */
 public final class ScreenShotMaker {
    /**
-    * Screen-shot for iOS / macOS
-    * - Abstract: This function takes a screenshot of either a window, an app, or the entire screen, depending on the parameters passed in.
-    * - Description: Take a screenshot of a given app and add it to the test attachements.
-    * - Remark: You can find screenshots in Xcode -> Report navigator -> select your test -> show gallery
-    * - Remark: Or go to: DerivedData -> ProjectName... -> Logs -> Test -> find .xcresult -> Show Package Contents -> Attachments
-    * - Remark: Or search for the file `Screenshot` in deriveddata root folder
-    * - Note: Ref: https://stackoverflow.com/a/56345842/5389500
-    * - Note: There is a xcode gallery feature to browse screenshots see: https://stackoverflow.com/a/74678917/5389500
-    * - Note: https://www.appsdeveloperblog.com/xcuiscreenshot-creating-screenshots-in-ui-test/
-    * - Fixme: ⚠️️ clean up comments
+    * Takes a screenshot of a specified app, window, or the entire screen for iOS/macOS testing.
+    * - Abstract: This function captures a screenshot based on the provided parameters, which can target a specific app window, the entire app, or the entire screen. The screenshot is then attached to the specified XCTestCase.
+    * - Description: Depending on the parameters, this function can capture a screenshot of a specific window within an app (useful for macOS), the entire app, or the entire screen. The screenshot is added to the test attachments, aiding in visual verification during automated testing.
+    * - Remark: Screenshots can be accessed via Xcode's Report navigator by selecting your test and viewing the gallery.
+    * - Remark: Alternatively, navigate to DerivedData -> ProjectName... -> Logs -> Test -> locate .xcresult -> Show Package Contents -> Attachments to find the screenshots.
+    * - Remark: Screenshots can also be searched for in the DerivedData root folder by the file name `Screenshot`.
+    * - Note: For more details on managing screenshots in Xcode, refer to: https://stackoverflow.com/a/56345842/5389500 and https://stackoverflow.com/a/74678917/5389500
+    * - Note: Learn about creating screenshots in UI tests at: https://www.appsdeveloperblog.com/xcuiscreenshot-creating-screenshots-in-ui-test/
     * - Parameters:
-    *   - testCase: Needed to add the attachment (is optional to avoid guard in caller etc)
-    *   - app: The app to take a screenshot of.
-    *   - name: The name of the screenshot.
-    *   - useWin: capture only window in app (relevant for macOS)
+    *   - testCase: The XCTestCase instance to which the screenshot will be attached. This parameter is optional to simplify calling conditions.
+    *   - app: The application instance from which to capture the screenshot.
+    *   - name: The designated name for the screenshot file.
+    *   - useWin: A boolean flag to specify if only the window should be captured (relevant for macOS applications).
     * ## Examples:
-    * ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests where you want the screenshot to be taken
+    * ScreenShotMaker.makeScreenShot(testCase: self) // Use this line in your UITests at the point where a screenshot is required.
     */
    @discardableResult public static func makeScreenShot(name: String, testCase: XCTestCase?, app: XCUIApplication? = nil, useWin: Bool = false) -> XCUIScreenshot? {
        // If useWin is true and an app is provided, take a screenshot of the first window of the app
@@ -52,7 +50,8 @@ public final class ScreenShotMaker {
       }
    }
    /**
-    * Takes a screenshot of the entire screen.
+    * Takes a screenshot of the entire screen and attaches it to a specified XCTestCase.
+    * - Description: This method captures a screenshot of the entire screen of the device. It is useful for verifying the overall UI layout in tests or capturing the state of the app for debugging purposes. The screenshot is then attached to the provided XCTestCase, allowing it to be reviewed later as part of the test results.
     * - Parameters:
     *   - name: The name of the screenshot file.
     *   - testCase: The XCTestCase instance that the screenshot will be attached to.
@@ -83,12 +82,13 @@ public final class ScreenShotMaker {
       return screenshot
    }
    /**
-    * Takes a screenshot of the provided app and saves it as an attachment to the provided XCTestCase.
+    * Captures a screenshot of the specified application and attaches it to the given XCTestCase.
+    * - Description: This method takes a screenshot of the entire application as displayed on the device at the time of invocation. The screenshot is then attached to the specified XCTestCase, which can be useful for documentation or debugging purposes during automated testing.
     * - Parameters:
-    *   - name: The name of the screenshot attachment.
-    *   - testCase: The XCTestCase to which the screenshot attachment should be added.
-    *   - app: The XCUIApplication instance to be screenshot.
-    * - Returns: The XCUIScreenshot instance of the screenshot taken.
+    *   - name: The name to be assigned to the screenshot attachment.
+    *   - testCase: The XCTestCase instance where the screenshot will be attached.
+    *   - app: The XCUIApplication instance from which the screenshot will be taken.
+    * - Returns: An XCUIScreenshot object representing the captured screenshot.
     *
     * Example usage:
     * ```
@@ -117,12 +117,13 @@ public final class ScreenShotMaker {
       return screenshot
    }
    /**
-    * This function takes a screenshot of the provided window and saves it as an attachment to the provided XCTestCase.
+    * Captures a screenshot of a specific window and attaches it to a test case.
+    * - Description: This method captures the visual state of a specified window element within the application and creates an attachment for the given XCTestCase. This is particularly useful for documenting or debugging the appearance of specific windows during automated UI tests.
     * - Parameters:
-    *   - name: The name of the screenshot attachment.
-    *   - testCase: The XCTestCase to which the screenshot attachment should be added.
-    *   - window: The XCUIElement instance of the window to be screenshot.
-    * - Returns: The XCUIScreenshot instance of the screenshot taken.
+    *   - name: The name to be assigned to the screenshot attachment.
+    *   - testCase: The XCTestCase instance where the screenshot will be attached.
+    *   - window: The XCUIElement representing the window to be captured.
+    * - Returns: An XCUIScreenshot object representing the captured screenshot, or nil if the testCase is nil.
     */
    @discardableResult public static func screenShotWindow(name: String, testCase: XCTestCase?, window: XCUIElement) -> XCUIScreenshot? {
       // Check if the provided XCTestCase is not nil
@@ -144,13 +145,13 @@ public final class ScreenShotMaker {
       // Return the XCUIScreenshot instance of the screenshot taken
       return screenshot
    }
-
    /**
-    * This function creates an XCTAttachment instance from the provided screenshot and name.
+    * Creates an XCTAttachment instance using a screenshot and a specified name.
+    * This method is useful for creating attachments from screenshots during UI testing, allowing these screenshots to be added to test cases for documentation or debugging purposes.
     * - Parameters:
-    *   - name: The name of the screenshot attachment.
-    *   - screenshot: The XCUIScreenshot instance of the screenshot to be attached.
-    * - Returns: The XCTAttachment instance of the screenshot attachment.
+    *   - name: The name to be assigned to the screenshot attachment.
+    *   - screenshot: The XCUIScreenshot instance to be used for creating the attachment.
+    * - Returns: An XCTAttachment created from the provided screenshot, named according to the specified parameter.
     */
    fileprivate static func attachment(name: String, screenshot: XCUIScreenshot) -> XCTAttachment {
       // Create an XCTAttachment instance from the provided screenshot and name

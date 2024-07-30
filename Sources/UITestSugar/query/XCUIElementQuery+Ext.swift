@@ -7,7 +7,8 @@ import XCTest
  */
 extension XCUIElementQuery {
    /**
-    * Returns all descendants of a query that are currently visible and can be interacted with.
+    * This method is used to fetch all the descendants of a query that are currently visible on the screen and can be interacted with by the user.
+    * - Description: It returns an array of XCUIElement objects that are hittable, meaning they are not only visible but also enabled for user interaction.
     * - Returns: An array of XCUIElement objects that are currently hittable.
     * - Example: `XCUIApplication().descendants(matching: .any).hittableElements.count` returns the number of hittable elements.
     */

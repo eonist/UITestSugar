@@ -6,7 +6,8 @@ import XCTest
  */
 extension ElementModifier {
    /**
-    * Returns a `WebView` item for a specified title
+    * Retrieves a `WebView` item based on the specified link title within an application.
+    * - Description: This method searches for a web link within the application's web content using the provided title and returns the corresponding `WebView` item. It is particularly useful for interacting with hyperlinks in web-based interfaces.
     * - Important: ⚠️️ This function may not work if the link title is not unique. Consider using a different solution if you encounter this issue.
     * - Remark: This function uses the `links` property of `XCUIApplication` to return a `WebView` item for the specified title.
     * - Remark: You can also use the `Accessibility Inspector.app` in macOS or enable the iOS Simulator's Accessibility Inspector to inspect elements in the app.
