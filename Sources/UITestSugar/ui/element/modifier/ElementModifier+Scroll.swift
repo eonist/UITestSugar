@@ -51,7 +51,7 @@ extension ElementModifier {
             parent.swipeUp() // Perform an upward swipe on the parent element
          } else { // If the direction is not upwards
             parent.swipeDown() // Perform a downward swipe on the parent element
-         } 
+         }
       }
    }
    /**

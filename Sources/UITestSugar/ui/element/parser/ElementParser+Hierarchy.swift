@@ -71,8 +71,8 @@ extension ElementParser {
          return root // return the root element
       }
       // If the index is at its end point, cut off the branch and return the element at the specified index
-      else if index.count == 1 && index[0] < children.count { 
-         return children[index[0]] 
+      else if index.count == 1 && index[0] < children.count {
+         return children[index[0]]
       }
       // If the index is not at its end point, recursively call the element function on the child element at the specified index
       else if index.count > 1 && !children.isEmpty && index[0] < children.count {

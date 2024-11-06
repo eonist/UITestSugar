@@ -23,16 +23,16 @@ extension XCUIElement {
     * - Description: This method checks if the element is visible within the application's window. It verifies that the element is not only present in the UI hierarchy but also not obscured by other elements, ensuring it can be seen by the user.
     * - Returns: `true` if the element is visible, `false` otherwise.
     */
-   public var isVisible: Bool { 
-      ElementAsserter.isVisibleInWindow(element: self) 
+   public var isVisible: Bool {
+      ElementAsserter.isVisibleInWindow(element: self)
    }
    /**
     * Asserts if the element exists and is currently hittable.
     * - Description: This method checks if the element is present in the UI hierarchy and can be interacted with (hittable). An element is considered hittable if it is visible and not obscured by other elements, allowing user interaction such as tapping.
     * - Returns: `true` if the element exists and is hittable, `false` otherwise.
     */
-   public var existsAndIsHittable: Bool { 
-      ElementAsserter.existsAndIsHittable(element: self) 
+   public var existsAndIsHittable: Bool {
+      ElementAsserter.existsAndIsHittable(element: self)
    }
    /**
     * Returns the state of a `UISwitch` element.

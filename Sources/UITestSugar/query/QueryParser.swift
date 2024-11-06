@@ -124,7 +124,7 @@ public class QueryParser {
     * ```
     */
    public static func elements(query: XCUIElementQuery, type: XCUIElement.ElementType = .any) -> [XCUIElement] {
-      return (0..<query.count).indices.map { index in 
+      (0..<query.count).indices.map { index in
          query.children(matching: type).element(boundBy: index) // bound by is a way to access element by index
       }
    }

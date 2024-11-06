@@ -26,7 +26,7 @@ public class QueryAsserter {
          for: exists, // The expectation to evaluate
          evaluatedWith: label, // The object to evaluate the expectation against
          handler: nil // The handler to call when the expectation is fulfilled
-      ) 
+      )
       testCase.waitForExpectations( // Wait for the expectation to be fulfilled within the provided timeout
          timeout: timeOut, // The maximum amount of time to wait for the expectation to be fulfilled
          handler: nil // The handler to call when the expectation is fulfilled or times out

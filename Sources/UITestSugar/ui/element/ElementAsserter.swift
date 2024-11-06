@@ -35,8 +35,8 @@ public class ElementAsserter {
     */
    public static func isVisibleInWindow(element: XCUIElement) -> Bool {
       // Check if the element exists and has a non-empty frame
-      guard element.exists && !element.frame.isEmpty else { 
-         return false 
+      guard element.exists && !element.frame.isEmpty else {
+         return false
       }
       // Check if the element's frame is contained within the frame of the main window
       return XCUIApplication().windows.element(boundBy: 0).frame.contains(element.frame)
@@ -53,7 +53,7 @@ public class ElementAsserter {
     */
    public static func existsAndIsHittable(element: XCUIElement) -> Bool {
       // Check if the element exists and is hittable
-      return element.exists && element.isHittable
+      element.exists && element.isHittable
    }
    /**
     * Asserts if an element exists.
@@ -66,7 +66,7 @@ public class ElementAsserter {
     */
    public static func exists(element: XCUIElement) -> Bool {
       // Check if the element exists
-      return element.exists
+      element.exists
    }
    /**
     * Asserts if an element exists within a specified timeout period.
@@ -109,7 +109,7 @@ public class ElementAsserter {
     */
    public static func hasText(element: XCUIElement, text: String) -> Bool {
       // Check if the specified element has the specified text
-      return element.staticTexts[text].exists
+      element.staticTexts[text].exists
    }
    /**
     * Verifies if an element has a specific label with a given text and type.
@@ -127,7 +127,7 @@ public class ElementAsserter {
     */
    public static func hasLabel(element: XCUIElement, text: String, type: XCUIElementType) -> Bool {
       // Check if the specified element has a label with the specified text and type
-      return element.firstDescendant(label: text, type: type).exists
+      element.firstDescendant(label: text, type: type).exists
    }
 }
 #endif

@@ -106,7 +106,7 @@ extension Array where Element: XCUIElement {
     */
    public func debug() -> String {
       // Call the `debug` method of the `ElementDebugger` class to generate a debug string for the elements
-      return ElementDebugger.debug(elements: self)
+      ElementDebugger.debug(elements: self)
    }
 }
 #endif

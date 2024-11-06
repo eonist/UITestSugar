@@ -1,4 +1,8 @@
-whitelist_rules:
+only_rules:
+  # - force_unwrapping
+  # - force_cast
+  # - weak_computed_property
+  # - unused_private_declaration
   - anyobject_protocol
   - array_init
   #- attributes
@@ -54,8 +58,8 @@ whitelist_rules:
   - lower_acl_than_parent
   - mark
   - modifier_order
-  - multiline_arguments
- ## - multiline_function_chains
+ # - multiline_arguments
+#  - multiline_function_chains
   - multiline_literal_brackets
   - multiline_parameters
   - multiline_parameters_brackets
@@ -102,7 +106,7 @@ whitelist_rules:
   - trailing_newline
   - trailing_semicolon
   - trailing_whitespace
-  - type_name
+  #- type_name
 #  - unavailable_function
   - unneeded_break_in_switch
   - unneeded_parentheses_in_closure_argument
@@ -118,16 +122,12 @@ whitelist_rules:
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
   - void_return
-  - weak_computed_property
   - weak_delegate
   - xct_specific_matcher
   - xctfail_message
   - yoda_condition
 analyzer_rules:
   - unused_import
-  - unused_private_declaration
-force_cast: warning
-force_unwrapping: warning
 number_separator:
   minimum_length: 5
 object_literal:
@@ -139,8 +139,8 @@ identifier_name:
     warning: 100
     error: 100
   min_length:
-    warning: 1
-    error: 1
+    warning: 0
+    error: 0
   validates_start_with_lowercase: false
   allowed_symbols:
     - '_'
@@ -153,4 +153,7 @@ identifier_name:
     - 'x2'
     - 'y1'
     - 'y2'
-macOS_deployment_target: '10.12'
+# macOS_deployment_target: '10.12'
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - 'Packages/External/SwiftDraw'
+    - 'Packages/External'

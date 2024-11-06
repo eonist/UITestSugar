@@ -13,7 +13,7 @@ public class TabBarHelper {
     */
    public static func tabButton(tabButtonName: String) -> XCUIElement {
       // Return the tabBar button with the specified name
-      return XCUIApplication().firstDescendant(type: .button, id: tabButtonName)
+      XCUIApplication().firstDescendant(type: .button, id: tabButtonName)
    }
    /**
     * Retrieves a tabBar button by its index.
