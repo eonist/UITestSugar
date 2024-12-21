@@ -46,7 +46,9 @@ extension XCUIElement {
     *   ```
     */
    public func clearAndEnterText(text: String) {
-      // Check if the element's value is a string - Fixme: ⚠️️ add more doc how this works
+      // Check if the element's value is a string by attempting to cast the value to a String type.
+      // This ensures that the element can hold text, which is necessary for operations like clearing and entering new text.
+      // If the cast fails, it indicates that the element's value is not a string, and an error is logged.
       guard let stringValue: String = self.value as? String else {
          XCTFail("⚠️️ Tried to clear and enter text into a non string value")
          return
