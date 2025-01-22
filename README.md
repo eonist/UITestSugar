@@ -1,12 +1,18 @@
 [![Tests](https://github.com/eonist/UITestSugar/actions/workflows/Tests.yml/badge.svg)](https://github.com/eonist/UITestSugar/actions/workflows/Tests.yml)
 [![codebeat badge](https://codebeat.co/badges/ab6aca0b-c9eb-486a-8209-6b0113840e0c)](https://codebeat.co/projects/github-com-eonist-uitestsugar-master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![SwiftPM](https://img.shields.io/badge/SwiftPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
+[![iOS](https://img.shields.io/badge/iOS-17%2B-blue.svg)](https://developer.apple.com/ios/)
+[![macOS](https://img.shields.io/badge/macOS-14%2B-blue.svg)](https://developer.apple.com/macos/)
+![Swift 5.9](https://img.shields.io/badge/Swift-5.9-orange.svg)
+
 
 # UITestSugar
 Sugar for UITesting
 
 ### Description
 
-is a Swift library that provides a collection of utilities and extensions to simplify UI testing in iOS and macOS applications. It streamlines the process of writing UI tests by offering convenient methods for interacting with UI elements, taking screenshots, and debugging UI hierarchies.
+`UITestSugar` is a Swift library that provides a collection of utilities and extensions to simplify UI testing in iOS and macOS applications. It streamlines the process of writing UI tests by offering convenient methods for interacting with UI elements, taking screenshots, and debugging UI hierarchies.
 
 ### Brief overview of what UITestSugar
 
@@ -16,6 +22,9 @@ is a Swift library that provides a collection of utilities and extensions to sim
 
 ### How do I get it
 - SPM: `"https://github.com/eonist/UITestSugar"`
+
+> [!IMPORTANT]
+> When adding `UITestSugar`, make sure to select the UITest target instead of the app target. The app target cannot load the `XCTest.framework` that `UITestSugar` uses, which will cause the build to fail.
 
 ### By button label title
 ```swift
@@ -45,21 +54,50 @@ searchedElement.exists // true , false
 searchedElement.firstMatch.tap()
 ```
 
-### Note:
-- **Important:** When adding `UITestSugar` to an Xcode project via Swift Package Manager, make sure to select the `UITest target` instead of the app target. The app target cannot load the `XCTest.framework` that `UITestSugar` uses, which will cause the build to fail.
-- **Note:** If you are using Carthage to manage dependencies, you need to add the correct framework search path in build settings. For more information, see [this Stack Overflow post](https://stackoverflow.com/questions/44665656/creating-a-framework-that-uses-xctest).
-- **Example:** You can see an example of `UITestSugar` being nested into another testing framework in [this GitHub repository](https://github.com/eonist/TestRunner).
+### Taking Screenshots
 
-### Gotchas:
-- Sometimes it can be difficult to access an element, such as a button inside a button in a cell. In these cases, you can try changing the app UI to make the element more accessible. For example, you can turn one button into a view or disable accessibility for one button and hit the cell itself instead, which triggers the button.
-- Element labels can be used to target elements that have children with text fields or labels with text. This can be useful for finding elements that might be difficult to access using other methods.
-- QuickTime can be used to record UItests, in order to pinpoint errors that happend etc. Sometimes logs can be hard to decipher etc.
+`UITestSugar` provides the `ScreenShotMaker` utility to capture screenshots during UI tests.
 
-### Resources:
-- https://github.com/joemasilotti/UI-Testing-Cheat-Sheet (The selected link is a GitHub repository that provides a cheat sheet for UI testing in iOS, including tips and tricks for using Xcode's UI testing framework)
-- Great primer for iOS UITesting: https://medium.com/tauk-blog/fundamentals-of-xcuitest-7dcbc23c4ee
+```swift
+import UITestSugar
+import XCTest
 
-### Example:
+class MyUITests: XCTestCase {
+   func testExample() {
+      let app = XCUIApplication()
+      app.launch()
+
+      // Capture a screenshot of the entire screen
+      ScreenShotMaker.makeScreenShot(name: "FullScreen", testCase: self)
+
+      // Capture a screenshot of a specific app window (macOS only)
+      ScreenShotMaker.makeScreenShot(name: "AppWindow", testCase: self, app: app, useWin: true)
+   }
+}
+```
+
+> [!NOTE] 
+> The screenshots will be attached to your test results and can be viewed in Xcode's **Reports** navigator.
+
+**Example: Entering Text into a Text Field**
+
+```swift
+import UITestSugar
+import XCTest
+
+class MyUITests: XCTestCase {
+      func testEnterText() {
+         let app = XCUIApplication()
+         app.launch()
+
+         if let textField = app.firstDescendant(type: .textField) {
+            textField.clearAndEnterText(text: "Hello, UITestSugar!")
+         }
+      }
+}
+```
+
+**Apples own UI**
 - When interacting with Apple's own UI, such as the Share modal in iOS, finding labels and IDs in Accessibility Inspector might not be enough. In some cases, the inspector might display a different label than the one that is actually used in the app. To find the correct label, you can log the label of each element using the `label` property and the `identifier` property. For example: `activityListView.descendants(type: .button, id: nil).allElementsBoundByIndex.forEach { Swift.print("$0.label: \($0.label) $0.identifier: \($0.identifier) ") }`.
 
 ```swift
@@ -71,20 +109,23 @@ activityListView.descendants(type: .button, id: nil).allElementsBoundByIndex.for
 ### Great for debugging hirarchy
 
 ```swift
-let hierarchyStr: String = ElementDebugger.debugHierarchy(element: app, type: .any, indentationLevel: 1)
-Swift.print("Hierarchy: \n" + hierarchyStr)
-```
+import UITestSugar
+import XCTest
 
-### Take screenshot:
-```swift
-ScreenShotMaker.makeScreenShot() // Put this line in your UITests where you want the screenshot to be taken
-```
+class MyUITests: XCTestCase {
+      func testDebugHierarchy() {
+         let app = XCUIApplication()
+         app.launch()
 
-### More advance screenshots:
-```swift
-ScreenShotMaker.makeScreenShot(testCase: self) // Put this line in your UITests where you want the screenshot to be taken
+         // Generate and print the hierarchy string
+         let hierarchyStr = ElementDebugger.debugHierarchy(element: app, type: .any)
+         print("Hierarchy: \n" + hierarchyStr)
+      }
+}
 ```
-
+ 
+> [!NOTE]
+> Be cautious when debugging the entire application hierarchy, as it can take a significant amount of time for complex UIs.
 
 ### Installation
 
@@ -102,6 +143,9 @@ If you encounter any issues with the installation process, try the following tro
 - Make sure that your project is configured to use Swift Package Manager. To do this, select your project in the Project navigator, select the Swift Packages tab, and make sure that the "Enable Swift Packages" checkbox is selected.
 - Make sure that your project is configured to use the correct version of Swift. To do this, select your project in the Project navigator, select the Build Settings tab, and make sure that the "Swift Language Version" setting is set to the correct version of Swift.
 
+> [!NOTE]
+> **Example:** You can see an example of `UITestSugar` being nested into another testing framework in [this GitHub repository](https://github.com/eonist/TestRunner).
+
 ## General UITesting tips:
 - Use descriptive labels and IDs for UI elements: When writing UI tests, it's important to use descriptive labels and IDs for UI elements to make it easier to find and interact with them. Avoid using generic labels like "Button" or "Label", and instead use labels that describe the purpose of the element, such as "Login Button" or "Username Label".
 - Use page objects to organize your tests: Page objects are a design pattern that can help you organize your UI tests and make them more maintainable. A page object is a class that represents a page or screen in your app, and contains methods for interacting with the UI elements on that page. By using page objects, you can write tests that are more modular and easier to maintain.
@@ -111,12 +155,23 @@ If you encounter any issues with the installation process, try the following tro
 - If you encounter strage bugs whule using doing UITesting in XCode. It is recommend you clean and delete derived data often, as well as restart XCode from time to time.
 - Print the entire UI:  `Swift.print(app.debugDescription)` 
 
+### Gotchas:
+- Sometimes it can be difficult to access an element, such as a button inside a button in a cell. In these cases, you can try changing the app UI to make the element more accessible. For example, you can turn one button into a view or disable accessibility for one button and hit the cell itself instead, which triggers the button.
+- Element labels can be used to target elements that have children with text fields or labels with text. This can be useful for finding elements that might be difficult to access using other methods.
+- QuickTime can be used to record UItests, in order to pinpoint errors that happend etc. Sometimes logs can be hard to decipher etc.
+
+### Resources:
+- [UI Testing Cheat Sheet](https://github.com/joemasilotti/UI-Testing-Cheat-Sheet): A comprehensive guide for UI testing in iOS.
+- [Fundamentals of XCUITest](https://medium.com/tauk-blog/fundamentals-of-xcuitest-7dcbc23c4ee): An excellent primer on UI testing with XCUITest.
+- [Creating Screenshots in UI Tests](https://www.appsdeveloperblog.com/xcuiscreenshot-creating-screenshots-in-ui-test/): Learn more about capturing screenshots during UI testing.
+- [Debugging UI Hierarchies](https://developer.apple.com/documentation/xctest/xcuielement/1500898-debugdescription): Official documentation on debugging UI hierarchies.
+
 ### Todo:
-- Add github actions ✅
-- Maybe add some of the method in the Kif.framework?
-- UITest tap should have param to set shouldFail: true
-- Add example gif to readme
-- Write about things that are different when using this with SwiftUI
+- [x] Add GitHub Actions
+- [ ] Maybe add some of the methods from the KIF framework
+- [ ] UITest tap should have a parameter to set `shouldFail: true`
+- [ ] Add example GIF to README
+- [ ] Write about differences when using this with SwiftUI
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. The MIT License is a permissive open source license that allows you to use, copy, modify, and distribute the software for any purpose, as long as you include the original copyright and license notice.

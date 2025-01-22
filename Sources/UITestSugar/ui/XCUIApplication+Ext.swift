@@ -17,5 +17,18 @@ extension XCUIApplication {
       // Dismiss the popup by tapping the "Cancel" button
       otherElements["Cancel"].tap()
    }
+   // a more robust soluton:
+   // fixme: add doc
+   public func dismissPopup2() {
+      let cancelButton = buttons["Cancel"]
+      if cancelButton.exists && cancelButton.isHittable {
+         cancelButton.tap()
+      } else if let dismissButton = alerts.buttons.firstMatch, dismissButton.isHittable {
+         dismissButton.tap()
+      } else {
+         // Optionally, tap outside the popup to dismiss it
+         tap()
+      }
+   }
 }
 #endif

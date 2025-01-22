@@ -50,6 +50,19 @@ extension ElementParser {
       }
       return collector
    }
+   // Suggested by o1: 
+   public static func ancestry(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
+      if condition(root.element) {
+         return [root]
+      }
+      let children = root.element.children(matching: .any).allElementsBoundByIndex
+      for (index, child) in children.enumerated() {
+         if let result = ancestry(root: (index, child), condition: condition) {
+               return [root] + result
+         }
+      }
+      return nil
+   }
    /**
     * Retrieves an element from a hierarchical structure based on a specified index path.
     * - Description: This method navigates through the hierarchy of the specified root element to locate and return an element at a given index path. The index path is an array of integers where each integer represents the child index at that level of the hierarchy.

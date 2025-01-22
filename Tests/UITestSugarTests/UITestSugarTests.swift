@@ -9,6 +9,15 @@ final class UITestSugarTests: XCTestCase {
         // XCTAssertEqual(UITestSugar().text, "Hello, World!")
         _ = {}()
     }
+//    func testClearAndEnterText() {
+//        let app = XCUIApplication()
+//        app.launch()
+//        let textField = app.textFields["testTextField"]
+//        textField.tap()
+//        textField.typeText("Initial Text")
+//        textField.clearAndEnterText(text: "New Text")
+//        XCTAssertEqual(textField.value as? String, "New Text")
+//    }
 
     // static var allTests = [
     //     ("testExample", testExample),

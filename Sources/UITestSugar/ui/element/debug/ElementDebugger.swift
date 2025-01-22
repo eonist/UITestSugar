@@ -80,19 +80,19 @@ public class ElementDebugger {
     * - Returns: A string representation of the hierarchy of the element and its descendants.
     */
    public static func debugHierarchy(element: XCUIElement, type: XCUIElement.ElementType = .any, indentationLevel: Int = 1) -> String {
-      let children: [XCUIElement] = element.children(matching: type).allElementsBoundByIndex // get all children of the element that match the given type
-      let str: String = children.map { // map each child to a string representation of its hierarchy
-         let indentationLevel: Int = indentationLevel + 1 // increment the indentation level for the child
-         let identation: String = .init(repeating: "-", count: indentationLevel) // create a string of "-" characters to represent the indentation level
-         let retVal1: String = debug(element: $0, indentation: identation) // get the string representation of the child element
-         let retVal2: String = debugHierarchy(
-            element: $0, // The element to debug
-            type: type, // The type of element to debug
-            indentationLevel: indentationLevel // The current indentation level
-         ) // recursively call debugHierarchy on the child element to get its descendants' hierarchy
-         return retVal1 + (retVal2.isEmpty ? "" : "\n" + retVal2) // concatenate the string representations of the child element and its descendants' hierarchy
-      }.joined(separator: "\n") // join the string representations of all children with a line break
-      return str.suffix(2) == "\n" ? String(str.dropLast(2)) : str // remove the last line break from the string if it exists
+      // ⚠️️ Recently refactored
+      let children = element.children(matching: type).allElementsBoundByIndex
+      var results = [String]()
+      for child in children {
+         let indentation = String(repeating: "-", count: indentationLevel + 1)
+         let elementDescription = debug(element: child, indentation: indentation)
+         results.append(elementDescription)
+         let childHierarchy = debugHierarchy(element: child, type: type, indentationLevel: indentationLevel + 1)
+         if !childHierarchy.isEmpty {
+               results.append(childHierarchy)
+         }
+      }
+      return results.joined(separator: "\n")
    }
 }
 /**
