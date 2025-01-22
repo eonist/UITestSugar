@@ -60,7 +60,11 @@ public class QueryParser {
    public static func firstElement(query: XCUIElementQuery, labels: [String]) -> XCUIElement? {
       labels.map { (label: String) in
          // ⚠️️ Used to be CONTAINS, but thats partial and not exact etc
-         let predicate: NSPredicate = .init(format: "label MATCHES %@", label)
+         // Replace MATCHES with == in NSPredicate for Exact Matching
+         // Issue:
+         // In your QueryParser class, you're using MATCHES in NSPredicate, which treats the string as a regular expression. This can lead to unexpected behavior if the string contains special regex characters. For exact string matching, it's better to use ==.
+         // let predicate: NSPredicate = .init(format: "label MATCHES %@", label)
+         let predicate: NSPredicate = .init(format: "label == %@", label)
          return query.containing(predicate)
          // Filter out any nil values from the array
       }.compactMap { $0 }.first?.element // Get the first non-nil element in the array
@@ -79,7 +83,7 @@ public class QueryParser {
     */
    public static func firstElement(_ query: XCUIElementQuery, label: String) -> XCUIElement {
       // ⚠️️ Used to be CONTAINS, but thats partial and not exact etc
-      let predicate: NSPredicate = .init(format: "label MATCHES %@", label)
+      let predicate: NSPredicate = .init(format: "label == %@", label) // // was: MATCHES
       let elementQuery: XCUIElementQuery = query.containing(predicate)
       return elementQuery.firstMatch
    }
@@ -89,10 +93,10 @@ public class QueryParser {
     * - Parameters:
     *   - query: The XCUIElementQuery within which to search for the element.
     *   - title: The title of the element to find.
-    * - Returns: The first element that matches the provided title in the given query. If no such element is found, the function returns nil.
+    * - Returns: The first element that matches the provided title in the given query.
     */
    public static func firstElement(_ query: XCUIElementQuery, title: String) -> XCUIElement {
-      let predicate: NSPredicate = .init(format: "title MATCHES %@", title)
+      let predicate: NSPredicate = .init(format: "title == %@", title) // was: MATCHES
       let elementQuery: XCUIElementQuery = query.containing(predicate)
       return elementQuery.firstMatch
    }
@@ -102,10 +106,10 @@ public class QueryParser {
     * - Parameters:
     *   - query: The XCUIElementQuery within which to search for the element.
     *   - value: The value of the element to find.
-    * - Returns: The first element that matches the provided value in the given query. If no such element is found, the function returns nil.
+    * - Returns: The first element that matches the provided value in the given query. 
     */
    public static func firstElement(_ query: XCUIElementQuery, value: String) -> XCUIElement {
-      let predicate: NSPredicate = .init(format: "value MATCHES %@", value)
+      let predicate: NSPredicate = .init(format: "value == %@", value) // was: MATCHES
       let elementQuery: XCUIElementQuery = query.containing(predicate)
       return elementQuery.firstMatch
    }
@@ -150,7 +154,8 @@ public class QueryParser {
     */
    public static func children(query: XCUIElementQuery, strings: [String], type: XCUIElement.ElementType = .any) -> [XCUIElement] {
       let result: [[XCUIElement]] = strings.map { (string: String) in // Map over each string in the array
-         let predicate: NSPredicate = .init(format: "label MATCHES %@", string) // Create a predicate to match the string
+         // ⚠️️ was: MATCHES
+         let predicate: NSPredicate = .init(format: "label == %@", string) // Create a predicate to match the string
          let elementQuery: XCUIElementQuery = query.containing(predicate) // Create an element query with the predicate
          let elements: [XCUIElement] = QueryParser.elements(query: elementQuery) // Get the elements matching the query
          return elements // Return the elements

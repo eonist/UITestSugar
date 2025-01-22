@@ -94,7 +94,9 @@ public class ElementAsserter {
     */
    public static func allExists(elements: [XCUIElement]) -> Bool {
       // Check if any element in the array does not exist
-      elements.contains { !$0.exists }
+      // elements.contains { !$0.exists }
+      // ⚠️️ Using allSatisfy checks that all elements satisfy the condition $0.exists, ensuring the method returns true only when all elements exist.
+      elements.allSatisfy { $0.exists }
    }
    /**
     * Asserts if an element has a specific text.

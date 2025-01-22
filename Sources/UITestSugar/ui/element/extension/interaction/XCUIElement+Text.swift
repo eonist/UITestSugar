@@ -64,6 +64,25 @@ extension XCUIElement {
       #endif
       deleteAllAndEnterText(stringValue: stringValue, text: text)
    }
+   // ⚠️️ suggest by o1 (worth a try)
+   // Using command + A to select all text is more reliable on macOS. On iOS, simulating a long press and selecting "Select All" from the edit menu can be more dependable.
+   public func clearAndEnterText2(text: String) {
+      guard let _ = self.value as? String else {
+         XCTFail("Tried to clear and enter text into a non-string value")
+         return
+      }
+      self.click() // Ensure the element has focus
+      #if os(macOS)
+      self.typeKey("a", modifierFlags: .command) // Select all text
+      #else
+      self.press(forDuration: 0.5) // Bring up the edit menu
+      if self.menuItems["Select All"].exists {
+         self.menuItems["Select All"].tap()
+      }
+      #endif
+      self.typeKey(XCUIKeyboardKey.delete.rawValue, modifierFlags: []) // Delete the selected text
+      self.typeText(text) // Type the new text
+   }
    /**
     * - Note requires textfield is in focus and all text is selected
     */

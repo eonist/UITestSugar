@@ -17,13 +17,17 @@ public class QueryHelper {
    */
    public static func hittableElements(query: XCUIElementQuery) -> [XCUIElement] {
       // Get the indices of all the elements in the query
-      (0..<query.count).indices.map { i in
-         // Get the i-th element in the query
-         let element = query.children(matching: .other).element(boundBy: i)
-         // Check if the element is hittable, and return it if it is
-         return element.isHittable ? element : nil
-      // Remove any nil elements from the array
-      }.compactMap { $0 }
+      // (0..<query.count).indices.map { i in
+      //    // Get the i-th element in the query
+      //    let element = query.children(matching: .other).element(boundBy: i)
+      //    // Check if the element is hittable, and return it if it is
+      //    return element.isHittable ? element : nil
+      // // Remove any nil elements from the array
+      // }.compactMap { $0 }
+      // ⚠️️ new
+      // Explanation:
+      // Using allElementsBoundByIndex directly provides an array of elements, which can then be filtered based on isHittable, making the code cleaner and more efficient.
+      query.children(matching: .other).allElementsBoundByIndex.filter { $0.isHittable }
    }
 }
 #endif

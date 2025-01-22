@@ -4,6 +4,10 @@
 # UITestSugar
 Sugar for UITesting
 
+### Description
+
+is a Swift library that provides a collection of utilities and extensions to simplify UI testing in iOS and macOS applications. It streamlines the process of writing UI tests by offering convenient methods for interacting with UI elements, taking screenshots, and debugging UI hierarchies.
+
 ### Brief overview of what UITestSugar
 
 - UITestSugar is a library that provides a set of utilities and extensions for UI testing in iOS and macOS.
