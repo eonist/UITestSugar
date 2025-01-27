@@ -23,8 +23,8 @@ extension XCUIApplication {
       let cancelButton = buttons["Cancel"]
       if cancelButton.exists && cancelButton.isHittable {
          cancelButton.tap()
-      } else if let dismissButton = alerts.buttons.firstMatch, dismissButton.isHittable {
-         dismissButton.tap()
+      } else if alerts.buttons.firstMatch.isHittable {
+         alerts.buttons.firstMatch.tap()
       } else {
          // Optionally, tap outside the popup to dismiss it
          tap()

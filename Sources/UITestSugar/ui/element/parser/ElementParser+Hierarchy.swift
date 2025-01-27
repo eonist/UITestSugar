@@ -50,8 +50,9 @@ extension ElementParser {
       }
       return collector
    }
-   // Suggested by o1: 
-   public static func ancestry(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
+   // Suggested by o1:
+   // - Fixme: ⚠️️ add doc
+   public static func ancestry2(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
       if condition(root.element) {
          return [root]
       }
