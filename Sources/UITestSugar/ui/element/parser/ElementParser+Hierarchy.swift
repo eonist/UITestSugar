@@ -50,8 +50,31 @@ extension ElementParser {
       }
       return collector
    }
-   // Suggested by o1:
-   // - Fixme: ⚠️️ add doc
+   /**
+    * Returns an array of ancestral elements for a specified element, tracing the path from the root to the target element.
+    * - Description: This method recursively searches the ancestors of the specified element starting from the provided root. It collects all ancestors that lead to the first element that satisfies the specified condition. The result is an array of tuples, each containing the index and the element itself, forming the path from the root to the element that meets the condition.
+    * - Remark: If no element satisfies the condition, this function returns nil, indicating that no suitable ancestor was found.
+    * - Parameters:
+    *   - root: The starting point for the search, represented as a tuple containing an index and an `XCUIElement`.
+    *   - condition: A closure that evaluates each element to determine if it meets the desired criteria.
+    * ## Example:
+    * ```
+    * let app = XCUIApplication()
+    * let condition: ElementParser.MatchCondition = { element in
+    *     let size = element.screenshot().image.size
+    *     Swift.print("Size: \(size)")
+    *     return size.width > 100 && size.height > 100 // Example condition based on size
+    * }
+    * let ancestry: [(Int, XCUIElement)]? = ElementParser.ancestry2(root: (0, app), condition: condition)
+    * if let ancestry = ancestry {
+    *     let imgElementParent = ancestry.last
+    *     let indices: [Int] = ancestry.map { $0.0 }
+    *     let elements: [XCUIElement] = ancestry.map { $0.1 }
+    *     let descendant: XCUIElement? = ElementParser.element(root: app, index: indices)
+    *     // Further processing or assertions can be done here
+    * }
+    * ```
+    */
    public static func ancestry2(root: (index: Int, element: XCUIElement), condition: MatchCondition) -> [(Int, XCUIElement)]? {
       if condition(root.element) {
          return [root]

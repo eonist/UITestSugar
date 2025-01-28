@@ -18,7 +18,15 @@ extension XCUIApplication {
       otherElements["Cancel"].tap()
    }
    // a more robust soluton:
-   // fixme: add doc
+   /**
+    * Dismisses the currently displayed popup using a more robust approach.
+    *
+    * This method attempts to dismiss any currently displayed popup by first tapping the "Cancel" button if it exists and is hittable.
+    * If the "Cancel" button is not available, it tries to tap the first available alert button.
+    * If neither of these are available, it optionally taps outside the popup to dismiss it.
+    *
+    * - Note: Ensure that the accessibility identifiers for buttons are correctly set to "Cancel" to allow this method to function as expected.
+    */
    public func dismissPopup2() {
       let cancelButton = buttons["Cancel"]
       if cancelButton.exists && cancelButton.isHittable {
