@@ -367,11 +367,11 @@ extension XCUIElement {
    }
 }
 // deprecated ⚠️️
-extension XCUIElement {
-   // deprecated ⚠️️
-   @available(*, deprecated, renamed: "firstDescendant")
-   public func descendant(_ map: [SearchType]) -> XCUIElement {
-      firstDescendant(map) // Find the first descendant that matches the specified search types
-   }
-}
+//extension XCUIElement {
+//   // deprecated ⚠️️
+//   @available(*, deprecated, renamed: "firstDescendant")
+//   public func descendant(_ map: [SearchType]) -> XCUIElement {
+//      firstDescendant(map) // Find the first descendant that matches the specified search types
+//   }
+//}
 #endif
